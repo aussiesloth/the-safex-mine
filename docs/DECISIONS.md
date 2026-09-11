@@ -27,3 +27,4 @@ This file records settled product decisions separately from implementation propo
 | 2026-09-11 | GUI and XMRig backend remain separate repos/executables | Settled | Clean architecture and licensing boundary |
 | 2026-09-11 | Distributed XMRig build must be portable, not 5950X-specific | Settled | Support assorted hardware |
 | 2026-09-11 | Tauri + PixiJS is preferred architecture | Preferred, validate during implementation | Lightweight desktop shell + GPU-accelerated 2D scene |
+| 2026-09-11 | Windows MSR optimisation is mandatory; the Tauri GUI remains unelevated and XMRig is managed through a narrowly scoped elevated helper | Settled | Running RandomX/SFX without MSR causes an unacceptable mining-performance loss; privilege should be isolated from the graphical application |
