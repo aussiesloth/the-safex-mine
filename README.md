@@ -47,9 +47,9 @@ The character's working tempo follows the selected mode and a smoothed hashrate 
 - Accepted block -> genuine treasure item and celebration.
 - Accepted messages are cosmetic and randomized from the agreed normal-block pool: **Strike!**, **Pay Dirt!**, **Treasure Found!**, **Gold!**, **Rich Vein!**, **Nice Find!**, **Block Found!**, **Claim Secured!**, **That One's Ours!**, **Good Strike!**, **Fresh Treasure!**, **We Hit Pay Dirt!**
 - Context-specific accepted messages override the normal random pool where appropriate: the first accepted block of a session may use **First Strike!**; a further ordinary accepted block may use **Another One!**; consecutive accepted blocks use the streak messages **DOUBLE STRIKE!**, **TRIPLE STRIKE!**, and x4+ **MOTHER LODE!**
-- - Rejected block -> pyrite/fool's-gold animation and separate reject count.
+- Consecutive accepted blocks merge into an interruptible celebration streak rather than queueing full animations.
+- Rejected block -> pyrite/fool's-gold animation and separate reject count.
 - Rejection messages are cosmetic and randomized from the agreed pool: **Fool's Gold!**, **Pyrite!**, **Claim Lost!**, **Too Late!**, **Stale Find!**, **Another Miner Beat You!**, **False Strike!**
-- Consecutive accepted blocks merge into an interruptible celebration streak rather than queueing full animations: x1 normal celebration, x2 **DOUBLE STRIKE!**, x3 **TRIPLE STRIKE!**, x4+ **MOTHER LODE!**.
 - High-volume sessions may visually consolidate rewards (for example, a bullion bar for each 100 accepted blocks) while the numerical count remains exact.
 
 ## Privacy
