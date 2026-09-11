@@ -22,7 +22,23 @@
 - Use the existing API if it is reliable.
 - Otherwise implement the smallest structured event patch required.
 
-## Controller tests
+## Windows privilege and MSR tests
+
+Verify on supported Windows systems that:
+
+- The Safex Mine GUI launches without administrator privileges.
+- Pressing Start Mining can elevate the mining helper through the normal Windows UAC flow.
+- XMRig launches with sufficient privileges to apply RandomX MSR optimisation.
+- Successful MSR application can be positively detected rather than assumed.
+- Failure to apply MSR is clearly reported to the user.
+- Stop -> Start within the same application run does not require another UAC prompt.
+- Changing node configuration can restart XMRig through the existing elevated helper.
+- Changing the mining address can restart XMRig through the existing elevated helper while clearing the visual reward session.
+- Closing The Safex Mine terminates XMRig and the elevated helper.
+- The helper cannot be used to launch arbitrary programs or arbitrary shell commands.
+- No duplicate elevated helper or XMRig process is created after crashes, restarts or repeated Start/Stop operations.
+-
+- ## Controller tests
 
 - First-run address entry and validation.
 - Address remembered across app launches.
