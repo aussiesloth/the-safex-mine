@@ -39,6 +39,15 @@ Tauri controller <---- localhost API/events ---- safex-xmrig
 - Reports process state, hashrate and result information.
 - Lives in its own GPL-3.0-or-later repository and executable.
 
+### SafexMineHelper
+
+- Runs elevated on Windows after user approval through UAC.
+- Starts, stops and restarts the bundled XMRig backend with the required privileges for MSR optimisation.
+- Accepts only tightly controlled mining-process operations.
+- Does not expose arbitrary command execution or arbitrary executable paths.
+- Remains available during the current application run so Stop -> Start does not require repeated elevation.
+- Exits when The Safex Mine closes.
+
 ### MiningService / adapter
 - Launches/stops the sidecar.
 - Applies address, node and mining-mode configuration.
@@ -64,6 +73,12 @@ Tauri controller <---- localhost API/events ---- safex-xmrig
 - XMRig should run without a visible console in production; logs remain available for diagnostics.
 - Local API endpoints bind to loopback only.
 - Do not allow renderer/web content to provide arbitrary executable paths or shell arguments.
+  The main Tauri GUI runs with normal user privileges.
+- XMRig must run with sufficient Windows privileges for RandomX MSR optimisation.
+- Elevation is isolated to the helper/backend boundary rather than the whole GUI.
+- One application instance must not accidentally launch multiple helpers or XMRig processes.
+- Stop -> Start within the same application run should reuse the already-elevated helper.
+- Normal application exit stops XMRig and terminates the elevated helper.
 
 ## Animation state versus backend state
 
