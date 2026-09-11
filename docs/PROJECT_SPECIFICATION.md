@@ -37,6 +37,18 @@ The initial Windows proof may be optimized specifically for the Ryzen 9 5950X re
 
 The GUI must launch the miner without a visible console but keep diagnostic logs accessible.
 
+### Windows privilege model
+
+RandomX MSR optimisation is a mandatory performance requirement for the Windows release.
+
+The Tauri GUI itself must remain at normal user privilege. A narrowly scoped Windows helper should obtain elevation through UAC and launch/manage the bundled XMRig process with the privileges required for MSR optimisation.
+
+The elevated helper should remain available throughout the current application run so that Stop -> Start and configuration-driven XMRig restarts do not repeatedly request elevation.
+
+The helper must terminate when the application closes and must not expose arbitrary command or executable execution.
+
+The application should verify successful MSR application and must not silently present a substantially degraded non-MSR mining state as normal operation.
+
 ## 4. Mining modes
 
 - **Calm:** approximately 40% of XMRig's useful/optimal RandomX thread set.
