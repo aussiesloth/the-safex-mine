@@ -37,7 +37,7 @@ Verify on supported Windows systems that:
 - Closing The Safex Mine terminates XMRig and the elevated helper.
 - The helper cannot be used to launch arbitrary programs or arbitrary shell commands.
 - No duplicate elevated helper or XMRig process is created after crashes, restarts or repeated Start/Stop operations.
--
+
 - ## Controller tests
 
 - First-run address entry and validation.
