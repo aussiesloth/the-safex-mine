@@ -1,0 +1,42 @@
+the-safex-mine-repo-starter/
+├── .github
+│   ├── ISSUE_TEMPLATE
+│   │   ├── bug_report.yml
+│   │   └── feature_request.yml
+│   └── pull_request_template.md
+├── assets
+│   ├── art
+│   │   └── .gitkeep
+│   ├── audio
+│   │   └── .gitkeep
+│   ├── fonts
+│   │   └── .gitkeep
+│   ├── ui
+│   │   └── .gitkeep
+│   └── README.md
+├── docs
+│   ├── source
+│   │   ├── README.md
+│   │   └── The_Safex_Mine_Project_Specification_v1.1.docx
+│   ├── ARCHITECTURE.md
+│   ├── ART_AND_AUDIO.md
+│   ├── BACKEND_INTEGRATION.md
+│   ├── DECISIONS.md
+│   ├── LICENSING.md
+│   ├── PRIVACY.md
+│   ├── PROJECT_SPECIFICATION.md
+│   ├── RELEASE_CHECKLIST.md
+│   ├── ROADMAP.md
+│   ├── SESSION_AND_ANIMATION.md
+│   └── TESTING.md
+├── scripts
+│   └── README.md
+├── tests
+│   └── fixtures
+│       ├── .gitkeep
+│       └── README.md
+├── .editorconfig
+├── .gitignore
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+└── README.md
