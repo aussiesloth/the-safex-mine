@@ -54,4 +54,40 @@ Never interpret a pool-style `share` field as a Safex block without proving the 
 
 ## Runtime privileges
 
-Windows large-page support may improve RandomX performance. First-run setup may offer an optional administrator step to grant the required privilege and then ask the user to restart. The GUI should not require permanent elevation.
+RandomX MSR optimisation is a mandatory Windows performance requirement for The Safex Mine. Running the bundled XMRig backend without MSR optimisation is not considered an acceptable normal operating mode.
+
+The main Tauri GUI must remain unelevated.
+
+On Windows, privileged mining operations should instead be handled by a narrowly scoped elevated helper process. The intended model is:
+
+TheSafexMine.exe
+normal user privilege
+        |
+        | Start Mining
+        v
+Windows UAC
+        |
+        v
+SafexMineHelper.exe
+elevated
+        |
+        v
+safex-xmrig.exe
+elevated
+
+The elevated helper should expose only the operations required to manage the bundled mining backend, such as:
+
+- start XMRig;
+- stop XMRig;
+- restart XMRig when mining configuration changes;
+- report process status or process ID.
+
+It must not provide arbitrary shell execution, arbitrary executable paths or unrestricted command-line execution.
+
+The helper should remain available for the duration of the running application session after elevation. This allows Stop -> Start, node changes and mining-address changes to restart or control XMRig without repeatedly prompting for administrator approval.
+
+Closing The Safex Mine should terminate both XMRig and the elevated helper.
+
+Windows large-page support is also desirable for RandomX performance and should be configured appropriately during setup, but it is distinct from the mandatory MSR requirement.
+
+The production application should verify that MSR optimisation was applied successfully and surface a clear error or warning if it was not.
