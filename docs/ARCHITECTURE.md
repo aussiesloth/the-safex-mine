@@ -7,17 +7,24 @@ Safex daemon / node
         ^
         | JSON-RPC / daemon mining
         |
-separate safex-xmrig process
+elevated safex-xmrig process
         ^
-        | local process control + API/events
+        | controlled by
+        |
+elevated SafexMineHelper
+        ^
+        | narrow privileged command interface
         |
 Tauri controller / MiningService
+normal user privilege
         |
         +--> current-session state
         |
         +--> HTML/CSS controls and settings
         |
         +--> PixiJS GameScene
+
+Tauri controller <---- localhost API/events ---- safex-xmrig
 ```
 
 ## Responsibility boundaries
