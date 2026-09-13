@@ -1,3 +1,5 @@
+import { invoke } from "@tauri-apps/api/core";
+
 import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
 import approvedScene from "./assets/scenes/APPROVED.png";
@@ -204,7 +206,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <div class="field">
 
             <label for="address">
-              Safex Cash Address
+              Safex Address
             </label>
 
             <input
@@ -281,9 +283,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </section>
 
 
-        <div class="backend-note">
-          Mining backend not yet connected.
-        </div>
+        <div
+  class="backend-note"
+  id="backend-note"
+>
+  Connecting to application backend...
+</div>
 
       </aside>
 
@@ -808,3 +813,40 @@ testRejectButton.addEventListener(
 
 updateCounters();
 updateSessionTimer();
+
+/* ---------------------------------------------------------
+   TAURI / RUST BACKEND PROBE
+   --------------------------------------------------------- */
+
+const backendNote =
+  document.querySelector<HTMLDivElement>(
+    "#backend-note",
+  )!;
+
+
+async function probeBackend() {
+
+  try {
+
+    const message =
+      await invoke<string>(
+        "backend_probe",
+      );
+
+    backendNote.textContent =
+      message;
+
+  } catch (error) {
+
+    backendNote.textContent =
+      "Rust backend unavailable.";
+
+    console.error(
+      "Backend probe failed:",
+      error,
+    );
+  }
+}
+
+
+void probeBackend();
