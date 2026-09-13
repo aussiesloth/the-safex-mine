@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
 
 import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
@@ -278,6 +279,20 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               Test Reject
             </button>
 
+            <button
+              id="test-process-start-button"
+              class="test-button"
+            >
+              Start Test Process
+            </button>
+
+            <button
+              id="test-process-stop-button"
+              class="test-button"
+            >
+              Stop Test Process
+            </button>
+
           </div>
 
         </section>
@@ -316,6 +331,16 @@ const testApprovedButton =
 const testRejectButton =
   document.querySelector<HTMLButtonElement>(
     "#test-reject-button",
+  )!;
+
+const testProcessStartButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-process-start-button",
+  )!;
+
+const testProcessStopButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-process-stop-button",
   )!;
 
 const statusDot =
@@ -806,6 +831,74 @@ testRejectButton.addEventListener(
   },
 );
 
+/* ---------------------------------------------------------
+   NATIVE PROCESS-MANAGER TEST
+   --------------------------------------------------------- */
+
+testProcessStartButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      const result =
+        await invoke<string>(
+          "start_test_process",
+        );
+
+      backendNote.textContent =
+        result;
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+  },
+);
+
+
+testProcessStopButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      const result =
+        await invoke<string>(
+          "stop_test_process",
+        );
+
+      backendNote.textContent =
+        result;
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+  },
+);
+
+
+void listen<string>(
+  "test-process-output",
+  (event) => {
+
+    backendNote.textContent =
+      `Test process: ${event.payload}`;
+  },
+);
+
+
+void listen<string>(
+  "test-process-error",
+  (event) => {
+
+    backendNote.textContent =
+      `Test process error: ${event.payload}`;
+  },
+);
 
 /* ---------------------------------------------------------
    INITIAL DISPLAY
