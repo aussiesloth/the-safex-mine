@@ -6,6 +6,7 @@ import rejectScene from "./assets/scenes/REJECT.png";
 import "./styles.css";
 
 type SceneState = "ready" | "mining" | "approved" | "reject";
+type TransientState = "approved" | "reject";
 
 const scenes: Record<
   SceneState,
@@ -39,6 +40,7 @@ const scenes: Record<
     description: "Fool's gold",
   },
 };
+
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="app-shell">
@@ -122,28 +124,40 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               <span class="stat-label">
                 Hashrate
               </span>
-              <strong>0 H/s</strong>
+
+              <strong id="hashrate-value">
+                0 H/s
+              </strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Blocks Found
               </span>
-              <strong>0</strong>
+
+              <strong id="blocks-found-value">
+                0
+              </strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Rejected
               </span>
-              <strong>0</strong>
+
+              <strong id="rejected-value">
+                0
+              </strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Session
               </span>
-              <strong>00:00:00</strong>
+
+              <strong id="session-time-value">
+                00:00:00
+              </strong>
             </div>
 
           </div>
@@ -279,6 +293,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `;
 
 
+/* ---------------------------------------------------------
+   UI REFERENCES
+   --------------------------------------------------------- */
+
 const startButton =
   document.querySelector<HTMLButtonElement>("#start-button")!;
 
@@ -323,26 +341,53 @@ const imageB =
     "#scene-image-b",
   )!;
 
+const blocksFoundValue =
+  document.querySelector<HTMLElement>(
+    "#blocks-found-value",
+  )!;
+
+const rejectedValue =
+  document.querySelector<HTMLElement>(
+    "#rejected-value",
+  )!;
+
+const sessionTimeValue =
+  document.querySelector<HTMLElement>(
+    "#session-time-value",
+  )!;
+
+
+/* ---------------------------------------------------------
+   VISUAL STATE
+   --------------------------------------------------------- */
 
 let activeImage = imageA;
 let inactiveImage = imageB;
 
 let currentState: SceneState = "ready";
 
-let miningRunning = false;
-
 let transientTimer:
   ReturnType<typeof window.setTimeout> | null = null;
 
+const transientQueue: TransientState[] = [];
 
-function clearTransientTimer() {
 
-  if (transientTimer !== null) {
-    window.clearTimeout(transientTimer);
-    transientTimer = null;
-  }
-}
+/* ---------------------------------------------------------
+   MINING / SESSION STATE
+   --------------------------------------------------------- */
 
+let miningRunning = false;
+
+let blocksFound = 0;
+let rejectedCount = 0;
+
+let accumulatedMiningMs = 0;
+let miningStartedAt: number | null = null;
+
+
+/* ---------------------------------------------------------
+   SCENE HANDLING
+   --------------------------------------------------------- */
 
 function setScene(state: SceneState) {
 
@@ -377,33 +422,238 @@ function setScene(state: SceneState) {
 }
 
 
-function showTransientState(
-  state: "approved" | "reject",
-  durationMs: number,
+/* ---------------------------------------------------------
+   SESSION TIMER
+   --------------------------------------------------------- */
+
+function getCurrentMiningTimeMs(): number {
+
+  if (
+    miningRunning &&
+    miningStartedAt !== null
+  ) {
+
+    return (
+      accumulatedMiningMs +
+      (Date.now() - miningStartedAt)
+    );
+  }
+
+  return accumulatedMiningMs;
+}
+
+
+function formatDuration(ms: number): string {
+
+  const totalSeconds =
+    Math.floor(ms / 1000);
+
+  const weeks =
+    Math.floor(
+      totalSeconds / 604800,
+    );
+
+  const days =
+    Math.floor(
+      (totalSeconds % 604800) / 86400,
+    );
+
+  const hours =
+    Math.floor(
+      (totalSeconds % 86400) / 3600,
+    );
+
+  const minutes =
+    Math.floor(
+      (totalSeconds % 3600) / 60,
+    );
+
+  const seconds =
+    totalSeconds % 60;
+
+  const time =
+    [
+      hours.toString().padStart(2, "0"),
+      minutes.toString().padStart(2, "0"),
+      seconds.toString().padStart(2, "0"),
+    ].join(":");
+
+  if (weeks > 0) {
+    return `${weeks}w ${days}d ${time}`;
+  }
+
+  if (days > 0) {
+    return `${days}d ${time}`;
+  }
+
+  return time;
+}
+
+
+function updateSessionTimer() {
+
+  sessionTimeValue.textContent =
+    formatDuration(
+      getCurrentMiningTimeMs(),
+    );
+}
+
+
+window.setInterval(
+  updateSessionTimer,
+  250,
+);
+
+
+/* ---------------------------------------------------------
+   COUNTERS
+   --------------------------------------------------------- */
+
+function updateCounters() {
+
+  blocksFoundValue.textContent =
+    blocksFound.toString();
+
+  rejectedValue.textContent =
+    rejectedCount.toString();
+}
+
+
+/* ---------------------------------------------------------
+   TRANSIENT EVENT QUEUE
+   --------------------------------------------------------- */
+
+function clearTransientTimer() {
+
+  if (transientTimer !== null) {
+
+    window.clearTimeout(
+      transientTimer,
+    );
+
+    transientTimer = null;
+  }
+}
+
+
+function getTransientDuration(
+  state: TransientState,
+): number {
+
+  if (state === "approved") {
+    return 5500;
+  }
+
+  return 2500;
+}
+
+
+function playNextTransient() {
+
+  if (!miningRunning) {
+    transientQueue.length = 0;
+    return;
+  }
+
+  const nextState =
+    transientQueue.shift();
+
+  if (!nextState) {
+    setScene("mining");
+    return;
+  }
+
+  setScene(nextState);
+
+  transientTimer =
+    window.setTimeout(
+      () => {
+
+        transientTimer = null;
+
+        playNextTransient();
+
+      },
+      getTransientDuration(
+        nextState,
+      ),
+    );
+}
+
+
+function queueTransient(
+  state: TransientState,
 ) {
 
   if (!miningRunning) {
     return;
   }
 
-  clearTransientTimer();
+  /*
+    If another transient event is already
+    playing, queue this event behind it.
+  */
+  if (transientTimer !== null) {
+
+    transientQueue.push(state);
+    return;
+  }
 
   setScene(state);
 
-  transientTimer = window.setTimeout(
-    () => {
+  transientTimer =
+    window.setTimeout(
+      () => {
 
-      transientTimer = null;
+        transientTimer = null;
 
-      if (miningRunning) {
-        setScene("mining");
-      }
+        playNextTransient();
 
-    },
-    durationMs,
-  );
+      },
+      getTransientDuration(state),
+    );
 }
 
+
+/* ---------------------------------------------------------
+   SIMULATED BACKEND EVENTS
+   --------------------------------------------------------- */
+
+function handleBlockFound() {
+
+  if (!miningRunning) {
+    return;
+  }
+
+  /*
+    Count the event immediately.
+    The visual celebration can be queued.
+  */
+  blocksFound += 1;
+
+  updateCounters();
+
+  queueTransient("approved");
+}
+
+
+function handleReject() {
+
+  if (!miningRunning) {
+    return;
+  }
+
+  rejectedCount += 1;
+
+  updateCounters();
+
+  queueTransient("reject");
+}
+
+
+/* ---------------------------------------------------------
+   MINING MODE BUTTONS
+   --------------------------------------------------------- */
 
 document
   .querySelectorAll<HTMLButtonElement>(
@@ -433,13 +683,21 @@ document
   });
 
 
+/* ---------------------------------------------------------
+   START MINING
+   --------------------------------------------------------- */
+
 startButton.addEventListener(
   "click",
   () => {
 
     clearTransientTimer();
 
+    transientQueue.length = 0;
+
     miningRunning = true;
+
+    miningStartedAt = Date.now();
 
     setScene("mining");
 
@@ -459,17 +717,44 @@ startButton.addEventListener(
 
     testApprovedButton.disabled = false;
     testRejectButton.disabled = false;
+
+    updateSessionTimer();
   },
 );
 
+
+/* ---------------------------------------------------------
+   STOP MINING
+   --------------------------------------------------------- */
 
 stopButton.addEventListener(
   "click",
   () => {
 
+    /*
+      Preserve accumulated session time.
+    */
+    if (
+      miningRunning &&
+      miningStartedAt !== null
+    ) {
+
+      accumulatedMiningMs +=
+        Date.now() -
+        miningStartedAt;
+    }
+
+    miningStartedAt = null;
+    miningRunning = false;
+
     clearTransientTimer();
 
-    miningRunning = false;
+    /*
+      The counters have already recorded
+      queued events, so only the pending
+      visual presentations are discarded.
+    */
+    transientQueue.length = 0;
 
     setScene("ready");
 
@@ -489,18 +774,21 @@ stopButton.addEventListener(
 
     testApprovedButton.disabled = true;
     testRejectButton.disabled = true;
+
+    updateSessionTimer();
   },
 );
 
+
+/* ---------------------------------------------------------
+   DEVELOPMENT TEST BUTTONS
+   --------------------------------------------------------- */
 
 testApprovedButton.addEventListener(
   "click",
   () => {
 
-    showTransientState(
-      "approved",
-      5500,
-    );
+    handleBlockFound();
   },
 );
 
@@ -509,9 +797,14 @@ testRejectButton.addEventListener(
   "click",
   () => {
 
-    showTransientState(
-      "reject",
-      2500,
-    );
+    handleReject();
   },
 );
+
+
+/* ---------------------------------------------------------
+   INITIAL DISPLAY
+   --------------------------------------------------------- */
+
+updateCounters();
+updateSessionTimer();
