@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Bundled mining backend binaries
+src-tauri/binaries/*.exe
