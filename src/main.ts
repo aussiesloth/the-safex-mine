@@ -272,6 +272,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </button>
 
             <button
+              id="test-xmrig-version-button"
+              class="test-button"
+            >
+              Test Safex XMRig
+            </button>
+
+            <button
               id="test-reject-button"
               class="test-button"
               disabled
@@ -322,6 +329,11 @@ const startButton =
 
 const stopButton =
   document.querySelector<HTMLButtonElement>("#stop-button")!;
+
+const testXmrigVersionButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-xmrig-version-button",
+  )!;
 
 const testApprovedButton =
   document.querySelector<HTMLButtonElement>(
@@ -916,6 +928,36 @@ const backendNote =
     "#backend-note",
   )!;
 
+/* ---------------------------------------------------------
+   SAFEX XMRIG VERSION TEST
+   --------------------------------------------------------- */
+
+testXmrigVersionButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      const result =
+        await invoke<string>(
+          "safex_xmrig_version",
+        );
+
+      backendNote.textContent =
+        result.replace(/\r?\n/g, " | ");
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+  },
+);
+
+
+/* ---------------------------------------------------------
+   TAURI / RUST BACKEND PROBE
+   --------------------------------------------------------- */
 
 async function probeBackend() {
 

@@ -1,5 +1,6 @@
 use std::{
     io::{BufRead, BufReader},
+    path::PathBuf,
     process::{Child, Command, Stdio},
     sync::Mutex,
     thread,
@@ -193,6 +194,41 @@ fn test_process_running(
     }
 }
 
+#[tauri::command]
+fn safex_xmrig_version() -> Result<String, String> {
+    let binary_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("binaries")
+        .join("safex-xmrig-x86_64-pc-windows-msvc.exe");
+
+    if !binary_path.exists() {
+        return Err(format!(
+            "Safex XMRig binary not found: {}",
+            binary_path.display()
+        ));
+    }
+
+    let output = Command::new(&binary_path)
+        .arg("--version")
+        .output()
+        .map_err(|error| {
+            format!(
+                "Unable to run Safex XMRig: {error}"
+            )
+        })?;
+
+    if !output.status.success() {
+        return Err(format!(
+            "Safex XMRig exited with status: {}",
+            output.status
+        ));
+    }
+
+    let stdout =
+        String::from_utf8_lossy(&output.stdout);
+
+    Ok(stdout.trim().to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -204,6 +240,7 @@ pub fn run() {
                 start_test_process,
                 stop_test_process,
                 test_process_running,
+                safex_xmrig_version,
             ],
         )
         .run(tauri::generate_context!())
