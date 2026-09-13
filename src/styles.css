@@ -1,116 +1,633 @@
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
-
-.logo.typescript:hover {
-  filter: drop-shadow(0 0 2em #2d79c7);
-}
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  font-family:
+    Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  color: #ece7de;
+  background: #090b0d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
-.container {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
   margin: 0;
-  padding-top: 10vh;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: 100%;
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #1c2529 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #101417 0%,
+      #080a0c 100%
+    );
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
-}
 
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
+/* ---------------------------------------------------------
+   TOP BAR
+   --------------------------------------------------------- */
 
-.row {
+.topbar {
+  flex: 0 0 auto;
+
+  min-height: 72px;
+  padding:
+    clamp(12px, 2vh, 18px)
+    clamp(18px, 2.2vw, 30px);
+
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  background:
+    rgba(8, 10, 12, 0.94);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.brand {
+  min-width: 0;
 }
 
-a:hover {
-  color: #535bf2;
+.brand-title {
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
 }
 
-h1 {
+.brand-subtitle {
+  margin-top: 5px;
+
+  color: #9b9b95;
+  font-size: clamp(11px, 0.9vw, 13px);
+}
+
+.connection-status {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #bbb8b1;
+  font-size: clamp(12px, 1vw, 14px);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+}
+
+.status-dot.stopped {
+  background: #7e8588;
+}
+
+.status-dot.mining {
+  background: #6fcf73;
+
+  box-shadow:
+    0 0 10px rgba(111, 207, 115, 0.55);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN WORKSPACE
+   --------------------------------------------------------- */
+
+.workspace {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+
+  /*
+    Main scene gets whatever remains.
+    Control panel scales with the window.
+  */
+  grid-template-columns:
+    minmax(0, 1fr)
+    clamp(290px, 27vw, 380px);
+}
+
+
+/* ---------------------------------------------------------
+   MINE / SCENE AREA
+   --------------------------------------------------------- */
+
+.mine-panel {
+  min-width: 0;
+  min-height: 0;
+
+  padding: clamp(14px, 1.8vw, 24px);
+}
+
+.scene-placeholder {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(20px, 3vw, 36px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius:
+    clamp(10px, 1vw, 15px);
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 8, 9, 0.92),
+      rgba(7, 8, 9, 0.10) 52%
+    ),
+    radial-gradient(
+      circle at 72% 43%,
+      rgba(173, 111, 37, 0.25),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #22282a,
+      #0e1113 65%
+    );
+}
+
+.scene-state {
+  font-size:
+    clamp(11px, 0.9vw, 13px);
+
+  letter-spacing: 0.16em;
+
+  color: #d59a4a;
+
+  font-weight: 700;
+}
+
+.scene-description {
+  margin-top: 8px;
+
+  font-size:
+    clamp(20px, 2vw, 28px);
+
+  line-height: 1.15;
+
+  font-weight: 600;
+
+  color: #f0e9df;
+}
+
+
+/* ---------------------------------------------------------
+   CONTROL PANEL
+   --------------------------------------------------------- */
+
+.control-panel {
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(16px, 1.8vw, 26px);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border-left:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  background:
+    rgba(14, 17, 19, 0.94);
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    #3b4143
+    transparent;
+}
+
+.panel-section {
+  margin-bottom:
+    clamp(20px, 2.2vh, 30px);
+}
+
+.panel-section h2 {
+  margin: 0 0 14px;
+
+  font-size:
+    clamp(14px, 1.1vw, 16px);
+
+  color: #e7dfd3;
+}
+
+
+/* ---------------------------------------------------------
+   STATS
+   --------------------------------------------------------- */
+
+.stat-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    clamp(7px, 0.8vw, 11px);
+}
+
+.stat {
+  min-width: 0;
+
+  padding:
+    clamp(11px, 1vw, 15px);
+
+  background: #171b1e;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+.stat-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size:
+    clamp(9px, 0.75vw, 11px);
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+  color: #86898a;
+
+  white-space: nowrap;
+}
+
+.stat strong {
+  display: block;
+
+  font-size:
+    clamp(16px, 1.4vw, 20px);
+
+  line-height: 1.1;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   MINING MODE
+   --------------------------------------------------------- */
+
+.mode-buttons {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.mode-button {
+  min-width: 0;
+
+  padding:
+    clamp(9px, 0.9vw, 11px)
+    6px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  border-radius: 7px;
+
+  color: #bfc0bd;
+
+  background: #171b1e;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.mode-button:hover {
+  background: #202629;
+}
+
+.mode-button.active {
+  color: #fff0d5;
+
+  border-color: #a66e30;
+
+  background: #49341f;
+}
+
+
+/* ---------------------------------------------------------
+   INPUTS
+   --------------------------------------------------------- */
+
+.field {
+  margin-bottom: 13px;
+}
+
+.field label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #969994;
+
+  font-size:
+    clamp(11px, 0.85vw, 12px);
+}
+
+.field input {
+  width: 100%;
+  min-width: 0;
+
+  padding:
+    clamp(10px, 0.9vw, 12px);
+
+  color: #e6e3dc;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #111517;
+
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.field input:focus {
+  border-color: #9c6a32;
+
+  background: #14191b;
+}
+
+
+/* ---------------------------------------------------------
+   START / STOP
+   --------------------------------------------------------- */
+
+.mining-controls {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+}
+
+.primary-button,
+.secondary-button {
+  min-width: 0;
+
+  padding:
+    clamp(11px, 1vw, 14px)
+    8px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.primary-button {
+  border: 1px solid #b7803b;
+
+  color: #17100a;
+
+  background: #d19a50;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #dea75e;
+}
+
+.secondary-button {
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  color: #ddd8ce;
+
+  background: #202427;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #292e31;
+}
+
+button:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.backend-note {
+  margin-top: 14px;
+
+  color: #747978;
+
+  font-size:
+    clamp(10px, 0.75vw, 11px);
+
   text-align: center;
 }
 
-input,
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
 
-button {
-  cursor: pointer;
-}
+/* ---------------------------------------------------------
+   MEDIUM WINDOWS
+   --------------------------------------------------------- */
 
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
+@media (max-width: 1100px) {
 
-input,
-button {
-  outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
+  .workspace {
+    grid-template-columns:
+      minmax(0, 1fr)
+      clamp(270px, 31vw, 320px);
   }
 
-  a:hover {
-    color: #24c8db;
+  .mine-panel {
+    padding: 14px;
   }
 
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
+  .control-panel {
+    padding: 16px;
   }
-  button:active {
-    background-color: #0f0f0f69;
+
+  .stat {
+    padding: 11px;
+  }
+
+  .mode-button {
+    font-size: 13px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    font-size: 13px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   SMALLER DESKTOP WINDOWS
+   --------------------------------------------------------- */
+
+@media (max-width: 850px) {
+
+  body {
+    overflow: auto;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .workspace {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows:
+      minmax(380px, 62vh)
+      auto;
+  }
+
+  .mine-panel {
+    padding: 12px;
+  }
+
+  .control-panel {
+    border-left: 0;
+
+    border-top:
+      1px solid rgba(255, 255, 255, 0.08);
+
+    overflow: visible;
+  }
+
+  .control-panel {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:
+      0 22px;
+  }
+
+  .mining-controls,
+  .backend-note {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   VERY NARROW WINDOWS
+   --------------------------------------------------------- */
+
+@media (max-width: 620px) {
+
+  .topbar {
+    min-height: 66px;
+
+    padding: 12px 14px;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .connection-status {
+    font-size: 12px;
+  }
+
+  .workspace {
+    grid-template-rows:
+      minmax(320px, 55vh)
+      auto;
+  }
+
+  .control-panel {
+    display: block;
+  }
+
+  .scene-description {
+    font-size: 20px;
+  }
+
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .mining-controls {
+    grid-template-columns: 1fr;
   }
 }
