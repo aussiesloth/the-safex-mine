@@ -199,6 +199,59 @@ input {
     );
 }
 
+.scene-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+
+  transition:
+    opacity 450ms ease;
+
+  pointer-events: none;
+}
+
+.scene-image-active {
+  opacity: 1;
+}
+
+.scene-text {
+  position: relative;
+  z-index: 10;
+
+  padding-top: 80px;
+
+  pointer-events: none;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.scene-placeholder::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(4, 5, 5, 0.72) 0%,
+      rgba(4, 5, 5, 0.12) 35%,
+      transparent 60%
+    );
+}
+
 .scene-state {
   font-size:
     clamp(11px, 0.9vw, 13px);
