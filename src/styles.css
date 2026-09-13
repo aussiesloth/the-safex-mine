@@ -684,3 +684,80 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------------------------------------------------------
+   DEVELOPMENT TEST CONTROLS
+   --------------------------------------------------------- */
+
+.development-tests {
+  margin-top: 18px;
+  padding-top: 16px;
+
+  border-top:
+    1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.development-label {
+  margin-bottom: 8px;
+
+  color: #6f7575;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.development-buttons {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.test-button {
+  min-width: 0;
+
+  padding: 9px 7px;
+
+  border:
+    1px dashed rgba(213, 154, 74, 0.32);
+
+  border-radius: 7px;
+
+  color: #b6a992;
+
+  background:
+    rgba(73, 52, 31, 0.22);
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.test-button:hover:not(:disabled) {
+  border-color:
+    rgba(213, 154, 74, 0.65);
+
+  background:
+    rgba(73, 52, 31, 0.5);
+}
+
+.test-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 620px) {
+
+  .development-buttons {
+    grid-template-columns: 1fr;
+  }
+}

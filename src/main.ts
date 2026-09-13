@@ -88,6 +88,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           />
 
           <div class="scene-text">
+
             <div
               class="scene-state"
               id="scene-state"
@@ -101,6 +102,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             >
               Miner seated in chair
             </div>
+
           </div>
 
         </div>
@@ -120,40 +122,28 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               <span class="stat-label">
                 Hashrate
               </span>
-
-              <strong>
-                0 H/s
-              </strong>
+              <strong>0 H/s</strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Blocks Found
               </span>
-
-              <strong>
-                0
-              </strong>
+              <strong>0</strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Rejected
               </span>
-
-              <strong>
-                0
-              </strong>
+              <strong>0</strong>
             </div>
 
             <div class="stat">
               <span class="stat-label">
                 Session
               </span>
-
-              <strong>
-                00:00:00
-              </strong>
+              <strong>00:00:00</strong>
             </div>
 
           </div>
@@ -198,6 +188,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <h2>Connection</h2>
 
           <div class="field">
+
             <label for="address">
               Safex Cash Address
             </label>
@@ -207,9 +198,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               type="text"
               placeholder="Enter mining address"
             />
+
           </div>
 
           <div class="field">
+
             <label for="node">
               Node / RPC
             </label>
@@ -219,6 +212,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               type="text"
               placeholder="Default public node"
             />
+
           </div>
 
         </section>
@@ -244,6 +238,35 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </section>
 
 
+        <section class="development-tests">
+
+          <div class="development-label">
+            DEVELOPMENT TESTS
+          </div>
+
+          <div class="development-buttons">
+
+            <button
+              id="test-approved-button"
+              class="test-button"
+              disabled
+            >
+              Test Block Found
+            </button>
+
+            <button
+              id="test-reject-button"
+              class="test-button"
+              disabled
+            >
+              Test Reject
+            </button>
+
+          </div>
+
+        </section>
+
+
         <div class="backend-note">
           Mining backend not yet connected.
         </div>
@@ -255,34 +278,70 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
+
 const startButton =
   document.querySelector<HTMLButtonElement>("#start-button")!;
 
 const stopButton =
   document.querySelector<HTMLButtonElement>("#stop-button")!;
 
+const testApprovedButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-approved-button",
+  )!;
+
+const testRejectButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-reject-button",
+  )!;
+
 const statusDot =
   document.querySelector<HTMLSpanElement>("#status-dot")!;
 
 const connectionText =
-  document.querySelector<HTMLSpanElement>("#connection-text")!;
+  document.querySelector<HTMLSpanElement>(
+    "#connection-text",
+  )!;
 
 const sceneState =
-  document.querySelector<HTMLDivElement>("#scene-state")!;
+  document.querySelector<HTMLDivElement>(
+    "#scene-state",
+  )!;
 
 const sceneDescription =
-  document.querySelector<HTMLDivElement>("#scene-description")!;
+  document.querySelector<HTMLDivElement>(
+    "#scene-description",
+  )!;
 
 const imageA =
-  document.querySelector<HTMLImageElement>("#scene-image-a")!;
+  document.querySelector<HTMLImageElement>(
+    "#scene-image-a",
+  )!;
 
 const imageB =
-  document.querySelector<HTMLImageElement>("#scene-image-b")!;
+  document.querySelector<HTMLImageElement>(
+    "#scene-image-b",
+  )!;
+
 
 let activeImage = imageA;
 let inactiveImage = imageB;
 
 let currentState: SceneState = "ready";
+
+let miningRunning = false;
+
+let transientTimer:
+  ReturnType<typeof window.setTimeout> | null = null;
+
+
+function clearTransientTimer() {
+
+  if (transientTimer !== null) {
+    window.clearTimeout(transientTimer);
+    transientTimer = null;
+  }
+}
 
 
 function setScene(state: SceneState) {
@@ -306,7 +365,6 @@ function setScene(state: SceneState) {
   const previousActive = activeImage;
 
   activeImage = inactiveImage;
-
   inactiveImage = previousActive;
 
   sceneState.textContent =
@@ -316,6 +374,34 @@ function setScene(state: SceneState) {
     scene.description;
 
   currentState = state;
+}
+
+
+function showTransientState(
+  state: "approved" | "reject",
+  durationMs: number,
+) {
+
+  if (!miningRunning) {
+    return;
+  }
+
+  clearTransientTimer();
+
+  setScene(state);
+
+  transientTimer = window.setTimeout(
+    () => {
+
+      transientTimer = null;
+
+      if (miningRunning) {
+        setScene("mining");
+      }
+
+    },
+    durationMs,
+  );
 }
 
 
@@ -351,6 +437,10 @@ startButton.addEventListener(
   "click",
   () => {
 
+    clearTransientTimer();
+
+    miningRunning = true;
+
     setScene("mining");
 
     statusDot.classList.remove(
@@ -366,6 +456,9 @@ startButton.addEventListener(
 
     startButton.disabled = true;
     stopButton.disabled = false;
+
+    testApprovedButton.disabled = false;
+    testRejectButton.disabled = false;
   },
 );
 
@@ -373,6 +466,10 @@ startButton.addEventListener(
 stopButton.addEventListener(
   "click",
   () => {
+
+    clearTransientTimer();
+
+    miningRunning = false;
 
     setScene("ready");
 
@@ -389,5 +486,32 @@ stopButton.addEventListener(
 
     startButton.disabled = false;
     stopButton.disabled = true;
+
+    testApprovedButton.disabled = true;
+    testRejectButton.disabled = true;
+  },
+);
+
+
+testApprovedButton.addEventListener(
+  "click",
+  () => {
+
+    showTransientState(
+      "approved",
+      5500,
+    );
+  },
+);
+
+
+testRejectButton.addEventListener(
+  "click",
+  () => {
+
+    showTransientState(
+      "reject",
+      2500,
+    );
   },
 );
