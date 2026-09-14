@@ -1204,53 +1204,212 @@ startButton.addEventListener(
 
     transientQueue.length = 0;
 
-    if (!(await validateAddressField())) {
+    startButton.disabled =
+      true;
 
-      addressInput.focus();
+    try {
+
+      if (!(await validateAddressField())) {
+
+        addressInput.focus();
+
+        backendNote.textContent =
+          "Enter a valid Safex Address before starting.";
+
+        return;
+      }
+
+
+      if (!(await validateDaemonField())) {
+
+        nodeInput.focus();
+
+        backendNote.textContent =
+          "A live Safex daemon is required before mining can start.";
+
+        return;
+      }
+
 
       backendNote.textContent =
-      "Enter a valid Safex Address before starting.";
+        "Waiting for Administrator approval...";
 
-    return;
-  }
-  
-    if (!(await validateDaemonField())) {
 
-  nodeInput.focus();
+      /*
+        Start or reuse the persistent elevated
+        helper. Once it exists, Stop -> Start
+        does not cause another UAC prompt.
+      */
+      await invoke<string>(
+        "start_helper_session",
+      );
 
-  backendNote.textContent =
-    "A live Safex daemon is required before mining can start.";
 
-  return;
-}
+      backendNote.textContent =
+        "Starting Safex XMRig...";
 
-    miningRunning = true;
-    setConnectionFieldsLocked(
-  true,
-);
 
-    miningStartedAt = Date.now();
+      const result =
+        await invoke<string>(
+          "start_xmrig_test",
+          {
+            address:
+              addressInput.value.trim(),
 
-    setScene("mining");
+            daemon:
+              nodeInput.value.trim(),
+          },
+        );
 
-    statusDot.classList.remove(
-      "stopped",
-    );
 
-    statusDot.classList.add(
-      "mining",
-    );
+      const started =
+        result.startsWith(
+          "OK STARTED",
+        )
+        ||
+        result.startsWith(
+          "OK ALREADY_ACTIVE",
+        );
 
-    connectionText.textContent =
-      "Mining";
 
-    startButton.disabled = true;
-    stopButton.disabled = false;
+      if (!started) {
 
-    testApprovedButton.disabled = false;
-    testRejectButton.disabled = false;
+        throw new Error(
+          result,
+        );
+      }
 
-    updateSessionTimer();
+
+      /*
+        Only change the visible application
+        state after the real miner has
+        successfully started.
+      */
+      miningRunning =
+        true;
+
+      setConnectionFieldsLocked(
+        true,
+      );
+
+
+      miningStartedAt =
+        Date.now();
+
+
+      setScene(
+        "mining",
+      );
+
+
+      statusDot.classList.remove(
+        "stopped",
+      );
+
+      statusDot.classList.add(
+        "mining",
+      );
+
+
+      connectionText.textContent =
+        "Mining";
+
+
+      startButton.disabled =
+        true;
+
+      stopButton.disabled =
+        false;
+
+
+      testApprovedButton.disabled =
+        false;
+
+      testRejectButton.disabled =
+        false;
+
+
+      if (
+        result.includes(
+          "STARTED_DEGRADED",
+        )
+        ||
+        result.includes(
+          "MSR=UNAVAILABLE",
+        )
+      ) {
+
+        backendNote.textContent =
+          "Mining started — MSR optimisation unavailable; reduced hashrate expected. Development profile: 1 thread.";
+
+      } else {
+
+        backendNote.textContent =
+          "Mining started — MSR optimisation active. Development profile: 1 thread.";
+      }
+
+
+      updateSessionTimer();
+
+    } catch (error) {
+
+      /*
+        A failed backend start must never
+        leave the UI pretending that mining
+        is running.
+      */
+      miningRunning =
+        false;
+
+      miningStartedAt =
+        null;
+
+
+      setConnectionFieldsLocked(
+        false,
+      );
+
+
+      setScene(
+        "ready",
+      );
+
+
+      statusDot.classList.remove(
+        "mining",
+      );
+
+      statusDot.classList.add(
+        "stopped",
+      );
+
+
+      connectionText.textContent =
+        "Ready";
+
+
+      stopButton.disabled =
+        true;
+
+
+      testApprovedButton.disabled =
+        true;
+
+      testRejectButton.disabled =
+        true;
+
+
+      backendNote.textContent =
+        `Unable to start mining: ${String(error)}`;
+
+    } finally {
+
+      if (!miningRunning) {
+
+        startButton.disabled =
+          false;
+      }
+    }
   },
 );
 
@@ -1260,56 +1419,132 @@ startButton.addEventListener(
 
 stopButton.addEventListener(
   "click",
-  () => {
+  async () => {
 
-    /*
-      Preserve accumulated session time.
-    */
-    if (
-      miningRunning &&
-      miningStartedAt !== null
-    ) {
-
-      accumulatedMiningMs +=
-        Date.now() -
-        miningStartedAt;
+    if (!miningRunning) {
+      return;
     }
 
-    miningStartedAt = null;
-    miningRunning = false;
-    setConnectionFieldsLocked(
-  false,
-);
 
-    clearTransientTimer();
+    stopButton.disabled =
+      true;
 
-    /*
-      The counters have already recorded
-      queued events, so only the pending
-      visual presentations are discarded.
-    */
-    transientQueue.length = 0;
 
-    setScene("ready");
+    backendNote.textContent =
+      "Stopping Safex XMRig gracefully...";
 
-    statusDot.classList.remove(
-      "mining",
-    );
 
-    statusDot.classList.add(
-      "stopped",
-    );
+    try {
 
-    connectionText.textContent =
-      "Ready";
+      const result =
+        await invoke<string>(
+          "stop_xmrig_test",
+        );
 
-    startButton.disabled = false;
-    stopButton.disabled = true;
 
-    testApprovedButton.disabled = true;
-    testRejectButton.disabled = true;
+      /*
+        The helper has confirmed that XMRig
+        has stopped. Now update the visible
+        application/session state.
+      */
+      if (
+        miningStartedAt !== null
+      ) {
 
-    updateSessionTimer();
+        accumulatedMiningMs +=
+          Date.now() -
+          miningStartedAt;
+      }
+
+
+      miningStartedAt =
+        null;
+
+      miningRunning =
+        false;
+
+
+      setConnectionFieldsLocked(
+        false,
+      );
+
+
+      clearTransientTimer();
+
+
+      /*
+        Counters have already recorded any
+        queued events. Only pending visual
+        presentations are discarded.
+      */
+      transientQueue.length =
+        0;
+
+
+      setScene(
+        "ready",
+      );
+
+
+      statusDot.classList.remove(
+        "mining",
+      );
+
+      statusDot.classList.add(
+        "stopped",
+      );
+
+
+      connectionText.textContent =
+        "Ready";
+
+
+      startButton.disabled =
+        false;
+
+      stopButton.disabled =
+        true;
+
+
+      testApprovedButton.disabled =
+        true;
+
+      testRejectButton.disabled =
+        true;
+
+
+      if (
+        result.includes(
+          "STOPPED_FORCED",
+        )
+      ) {
+
+        backendNote.textContent =
+          "Mining stopped, but XMRig required forced termination.";
+
+      } else {
+
+        backendNote.textContent =
+          "Mining stopped cleanly. Elevated helper remains ready.";
+      }
+
+
+      updateSessionTimer();
+
+    } catch (error) {
+
+      /*
+        If STOP failed, do not claim that
+        mining has stopped. The process may
+        still be alive.
+      */
+      backendNote.textContent =
+        `Unable to stop mining: ${String(error)}`;
+
+
+      stopButton.disabled =
+        false;
+    }
   },
 );
 
