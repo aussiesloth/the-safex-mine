@@ -548,6 +548,11 @@ const sessionTimeValue =
     "#session-time-value",
   )!;
 
+  const hashrateValue =
+  document.querySelector<HTMLElement>(
+    "#hashrate-value",
+  )!;
+
 /* ---------------------------------------------------------
    PERSISTENT SETTINGS
    --------------------------------------------------------- */
@@ -910,6 +915,10 @@ let rejectedCount = 0;
 let accumulatedMiningMs = 0;
 let miningStartedAt: number | null = null;
 
+let telemetryTimer:
+  ReturnType<typeof window.setInterval> | null =
+  null;
+
 
 /* ---------------------------------------------------------
    SCENE HANDLING
@@ -947,6 +956,114 @@ function setScene(state: SceneState) {
   currentState = state;
 }
 
+function formatHashrate(
+  hashrateHs: number,
+): string {
+
+  if (hashrateHs >= 1_000_000) {
+
+    return `${(
+      hashrateHs /
+      1_000_000
+    ).toFixed(2)} MH/s`;
+  }
+
+
+  if (hashrateHs >= 1_000) {
+
+    return `${(
+      hashrateHs /
+      1_000
+    ).toFixed(2)} kH/s`;
+  }
+
+
+  return `${hashrateHs.toFixed(1)} H/s`;
+}
+
+
+function stopTelemetryPolling() {
+
+  if (telemetryTimer !== null) {
+
+    window.clearInterval(
+      telemetryTimer,
+    );
+
+    telemetryTimer =
+      null;
+  }
+}
+
+
+async function refreshMiningTelemetry() {
+
+  if (!miningRunning) {
+    return;
+  }
+
+
+  try {
+
+    const status =
+      await invoke<string>(
+        "xmrig_test_status",
+      );
+
+
+    const match =
+      status.match(
+        /HASHRATE_HS=([0-9]+(?:\.[0-9]+)?)/,
+      );
+
+
+    if (match) {
+
+      const hashrate =
+        Number(
+          match[1],
+        );
+
+
+      if (
+        Number.isFinite(
+          hashrate,
+        )
+      ) {
+
+        hashrateValue.textContent =
+          formatHashrate(
+            hashrate,
+          );
+      }
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Mining telemetry update failed:",
+      error,
+    );
+  }
+}
+
+
+function startTelemetryPolling() {
+
+  stopTelemetryPolling();
+
+
+  void refreshMiningTelemetry();
+
+
+  telemetryTimer =
+    window.setInterval(
+      () => {
+        void refreshMiningTelemetry();
+      },
+      2000,
+    );
+}
 
 /* ---------------------------------------------------------
    SESSION TIMER
@@ -1372,6 +1489,7 @@ if (
 
 
       updateSessionTimer();
+      startTelemetryPolling();
 
     } catch (error) {
 
@@ -1399,7 +1517,7 @@ if (
         "ready",
       );
 
-
+      
       statusDot.classList.remove(
         "mining",
       );
@@ -1407,6 +1525,11 @@ if (
       statusDot.classList.add(
         "stopped",
       );
+
+      stopTelemetryPolling();
+
+        hashrateValue.textContent =
+          "0 H/s";
 
 
       connectionText.textContent =
@@ -1487,6 +1610,11 @@ stopButton.addEventListener(
 
       miningRunning =
         false;
+
+        stopTelemetryPolling();
+
+          hashrateValue.textContent =
+            "0 H/s";
 
 
       setConnectionFieldsLocked(

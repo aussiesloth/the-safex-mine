@@ -293,6 +293,7 @@ struct MinerTelemetry {
     msr_ok: bool,
     msr_failed: bool,
     daemon_connected: bool,
+    hashrate_hs: Option<f64>,
     recent_lines: VecDeque<String>,
 }
 
@@ -325,6 +326,85 @@ fn mining_backend_dir()
     )
 }
 
+fn parse_short_hashrate(
+    line: &str,
+) -> Option<f64> {
+
+    let parts:
+        Vec<&str> =
+        line
+            .split_whitespace()
+            .collect();
+
+
+    let marker =
+        parts
+            .iter()
+            .position(|part| {
+                *part
+                    == "10s/60s/15m"
+            })?;
+
+
+    let value =
+        parts
+            .get(
+                marker + 1,
+            )?;
+
+
+    if *value == "n/a" {
+        return None;
+    }
+
+
+    let value:
+        f64 =
+        value
+            .parse()
+            .ok()?;
+
+
+    /*
+       XMRig prints the unit after the three
+       interval values:
+
+       712.4 n/a n/a H/s
+       1.23  1.20 n/a MH/s
+    */
+    let unit =
+        parts
+            .get(
+                marker + 4,
+            )
+            .copied()
+            .unwrap_or(
+                "H/s",
+            );
+
+
+    match unit {
+        "H/s" =>
+            Some(
+                value,
+            ),
+
+        "kH/s" =>
+            Some(
+                value
+                    * 1_000.0,
+            ),
+
+        "MH/s" =>
+            Some(
+                value
+                    * 1_000_000.0,
+            ),
+
+        _ =>
+            None,
+    }
+}
 
 fn record_miner_line(
     telemetry: &Arc<Mutex<MinerTelemetry>>,
@@ -366,6 +446,22 @@ fn record_miner_line(
         telemetry.daemon_connected =
             true;
     }
+
+    if line.contains(
+        "speed 10s/60s/15m"
+    ) {
+
+        if let Some(hashrate) =
+            parse_short_hashrate(
+                &line,
+            )
+        {
+            telemetry.hashrate_hs =
+                Some(
+                    hashrate,
+                );
+        }
+    }    
 
 
     if telemetry.recent_lines.len()
@@ -461,6 +557,18 @@ fn telemetry_summary(
             "WAITING"
         };
 
+    let hashrate =
+    telemetry
+        .hashrate_hs
+        .map(|value| {
+            format!(
+                "{value:.1}"
+            )
+        })
+        .unwrap_or_else(|| {
+            "0.0"
+                .to_string()
+        });    
 
     let last =
         telemetry
@@ -476,6 +584,7 @@ fn telemetry_summary(
     format!(
         "MSR={msr} | \
          DAEMON={daemon} | \
+         HASHRATE_HS={hashrate} | \
          LAST={last}"
     )
 }
