@@ -358,6 +358,27 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </button>
 
             <button
+              id="start-xmrig-test-button"
+              class="test-button"
+            >
+              Start XMRig Test
+            </button>
+
+            <button
+              id="xmrig-test-status-button"
+              class="test-button"
+            >
+              XMRig Status
+            </button>
+
+            <button
+              id="stop-xmrig-test-button"
+              class="test-button"
+            >
+              Stop XMRig Test
+            </button>
+
+            <button
               id="shutdown-helper-session-button"
               class="test-button"
             >
@@ -462,6 +483,21 @@ const testProcessStopButton =
 const testHelperCommandsButton =
   document.querySelector<HTMLButtonElement>(
     "#test-helper-commands-button",
+  )!;
+
+const startXmrigTestButton =
+  document.querySelector<HTMLButtonElement>(
+    "#start-xmrig-test-button",
+  )!;
+
+const xmrigTestStatusButton =
+  document.querySelector<HTMLButtonElement>(
+    "#xmrig-test-status-button",
+  )!;
+
+const stopXmrigTestButton =
+  document.querySelector<HTMLButtonElement>(
+    "#stop-xmrig-test-button",
   )!;
 
 const shutdownHelperSessionButton =
@@ -1478,6 +1514,135 @@ testHelperCommandsButton.addEventListener(
   },
 );
 
+startXmrigTestButton.addEventListener(
+  "click",
+  async () => {
+
+    startXmrigTestButton.disabled =
+      true;
+
+    try {
+
+      if (!(await validateAddressField())) {
+
+        backendNote.textContent =
+          "Enter a valid Safex Address before testing XMRig.";
+
+        addressInput.focus();
+
+        return;
+      }
+
+
+      if (!(await validateDaemonField())) {
+
+        backendNote.textContent =
+          "A live Safex daemon is required before testing XMRig.";
+
+        nodeInput.focus();
+
+        return;
+      }
+
+
+      backendNote.textContent =
+        "Waiting for Administrator approval...";
+
+
+      /*
+        Ensure the persistent elevated helper
+        exists. If already connected this does
+        not cause another UAC prompt.
+      */
+      await invoke<string>(
+        "start_helper_session",
+      );
+
+
+      backendNote.textContent =
+        "Starting Safex XMRig and verifying MSR optimisation...";
+
+
+      const result =
+        await invoke<string>(
+          "start_xmrig_test",
+          {
+            address:
+              addressInput.value.trim(),
+
+            daemon:
+              nodeInput.value.trim(),
+          },
+        );
+
+
+      backendNote.textContent =
+        result;
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+
+    } finally {
+
+      startXmrigTestButton.disabled =
+        false;
+    }
+  },
+);
+
+
+xmrigTestStatusButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      backendNote.textContent =
+        await invoke<string>(
+          "xmrig_test_status",
+        );
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+  },
+);
+
+
+stopXmrigTestButton.addEventListener(
+  "click",
+  async () => {
+
+    stopXmrigTestButton.disabled =
+      true;
+
+    try {
+
+      backendNote.textContent =
+        "Stopping Safex XMRig gracefully...";
+
+
+      backendNote.textContent =
+        await invoke<string>(
+          "stop_xmrig_test",
+        );
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+
+    } finally {
+
+      stopXmrigTestButton.disabled =
+        false;
+    }
+  },
+);
 
 shutdownHelperSessionButton.addEventListener(
   "click",

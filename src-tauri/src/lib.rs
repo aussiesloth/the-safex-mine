@@ -1383,7 +1383,7 @@ async fn helper_send_command(
     let count =
         timeout(
             Duration::from_secs(
-                5,
+                15,
             ),
             session
                 .reader
@@ -1700,39 +1700,7 @@ async fn test_helper_commands(
                     })?;
 
 
-            let before =
-                helper_send_command(
-                    session,
-                    "STATUS",
-                )
-                .await?;
-
-
-            let start =
-                helper_send_command(
-                    session,
-                    "START",
-                )
-                .await?;
-
-
-            let active =
-                helper_send_command(
-                    session,
-                    "STATUS",
-                )
-                .await?;
-
-
-            let stop =
-                helper_send_command(
-                    session,
-                    "STOP",
-                )
-                .await?;
-
-
-            let after =
+            let status =
                 helper_send_command(
                     session,
                     "STATUS",
@@ -1742,17 +1710,13 @@ async fn test_helper_commands(
 
             Ok(
                 format!(
-                    "{before} | {start} | {active} | {stop} | {after}"
+                    "Helper command channel OK | {status}"
                 )
             )
         }
         .await;
 
 
-    /*
-       If the pipe broke, don't retain a
-       dead session in application state.
-    */
     if result.is_err() {
         *guard = None;
     }
@@ -1761,6 +1725,134 @@ async fn test_helper_commands(
     result
 }
 
+#[tauri::command]
+async fn start_xmrig_test(
+    address: String,
+    daemon: String,
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let address =
+        address.trim();
+
+    let daemon =
+        daemon.trim();
+
+
+    if address.is_empty() {
+        return Err(
+            "Safex Address is empty."
+                .to_string()
+        );
+    }
+
+
+    if daemon.is_empty() {
+        return Err(
+            "Safex daemon is empty."
+                .to_string()
+        );
+    }
+
+
+    let mut guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    let session =
+        guard
+            .as_mut()
+            .ok_or_else(|| {
+                "Elevated helper is not connected."
+                    .to_string()
+            })?;
+
+
+    let command =
+        format!(
+            "START {address} {daemon}"
+        );
+
+
+    helper_send_command(
+        session,
+        &command,
+    )
+    .await
+}
+
+
+#[tauri::command]
+async fn xmrig_test_status(
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let mut guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    let session =
+        guard
+            .as_mut()
+            .ok_or_else(|| {
+                "Elevated helper is not connected."
+                    .to_string()
+            })?;
+
+
+    helper_send_command(
+        session,
+        "STATUS",
+    )
+    .await
+}
+
+
+#[tauri::command]
+async fn stop_xmrig_test(
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let mut guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    let session =
+        guard
+            .as_mut()
+            .ok_or_else(|| {
+                "Elevated helper is not connected."
+                    .to_string()
+            })?;
+
+
+    helper_send_command(
+        session,
+        "STOP",
+    )
+    .await
+}
 
 #[tauri::command]
 async fn shutdown_helper_session(
@@ -1826,6 +1918,9 @@ pub fn run() {
                 start_helper_session,
                 test_helper_commands,
                 shutdown_helper_session,
+                start_xmrig_test,
+                xmrig_test_status,
+                stop_xmrig_test,
             ],
         )
         .run(tauri::generate_context!())

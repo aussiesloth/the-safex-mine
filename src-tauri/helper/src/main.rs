@@ -28,7 +28,6 @@ use tokio::{
     },
     process::{
         Child,
-        ChildStdin,
         Command as TokioCommand,
     },
     time::{
@@ -49,10 +48,17 @@ use windows::Win32::{
         TOKEN_ELEVATION,
         TOKEN_QUERY,
     },
-    System::Threading::{
+   System::{
+    Console::{
+        GenerateConsoleCtrlEvent,
+        SetConsoleCtrlHandler,
+        CTRL_C_EVENT,
+    },
+    Threading::{
         GetCurrentProcess,
         OpenProcessToken,
     },
+},
 };
 
 
@@ -293,7 +299,6 @@ struct MinerTelemetry {
 
 struct MinerProcess {
     child: Child,
-    stdin: ChildStdin,
     telemetry: Arc<Mutex<MinerTelemetry>>,
 }
 
@@ -438,7 +443,7 @@ fn telemetry_summary(
 
     let msr =
         if telemetry.msr_failed {
-            "FAILED"
+            "Unavailable"
         }
         else if telemetry.msr_ok {
             "OK"
@@ -499,96 +504,147 @@ async fn stop_miner_process(
 
 
     /*
-       XMRig's Console implementation accepts
-       stdin as a named pipe.
+       GenerateConsoleCtrlEvent broadcasts
+       Ctrl+C to every process attached to
+       this console.
 
-       Byte 3 is Ctrl+C. XMRig handles it via
-       its normal close() path rather than
-       hard termination.
+       Protect the elevated helper from
+       Ctrl+C for the ENTIRE time XMRig is
+       shutting down. Restoring the handler
+       immediately after generating the
+       event creates a race where the helper
+       can receive the Ctrl+C and exit too.
     */
-    miner
-        .stdin
-        .write_all(
-            &[3u8],
+    unsafe {
+
+        SetConsoleCtrlHandler(
+            None,
+            true,
         )
-        .await
         .map_err(|error| {
             format!(
-                "Unable to send Ctrl+C to XMRig: {error}"
+                "Unable to protect helper from Ctrl+C: {error}"
             )
         })?;
 
 
-    miner
-        .stdin
-        .flush()
-        .await
-        .map_err(|error| {
-            format!(
-                "Unable to flush XMRig stdin: {error}"
+        if let Err(error) =
+            GenerateConsoleCtrlEvent(
+                CTRL_C_EVENT,
+                0,
             )
-        })?;
-
-
-    match timeout(
-        Duration::from_secs(
-            8,
-        ),
-        miner.child.wait(),
-    )
-    .await
-    {
-        Ok(
-            Ok(status)
-        ) => {
-
-            Ok(
-                format!(
-                    "STOPPED_GRACEFULLY ({status})"
-                )
-            )
-        }
-
-
-        Ok(
-            Err(error)
-        ) => {
-
-            Err(
-                format!(
-                    "Unable to wait for XMRig: {error}"
-                )
-            )
-        }
-
-
-        Err(_) => {
-
-            miner
-                .child
-                .kill()
-                .await
-                .map_err(|error| {
-                    format!(
-                        "Unable to force-stop XMRig: {error}"
-                    )
-                })?;
-
+        {
             let _ =
-                miner
-                    .child
-                    .wait()
-                    .await;
+                SetConsoleCtrlHandler(
+                    None,
+                    false,
+                );
 
-
-            Ok(
-                "STOPPED_FORCED"
-                    .to_string()
-            )
+            return Err(
+                format!(
+                    "Unable to send Ctrl+C to XMRig: {error}"
+                )
+            );
         }
     }
-}
 
+
+    /*
+       Do not re-enable Ctrl+C handling for
+       the helper until XMRig has exited or
+       the forced-stop fallback has finished.
+    */
+    let stop_result:
+        Result<String, String> =
+
+        match timeout(
+            Duration::from_secs(
+                8,
+            ),
+            miner.child.wait(),
+        )
+        .await
+        {
+            Ok(
+                Ok(status)
+            ) => {
+
+                Ok(
+                    format!(
+                        "STOPPED_GRACEFULLY ({status})"
+                    )
+                )
+            }
+
+
+            Ok(
+                Err(error)
+            ) => {
+
+                Err(
+                    format!(
+                        "Unable to wait for XMRig: {error}"
+                    )
+                )
+            }
+
+
+            Err(_) => {
+
+                match miner
+                    .child
+                    .kill()
+                    .await
+                {
+                    Ok(()) => {
+
+                        let _ =
+                            miner
+                                .child
+                                .wait()
+                                .await;
+
+                        Ok(
+                            "STOPPED_FORCED"
+                                .to_string()
+                        )
+                    }
+
+
+                    Err(error) => {
+
+                        Err(
+                            format!(
+                                "Unable to force-stop XMRig: {error}"
+                            )
+                        )
+                    }
+                }
+            }
+        };
+
+
+    /*
+       XMRig is now gone (or the stop attempt
+       has completed), so restore the helper's
+       normal Ctrl+C handling.
+    */
+    unsafe {
+
+        SetConsoleCtrlHandler(
+            None,
+            false,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to restore helper Ctrl+C handling: {error}"
+            )
+        })?;
+    }
+
+
+    stop_result
+}
 
 async fn stop_miner(
     miner: &mut Option<MinerProcess>,
@@ -871,9 +927,6 @@ async fn start_miner(
         .arg(
             "--print-time=5",
         )
-        .stdin(
-            Stdio::piped(),
-        )
         .stdout(
             Stdio::piped(),
         )
@@ -886,16 +939,6 @@ async fn start_miner(
                 "Unable to launch Safex XMRig: {error}"
             )
         })?;
-
-
-    let stdin =
-        child
-            .stdin
-            .take()
-            .ok_or_else(|| {
-                "Unable to capture XMRig stdin."
-                    .to_string()
-            })?;
 
 
     let stdout =
@@ -940,7 +983,6 @@ async fn start_miner(
     let mut process =
         MinerProcess {
             child,
-            stdin,
             telemetry,
         };
 
@@ -1003,16 +1045,26 @@ async fn start_miner(
                     &process.telemetry,
                 );
 
-            let _ =
-                stop_miner_process(
-                    &mut process,
-                )
-                .await;
+
+            /*
+            MSR optimisation is desirable but
+            not required for mining.
+
+            Some Windows systems prevent direct
+            MSR writes through VBS/hypervisor
+            security. Continue mining at the
+            reduced hashrate instead of refusing
+            to start.
+            */
+            *miner =
+                Some(
+                    process,
+                );
 
 
-            return Err(
+            return Ok(
                 format!(
-                    "MSR optimisation failed | {summary}"
+                    "OK STARTED_DEGRADED | {summary}"
                 )
             );
         }
