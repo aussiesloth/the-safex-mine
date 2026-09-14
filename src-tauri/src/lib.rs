@@ -64,6 +64,7 @@ use windows::{
                 SEE_MASK_NOCLOSEPROCESS,
             },
             WindowsAndMessaging::{
+                SW_HIDE,
                 SW_SHOWNORMAL,
             },
         },
@@ -803,7 +804,7 @@ fn launch_helper_with_arguments(
         );
 
     info.nShow =
-        SW_SHOWNORMAL.0;
+        SW_HIDE.0;
 
 
     unsafe {
