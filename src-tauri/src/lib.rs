@@ -1,11 +1,26 @@
 use std::{
     io::{BufRead, BufReader},
+    time::Duration,
     mem::size_of,
     path::PathBuf,
     process::{Child, Command, Stdio},
     sync::Mutex,
     thread,
 };
+
+use tokio::{
+    io::{
+        AsyncBufReadExt,
+        AsyncWriteExt,
+        BufReader as TokioBufReader,
+    },
+    net::windows::named_pipe::{
+        ServerOptions,
+    },
+    time::timeout,
+};
+
+use uuid::Uuid;
 
 use windows::{
     core::PCWSTR,
@@ -670,6 +685,334 @@ async fn launch_helper_probe()
     })?
 }
 
+fn launch_helper_with_arguments(
+    helper_path: &PathBuf,
+    parameters: &str,
+) -> Result<(), String> {
+
+    let helper_text =
+        helper_path
+            .to_str()
+            .ok_or_else(|| {
+                "Helper path contains invalid Unicode."
+                    .to_string()
+            })?;
+
+    let verb =
+        to_wide_null(
+            "runas",
+        );
+
+    let file =
+        to_wide_null(
+            helper_text,
+        );
+
+    let parameters =
+        to_wide_null(
+            parameters,
+        );
+
+    let mut info:
+        SHELLEXECUTEINFOW =
+        unsafe {
+            std::mem::zeroed()
+        };
+
+    info.cbSize =
+        size_of::<SHELLEXECUTEINFOW>()
+            as u32;
+
+    info.fMask =
+        SEE_MASK_NOCLOSEPROCESS;
+
+    info.lpVerb =
+        PCWSTR(
+            verb.as_ptr(),
+        );
+
+    info.lpFile =
+        PCWSTR(
+            file.as_ptr(),
+        );
+
+    info.lpParameters =
+        PCWSTR(
+            parameters.as_ptr(),
+        );
+
+    info.nShow =
+        SW_SHOWNORMAL.0;
+
+
+    unsafe {
+
+        ShellExecuteExW(
+            &mut info,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to launch elevated helper. \
+                 The UAC request may have been cancelled. \
+                 Error: {error}"
+            )
+        })?;
+
+
+        /*
+           For this handshake test we don't
+           need to retain the process handle.
+
+           The named pipe tells us whether
+           the helper actually connected.
+        */
+        if !info.hProcess.is_invalid() {
+
+            let _ =
+                CloseHandle(
+                    info.hProcess,
+                );
+        }
+    }
+
+
+    Ok(())
+}
+
+#[tauri::command]
+async fn test_secure_helper_pipe()
+    -> Result<String, String>
+{
+    let helper_path =
+        PathBuf::from(
+            env!("CARGO_MANIFEST_DIR"),
+        )
+        .join("helper")
+        .join("target")
+        .join("release")
+        .join(
+            "safex-mine-helper.exe",
+        );
+
+
+    if !helper_path.exists() {
+
+        return Err(
+            format!(
+                "Safex Mine helper not found: {}",
+                helper_path.display()
+            ),
+        );
+    }
+
+
+    /*
+       Both values are different on every
+       probe/app invocation.
+    */
+    let pipe_id =
+        Uuid::new_v4()
+            .simple()
+            .to_string();
+
+    let token =
+        Uuid::new_v4()
+            .simple()
+            .to_string();
+
+
+    let pipe_name =
+        format!(
+            r"\\.\pipe\safex-mine-{pipe_id}"
+        );
+
+
+    /*
+       Create the pipe BEFORE asking Windows
+       to launch the elevated helper.
+
+       first_pipe_instance prevents another
+       process from pre-creating the same
+       pipe name.
+
+       reject_remote_clients keeps this
+       strictly local to this PC.
+    */
+    let server =
+        ServerOptions::new()
+            .first_pipe_instance(
+                true,
+            )
+            .reject_remote_clients(
+                true,
+            )
+            .create(
+                &pipe_name,
+            )
+            .map_err(|error| {
+                format!(
+                    "Unable to create Safex Mine pipe: {error}"
+                )
+            })?;
+
+
+    let parameters =
+        format!(
+            "--pipe \"{pipe_name}\" --token \"{token}\""
+        );
+
+
+    launch_helper_with_arguments(
+        &helper_path,
+        &parameters,
+    )?;
+
+
+    /*
+       UAC may remain open for a while while
+       the user reads it, so give them a
+       reasonable period to approve it.
+    */
+    timeout(
+        Duration::from_secs(
+            60,
+        ),
+        server.connect(),
+    )
+    .await
+    .map_err(|_| {
+        "Timed out waiting for Administrator approval."
+            .to_string()
+    })?
+    .map_err(|error| {
+        format!(
+            "Elevated helper could not connect to the pipe: {error}"
+        )
+    })?;
+
+
+    let (
+        reader,
+        mut writer,
+    ) =
+        tokio::io::split(
+            server,
+        );
+
+    let mut reader =
+        TokioBufReader::new(
+            reader,
+        );
+
+
+    /*
+       Verify the helper knows the random
+       token passed through the UAC launch.
+    */
+    let mut hello =
+        String::new();
+
+
+    timeout(
+        Duration::from_secs(
+            5,
+        ),
+        reader.read_line(
+            &mut hello,
+        ),
+    )
+    .await
+    .map_err(|_| {
+        "Timed out waiting for helper handshake."
+            .to_string()
+    })?
+    .map_err(|error| {
+        format!(
+            "Unable to read helper handshake: {error}"
+        )
+    })?;
+
+
+    let expected_hello =
+        format!(
+            "HELLO {token}"
+        );
+
+
+    if hello.trim()
+        != expected_hello
+    {
+        return Err(
+            "Elevated helper handshake token was invalid."
+                .to_string()
+        );
+    }
+
+
+    writer
+        .write_all(
+            b"PING\n",
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to send helper PING: {error}"
+            )
+        })?;
+
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush helper PING: {error}"
+            )
+        })?;
+
+
+    let mut response =
+        String::new();
+
+
+    timeout(
+        Duration::from_secs(
+            5,
+        ),
+        reader.read_line(
+            &mut response,
+        ),
+    )
+    .await
+    .map_err(|_| {
+        "Timed out waiting for helper PONG."
+            .to_string()
+    })?
+    .map_err(|error| {
+        format!(
+            "Unable to read helper response: {error}"
+        )
+    })?;
+
+
+    if response.trim()
+        != "PONG ELEVATED"
+    {
+        return Err(
+            format!(
+                "Unexpected helper response: {}",
+                response.trim()
+            ),
+        );
+    }
+
+
+    Ok(
+        "Elevated helper connected securely."
+            .to_string()
+    )
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -685,6 +1028,7 @@ pub fn run() {
                 validate_safex_address,
                 validate_safex_daemon,
                 launch_helper_probe,
+                test_secure_helper_pipe,
             ],
         )
         .run(tauri::generate_context!())

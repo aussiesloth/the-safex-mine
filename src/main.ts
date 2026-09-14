@@ -336,6 +336,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               Test Elevated Helper
             </button>
 
+            <button
+              id="test-secure-pipe-button"
+              class="test-button"
+            >
+              Test Secure Helper Pipe
+            </button>
+
           </div>
 
         </section>
@@ -419,6 +426,11 @@ const testProcessStopButton =
   const testElevatedHelperButton =
   document.querySelector<HTMLButtonElement>(
     "#test-elevated-helper-button",
+  )!;
+
+  const testSecurePipeButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-secure-pipe-button",
   )!;
 
 const statusDot =
@@ -1347,6 +1359,37 @@ testElevatedHelperButton.addEventListener(
     }
 
     testElevatedHelperButton.disabled =
+      false;
+  },
+);
+
+testSecurePipeButton.addEventListener(
+  "click",
+  async () => {
+
+    testSecurePipeButton.disabled =
+      true;
+
+    backendNote.textContent =
+      "Waiting for secure elevated helper connection...";
+
+    try {
+
+      const result =
+        await invoke<string>(
+          "test_secure_helper_pipe",
+        );
+
+      backendNote.textContent =
+        result;
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+
+    testSecurePipeButton.disabled =
       false;
   },
 );

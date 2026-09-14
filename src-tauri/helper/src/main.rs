@@ -1,13 +1,28 @@
 use std::{
+    io,
     mem::size_of,
     process,
     thread,
     time::Duration,
 };
 
+use tokio::{
+    io::{
+        AsyncBufReadExt,
+        AsyncWriteExt,
+        BufReader,
+    },
+    net::windows::named_pipe::{
+        ClientOptions,
+        NamedPipeClient,
+    },
+    time::sleep,
+};
+
 use windows::Win32::{
     Foundation::{
         CloseHandle,
+        ERROR_PIPE_BUSY,
         HANDLE,
     },
     Security::{
@@ -21,6 +36,7 @@ use windows::Win32::{
         OpenProcessToken,
     },
 };
+
 
 fn is_process_elevated()
     -> windows::core::Result<bool>
@@ -70,7 +86,186 @@ fn is_process_elevated()
 }
 
 
-fn main() {
+fn get_argument(
+    name: &str,
+) -> Option<String> {
+
+    let args:
+        Vec<String> =
+        std::env::args()
+            .collect();
+
+    args.windows(2)
+        .find(|pair| {
+            pair[0] == name
+        })
+        .map(|pair| {
+            pair[1].clone()
+        })
+}
+
+
+async fn connect_to_pipe(
+    pipe_name: &str,
+) -> io::Result<NamedPipeClient> {
+
+    /*
+       UAC startup can take a moment.
+       Retry briefly if the pipe is busy
+       or not yet visible.
+    */
+    for _ in 0..100 {
+
+        match ClientOptions::new()
+            .open(pipe_name)
+        {
+            Ok(client) => {
+                return Ok(client);
+            }
+
+            Err(error)
+                if
+                    error.raw_os_error()
+                        == Some(
+                            ERROR_PIPE_BUSY.0
+                                as i32
+                        )
+                    ||
+                    error.kind()
+                        == io::ErrorKind::NotFound
+                =>
+            {
+                sleep(
+                    Duration::from_millis(
+                        50,
+                    ),
+                )
+                .await;
+            }
+
+            Err(error) => {
+                return Err(error);
+            }
+        }
+    }
+
+    Err(
+        io::Error::new(
+            io::ErrorKind::TimedOut,
+            "Timed out connecting to Safex Mine pipe.",
+        ),
+    )
+}
+
+
+async fn run_pipe_probe(
+    pipe_name: String,
+    token: String,
+) -> Result<(), String> {
+
+    let client =
+        connect_to_pipe(
+            &pipe_name,
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to connect to Safex Mine pipe: {error}"
+            )
+        })?;
+
+    let (
+        reader,
+        mut writer,
+    ) =
+        tokio::io::split(
+            client,
+        );
+
+    let mut reader =
+        BufReader::new(
+            reader,
+        );
+
+    /*
+       First message proves that the
+       helper knows the per-launch token.
+    */
+    writer
+        .write_all(
+            format!(
+                "HELLO {token}\n"
+            )
+            .as_bytes(),
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to send helper handshake: {error}"
+            )
+        })?;
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush helper handshake: {error}"
+            )
+        })?;
+
+    let mut command =
+        String::new();
+
+    reader
+        .read_line(
+            &mut command,
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to read pipe command: {error}"
+            )
+        })?;
+
+    if command.trim()
+        != "PING"
+    {
+        return Err(
+            format!(
+                "Unexpected command from Safex Mine: {}",
+                command.trim()
+            ),
+        );
+    }
+
+    writer
+        .write_all(
+            b"PONG ELEVATED\n",
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to send helper response: {error}"
+            )
+        })?;
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush helper response: {error}"
+            )
+        })?;
+
+    Ok(())
+}
+
+
+#[tokio::main]
+async fn main() {
+
     println!(
         "The Safex Mine Helper"
     );
@@ -80,27 +275,16 @@ fn main() {
     );
 
     match is_process_elevated() {
+
         Ok(true) => {
             println!(
                 "Elevation: Administrator"
-            );
-
-            println!(
-                "Helper elevation probe: SUCCESS"
             );
         }
 
         Ok(false) => {
             eprintln!(
                 "Elevation: NOT elevated"
-            );
-
-            eprintln!(
-                "Helper elevation probe: FAILED"
-            );
-
-            thread::sleep(
-                Duration::from_secs(8),
             );
 
             process::exit(2);
@@ -111,21 +295,98 @@ fn main() {
                 "Unable to determine elevation: {error}"
             );
 
-            thread::sleep(
-                Duration::from_secs(8),
-            );
-
             process::exit(3);
         }
     }
 
-    println!();
+
+    let pipe_name =
+        get_argument("--pipe");
+
+    let token =
+        get_argument("--token");
+
+
+    /*
+       No pipe arguments means this is the
+       original manual elevation probe.
+    */
+    if pipe_name.is_none()
+        && token.is_none()
+    {
+        println!(
+            "Helper elevation probe: SUCCESS"
+        );
+
+        println!();
+
+        println!(
+            "This window will close in 8 seconds."
+        );
+
+        thread::sleep(
+            Duration::from_secs(8),
+        );
+
+        return;
+    }
+
+
+    let Some(pipe_name) =
+        pipe_name
+    else {
+        eprintln!(
+            "Missing --pipe argument."
+        );
+
+        process::exit(4);
+    };
+
+
+    let Some(token) =
+        token
+    else {
+        eprintln!(
+            "Missing --token argument."
+        );
+
+        process::exit(5);
+    };
+
 
     println!(
-        "This window will close in 8 seconds."
+        "Connecting to The Safex Mine..."
     );
 
-    thread::sleep(
-        Duration::from_secs(8),
-    );
+
+    match run_pipe_probe(
+        pipe_name,
+        token,
+    )
+    .await
+    {
+        Ok(()) => {
+
+            println!(
+                "Secure pipe probe: SUCCESS"
+            );
+
+            thread::sleep(
+                Duration::from_secs(2),
+            );
+        }
+
+        Err(error) => {
+
+            eprintln!(
+                "Secure pipe probe failed: {error}"
+            );
+
+            thread::sleep(
+                Duration::from_secs(5),
+            );
+
+            process::exit(6);
+        }
+    }
 }

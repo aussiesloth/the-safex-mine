@@ -10,5 +10,13 @@ windows = { version = "0.62", features = [
     "Win32_System_Threading",
 ] }
 
+tokio = { version = "1", features = [
+    "io-util",
+    "net",
+    "rt-multi-thread",
+    "macros",
+    "time",
+] }
+
 [build-dependencies]
 winresource = "0.1.31"
