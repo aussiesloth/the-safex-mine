@@ -1729,6 +1729,7 @@ async fn test_helper_commands(
 async fn start_xmrig_test(
     address: String,
     daemon: String,
+    mode: String,
     state:
         State<
             '_,
@@ -1742,6 +1743,24 @@ async fn start_xmrig_test(
     let daemon =
         daemon.trim();
 
+    let profile =
+    match mode.as_str() {
+        "Calm" =>
+            "calm",
+
+        "Balanced" =>
+            "balanced",
+
+        "Full Bore" =>
+            "full",
+
+        _ => {
+            return Err(
+                "Invalid mining mode."
+                    .to_string()
+            );
+        }
+    };
 
     if address.is_empty() {
         return Err(
@@ -1777,7 +1796,7 @@ async fn start_xmrig_test(
 
     let command =
         format!(
-            "START {address} {daemon}"
+            "START {address} {daemon} {profile}"
         );
 
 

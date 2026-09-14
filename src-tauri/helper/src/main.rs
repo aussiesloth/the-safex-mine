@@ -769,6 +769,7 @@ async fn miner_status(
 async fn start_miner(
     address: &str,
     daemon: &str,
+    profile: &str,
     miner: &mut Option<MinerProcess>,
 ) -> Result<String, String> {
 
@@ -854,6 +855,24 @@ async fn start_miner(
         );
     }
 
+    let cpu_hint =
+    match profile {
+        "calm" =>
+            40,
+
+        "balanced" =>
+            70,
+
+        "full" =>
+            100,
+
+        _ => {
+            return Err(
+                "Invalid mining profile."
+                    .to_string()
+            );
+        }
+    };
 
     let backend_dir =
         mining_backend_dir()?;
@@ -919,7 +938,9 @@ async fn start_miner(
             address,
         )
         .arg(
-            "--threads=1",
+            format!(
+                "--cpu-max-threads-hint={cpu_hint}"
+            ),
         )
         .arg(
             "--no-color",
@@ -1369,7 +1390,7 @@ let response:
         let mut parts =
             parameters
                 .splitn(
-                    2,
+                    3,
                     ' ',
                 );
 
@@ -1385,13 +1406,18 @@ let response:
                 .next()
                 .unwrap_or_default();
 
+        let profile =
+            parts
+                .next()
+                .unwrap_or_default();
 
         if address.is_empty()
             || daemon.is_empty()
+            || profile.is_empty()
         {
             (
                 "ERR START requires \
-                 Safex Address and daemon"
+                 Safex Address, daemon and mining profile"
             )
             .to_string()
         }
@@ -1400,6 +1426,7 @@ let response:
             match start_miner(
                 address,
                 daemon,
+                profile,
                 &mut miner,
             )
             .await

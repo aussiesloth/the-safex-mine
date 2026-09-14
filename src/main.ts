@@ -868,6 +868,21 @@ function setConnectionFieldsLocked(
   nodeInput.readOnly = locked;
 }
 
+function setModeButtonsLocked(
+  locked: boolean,
+) {
+
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      ".mode-button",
+    )
+    .forEach((button) => {
+
+      button.disabled =
+        locked;
+    });
+}
+
 /* ---------------------------------------------------------
    VISUAL STATE
    --------------------------------------------------------- */
@@ -1249,6 +1264,9 @@ startButton.addEventListener(
         "Starting Safex XMRig...";
 
 
+      const mode =
+        getSavedMode();
+
       const result =
         await invoke<string>(
           "start_xmrig_test",
@@ -1258,9 +1276,10 @@ startButton.addEventListener(
 
             daemon:
               nodeInput.value.trim(),
+
+            mode,
           },
         );
-
 
       const started =
         result.startsWith(
@@ -1292,6 +1311,9 @@ startButton.addEventListener(
         true,
       );
 
+      setModeButtonsLocked(
+        true,
+      );
 
       miningStartedAt =
         Date.now();
@@ -1329,24 +1351,24 @@ startButton.addEventListener(
         false;
 
 
-      if (
-        result.includes(
-          "STARTED_DEGRADED",
-        )
-        ||
-        result.includes(
-          "MSR=UNAVAILABLE",
-        )
-      ) {
+if (
+  result.includes(
+    "STARTED_DEGRADED",
+  )
+  ||
+  result.includes(
+    "MSR=UNAVAILABLE",
+  )
+) {
 
-        backendNote.textContent =
-          "Mining started — MSR optimisation unavailable; reduced hashrate expected. Development profile: 1 thread.";
+  backendNote.textContent =
+    `Mining started — ${mode} mode. MSR optimisation unavailable; reduced hashrate expected.`;
 
-      } else {
+} else {
 
-        backendNote.textContent =
-          "Mining started — MSR optimisation active. Development profile: 1 thread.";
-      }
+  backendNote.textContent =
+    `Mining started — ${mode} mode. MSR optimisation active.`;
+}
 
 
       updateSessionTimer();
@@ -1369,6 +1391,9 @@ startButton.addEventListener(
         false,
       );
 
+      setModeButtonsLocked(
+        false,
+      );
 
       setScene(
         "ready",
@@ -1468,6 +1493,9 @@ stopButton.addEventListener(
         false,
       );
 
+      setModeButtonsLocked(
+        false,
+      );
 
       clearTransientTimer();
 
@@ -1798,6 +1826,10 @@ startXmrigTestButton.addEventListener(
         "Starting Safex XMRig and verifying MSR optimisation...";
 
 
+      const mode =
+        getSavedMode();
+
+
       const result =
         await invoke<string>(
           "start_xmrig_test",
@@ -1807,6 +1839,8 @@ startXmrigTestButton.addEventListener(
 
             daemon:
               nodeInput.value.trim(),
+
+            mode,
           },
         );
 
