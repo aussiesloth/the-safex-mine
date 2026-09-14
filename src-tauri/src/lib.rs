@@ -1,9 +1,34 @@
 use std::{
     io::{BufRead, BufReader},
+    mem::size_of,
     path::PathBuf,
     process::{Child, Command, Stdio},
     sync::Mutex,
     thread,
+};
+
+use windows::{
+    core::PCWSTR,
+    Win32::{
+        Foundation::{
+            CloseHandle,
+            WAIT_OBJECT_0,
+        },
+        System::Threading::{
+            GetExitCodeProcess,
+            WaitForSingleObject,
+        },
+        UI::{
+            Shell::{
+                ShellExecuteExW,
+                SHELLEXECUTEINFOW,
+                SEE_MASK_NOCLOSEPROCESS,
+            },
+            WindowsAndMessaging::{
+                SW_SHOWNORMAL,
+            },
+        },
+    },
 };
 
 use tauri::{Emitter, State};
@@ -445,6 +470,206 @@ async fn validate_safex_daemon(
     }
 }
 
+fn to_wide_null(
+    value: &str,
+) -> Vec<u16> {
+    value
+        .encode_utf16()
+        .chain(std::iter::once(0))
+        .collect()
+}
+
+
+fn launch_helper_probe_blocking(
+    helper_path: PathBuf,
+) -> Result<String, String> {
+
+    let helper_text =
+        helper_path
+            .to_str()
+            .ok_or_else(|| {
+                "Helper path contains invalid Unicode."
+                    .to_string()
+            })?;
+
+    let verb =
+        to_wide_null("runas");
+
+    let file =
+        to_wide_null(helper_text);
+
+    /*
+       SAFETY:
+       SHELLEXECUTEINFOW is a plain Win32
+       structure. Zero initialization is the
+       normal starting state before filling
+       the required fields.
+    */
+    let mut info: SHELLEXECUTEINFOW =
+        unsafe {
+            std::mem::zeroed()
+        };
+
+    info.cbSize =
+        size_of::<SHELLEXECUTEINFOW>()
+            as u32;
+
+    info.fMask =
+        SEE_MASK_NOCLOSEPROCESS;
+
+    info.lpVerb =
+        PCWSTR(verb.as_ptr());
+
+    info.lpFile =
+        PCWSTR(file.as_ptr());
+
+    info.nShow =
+        SW_SHOWNORMAL.0;
+
+
+    unsafe {
+
+        ShellExecuteExW(
+            &mut info,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to launch elevated helper. \
+                 The UAC request may have been cancelled. \
+                 Error: {error}"
+            )
+        })?;
+
+
+        if info.hProcess.is_invalid() {
+
+            return Err(
+                "Windows did not return a helper process handle."
+                    .to_string()
+            );
+        }
+
+
+        let wait_result =
+            WaitForSingleObject(
+                info.hProcess,
+                u32::MAX,
+            );
+
+
+        if wait_result != WAIT_OBJECT_0 {
+
+            let _ =
+                CloseHandle(
+                    info.hProcess,
+                );
+
+            return Err(
+                format!(
+                    "Waiting for elevated helper failed: {:?}",
+                    wait_result
+                )
+            );
+        }
+
+
+        let mut exit_code =
+            0u32;
+
+        let exit_result =
+            GetExitCodeProcess(
+                info.hProcess,
+                &mut exit_code,
+            );
+
+
+        let _ =
+            CloseHandle(
+                info.hProcess,
+            );
+
+
+        exit_result
+            .map_err(|error| {
+                format!(
+                    "Unable to read helper exit code: {error}"
+                )
+            })?;
+
+
+        match exit_code {
+
+            0 => Ok(
+                "Elevated helper completed successfully."
+                    .to_string()
+            ),
+
+            2 => Err(
+                "Helper started but was not elevated."
+                    .to_string()
+            ),
+
+            3 => Err(
+                "Helper could not determine its elevation state."
+                    .to_string()
+            ),
+
+            code => Err(
+                format!(
+                    "Elevated helper exited with code {code}."
+                )
+            ),
+        }
+    }
+}
+
+
+#[tauri::command]
+async fn launch_helper_probe()
+    -> Result<String, String>
+{
+    /*
+       Development location only.
+
+       Later this changes to the packaged
+       sidecar/helper location.
+    */
+    let helper_path =
+        PathBuf::from(
+            env!("CARGO_MANIFEST_DIR"),
+        )
+        .join("helper")
+        .join("target")
+        .join("release")
+        .join("safex-mine-helper.exe");
+
+
+    if !helper_path.exists() {
+
+        return Err(
+            format!(
+                "Safex Mine helper not found: {}",
+                helper_path.display()
+            )
+        );
+    }
+
+
+    tauri::async_runtime::spawn_blocking(
+        move || {
+            launch_helper_probe_blocking(
+                helper_path,
+            )
+        },
+    )
+    .await
+    .map_err(|error| {
+        format!(
+            "Helper launch task failed: {error}"
+        )
+    })?
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -459,6 +684,7 @@ pub fn run() {
                 safex_xmrig_version,
                 validate_safex_address,
                 validate_safex_daemon,
+                launch_helper_probe,
             ],
         )
         .run(tauri::generate_context!())

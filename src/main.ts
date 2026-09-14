@@ -328,6 +328,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             >
               Stop Test Process
             </button>
+            
+            <button
+              id="test-elevated-helper-button"
+              class="test-button"
+            >
+              Test Elevated Helper
+            </button>
 
           </div>
 
@@ -407,6 +414,11 @@ const testProcessStartButton =
 const testProcessStopButton =
   document.querySelector<HTMLButtonElement>(
     "#test-process-stop-button",
+  )!;
+
+  const testElevatedHelperButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-elevated-helper-button",
   )!;
 
 const statusDot =
@@ -904,7 +916,6 @@ function formatDuration(ms: number): string {
   return time;
 }
 
-
 function updateSessionTimer() {
 
   sessionTimeValue.textContent =
@@ -912,7 +923,6 @@ function updateSessionTimer() {
       getCurrentMiningTimeMs(),
     );
 }
-
 
 window.setInterval(
   updateSessionTimer,
@@ -933,7 +943,6 @@ function updateCounters() {
     rejectedCount.toString();
 }
 
-
 /* ---------------------------------------------------------
    TRANSIENT EVENT QUEUE
    --------------------------------------------------------- */
@@ -950,7 +959,6 @@ function clearTransientTimer() {
   }
 }
 
-
 function getTransientDuration(
   state: TransientState,
 ): number {
@@ -961,7 +969,6 @@ function getTransientDuration(
 
   return 2500;
 }
-
 
 function playNextTransient() {
 
@@ -994,7 +1001,6 @@ function playNextTransient() {
       ),
     );
 }
-
 
 function queueTransient(
   state: TransientState,
@@ -1029,7 +1035,6 @@ function queueTransient(
     );
 }
 
-
 /* ---------------------------------------------------------
    SIMULATED BACKEND EVENTS
    --------------------------------------------------------- */
@@ -1051,7 +1056,6 @@ function handleBlockFound() {
   queueTransient("approved");
 }
 
-
 function handleReject() {
 
   if (!miningRunning) {
@@ -1064,7 +1068,6 @@ function handleReject() {
 
   queueTransient("reject");
 }
-
 
 /* ---------------------------------------------------------
    MINING MODE BUTTONS
@@ -1167,7 +1170,6 @@ startButton.addEventListener(
   },
 );
 
-
 /* ---------------------------------------------------------
    STOP MINING
    --------------------------------------------------------- */
@@ -1227,7 +1229,6 @@ stopButton.addEventListener(
   },
 );
 
-
 /* ---------------------------------------------------------
    DEVELOPMENT TEST BUTTONS
    --------------------------------------------------------- */
@@ -1248,6 +1249,7 @@ testRejectButton.addEventListener(
     handleReject();
   },
 );
+
 
 /* ---------------------------------------------------------
    NATIVE PROCESS-MANAGER TEST
@@ -1315,6 +1317,37 @@ void listen<string>(
 
     backendNote.textContent =
       `Test process error: ${event.payload}`;
+  },
+);
+
+testElevatedHelperButton.addEventListener(
+  "click",
+  async () => {
+
+    testElevatedHelperButton.disabled =
+      true;
+
+    backendNote.textContent =
+      "Waiting for Administrator approval...";
+
+    try {
+
+      const result =
+        await invoke<string>(
+          "launch_helper_probe",
+        );
+
+      backendNote.textContent =
+        result;
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+
+    testElevatedHelperButton.disabled =
+      false;
   },
 );
 
