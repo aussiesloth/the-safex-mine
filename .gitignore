@@ -25,6 +25,7 @@ dist-ssr
 
 # Bundled mining backend binaries
 src-tauri/binaries/*.exe
+src-tauri/binaries/*.sys
 
 # Rust helper build output
 src-tauri/helper/target/
