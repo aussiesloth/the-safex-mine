@@ -23,15 +23,35 @@ use tokio::{
 use uuid::Uuid;
 
 use windows::{
-    core::PCWSTR,
+    core::{
+    PCWSTR,
+    PWSTR,
+    },
     Win32::{
         Foundation::{
             CloseHandle,
             WAIT_OBJECT_0,
+            HLOCAL,
+            LocalFree,
+        },
+        Security::{
+            Authorization::{
+                ConvertSidToStringSidW,
+                ConvertStringSecurityDescriptorToSecurityDescriptorW,
+                SDDL_REVISION_1,
+            },
+            GetTokenInformation,
+            PSECURITY_DESCRIPTOR,
+            SECURITY_ATTRIBUTES,
+            TOKEN_QUERY,
+            TOKEN_USER,
+            TokenUser,
         },
         System::Threading::{
             GetExitCodeProcess,
             WaitForSingleObject,
+            GetCurrentProcess,
+            OpenProcessToken,
         },
         UI::{
             Shell::{
@@ -779,6 +799,287 @@ fn launch_helper_with_arguments(
     Ok(())
 }
 
+fn current_user_sid_string()
+    -> Result<String, String>
+{
+    unsafe {
+
+        let mut token =
+            windows::Win32::Foundation::HANDLE::default();
+
+        OpenProcessToken(
+            GetCurrentProcess(),
+            TOKEN_QUERY,
+            &mut token,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to open current-user token: {error}"
+            )
+        })?;
+
+
+        /*
+           First call asks Windows how large
+           the TOKEN_USER buffer must be.
+        */
+        let mut required =
+            0u32;
+
+        let _ =
+            GetTokenInformation(
+                token,
+                TokenUser,
+                None,
+                0,
+                &mut required,
+            );
+
+
+        if required == 0 {
+
+            let _ =
+                CloseHandle(
+                    token,
+                );
+
+            return Err(
+                "Windows returned no user-token size."
+                    .to_string()
+            );
+        }
+
+
+        let mut buffer =
+            vec![
+                0u8;
+                required as usize
+            ];
+
+
+        let info_result =
+            GetTokenInformation(
+                token,
+                TokenUser,
+                Some(
+                    buffer
+                        .as_mut_ptr()
+                        .cast(),
+                ),
+                required,
+                &mut required,
+            );
+
+
+        let _ =
+            CloseHandle(
+                token,
+            );
+
+
+        info_result
+            .map_err(|error| {
+                format!(
+                    "Unable to read current-user token: {error}"
+                )
+            })?;
+
+
+        /*
+           TOKEN_USER begins at the start of
+           the returned buffer.
+
+           read_unaligned avoids making any
+           unnecessary Rust alignment
+           assumption about that byte buffer.
+        */
+        let token_user =
+            std::ptr::read_unaligned(
+                buffer.as_ptr()
+                    as *const TOKEN_USER,
+            );
+
+
+        let mut sid_text =
+            PWSTR::default();
+
+
+        ConvertSidToStringSidW(
+            token_user.User.Sid,
+            &mut sid_text,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to convert current-user SID: {error}"
+            )
+        })?;
+
+
+        let sid_result =
+            sid_text
+                .to_string()
+                .map_err(|error| {
+                    format!(
+                        "Unable to read current-user SID: {error}"
+                    )
+                });
+
+
+        /*
+           ConvertSidToStringSidW allocated
+           this string with LocalAlloc.
+        */
+        let _ =
+            LocalFree(
+                Some(
+                    HLOCAL(
+                        sid_text
+                            .0
+                            .cast(),
+                    ),
+                ),
+            );
+
+
+        sid_result
+    }
+}
+
+fn create_user_locked_pipe(
+    pipe_name: &str,
+) -> Result<
+    tokio::net::windows::named_pipe::NamedPipeServer,
+    String,
+> {
+
+    let user_sid =
+        current_user_sid_string()?;
+
+
+    /*
+       D:P
+         = protected DACL; do not inherit
+           broader permissions.
+
+       First ACE:
+         full access for the user who
+         launched The Safex Mine.
+
+       Second ACE:
+         full access for local
+         Administrators, allowing a helper
+         elevated using alternate admin
+         credentials.
+
+       The random handshake token remains
+       the application-level authentication.
+    */
+    let sddl =
+        format!(
+            "D:P(A;;GA;;;{user_sid})(A;;GA;;;BA)"
+        );
+
+
+    let sddl_wide =
+        to_wide_null(
+            &sddl,
+        );
+
+
+    let mut descriptor =
+        PSECURITY_DESCRIPTOR::default();
+
+
+    unsafe {
+
+        ConvertStringSecurityDescriptorToSecurityDescriptorW(
+            PCWSTR(
+                sddl_wide.as_ptr(),
+            ),
+            SDDL_REVISION_1,
+            &mut descriptor,
+            None,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to build named-pipe security descriptor: {error}"
+            )
+        })?;
+    }
+
+
+    let mut attributes =
+        SECURITY_ATTRIBUTES {
+            nLength:
+                size_of::<SECURITY_ATTRIBUTES>()
+                    as u32,
+
+            lpSecurityDescriptor:
+                descriptor.0,
+
+            bInheritHandle:
+                false.into(),
+        };
+
+
+    let mut options =
+        ServerOptions::new();
+
+    options
+        .first_pipe_instance(
+            true,
+        )
+        .reject_remote_clients(
+            true,
+        );
+
+
+    /*
+       Tokio passes this SECURITY_ATTRIBUTES
+       object directly to CreateNamedPipe.
+
+       Windows copies the descriptor while
+       creating the pipe, so we can free our
+       allocated descriptor immediately
+       afterwards.
+    */
+    let create_result =
+        unsafe {
+            options
+                .create_with_security_attributes_raw(
+                    pipe_name,
+                    (
+                        &mut attributes
+                            as *mut SECURITY_ATTRIBUTES
+                    )
+                    .cast(),
+                )
+        };
+
+
+    unsafe {
+
+        let _ =
+            LocalFree(
+                Some(
+                    HLOCAL(
+                        descriptor
+                            .0
+                            .cast(),
+                    ),
+                ),
+            );
+    }
+
+
+    create_result
+        .map_err(|error| {
+            format!(
+                "Unable to create secured Safex Mine pipe: {error}"
+            )
+        })
+}
+
 #[tauri::command]
 async fn test_secure_helper_pipe()
     -> Result<String, String>
@@ -839,21 +1140,9 @@ async fn test_secure_helper_pipe()
        strictly local to this PC.
     */
     let server =
-        ServerOptions::new()
-            .first_pipe_instance(
-                true,
-            )
-            .reject_remote_clients(
-                true,
-            )
-            .create(
-                &pipe_name,
-            )
-            .map_err(|error| {
-                format!(
-                    "Unable to create Safex Mine pipe: {error}"
-                )
-            })?;
+    create_user_locked_pipe(
+        &pipe_name,
+    )?;
 
 
     let parameters =
