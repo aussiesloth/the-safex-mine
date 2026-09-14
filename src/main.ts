@@ -343,6 +343,27 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               Test Secure Helper Pipe
             </button>
 
+            <button
+              id="start-helper-session-button"
+              class="test-button"
+            >
+              Start Helper Session
+            </button>
+
+            <button
+              id="test-helper-commands-button"
+              class="test-button"
+            >
+              Test Helper Commands
+            </button>
+
+            <button
+              id="shutdown-helper-session-button"
+              class="test-button"
+            >
+              Shutdown Helper
+            </button>
+
           </div>
 
         </section>
@@ -431,6 +452,21 @@ const testProcessStopButton =
   const testSecurePipeButton =
   document.querySelector<HTMLButtonElement>(
     "#test-secure-pipe-button",
+  )!;
+
+  const startHelperSessionButton =
+  document.querySelector<HTMLButtonElement>(
+    "#start-helper-session-button",
+  )!;
+
+const testHelperCommandsButton =
+  document.querySelector<HTMLButtonElement>(
+    "#test-helper-commands-button",
+  )!;
+
+const shutdownHelperSessionButton =
+  document.querySelector<HTMLButtonElement>(
+    "#shutdown-helper-session-button",
   )!;
 
 const statusDot =
@@ -1391,6 +1427,74 @@ testSecurePipeButton.addEventListener(
 
     testSecurePipeButton.disabled =
       false;
+  },
+);
+
+startHelperSessionButton.addEventListener(
+  "click",
+  async () => {
+
+    startHelperSessionButton.disabled =
+      true;
+
+    backendNote.textContent =
+      "Waiting for Administrator approval...";
+
+    try {
+
+      backendNote.textContent =
+        await invoke<string>(
+          "start_helper_session",
+        );
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+
+    startHelperSessionButton.disabled =
+      false;
+  },
+);
+
+
+testHelperCommandsButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      backendNote.textContent =
+        await invoke<string>(
+          "test_helper_commands",
+        );
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
+  },
+);
+
+
+shutdownHelperSessionButton.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      backendNote.textContent =
+        await invoke<string>(
+          "shutdown_helper_session",
+        );
+
+    } catch (error) {
+
+      backendNote.textContent =
+        String(error);
+    }
   },
 );
 

@@ -28,6 +28,7 @@ base58-monero = { version = "2", features = ["check"] }
 tokio = { version = "1", features = [
     "io-util",
     "net",
+    "sync",
     "time",
 ] }
 

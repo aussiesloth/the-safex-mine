@@ -13,10 +13,14 @@ use tokio::{
         AsyncBufReadExt,
         AsyncWriteExt,
         BufReader as TokioBufReader,
+        ReadHalf,
+        WriteHalf,
     },
     net::windows::named_pipe::{
+        NamedPipeServer,
         ServerOptions,
     },
+    sync::Mutex as AsyncMutex,
     time::timeout,
 };
 
@@ -76,6 +80,43 @@ impl Default for ProcessState {
     fn default() -> Self {
         Self {
             child: Mutex::new(None),
+        }
+    }
+}
+
+type HelperPipeReader =
+    TokioBufReader<
+        ReadHalf<NamedPipeServer>
+    >;
+
+type HelperPipeWriter =
+    WriteHalf<NamedPipeServer>;
+
+
+struct HelperSession {
+    reader: HelperPipeReader,
+    writer: HelperPipeWriter,
+}
+
+
+struct HelperSessionState {
+    session:
+        AsyncMutex<
+            Option<HelperSession>
+        >,
+}
+
+
+impl Default
+    for HelperSessionState
+{
+    fn default() -> Self {
+
+        Self {
+            session:
+                AsyncMutex::new(
+                    None,
+                ),
         }
     }
 }
@@ -1302,11 +1343,474 @@ async fn test_secure_helper_pipe()
     )
 }
 
+async fn helper_send_command(
+    session: &mut HelperSession,
+    command: &str,
+) -> Result<String, String> {
+
+    session
+        .writer
+        .write_all(
+            format!(
+                "{command}\n"
+            )
+            .as_bytes(),
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to send helper command: {error}"
+            )
+        })?;
+
+
+    session
+        .writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush helper command: {error}"
+            )
+        })?;
+
+
+    let mut response =
+        String::new();
+
+
+    let count =
+        timeout(
+            Duration::from_secs(
+                5,
+            ),
+            session
+                .reader
+                .read_line(
+                    &mut response,
+                ),
+        )
+        .await
+        .map_err(|_| {
+            "Timed out waiting for elevated helper."
+                .to_string()
+        })?
+        .map_err(|error| {
+            format!(
+                "Unable to read helper response: {error}"
+            )
+        })?;
+
+
+    if count == 0 {
+
+        return Err(
+            "Elevated helper disconnected."
+                .to_string()
+        );
+    }
+
+
+    Ok(
+        response
+            .trim()
+            .to_string()
+    )
+}
+
+
+#[tauri::command]
+async fn start_helper_session(
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let mut session_guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    /*
+       Important UX behaviour:
+       once UAC has been approved, reuse
+       the existing elevated helper.
+    */
+    if session_guard.is_some() {
+
+        return Ok(
+            "Elevated helper is already connected."
+                .to_string()
+        );
+    }
+
+
+    let helper_path =
+        PathBuf::from(
+            env!(
+                "CARGO_MANIFEST_DIR"
+            ),
+        )
+        .join("helper")
+        .join("target")
+        .join("release")
+        .join(
+            "safex-mine-helper.exe",
+        );
+
+
+    if !helper_path.exists() {
+
+        return Err(
+            format!(
+                "Safex Mine helper not found: {}",
+                helper_path.display()
+            ),
+        );
+    }
+
+
+    let pipe_id =
+        Uuid::new_v4()
+            .simple()
+            .to_string();
+
+    let token =
+        Uuid::new_v4()
+            .simple()
+            .to_string();
+
+
+    let pipe_name =
+        format!(
+            r"\\.\pipe\safex-mine-{pipe_id}"
+        );
+
+
+    /*
+       Uses the Stage 3.5 secured pipe:
+       local-only + explicit DACL.
+    */
+    let server =
+        create_user_locked_pipe(
+            &pipe_name,
+        )?;
+
+
+    let parameters =
+        format!(
+            "--pipe \"{pipe_name}\" --token \"{token}\" --persistent"
+        );
+
+
+    launch_helper_with_arguments(
+        &helper_path,
+        &parameters,
+    )?;
+
+
+    timeout(
+        Duration::from_secs(
+            60,
+        ),
+        server.connect(),
+    )
+    .await
+    .map_err(|_| {
+        "Timed out waiting for Administrator approval."
+            .to_string()
+    })?
+    .map_err(|error| {
+        format!(
+            "Elevated helper could not connect: {error}"
+        )
+    })?;
+
+
+    let (
+        reader,
+        mut writer,
+    ) =
+        tokio::io::split(
+            server,
+        );
+
+
+    let mut reader =
+        TokioBufReader::new(
+            reader,
+        );
+
+
+    let mut hello =
+        String::new();
+
+
+    let hello_count =
+        timeout(
+            Duration::from_secs(
+                5,
+            ),
+            reader.read_line(
+                &mut hello,
+            ),
+        )
+        .await
+        .map_err(|_| {
+            "Timed out waiting for helper handshake."
+                .to_string()
+        })?
+        .map_err(|error| {
+            format!(
+                "Unable to read helper handshake: {error}"
+            )
+        })?;
+
+
+    if hello_count == 0 {
+
+        return Err(
+            "Elevated helper disconnected during handshake."
+                .to_string()
+        );
+    }
+
+
+    let expected_hello =
+        format!(
+            "HELLO {token}"
+        );
+
+
+    if hello.trim()
+        != expected_hello
+    {
+        return Err(
+            "Elevated helper handshake token was invalid."
+                .to_string()
+        );
+    }
+
+
+    writer
+        .write_all(
+            b"SESSION\n",
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to start helper session: {error}"
+            )
+        })?;
+
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush helper session command: {error}"
+            )
+        })?;
+
+
+    let mut ready =
+        String::new();
+
+
+    timeout(
+        Duration::from_secs(
+            5,
+        ),
+        reader.read_line(
+            &mut ready,
+        ),
+    )
+    .await
+    .map_err(|_| {
+        "Timed out waiting for helper session acknowledgement."
+            .to_string()
+    })?
+    .map_err(|error| {
+        format!(
+            "Unable to read helper session acknowledgement: {error}"
+        )
+    })?;
+
+
+    if ready.trim()
+        != "SESSION READY ELEVATED"
+    {
+        return Err(
+            format!(
+                "Unexpected helper session response: {}",
+                ready.trim()
+            ),
+        );
+    }
+
+
+    *session_guard =
+        Some(
+            HelperSession {
+                reader,
+                writer,
+            },
+        );
+
+
+    Ok(
+        "Persistent elevated helper connected."
+            .to_string()
+    )
+}
+
+
+#[tauri::command]
+async fn test_helper_commands(
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let mut guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    let result:
+        Result<String, String> =
+        async {
+
+            let session =
+                guard
+                    .as_mut()
+                    .ok_or_else(|| {
+                        "Elevated helper is not connected."
+                            .to_string()
+                    })?;
+
+
+            let before =
+                helper_send_command(
+                    session,
+                    "STATUS",
+                )
+                .await?;
+
+
+            let start =
+                helper_send_command(
+                    session,
+                    "START",
+                )
+                .await?;
+
+
+            let active =
+                helper_send_command(
+                    session,
+                    "STATUS",
+                )
+                .await?;
+
+
+            let stop =
+                helper_send_command(
+                    session,
+                    "STOP",
+                )
+                .await?;
+
+
+            let after =
+                helper_send_command(
+                    session,
+                    "STATUS",
+                )
+                .await?;
+
+
+            Ok(
+                format!(
+                    "{before} | {start} | {active} | {stop} | {after}"
+                )
+            )
+        }
+        .await;
+
+
+    /*
+       If the pipe broke, don't retain a
+       dead session in application state.
+    */
+    if result.is_err() {
+        *guard = None;
+    }
+
+
+    result
+}
+
+
+#[tauri::command]
+async fn shutdown_helper_session(
+    state:
+        State<
+            '_,
+            HelperSessionState
+        >,
+) -> Result<String, String> {
+
+    let mut guard =
+        state
+            .session
+            .lock()
+            .await;
+
+
+    let Some(
+        mut session
+    ) =
+        guard.take()
+    else {
+
+        return Ok(
+            "Elevated helper is not running."
+                .to_string()
+        );
+    };
+
+
+    let response =
+        helper_send_command(
+            &mut session,
+            "SHUTDOWN",
+        )
+        .await?;
+
+
+    Ok(
+        format!(
+            "Helper shutdown acknowledged: {response}"
+        )
+    )
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .manage(ProcessState::default())
+        .manage(HelperSessionState::default())
         .invoke_handler(
             tauri::generate_handler![
                 backend_probe,
@@ -1318,6 +1822,9 @@ pub fn run() {
                 validate_safex_daemon,
                 launch_helper_probe,
                 test_secure_helper_pipe,
+                start_helper_session,
+                test_helper_commands,
+                shutdown_helper_session,
             ],
         )
         .run(tauri::generate_context!())

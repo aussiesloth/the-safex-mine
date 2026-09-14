@@ -105,15 +105,21 @@ fn get_argument(
 }
 
 
+fn has_argument(
+    name: &str,
+) -> bool {
+
+    std::env::args()
+        .any(|arg| {
+            arg == name
+        })
+}
+
+
 async fn connect_to_pipe(
     pipe_name: &str,
 ) -> io::Result<NamedPipeClient> {
 
-    /*
-       UAC startup can take a moment.
-       Retry briefly if the pipe is busy
-       or not yet visible.
-    */
     for _ in 0..100 {
 
         match ClientOptions::new()
@@ -187,10 +193,6 @@ async fn run_pipe_probe(
             reader,
         );
 
-    /*
-       First message proves that the
-       helper knows the per-launch token.
-    */
     writer
         .write_all(
             format!(
@@ -263,6 +265,250 @@ async fn run_pipe_probe(
 }
 
 
+async fn run_persistent_session(
+    pipe_name: String,
+    token: String,
+) -> Result<(), String> {
+
+    let client =
+        connect_to_pipe(
+            &pipe_name,
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to connect to Safex Mine pipe: {error}"
+            )
+        })?;
+
+    let (
+        reader,
+        mut writer,
+    ) =
+        tokio::io::split(
+            client,
+        );
+
+    let mut reader =
+        BufReader::new(
+            reader,
+        );
+
+
+    writer
+        .write_all(
+            format!(
+                "HELLO {token}\n"
+            )
+            .as_bytes(),
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to send persistent handshake: {error}"
+            )
+        })?;
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush persistent handshake: {error}"
+            )
+        })?;
+
+
+    let mut session_command =
+        String::new();
+
+    let count =
+        reader
+            .read_line(
+                &mut session_command,
+            )
+            .await
+            .map_err(|error| {
+                format!(
+                    "Unable to read session command: {error}"
+                )
+            })?;
+
+    if count == 0 {
+        return Err(
+            "Safex Mine closed the pipe during session setup."
+                .to_string()
+        );
+    }
+
+    if session_command.trim()
+        != "SESSION"
+    {
+        return Err(
+            format!(
+                "Unexpected session command: {}",
+                session_command.trim()
+            )
+        );
+    }
+
+
+    writer
+        .write_all(
+            b"SESSION READY ELEVATED\n",
+        )
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to acknowledge session: {error}"
+            )
+        })?;
+
+    writer
+        .flush()
+        .await
+        .map_err(|error| {
+            format!(
+                "Unable to flush session acknowledgement: {error}"
+            )
+        })?;
+
+
+    /*
+       This is only simulated state for
+       Stage 4.
+
+       Stage 5 will replace this boolean
+       with the actual XMRig process.
+    */
+    let mut active =
+        false;
+
+
+    loop {
+
+        let mut command =
+            String::new();
+
+        let count =
+            reader
+                .read_line(
+                    &mut command,
+                )
+                .await
+                .map_err(|error| {
+                    format!(
+                        "Unable to read helper command: {error}"
+                    )
+                })?;
+
+
+        /*
+           Main application disappeared.
+           Do not leave the helper orphaned.
+        */
+        if count == 0 {
+            return Ok(());
+        }
+
+
+        let command =
+            command.trim();
+
+
+        let response =
+            match command {
+
+                "STATUS" => {
+
+                    if active {
+                        "STATUS ACTIVE"
+                    } else {
+                        "STATUS IDLE"
+                    }
+                }
+
+
+                "START" => {
+
+                    if active {
+                        "OK ALREADY_ACTIVE"
+                    } else {
+                        active = true;
+                        "OK STARTED"
+                    }
+                }
+
+
+                "STOP" => {
+
+                    if active {
+                        active = false;
+                        "OK STOPPED"
+                    } else {
+                        "OK ALREADY_STOPPED"
+                    }
+                }
+
+
+                "SHUTDOWN" => {
+
+                    writer
+                        .write_all(
+                            b"OK SHUTDOWN\n",
+                        )
+                        .await
+                        .map_err(|error| {
+                            format!(
+                                "Unable to acknowledge shutdown: {error}"
+                            )
+                        })?;
+
+                    writer
+                        .flush()
+                        .await
+                        .map_err(|error| {
+                            format!(
+                                "Unable to flush shutdown acknowledgement: {error}"
+                            )
+                        })?;
+
+                    return Ok(());
+                }
+
+
+                _ => {
+                    "ERR UNKNOWN_COMMAND"
+                }
+            };
+
+
+        writer
+            .write_all(
+                format!(
+                    "{response}\n"
+                )
+                .as_bytes(),
+            )
+            .await
+            .map_err(|error| {
+                format!(
+                    "Unable to send helper response: {error}"
+                )
+            })?;
+
+        writer
+            .flush()
+            .await
+            .map_err(|error| {
+                format!(
+                    "Unable to flush helper response: {error}"
+                )
+            })?;
+    }
+}
+
+
 #[tokio::main]
 async fn main() {
 
@@ -274,6 +520,7 @@ async fn main() {
         "---------------------"
     );
 
+
     match is_process_elevated() {
 
         Ok(true) => {
@@ -283,6 +530,7 @@ async fn main() {
         }
 
         Ok(false) => {
+
             eprintln!(
                 "Elevation: NOT elevated"
             );
@@ -291,6 +539,7 @@ async fn main() {
         }
 
         Err(error) => {
+
             eprintln!(
                 "Unable to determine elevation: {error}"
             );
@@ -308,8 +557,7 @@ async fn main() {
 
 
     /*
-       No pipe arguments means this is the
-       original manual elevation probe.
+       Original manual elevation probe.
     */
     if pipe_name.is_none()
         && token.is_none()
@@ -335,6 +583,7 @@ async fn main() {
     let Some(pipe_name) =
         pipe_name
     else {
+
         eprintln!(
             "Missing --pipe argument."
         );
@@ -346,6 +595,7 @@ async fn main() {
     let Some(token) =
         token
     else {
+
         eprintln!(
             "Missing --token argument."
         );
@@ -359,6 +609,49 @@ async fn main() {
     );
 
 
+    if has_argument(
+        "--persistent",
+    ) {
+
+        println!(
+            "Persistent helper session requested."
+        );
+
+
+        match run_persistent_session(
+            pipe_name,
+            token,
+        )
+        .await
+        {
+            Ok(()) => {
+
+                println!(
+                    "Persistent helper session closed."
+                );
+            }
+
+            Err(error) => {
+
+                eprintln!(
+                    "Persistent helper session failed: {error}"
+                );
+
+                thread::sleep(
+                    Duration::from_secs(5),
+                );
+
+                process::exit(6);
+            }
+        }
+
+        return;
+    }
+
+
+    /*
+       Existing one-shot secure pipe probe.
+    */
     match run_pipe_probe(
         pipe_name,
         token,
