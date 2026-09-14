@@ -294,6 +294,7 @@ struct MinerTelemetry {
     msr_failed: bool,
     daemon_connected: bool,
     hashrate_hs: Option<f64>,
+    worker_threads: Option<u32>,
     recent_lines: VecDeque<String>,
 }
 
@@ -406,6 +407,43 @@ fn parse_short_hashrate(
     }
 }
 
+fn parse_worker_threads(
+    line: &str,
+) -> Option<u32> {
+
+    if !line.contains(
+        "use profile"
+    ) {
+        return None;
+    }
+
+
+    let open =
+        line.find(
+            '(',
+        )?;
+
+
+    let remainder =
+        &line[
+            open + 1..
+        ];
+
+
+    let end =
+        remainder.find(
+            " thread",
+        )?;
+
+
+    remainder[
+        ..end
+    ]
+    .trim()
+    .parse()
+    .ok()
+}
+
 fn record_miner_line(
     telemetry: &Arc<Mutex<MinerTelemetry>>,
     line: String,
@@ -446,6 +484,18 @@ fn record_miner_line(
         telemetry.daemon_connected =
             true;
     }
+    if let Some(
+    threads
+) =
+    parse_worker_threads(
+        &line,
+    )
+{
+    telemetry.worker_threads =
+        Some(
+            threads,
+        );
+}
 
     if line.contains(
         "speed 10s/60s/15m"
@@ -570,6 +620,17 @@ fn telemetry_summary(
                 .to_string()
         });    
 
+    let threads =
+    telemetry
+        .worker_threads
+        .map(|value| {
+            value.to_string()
+        })
+        .unwrap_or_else(|| {
+            "PENDING"
+                .to_string()
+        });
+        
     let last =
         telemetry
             .recent_lines
@@ -585,6 +646,7 @@ fn telemetry_summary(
         "MSR={msr} | \
          DAEMON={daemon} | \
          HASHRATE_HS={hashrate} | \
+         THREADS={threads} | \
          LAST={last}"
     )
 }

@@ -332,6 +332,10 @@ input {
     clamp(7px, 0.8vw, 11px);
 }
 
+.session-stat {
+  grid-column: 1 / -1;
+}
+
 .stat {
   min-width: 0;
 

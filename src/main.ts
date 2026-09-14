@@ -154,6 +154,16 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
             <div class="stat">
               <span class="stat-label">
+                Threads
+              </span>
+
+              <strong id="threads-value">
+                0
+              </strong>
+            </div>
+
+            <div class="stat">
+              <span class="stat-label">
                 Blocks Found
               </span>
 
@@ -172,7 +182,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               </strong>
             </div>
 
-            <div class="stat">
+            <div class="stat session-stat">
               <span class="stat-label">
                 Session
               </span>
@@ -551,6 +561,11 @@ const sessionTimeValue =
   const hashrateValue =
   document.querySelector<HTMLElement>(
     "#hashrate-value",
+  )!;
+
+  const threadsValue =
+  document.querySelector<HTMLElement>(
+    "#threads-value",
   )!;
 
 /* ---------------------------------------------------------
@@ -1016,6 +1031,11 @@ async function refreshMiningTelemetry() {
         /HASHRATE_HS=([0-9]+(?:\.[0-9]+)?)/,
       );
 
+    const threadsMatch =
+      status.match(
+        /THREADS=([0-9]+)/,
+      );
+
 
     if (match) {
 
@@ -1036,6 +1056,12 @@ async function refreshMiningTelemetry() {
             hashrate,
           );
       }
+    }
+
+    if (threadsMatch) {
+
+      threadsValue.textContent =
+        threadsMatch[1];
     }
 
   } catch (error) {
@@ -1530,6 +1556,9 @@ if (
 
         hashrateValue.textContent =
           "0 H/s";
+
+        threadsValue.textContent =
+            "0";
 
 
       connectionText.textContent =
