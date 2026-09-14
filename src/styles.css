@@ -435,6 +435,17 @@ input {
    INPUTS
    --------------------------------------------------------- */
 
+.field input:read-only {
+  color: #969994;
+
+  background: #0d1012;
+
+  border-color:
+    rgba(255, 255, 255, 0.05);
+
+  cursor: not-allowed;
+}
+
 .field {
   margin-bottom: 13px;
 }
@@ -760,4 +771,29 @@ button:disabled {
   .development-buttons {
     grid-template-columns: 1fr;
   }
+}
+
+.field-validation {
+  min-height: 16px;
+  margin-top: 5px;
+
+  font-size: 10px;
+}
+
+.field-validation.valid {
+  color: #6fcf73;
+}
+
+.field-validation.invalid {
+  color: #d86b62;
+}
+
+.field input.input-valid:not(:read-only) {
+  border-color:
+    rgba(111, 207, 115, 0.55);
+}
+
+.field input.input-invalid:not(:read-only) {
+  border-color:
+    rgba(216, 107, 98, 0.75);
 }

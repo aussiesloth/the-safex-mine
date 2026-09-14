@@ -10,6 +10,25 @@ import "./styles.css";
 
 type SceneState = "ready" | "mining" | "approved" | "reject";
 type TransientState = "approved" | "reject";
+type MiningMode =
+  | "Calm"
+  | "Balanced"
+  | "Full Bore";
+
+type DaemonCheckResult = {
+  valid: boolean;
+  height: number | null;
+  message: string;
+};
+
+const DEFAULT_DAEMON =
+  "rpc.safex.org:17402";
+
+const SETTINGS = {
+  address: "safex-mine.address",
+  daemon: "safex-mine.daemon",
+  mode: "safex-mine.mode",
+} as const;
 
 const scenes: Record<
   SceneState,
@@ -216,6 +235,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               placeholder="Enter mining address"
             />
 
+          <div
+            id="address-validation"
+            class="field-validation"
+          ></div>
+
           </div>
 
           <div class="field">
@@ -229,6 +253,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               type="text"
               placeholder="Default public node"
             />
+
+            <div
+             id="node-validation"
+             class="field-validation"
+            ></div>
 
           </div>
 
@@ -335,6 +364,31 @@ const testXmrigVersionButton =
     "#test-xmrig-version-button",
   )!;
 
+const addressInput =
+  document.querySelector<HTMLInputElement>(
+    "#address",
+  )!;
+
+const addressValidation =
+  document.querySelector<HTMLDivElement>(
+    "#address-validation",
+  )!;
+
+const nodeInput =
+  document.querySelector<HTMLInputElement>(
+    "#node",
+  )!;
+
+const nodeValidation =
+  document.querySelector<HTMLDivElement>(
+    "#node-validation",
+  )!;
+
+const backendNote =
+  document.querySelector<HTMLDivElement>(
+    "#backend-note",
+  )!;
+
 const testApprovedButton =
   document.querySelector<HTMLButtonElement>(
     "#test-approved-button",
@@ -398,6 +452,325 @@ const sessionTimeValue =
     "#session-time-value",
   )!;
 
+/* ---------------------------------------------------------
+   PERSISTENT SETTINGS
+   --------------------------------------------------------- */
+
+async function isSafexAddressValid(
+  address: string,
+): Promise<boolean> {
+
+  return await invoke<boolean>(
+    "validate_safex_address",
+    {
+      address: address.trim(),
+    },
+  );
+}
+
+let daemonValidationGeneration = 0;
+
+async function validateDaemonField(): Promise<boolean> {
+
+  const daemon =
+    nodeInput.value.trim();
+
+  const generation =
+    ++daemonValidationGeneration;
+
+  nodeInput.classList.remove(
+    "input-valid",
+    "input-invalid",
+  );
+
+  if (!daemon) {
+
+    nodeValidation.textContent =
+      "";
+
+    return false;
+  }
+
+  nodeValidation.textContent =
+    "Checking Safex daemon...";
+
+  nodeValidation.className =
+    "field-validation";
+
+  try {
+
+    const result =
+      await invoke<DaemonCheckResult>(
+        "validate_safex_daemon",
+        {
+          daemon,
+        },
+      );
+
+    /*
+      Ignore an old result if the user has
+      typed another daemon meanwhile.
+    */
+    if (
+      generation !== daemonValidationGeneration ||
+      daemon !== nodeInput.value.trim()
+    ) {
+      return false;
+    }
+
+    if (
+      result.valid &&
+      result.height !== null
+    ) {
+
+      nodeInput.classList.add(
+        "input-valid",
+      );
+
+      nodeValidation.className =
+        "field-validation valid";
+
+      nodeValidation.textContent =
+        `Safex daemon online — height ${result.height.toLocaleString()}`;
+
+      return true;
+    }
+
+    nodeInput.classList.add(
+      "input-invalid",
+    );
+
+    nodeValidation.className =
+      "field-validation invalid";
+
+    nodeValidation.textContent =
+      result.message;
+
+    return false;
+
+  } catch (error) {
+
+    nodeInput.classList.add(
+      "input-invalid",
+    );
+
+    nodeValidation.className =
+      "field-validation invalid";
+
+    nodeValidation.textContent =
+      "Unable to check daemon.";
+
+    console.error(
+      "Daemon validation failed:",
+      error,
+    );
+
+    return false;
+  }
+}
+
+async function validateAddressField(): Promise<boolean> {
+
+  const address =
+    addressInput.value.trim();
+
+  addressInput.classList.remove(
+    "input-valid",
+    "input-invalid",
+  );
+
+  if (!address) {
+
+    addressValidation.textContent =
+      "";
+
+    return false;
+  }
+
+ if (await isSafexAddressValid(address)) {
+
+    addressInput.classList.add(
+      "input-valid",
+    );
+
+    addressValidation.textContent =
+      "Valid Safex Address";
+
+    addressValidation.className =
+      "field-validation valid";
+
+    return true;
+  }
+
+  addressInput.classList.add(
+    "input-invalid",
+  );
+
+  addressValidation.textContent =
+    "Invalid Safex Address";
+
+  addressValidation.className =
+    "field-validation invalid";
+
+  return false;
+}
+
+function getSavedMode(): MiningMode {
+
+  const saved =
+    localStorage.getItem(
+      SETTINGS.mode,
+    );
+
+  if (
+    saved === "Calm" ||
+    saved === "Balanced" ||
+    saved === "Full Bore"
+  ) {
+    return saved;
+  }
+
+  return "Balanced";
+}
+
+
+function setActiveMode(
+  mode: MiningMode,
+) {
+
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      ".mode-button",
+    )
+    .forEach((button) => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.mode === mode,
+      );
+    });
+}
+
+addressInput.addEventListener(
+  "input",
+  () => {
+    void validateAddressField();
+  },
+);
+
+
+addressInput.addEventListener(
+  "change",
+  async () => {
+
+    const address =
+      addressInput.value.trim();
+
+    addressInput.value =
+      address;
+
+    if (await validateAddressField()) {
+
+      localStorage.setItem(
+        SETTINGS.address,
+        address,
+      );
+    }
+  },
+);
+
+
+let daemonValidationTimer:
+  ReturnType<typeof window.setTimeout> | null = null;
+
+
+nodeInput.addEventListener(
+  "input",
+  () => {
+
+    if (daemonValidationTimer !== null) {
+      window.clearTimeout(
+        daemonValidationTimer,
+      );
+    }
+
+    nodeValidation.textContent =
+      "Waiting to check daemon...";
+
+    nodeValidation.className =
+      "field-validation";
+
+    daemonValidationTimer =
+      window.setTimeout(
+        () => {
+
+          daemonValidationTimer = null;
+
+          void validateDaemonField();
+        },
+        700,
+      );
+  },
+);
+
+
+nodeInput.addEventListener(
+  "change",
+  async () => {
+
+    if (daemonValidationTimer !== null) {
+
+      window.clearTimeout(
+        daemonValidationTimer,
+      );
+
+      daemonValidationTimer = null;
+    }
+
+    let daemon =
+      nodeInput.value.trim();
+
+    if (!daemon) {
+      daemon = DEFAULT_DAEMON;
+    }
+
+    nodeInput.value =
+      daemon;
+
+    localStorage.setItem(
+      SETTINGS.daemon,
+      daemon,
+    );
+
+    await validateDaemonField();
+  },
+);
+
+function loadSettings() {
+
+  addressInput.value =
+    localStorage.getItem(
+      SETTINGS.address,
+    ) ?? "";
+
+  nodeInput.value =
+    localStorage.getItem(
+      SETTINGS.daemon,
+    ) ?? DEFAULT_DAEMON;
+
+  setActiveMode(
+    getSavedMode(),
+  );
+}
+
+
+function setConnectionFieldsLocked(
+  locked: boolean,
+) {
+
+  addressInput.readOnly = locked;
+  nodeInput.readOnly = locked;
+}
 
 /* ---------------------------------------------------------
    VISUAL STATE
@@ -720,6 +1093,13 @@ document
         button.classList.add(
           "active",
         );
+        const mode =
+  button.dataset.mode as MiningMode;
+
+localStorage.setItem(
+  SETTINGS.mode,
+  mode,
+);
       },
     );
   });
@@ -731,13 +1111,36 @@ document
 
 startButton.addEventListener(
   "click",
-  () => {
+  async () => {
 
     clearTransientTimer();
 
     transientQueue.length = 0;
 
+    if (!(await validateAddressField())) {
+
+      addressInput.focus();
+
+      backendNote.textContent =
+      "Enter a valid Safex Address before starting.";
+
+    return;
+  }
+  
+    if (!(await validateDaemonField())) {
+
+  nodeInput.focus();
+
+  backendNote.textContent =
+    "A live Safex daemon is required before mining can start.";
+
+  return;
+}
+
     miningRunning = true;
+    setConnectionFieldsLocked(
+  true,
+);
 
     miningStartedAt = Date.now();
 
@@ -788,6 +1191,9 @@ stopButton.addEventListener(
 
     miningStartedAt = null;
     miningRunning = false;
+    setConnectionFieldsLocked(
+  false,
+);
 
     clearTransientTimer();
 
@@ -919,14 +1325,14 @@ void listen<string>(
 updateCounters();
 updateSessionTimer();
 
-/* ---------------------------------------------------------
-   TAURI / RUST BACKEND PROBE
-   --------------------------------------------------------- */
+loadSettings();
 
-const backendNote =
-  document.querySelector<HTMLDivElement>(
-    "#backend-note",
-  )!;
+void validateAddressField();
+void validateDaemonField();
+
+setConnectionFieldsLocked(
+  false,
+);
 
 /* ---------------------------------------------------------
    SAFEX XMRIG VERSION TEST
