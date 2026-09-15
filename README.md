@@ -89,13 +89,18 @@ Current design decisions:
 
 ## Windows privilege model
 
-MSR optimisation is considered a **required performance feature** for the Windows build.
+The Safex Mine uses a **split-privilege design** on Windows so the desktop GUI does not need to run as Administrator.
 
-The intended privilege model is:
+The current model is:
 
 - the desktop GUI runs normally as a standard user;
-- only the mining backend or a narrowly scoped helper is elevated when required for MSR setup;
-- the whole graphical application should not need to run as Administrator.
+- when mining is first started during an application session, Windows requests Administrator approval to launch a dedicated `safex-mine-helper.exe`;
+- the elevated helper launches and supervises the bundled XMRig backend, allowing XMRig to apply Windows MSR optimisation;
+- the helper remains available for the application session, so a normal **Stop → Start** cycle does not require another UAC prompt;
+- if Windows prevents MSR optimisation from being applied, mining may continue in a clearly reported **degraded-performance mode** rather than failing to start;
+- the graphical application itself remains non-administrative.
+
+MSR optimisation is therefore the preferred high-performance path, but inability to apply it does not prevent the miner from operating.
 
 See [`docs/SECURITY_AND_PRIVILEGE_MODEL.md`](docs/SECURITY_AND_PRIVILEGE_MODEL.md).
 
