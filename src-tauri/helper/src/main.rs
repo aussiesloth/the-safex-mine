@@ -309,6 +309,7 @@ struct MinerTelemetry {
     msr_ok: bool,
     msr_failed: bool,
     daemon_connected: bool,
+    daemon_was_connected: bool,
     hashrate_hs: Option<f64>,
     worker_threads: Option<u32>,
     accepted_count: u64,
@@ -620,13 +621,33 @@ fn record_miner_line(
             true;
     }
 
-
     if line.contains(
         "new job from"
     ) {
         telemetry.daemon_connected =
             true;
+
+        telemetry.daemon_was_connected =
+            true;
     }
+
+    if line.contains(
+        "no active pools, stop mining"
+    ) {
+        telemetry.daemon_connected =
+            false;
+
+        /*
+        Do not leave the last good hashrate
+        visible while XMRig is paused waiting
+        for the daemon to return.
+        */
+        telemetry.hashrate_hs =
+            Some(
+                0.0,
+            );
+    }
+
     if line.contains(
         " accepted ("
     ) {
@@ -755,10 +776,12 @@ fn telemetry_summary(
             "PENDING"
         };
 
-
     let daemon =
         if telemetry.daemon_connected {
             "CONNECTED"
+        }
+        else if telemetry.daemon_was_connected {
+            "DISCONNECTED"
         }
         else {
             "WAITING"

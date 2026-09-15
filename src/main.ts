@@ -597,7 +597,9 @@ async function isSafexAddressValid(
 
 let daemonValidationGeneration = 0;
 
-async function validateDaemonField(): Promise<boolean> {
+async function validateDaemonField(
+  silent = false,
+): Promise<boolean> {
 
   const daemon =
     nodeInput.value.trim();
@@ -618,11 +620,14 @@ async function validateDaemonField(): Promise<boolean> {
     return false;
   }
 
-  nodeValidation.textContent =
-    "Checking Safex daemon...";
+  if (!silent) {
 
-  nodeValidation.className =
-    "field-validation";
+    nodeValidation.textContent =
+      "Checking Safex daemon...";
+
+    nodeValidation.className =
+      "field-validation";
+  }
 
   try {
 
@@ -810,6 +815,8 @@ addressInput.addEventListener(
 let daemonValidationTimer:
   ReturnType<typeof window.setTimeout> | null = null;
 
+let daemonRefreshTimer:
+  ReturnType<typeof window.setInterval> | null = null;
 
 nodeInput.addEventListener(
   "input",
@@ -872,6 +879,42 @@ nodeInput.addEventListener(
     await validateDaemonField();
   },
 );
+
+function stopDaemonRefresh() {
+
+  if (daemonRefreshTimer !== null) {
+
+    window.clearInterval(
+      daemonRefreshTimer,
+    );
+
+    daemonRefreshTimer =
+      null;
+  }
+}
+
+
+function startDaemonRefresh() {
+
+  stopDaemonRefresh();
+
+
+  daemonRefreshTimer =
+    window.setInterval(
+      () => {
+
+        if (
+          !daemonOffline
+        ) {
+          void validateDaemonField(
+            true,
+          );
+        }
+
+      },
+      30_000,
+    );
+}
 
 function loadSettings() {
 
@@ -952,6 +995,9 @@ let telemetryTimer:
   null;
 
 let waitingForFirstHashrate =
+  false;
+
+let daemonOffline =
   false;
 
 /* ---------------------------------------------------------
@@ -1058,6 +1104,9 @@ function handleUnexpectedMiningStop(
   miningRunning =
     false;
 
+  daemonOffline =
+    false;
+
   waitingForFirstHashrate =
     false;
 
@@ -1125,6 +1174,148 @@ function handleUnexpectedMiningStop(
   updateSessionTimer();
 }
 
+function handleDaemonOffline() {
+
+  if (
+    !miningRunning ||
+    daemonOffline
+  ) {
+    return;
+  }
+
+
+  /*
+    XMRig itself is still alive.
+    Keep the mining session and telemetry
+    polling running while it reconnects.
+  */
+  daemonOffline =
+    true;
+
+  waitingForFirstHashrate =
+    false;
+
+
+  clearTransientTimer();
+
+  transientQueue.length =
+    0;
+
+
+  hashrateValue.textContent =
+    "0 H/s";
+
+
+  setScene(
+    "offline",
+  );
+
+
+  statusDot.classList.remove(
+    "mining",
+  );
+
+  statusDot.classList.add(
+    "stopped",
+  );
+
+
+  connectionText.textContent =
+    "Offline";
+
+    nodeInput.classList.remove(
+  "input-valid",
+  );
+
+  nodeInput.classList.add(
+    "input-invalid",
+  );
+
+
+  nodeValidation.className =
+    "field-validation invalid";
+
+  nodeValidation.textContent =
+    "Connection lost";
+
+  /*
+    Do not enable Start. XMRig is still
+    running and attempting to reconnect.
+  */
+  startButton.disabled =
+    true;
+
+  stopButton.disabled =
+    false;
+
+
+  testApprovedButton.disabled =
+    true;
+
+  testRejectButton.disabled =
+    true;
+
+
+  backendNote.textContent =
+    "Safex daemon connection lost. Waiting to reconnect...";
+}
+
+
+function handleDaemonReconnected() {
+
+  if (
+    !miningRunning ||
+    !daemonOffline
+  ) {
+    return;
+  }
+
+
+  daemonOffline =
+    false;
+
+  /*
+    Wait for a fresh speed report rather
+    than displaying the old pre-disconnect
+    hashrate.
+  */
+  waitingForFirstHashrate =
+    true;
+
+  hashrateValue.textContent =
+    "Resuming…";
+
+
+  setScene(
+    "mining",
+  );
+
+
+  statusDot.classList.remove(
+    "stopped",
+  );
+
+  statusDot.classList.add(
+    "mining",
+  );
+
+
+  connectionText.textContent =
+    "Mining";
+
+    void validateDaemonField();
+
+  testApprovedButton.disabled =
+    false;
+
+  testRejectButton.disabled =
+    false;
+
+
+  backendNote.textContent =
+    "Safex daemon connection restored. Mining resumed.";
+}
+
 async function refreshMiningTelemetry() {
 
   if (!miningRunning) {
@@ -1138,6 +1329,24 @@ async function refreshMiningTelemetry() {
       await invoke<string>(
         "xmrig_test_status",
       );
+
+    if (
+      status.includes(
+        "DAEMON=DISCONNECTED",
+      )
+    ) {
+
+      handleDaemonOffline();
+
+    } else if (
+      status.includes(
+        "DAEMON=CONNECTED",
+      ) &&
+      daemonOffline
+    ) {
+
+      handleDaemonReconnected();
+    }
 
     const match =
       status.match(
@@ -1159,7 +1368,10 @@ async function refreshMiningTelemetry() {
         /REJECTED=([0-9]+)/,
       );
 
-    if (match) {
+    if (
+      match &&
+      !daemonOffline
+    ) {
 
       const hashrate =
         Number(
@@ -1712,6 +1924,9 @@ startButton.addEventListener(
       miningRunning =
         true;
 
+      daemonOffline =
+        false;
+
       lastAcceptedTelemetry =
         0;
 
@@ -1914,6 +2129,9 @@ stopButton.addEventListener(
         null;
 
       miningRunning =
+        false;
+
+      daemonOffline =
         false;
 
       waitingForFirstHashrate =
@@ -2382,6 +2600,8 @@ loadSettings();
 
 void validateAddressField();
 void validateDaemonField();
+
+startDaemonRefresh();
 
 setConnectionFieldsLocked(
   false,
