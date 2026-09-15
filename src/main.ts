@@ -8,7 +8,12 @@ import rejectScene from "./assets/scenes/REJECT.png";
 
 import "./styles.css";
 
-type SceneState = "ready" | "mining" | "approved" | "reject";
+type SceneState =
+  | "ready"
+  | "mining"
+  | "approved"
+  | "reject"
+  | "offline";
 type TransientState = "approved" | "reject";
 type MiningMode =
   | "Calm"
@@ -54,6 +59,12 @@ const scenes: Record<
     image: approvedScene,
     label: "BLOCK FOUND",
     description: "Accepted block",
+  },
+
+  offline: {
+  image: readyScene,
+  label: "OFFLINE",
+  description: "Mining unavailable",
   },
 
   reject: {
@@ -1018,6 +1029,101 @@ function stopTelemetryPolling() {
   }
 }
 
+function handleUnexpectedMiningStop(
+  reason: string,
+) {
+
+  if (!miningRunning) {
+    return;
+  }
+
+
+  /*
+    Preserve the mining time accumulated
+    before the unexpected stop.
+  */
+  if (
+    miningStartedAt !== null
+  ) {
+
+    accumulatedMiningMs +=
+      Date.now() -
+      miningStartedAt;
+  }
+
+
+  miningStartedAt =
+    null;
+
+  miningRunning =
+    false;
+
+  waitingForFirstHashrate =
+    false;
+
+
+  stopTelemetryPolling();
+
+  clearTransientTimer();
+
+  transientQueue.length =
+    0;
+
+
+  hashrateValue.textContent =
+    "0 H/s";
+
+  threadsValue.textContent =
+    "0";
+
+
+  setConnectionFieldsLocked(
+    false,
+  );
+
+  setModeButtonsLocked(
+    false,
+  );
+
+
+  setScene(
+    "offline",
+  );
+
+
+  statusDot.classList.remove(
+    "mining",
+  );
+
+  statusDot.classList.add(
+    "stopped",
+  );
+
+
+  connectionText.textContent =
+    "Offline";
+
+
+  startButton.disabled =
+    false;
+
+  stopButton.disabled =
+    true;
+
+
+  testApprovedButton.disabled =
+    true;
+
+  testRejectButton.disabled =
+    true;
+
+
+  backendNote.textContent =
+    `Mining stopped unexpectedly: ${reason}`;
+
+
+  updateSessionTimer();
+}
 
 async function refreshMiningTelemetry() {
 
@@ -1032,7 +1138,6 @@ async function refreshMiningTelemetry() {
       await invoke<string>(
         "xmrig_test_status",
       );
-
 
     const match =
       status.match(
@@ -1101,100 +1206,131 @@ async function refreshMiningTelemetry() {
 
     if (acceptedMatch) {
 
-  const accepted =
-    Number(
-      acceptedMatch[1],
-    );
+      const accepted =
+        Number(
+          acceptedMatch[1],
+        );
 
 
-  if (
-    Number.isInteger(
-      accepted,
-    )
-  ) {
-
-    if (
-      accepted <
-      lastAcceptedTelemetry
-    ) {
-
-      lastAcceptedTelemetry =
-        accepted;
-
-    } else {
-
-      const newAccepted =
-        accepted -
-        lastAcceptedTelemetry;
-
-
-      lastAcceptedTelemetry =
-        accepted;
-
-
-      for (
-        let index = 0;
-        index < newAccepted;
-        index += 1
+      if (
+        Number.isInteger(
+          accepted,
+        )
       ) {
 
-        handleBlockFound();
+        if (
+          accepted <
+          lastAcceptedTelemetry
+        ) {
+
+          lastAcceptedTelemetry =
+            accepted;
+
+        } else {
+
+          const newAccepted =
+            accepted -
+            lastAcceptedTelemetry;
+
+
+          lastAcceptedTelemetry =
+            accepted;
+
+
+          for (
+            let index = 0;
+            index < newAccepted;
+            index += 1
+          ) {
+
+            handleBlockFound();
+          }
+        }
       }
     }
+
+
+    if (rejectedMatch) {
+
+      const rejected =
+        Number(
+          rejectedMatch[1],
+        );
+
+
+      if (
+        Number.isInteger(
+          rejected,
+        )
+      ) {
+
+        if (
+          rejected <
+          lastRejectedTelemetry
+        ) {
+
+          lastRejectedTelemetry =
+            rejected;
+
+        } else {
+
+          const newRejected =
+            rejected -
+            lastRejectedTelemetry;
+
+
+          lastRejectedTelemetry =
+            rejected;
+
+
+          for (
+            let index = 0;
+            index < newRejected;
+            index += 1
+          ) {
+
+            handleReject();
+          }
+        }
   }
 }
 
-
-if (rejectedMatch) {
-
-  const rejected =
-    Number(
-      rejectedMatch[1],
-    );
-
-
   if (
-    Number.isInteger(
-      rejected,
+    status.startsWith(
+      "STATUS EXITED",
     )
   ) {
 
-    if (
-      rejected <
-      lastRejectedTelemetry
-    ) {
+    handleUnexpectedMiningStop(
+      status,
+    );
 
-      lastRejectedTelemetry =
-        rejected;
-
-    } else {
-
-      const newRejected =
-        rejected -
-        lastRejectedTelemetry;
-
-
-      lastRejectedTelemetry =
-        rejected;
-
-
-      for (
-        let index = 0;
-        index < newRejected;
-        index += 1
-      ) {
-
-        handleReject();
-      }
-    }
+    return;
   }
-}
+
+
+  if (
+    status ===
+    "STATUS IDLE"
+  ) {
+
+    handleUnexpectedMiningStop(
+      "XMRig is no longer running.",
+    );
+
+    return;
+  }
 
   } catch (error) {
 
     console.error(
       "Mining telemetry update failed:",
       error,
+    );
+
+
+    handleUnexpectedMiningStop(
+      String(error),
     );
   }
 }

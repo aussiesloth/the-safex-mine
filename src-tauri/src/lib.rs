@@ -1824,6 +1824,8 @@ async fn xmrig_test_status(
             .await;
 
 
+let result = {
+
     let session =
         guard
             .as_mut()
@@ -1838,6 +1840,23 @@ async fn xmrig_test_status(
         "STATUS",
     )
     .await
+};
+
+
+if result.is_err() {
+
+    /*
+    The persistent helper connection is
+    no longer usable. Discard it so the
+    next Start can create a fresh elevated
+    helper session.
+    */
+    *guard =
+        None;
+}
+
+
+result
 }
 
 
