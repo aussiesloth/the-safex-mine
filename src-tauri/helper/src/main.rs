@@ -2,6 +2,11 @@ use std::{
     collections::VecDeque,
     io,
     mem::size_of,
+    os::windows::io::{
+        AsRawHandle,
+        FromRawHandle,
+        OwnedHandle,
+    },
     path::PathBuf,
     process::{
         self,
@@ -54,9 +59,20 @@ use windows::Win32::{
         SetConsoleCtrlHandler,
         CTRL_C_EVENT,
     },
+    JobObjects::{
+        AssignProcessToJobObject,
+        CreateJobObjectW,
+        JobObjectExtendedLimitInformation,
+        SetInformationJobObject,
+        JOBOBJECT_EXTENDED_LIMIT_INFORMATION,
+        JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE,
+    },
     Threading::{
         GetCurrentProcess,
+        OpenProcess,
         OpenProcessToken,
+        PROCESS_SET_QUOTA,
+        PROCESS_TERMINATE,
     },
 },
 };
@@ -300,10 +316,135 @@ struct MinerTelemetry {
     recent_lines: VecDeque<String>,
 }
 
+struct KillOnCloseJob {
+    handle: OwnedHandle,
+}
+
+
+impl KillOnCloseJob {
+
+    fn as_handle(
+        &self,
+    ) -> HANDLE {
+
+        HANDLE(
+            self.handle
+                .as_raw_handle(),
+        )
+    }
+}
+
+fn create_kill_on_close_job()
+    -> Result<KillOnCloseJob, String>
+{
+    unsafe {
+
+        let handle =
+            CreateJobObjectW(
+                None,
+                None,
+            )
+            .map_err(|error| {
+                format!(
+                    "Unable to create XMRig Job Object: {error}"
+                )
+            })?;
+
+
+        let handle =
+            OwnedHandle::from_raw_handle(
+                handle.0,
+            );
+
+
+        let mut information =
+            JOBOBJECT_EXTENDED_LIMIT_INFORMATION::default();
+
+
+        information
+            .BasicLimitInformation
+            .LimitFlags =
+            JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+
+
+        SetInformationJobObject(
+            HANDLE(
+                handle.as_raw_handle(),
+            ),
+            JobObjectExtendedLimitInformation,
+            (
+                &information
+                    as *const JOBOBJECT_EXTENDED_LIMIT_INFORMATION
+            )
+            .cast(),
+            size_of::<JOBOBJECT_EXTENDED_LIMIT_INFORMATION>()
+                as u32,
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to configure XMRig Job Object: {error}"
+            )
+        })?;
+
+
+        Ok(
+            KillOnCloseJob {
+                handle,
+            },
+        )
+    }
+}
+
+
+fn assign_process_to_job(
+    job: &KillOnCloseJob,
+    process_id: u32,
+) -> Result<(), String> {
+
+    unsafe {
+
+        let process_handle =
+            OpenProcess(
+                PROCESS_SET_QUOTA
+                    | PROCESS_TERMINATE,
+                false,
+                process_id,
+            )
+            .map_err(|error| {
+                format!(
+                    "Unable to open XMRig for Job Object assignment: {error}"
+                )
+            })?;
+
+
+        let process_handle =
+            OwnedHandle::from_raw_handle(
+                process_handle.0,
+            );
+
+
+        AssignProcessToJobObject(
+            job.as_handle(),
+            HANDLE(
+                process_handle
+                    .as_raw_handle(),
+            ),
+        )
+        .map_err(|error| {
+            format!(
+                "Unable to assign XMRig to Job Object: {error}"
+            )
+        })?;
+
+
+        Ok(())
+    }
+}
 
 struct MinerProcess {
     child: Child,
     telemetry: Arc<Mutex<MinerTelemetry>>,
+    _job: KillOnCloseJob,
 }
 
 
@@ -1107,6 +1248,8 @@ async fn start_miner(
         );
     }
 
+    let job =
+        create_kill_on_close_job()?;
 
     let mut child =
         TokioCommand::new(
@@ -1157,6 +1300,55 @@ async fn start_miner(
             )
         })?;
 
+let process_id =
+    match child.id() {
+
+        Some(process_id) =>
+            process_id,
+
+        None => {
+
+            let _ =
+                child
+                    .kill()
+                    .await;
+
+            let _ =
+                child
+                    .wait()
+                    .await;
+
+
+            return Err(
+                "Unable to obtain XMRig process ID."
+                    .to_string()
+            );
+        }
+    };
+
+
+if let Err(error) =
+    assign_process_to_job(
+        &job,
+        process_id,
+    )
+{
+
+    let _ =
+        child
+            .kill()
+            .await;
+
+    let _ =
+        child
+            .wait()
+            .await;
+
+
+    return Err(
+        error,
+    );
+}
 
     let stdout =
         child
@@ -1201,6 +1393,7 @@ async fn start_miner(
         MinerProcess {
             child,
             telemetry,
+            _job: job,
         };
 
 
