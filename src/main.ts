@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen } from "@tauri-apps/api/event";
 
 import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
@@ -305,112 +304,6 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </section>
 
 
-        <section class="development-tests">
-
-          <div class="development-label">
-            DEVELOPMENT TESTS
-          </div>
-
-          <div class="development-buttons">
-
-            <button
-              id="test-approved-button"
-              class="test-button"
-              disabled
-            >
-              Test Block Found
-            </button>
-
-            <button
-              id="test-xmrig-version-button"
-              class="test-button"
-            >
-              Test Safex XMRig
-            </button>
-
-            <button
-              id="test-reject-button"
-              class="test-button"
-              disabled
-            >
-              Test Reject
-            </button>
-
-            <button
-              id="test-process-start-button"
-              class="test-button"
-            >
-              Start Test Process
-            </button>
-
-            <button
-              id="test-process-stop-button"
-              class="test-button"
-            >
-              Stop Test Process
-            </button>
-            
-            <button
-              id="test-elevated-helper-button"
-              class="test-button"
-            >
-              Test Elevated Helper
-            </button>
-
-            <button
-              id="test-secure-pipe-button"
-              class="test-button"
-            >
-              Test Secure Helper Pipe
-            </button>
-
-            <button
-              id="start-helper-session-button"
-              class="test-button"
-            >
-              Start Helper Session
-            </button>
-
-            <button
-              id="test-helper-commands-button"
-              class="test-button"
-            >
-              Test Helper Commands
-            </button>
-
-            <button
-              id="start-xmrig-test-button"
-              class="test-button"
-            >
-              Start XMRig Test
-            </button>
-
-            <button
-              id="xmrig-test-status-button"
-              class="test-button"
-            >
-              XMRig Status
-            </button>
-
-            <button
-              id="stop-xmrig-test-button"
-              class="test-button"
-            >
-              Stop XMRig Test
-            </button>
-
-            <button
-              id="shutdown-helper-session-button"
-              class="test-button"
-            >
-              Shutdown Helper
-            </button>
-
-          </div>
-
-        </section>
-
-
         <div
   class="backend-note"
   id="backend-note"
@@ -436,11 +329,6 @@ const startButton =
 const stopButton =
   document.querySelector<HTMLButtonElement>("#stop-button")!;
 
-const testXmrigVersionButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-xmrig-version-button",
-  )!;
-
 const addressInput =
   document.querySelector<HTMLInputElement>(
     "#address",
@@ -464,66 +352,6 @@ const nodeValidation =
 const backendNote =
   document.querySelector<HTMLDivElement>(
     "#backend-note",
-  )!;
-
-const testApprovedButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-approved-button",
-  )!;
-
-const testRejectButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-reject-button",
-  )!;
-
-const testProcessStartButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-process-start-button",
-  )!;
-
-const testProcessStopButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-process-stop-button",
-  )!;
-
-  const testElevatedHelperButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-elevated-helper-button",
-  )!;
-
-  const testSecurePipeButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-secure-pipe-button",
-  )!;
-
-  const startHelperSessionButton =
-  document.querySelector<HTMLButtonElement>(
-    "#start-helper-session-button",
-  )!;
-
-const testHelperCommandsButton =
-  document.querySelector<HTMLButtonElement>(
-    "#test-helper-commands-button",
-  )!;
-
-const startXmrigTestButton =
-  document.querySelector<HTMLButtonElement>(
-    "#start-xmrig-test-button",
-  )!;
-
-const xmrigTestStatusButton =
-  document.querySelector<HTMLButtonElement>(
-    "#xmrig-test-status-button",
-  )!;
-
-const stopXmrigTestButton =
-  document.querySelector<HTMLButtonElement>(
-    "#stop-xmrig-test-button",
-  )!;
-
-const shutdownHelperSessionButton =
-  document.querySelector<HTMLButtonElement>(
-    "#shutdown-helper-session-button",
   )!;
 
 const statusDot =
@@ -1159,14 +987,6 @@ function handleUnexpectedMiningStop(
   stopButton.disabled =
     true;
 
-
-  testApprovedButton.disabled =
-    true;
-
-  testRejectButton.disabled =
-    true;
-
-
   backendNote.textContent =
     `Mining stopped unexpectedly: ${reason}`;
 
@@ -1248,14 +1068,6 @@ function handleDaemonOffline() {
   stopButton.disabled =
     false;
 
-
-  testApprovedButton.disabled =
-    true;
-
-  testRejectButton.disabled =
-    true;
-
-
   backendNote.textContent =
     "Safex daemon connection lost. Waiting to reconnect...";
 }
@@ -1305,14 +1117,7 @@ function handleDaemonReconnected() {
 
     void validateDaemonField();
 
-  testApprovedButton.disabled =
-    false;
-
-  testRejectButton.disabled =
-    false;
-
-
-  backendNote.textContent =
+   backendNote.textContent =
     "Safex daemon connection restored. Mining resumed.";
 }
 
@@ -1975,31 +1780,24 @@ startButton.addEventListener(
         false;
 
 
-      testApprovedButton.disabled =
-        false;
+    if (
+      result.includes(
+        "STARTED_DEGRADED",
+      )
+      ||
+      result.includes(
+        "MSR=UNAVAILABLE",
+      )
+    ) {
 
-      testRejectButton.disabled =
-        false;
+      backendNote.textContent =
+        `Mining started — ${mode} mode. MSR optimisation unavailable; reduced hashrate expected.`;
 
+    } else {
 
-if (
-  result.includes(
-    "STARTED_DEGRADED",
-  )
-  ||
-  result.includes(
-    "MSR=UNAVAILABLE",
-  )
-) {
-
-  backendNote.textContent =
-    `Mining started — ${mode} mode. MSR optimisation unavailable; reduced hashrate expected.`;
-
-} else {
-
-  backendNote.textContent =
-    `Mining started — ${mode} mode. MSR optimisation active.`;
-}
+      backendNote.textContent =
+        `Mining started — ${mode} mode. MSR optimisation active.`;
+    }
 
 
       updateSessionTimer();
@@ -2057,13 +1855,6 @@ if (
 
 
       stopButton.disabled =
-        true;
-
-
-      testApprovedButton.disabled =
-        true;
-
-      testRejectButton.disabled =
         true;
 
 
@@ -2191,13 +1982,6 @@ stopButton.addEventListener(
         true;
 
 
-      testApprovedButton.disabled =
-        true;
-
-      testRejectButton.disabled =
-        true;
-
-
       if (
         result.includes(
           "STOPPED_FORCED",
@@ -2234,362 +2018,6 @@ stopButton.addEventListener(
 );
 
 /* ---------------------------------------------------------
-   DEVELOPMENT TEST BUTTONS
-   --------------------------------------------------------- */
-
-testApprovedButton.addEventListener(
-  "click",
-  () => {
-
-    handleBlockFound();
-  },
-);
-
-
-testRejectButton.addEventListener(
-  "click",
-  () => {
-
-    handleReject();
-  },
-);
-
-
-/* ---------------------------------------------------------
-   NATIVE PROCESS-MANAGER TEST
-   --------------------------------------------------------- */
-
-testProcessStartButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      const result =
-        await invoke<string>(
-          "start_test_process",
-        );
-
-      backendNote.textContent =
-        result;
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
-
-testProcessStopButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      const result =
-        await invoke<string>(
-          "stop_test_process",
-        );
-
-      backendNote.textContent =
-        result;
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
-
-void listen<string>(
-  "test-process-output",
-  (event) => {
-
-    backendNote.textContent =
-      `Test process: ${event.payload}`;
-  },
-);
-
-
-void listen<string>(
-  "test-process-error",
-  (event) => {
-
-    backendNote.textContent =
-      `Test process error: ${event.payload}`;
-  },
-);
-
-testElevatedHelperButton.addEventListener(
-  "click",
-  async () => {
-
-    testElevatedHelperButton.disabled =
-      true;
-
-    backendNote.textContent =
-      "Waiting for Administrator approval...";
-
-    try {
-
-      const result =
-        await invoke<string>(
-          "launch_helper_probe",
-        );
-
-      backendNote.textContent =
-        result;
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-
-    testElevatedHelperButton.disabled =
-      false;
-  },
-);
-
-testSecurePipeButton.addEventListener(
-  "click",
-  async () => {
-
-    testSecurePipeButton.disabled =
-      true;
-
-    backendNote.textContent =
-      "Waiting for secure elevated helper connection...";
-
-    try {
-
-      const result =
-        await invoke<string>(
-          "test_secure_helper_pipe",
-        );
-
-      backendNote.textContent =
-        result;
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-
-    testSecurePipeButton.disabled =
-      false;
-  },
-);
-
-startHelperSessionButton.addEventListener(
-  "click",
-  async () => {
-
-    startHelperSessionButton.disabled =
-      true;
-
-    backendNote.textContent =
-      "Waiting for Administrator approval...";
-
-    try {
-
-      backendNote.textContent =
-        await invoke<string>(
-          "start_helper_session",
-        );
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-
-    startHelperSessionButton.disabled =
-      false;
-  },
-);
-
-
-testHelperCommandsButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      backendNote.textContent =
-        await invoke<string>(
-          "test_helper_commands",
-        );
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
-startXmrigTestButton.addEventListener(
-  "click",
-  async () => {
-
-    startXmrigTestButton.disabled =
-      true;
-
-    try {
-
-      if (!(await validateAddressField())) {
-
-        backendNote.textContent =
-          "Enter a valid Safex Address before testing XMRig.";
-
-        addressInput.focus();
-
-        return;
-      }
-
-
-      if (!(await validateDaemonField())) {
-
-        backendNote.textContent =
-          "A live Safex daemon is required before testing XMRig.";
-
-        nodeInput.focus();
-
-        return;
-      }
-
-
-      backendNote.textContent =
-        "Waiting for Administrator approval...";
-
-
-      /*
-        Ensure the persistent elevated helper
-        exists. If already connected this does
-        not cause another UAC prompt.
-      */
-      await invoke<string>(
-        "start_helper_session",
-      );
-
-
-      backendNote.textContent =
-        "Starting Safex XMRig and verifying MSR optimisation...";
-
-
-      const mode =
-        getSavedMode();
-
-
-      const result =
-        await invoke<string>(
-          "start_xmrig_test",
-          {
-            address:
-              addressInput.value.trim(),
-
-            daemon:
-              nodeInput.value.trim(),
-
-            mode,
-          },
-        );
-
-
-      backendNote.textContent =
-        result;
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-
-    } finally {
-
-      startXmrigTestButton.disabled =
-        false;
-    }
-  },
-);
-
-
-xmrigTestStatusButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      backendNote.textContent =
-        await invoke<string>(
-          "xmrig_test_status",
-        );
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
-
-stopXmrigTestButton.addEventListener(
-  "click",
-  async () => {
-
-    stopXmrigTestButton.disabled =
-      true;
-
-    try {
-
-      backendNote.textContent =
-        "Stopping Safex XMRig gracefully...";
-
-
-      backendNote.textContent =
-        await invoke<string>(
-          "stop_xmrig_test",
-        );
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-
-    } finally {
-
-      stopXmrigTestButton.disabled =
-        false;
-    }
-  },
-);
-
-shutdownHelperSessionButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      backendNote.textContent =
-        await invoke<string>(
-          "shutdown_helper_session",
-        );
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
-/* ---------------------------------------------------------
    INITIAL DISPLAY
    --------------------------------------------------------- */
 
@@ -2606,33 +2034,6 @@ startDaemonRefresh();
 setConnectionFieldsLocked(
   false,
 );
-
-/* ---------------------------------------------------------
-   SAFEX XMRIG VERSION TEST
-   --------------------------------------------------------- */
-
-testXmrigVersionButton.addEventListener(
-  "click",
-  async () => {
-
-    try {
-
-      const result =
-        await invoke<string>(
-          "safex_xmrig_version",
-        );
-
-      backendNote.textContent =
-        result.replace(/\r?\n/g, " | ");
-
-    } catch (error) {
-
-      backendNote.textContent =
-        String(error);
-    }
-  },
-);
-
 
 /* ---------------------------------------------------------
    TAURI / RUST BACKEND PROBE
