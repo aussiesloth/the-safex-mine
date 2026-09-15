@@ -934,6 +934,8 @@ let telemetryTimer:
   ReturnType<typeof window.setInterval> | null =
   null;
 
+let waitingForFirstHashrate =
+  false;
 
 /* ---------------------------------------------------------
    SCENE HANDLING
@@ -1051,10 +1053,28 @@ async function refreshMiningTelemetry() {
         )
       ) {
 
-        hashrateValue.textContent =
-          formatHashrate(
-            hashrate,
-          );
+        if (
+          waitingForFirstHashrate &&
+          hashrate > 0
+        ) {
+
+          waitingForFirstHashrate =
+            false;
+
+          connectionText.textContent =
+            "Mining";
+        }
+
+
+        if (
+          !waitingForFirstHashrate
+        ) {
+
+          hashrateValue.textContent =
+            formatHashrate(
+              hashrate,
+            );
+        }
       }
     }
 
@@ -1450,6 +1470,15 @@ startButton.addEventListener(
       miningRunning =
         true;
 
+      waitingForFirstHashrate =
+        true;
+
+      hashrateValue.textContent =
+        "Starting…";
+
+      connectionText.textContent =
+        "Launching miner…";
+
       setConnectionFieldsLocked(
         true,
       );
@@ -1474,10 +1503,6 @@ startButton.addEventListener(
       statusDot.classList.add(
         "mining",
       );
-
-
-      connectionText.textContent =
-        "Mining";
 
 
       startButton.disabled =
@@ -1525,6 +1550,9 @@ if (
         is running.
       */
       miningRunning =
+        false;
+
+      waitingForFirstHashrate =
         false;
 
       miningStartedAt =
@@ -1640,10 +1668,16 @@ stopButton.addEventListener(
       miningRunning =
         false;
 
+      waitingForFirstHashrate =
+        false;
+
         stopTelemetryPolling();
 
           hashrateValue.textContent =
             "0 H/s";
+
+          threadsValue.textContent =
+            "0";
 
 
       setConnectionFieldsLocked(
