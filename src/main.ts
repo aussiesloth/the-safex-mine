@@ -927,6 +927,12 @@ let miningRunning = false;
 let blocksFound = 0;
 let rejectedCount = 0;
 
+let lastAcceptedTelemetry =
+  0;
+
+let lastRejectedTelemetry =
+  0;
+
 let accumulatedMiningMs = 0;
 let miningStartedAt: number | null = null;
 
@@ -1038,6 +1044,15 @@ async function refreshMiningTelemetry() {
         /THREADS=([0-9]+)/,
       );
 
+    const acceptedMatch =
+      status.match(
+        /ACCEPTED=([0-9]+)/,
+      );
+
+    const rejectedMatch =
+      status.match(
+        /REJECTED=([0-9]+)/,
+      );
 
     if (match) {
 
@@ -1083,6 +1098,97 @@ async function refreshMiningTelemetry() {
       threadsValue.textContent =
         threadsMatch[1];
     }
+
+    if (acceptedMatch) {
+
+  const accepted =
+    Number(
+      acceptedMatch[1],
+    );
+
+
+  if (
+    Number.isInteger(
+      accepted,
+    )
+  ) {
+
+    if (
+      accepted <
+      lastAcceptedTelemetry
+    ) {
+
+      lastAcceptedTelemetry =
+        accepted;
+
+    } else {
+
+      const newAccepted =
+        accepted -
+        lastAcceptedTelemetry;
+
+
+      lastAcceptedTelemetry =
+        accepted;
+
+
+      for (
+        let index = 0;
+        index < newAccepted;
+        index += 1
+      ) {
+
+        handleBlockFound();
+      }
+    }
+  }
+}
+
+
+if (rejectedMatch) {
+
+  const rejected =
+    Number(
+      rejectedMatch[1],
+    );
+
+
+  if (
+    Number.isInteger(
+      rejected,
+    )
+  ) {
+
+    if (
+      rejected <
+      lastRejectedTelemetry
+    ) {
+
+      lastRejectedTelemetry =
+        rejected;
+
+    } else {
+
+      const newRejected =
+        rejected -
+        lastRejectedTelemetry;
+
+
+      lastRejectedTelemetry =
+        rejected;
+
+
+      for (
+        let index = 0;
+        index < newRejected;
+        index += 1
+      ) {
+
+        handleReject();
+      }
+    }
+  }
+}
 
   } catch (error) {
 
@@ -1469,6 +1575,12 @@ startButton.addEventListener(
       */
       miningRunning =
         true;
+
+      lastAcceptedTelemetry =
+        0;
+
+      lastRejectedTelemetry =
+        0;
 
       waitingForFirstHashrate =
         true;

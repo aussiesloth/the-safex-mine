@@ -295,6 +295,8 @@ struct MinerTelemetry {
     daemon_connected: bool,
     hashrate_hs: Option<f64>,
     worker_threads: Option<u32>,
+    accepted_count: u64,
+    rejected_count: u64,
     recent_lines: VecDeque<String>,
 }
 
@@ -484,6 +486,20 @@ fn record_miner_line(
         telemetry.daemon_connected =
             true;
     }
+    if line.contains(
+        " accepted ("
+    ) {
+        telemetry.accepted_count +=
+            1;
+    }
+
+
+    if line.contains(
+        " rejected ("
+    ) {
+        telemetry.rejected_count +=
+            1;
+    }
     if let Some(
     threads
 ) =
@@ -642,12 +658,21 @@ fn telemetry_summary(
             });
 
 
+   let accepted =
+    telemetry.accepted_count;
+
+    let rejected =
+        telemetry.rejected_count;
+
+
     format!(
         "MSR={msr} | \
-         DAEMON={daemon} | \
-         HASHRATE_HS={hashrate} | \
-         THREADS={threads} | \
-         LAST={last}"
+        DAEMON={daemon} | \
+        HASHRATE_HS={hashrate} | \
+        THREADS={threads} | \
+        ACCEPTED={accepted} | \
+        REJECTED={rejected} | \
+        LAST={last}"
     )
 }
 
