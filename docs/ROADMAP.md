@@ -58,6 +58,14 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 - create/test Windows installer;
 - test uninstall behaviour.
 
+### Build reproducibility
+
+- review the current Safex frontend dependency usage;
+- remove any unused direct package such as `@safex/wallet-core` if it is not required;
+- normalise any required GitHub dependencies from SSH-only lockfile URLs to anonymous HTTPS;
+- verify `npm ci` works on a clean contributor machine without GitHub SSH configuration;
+- document the exact reproducible XMRig MSVC/dependency build process used for release binaries.
+
 ### Product polish
 
 - create final custom application icon set;
