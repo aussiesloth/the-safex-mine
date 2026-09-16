@@ -22,11 +22,16 @@ Scene rules are documented in `VISUAL_STATE_SYSTEM.md`.
 
 ```text
 src/assets/branding/safex-gradient-logo.svg
+src/assets/branding/safex-cash.svg
 ```
 
-The SVG Safex wordmark is displayed in the app header at the top-right.
+`safex-gradient-logo.svg` is the Safex wordmark displayed in the app header at the top-right.
 
-The wordmark is not baked into scene images.
+`safex-cash.svg` is the official Safex Cash logo asset retained in the branding folder for approved Safex Cash branding use, including future application-icon work and other product branding where appropriate.
+
+Safex/Safex Cash branding assets are not covered by The Safex Mine's GPL-3.0 application licence. Their use in this project is addressed separately in `BRANDING.md`.
+
+The header wordmark is not baked into scene images.
 
 ## 4. Safex Cash reward motif
 
