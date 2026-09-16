@@ -131,7 +131,7 @@ The app launches the backend with the Safex RandomX algorithm (`rx/sfx`) and the
 
 ## Licensing and third-party components
 
-The application uses third-party open-source components, including the Safex-compatible XMRig backend and Safex wallet libraries. Those components retain their own licences and attribution requirements.
+The application uses third-party open-source components, including the Safex-compatible XMRig backend and Rust/JavaScript libraries. Those components retain their own licences and attribution requirements.
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
