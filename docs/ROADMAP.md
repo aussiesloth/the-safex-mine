@@ -76,7 +76,6 @@ Still required:
 
 - create final custom application icon set;
 - tidy source formatting where iterative development left uneven indentation;
-- remove any remaining dead/unregistered development probe functions after compile validation;
 - review UI wording and remaining backend messages.
 
 ### Documentation and licensing
