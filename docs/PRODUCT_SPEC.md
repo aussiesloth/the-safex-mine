@@ -1,217 +1,166 @@
-# Product Specification
+# Product Behaviour and Scope
 
 ## 1. Product summary
 
-**The Safex Mine** is a Windows desktop application that makes Safex Cash solo mining accessible through a graphical interface.
+**The Safex Mine** is a Windows graphical solo miner for Safex Cash (SFX). It wraps a Safex-compatible XMRig backend with configuration, privilege handling, telemetry, recovery and a themed state-driven user interface.
 
-The application is not intended to replace the underlying mining engine. It provides the orchestration, configuration, event handling, statistics, user experience and visual presentation around a Safex-compatible XMRig backend.
+Current development version: `0.1.0`.
 
-The initial public release should prioritise:
+## 2. Current release target
 
-1. correct mining behaviour;
-2. predictable Windows privilege handling;
-3. simple configuration;
-4. useful status and statistics;
-5. a polished state-driven visual experience;
-6. straightforward packaging and installation.
+The initial public target is a Windows x64 desktop application with:
 
-Continuous full-character animation is outside the current release scope.
+- simple Safex Cash address entry;
+- default/custom daemon support;
+- three CPU allocation modes;
+- Start/Stop control;
+- live mining statistics;
+- accepted/rejected event handling;
+- resilient daemon-loss handling;
+- narrow UAC elevation;
+- authored static mining scenes;
+- block-found audio with a persistent mute control.
 
-## 2. Target user
+Continuous character animation is not part of the current release scope.
 
-The target user is someone who wants to solo mine Safex Cash on a Windows PC without manually maintaining command-line arguments, configuration files or mining-process lifecycle details.
+## 3. Main interface
 
-The application should remain useful to experienced miners while being approachable to users who have never launched XMRig directly.
+The main window contains:
 
-## 3. In-scope features
+- product/Safex branding header;
+- connection/mining status;
+- persistent sound toggle;
+- main mine scene;
+- Safex Cash address;
+- daemon endpoint/status;
+- mining-mode buttons;
+- hashrate;
+- worker threads;
+- session time;
+- Blocks Found;
+- Rejected;
+- Start and Stop controls;
+- backend/status messaging.
 
-### 3.1 First-run setup
+## 4. Mining configuration
 
-On first launch, the application should request at least:
+### Address
 
-- Safex Cash mining address;
-- confirmation of the default public node/RPC or selection of a custom node;
-- preferred initial mining mode.
+A valid Safex Cash mainnet mining address is required.
 
-Optional advanced settings should not block first use.
+### Daemon
 
-### 3.2 Node configuration
+Default:
 
-The application should support:
+```text
+rpc.safex.org:17402
+```
 
-- a project-defined default public RPC/node;
-- custom remote node configuration;
-- LAN node configuration.
+Custom/LAN endpoints are supported.
 
-Connection status must be visible to the user.
+### CPU modes
 
-### 3.3 Mining control
+- Calm: 40%
+- Balanced: 70%
+- Full Bore: 100%
 
-The application must provide:
+Balanced is the default saved-mode fallback.
 
-- Start Mining;
-- Stop Mining;
-- Calm mode;
-- Balanced mode;
-- Full Bore mode.
+## 5. Mining lifecycle
 
-Changing mode should update the mining backend cleanly without corrupting the current session state.
+Start Mining:
 
-### 3.4 Mining statistics
+- validates configuration;
+- starts/reuses the elevated helper;
+- launches the pinned Safex XMRig backend;
+- applies the selected CPU hint;
+- attempts MSR optimisation;
+- transitions into live mining telemetry.
 
-At minimum, the UI should expose:
+Stop Mining:
 
-- current mining state;
-- current mode;
-- current hashrate;
-- backend/node connection state;
-- accepted blocks found during the session;
-- rejected/stale results during the session;
-- elapsed mining/session time where practical;
-- useful backend error information when mining fails.
+- requests graceful XMRig shutdown;
+- preserves the current in-memory session counters/time;
+- leaves the helper ready for another Start during the same app session.
 
-Additional useful metrics can be added after the core behaviour is stable.
+## 6. Live status and recovery
 
-### 3.5 Event feedback
+The UI distinguishes:
 
-Important backend events should be converted into user-facing application events.
+- ready/stopped;
+- mining;
+- daemon offline while XMRig remains alive;
+- helper/backend failure.
 
-Examples:
+Daemon loss is recoverable in place. A dead helper/backend session is discarded so a fresh Start can launch a new helper.
 
-- mining started;
-- mining stopped;
-- hashrate updated;
-- accepted block;
-- rejected or stale result;
-- connection lost;
-- connection restored;
-- backend exited unexpectedly;
-- configuration error.
+## 7. Session statistics
 
-### 3.6 Visual presentation
+The current session tracks:
 
-The visual layer uses authored still-state scenes with crossfades.
+- hashrate;
+- worker threads;
+- mining time;
+- accepted blocks;
+- rejected results.
 
-Required v1 states:
+Blocks/rejects/time survive Stop -> Start but reset after a full app restart.
+
+## 8. Visual states
+
+Required/implemented scenes:
 
 - READY / STOPPED;
 - MINING;
 - BLOCK FOUND;
 - REJECTED;
-- OFFLINE / ERROR.
+- OFFLINE.
 
-The application may add lightweight effects such as:
+The scenes crossfade while the fixed interface remains stationary.
 
-- fireworks;
-- sparkles;
-- nugget glow;
-- subtle dust;
-- subtle lantern or headlamp effects.
+Safex Cash treasure is shown as rectangular bullion bars. Bars may be visible on the table, but are hidden in the rock face. BLOCK FOUND shows the miner holding the discovered bar aloft.
 
-These effects must not materially reduce CPU mining performance.
+## 9. Block-found audio
 
-### 3.7 Reward-table progression
+A real accepted block triggers a short cash-register-style sound at the same time as the counter and BLOCK FOUND scene.
 
-Accepted blocks should be represented visually by nuggets appearing on the reward table.
+The user can mute/unmute that sound from the top bar. The preference is saved across restarts.
 
-The initial implementation should be simple and robust. Possible approaches include:
+## 10. Windows privilege policy
 
-- one nugget sprite per accepted block up to a practical visual limit;
-- staged pile levels;
-- a hybrid system where individual nuggets accumulate initially and then collapse into larger pile states.
+The GUI is never intended to require Administrator mode.
 
-The visual representation does not need to map to actual reward value.
+Only the helper is elevated. The helper controls XMRig, owns its Job Object and handles the MSR-capable mining session.
 
-### 3.8 Rejected-result presentation
+## 11. Performance policy
 
-Rejected events should not add anything to the reward table.
+The app should not imply that a higher CPU allocation always produces a higher hashrate.
 
-The rejection state may use randomised messages such as:
+Full Bore means maximum configured CPU allocation, not guaranteed maximum efficiency.
 
-- Fool's Gold
-- Pyrite!
-- Claim Lost
-- Too Late
-- Stale Find
-- Another Miner Beat You
-- False Strike
+## 12. Current release exclusions
 
-The exact message shown should reflect the backend result where that distinction can be determined reliably.
+Not required for the first public release:
 
-## 4. Session rules
+- continuous miner animation;
+- GPU mining;
+- mining-pool management;
+- automatic CPU-profile tuning;
+- non-Windows desktop builds;
+- automatic updater;
+- dynamically accumulating reward sprites;
+- complex particle systems.
 
-Current decisions:
+## 13. Remaining public-release work
 
-- Stop → Start continues the current session.
-- The reward table is not cleared by Stop.
-- Changing the mining address clears the current visual treasure/session state.
-- Accepted and rejected event counters remain logically separate.
-- Persistence across a full application restart is not yet specified and should be decided before release.
+The core application is functioning. Remaining release work is primarily:
 
-## 5. Performance modes
-
-Initial target profiles:
-
-### Calm
-
-Approximately 40% CPU allocation.
-
-Purpose:
-
-- background mining;
-- lower heat and noise;
-- better responsiveness for simultaneous desktop use.
-
-### Balanced
-
-Approximately 70% CPU allocation.
-
-Purpose:
-
-- strong mining performance;
-- reasonable desktop responsiveness;
-- likely default mode.
-
-### Full Bore
-
-Highest practical CPU allocation.
-
-Current design intent is to reserve enough capacity for Windows and the application rather than blindly consuming every logical processor. The exact strategy must be benchmarked across several systems.
-
-## 6. Windows MSR requirement
-
-MSR optimisation is a required part of the intended Windows performance profile.
-
-The GUI itself should not run elevated.
-
-The application should request elevation only for the mining backend or a narrow helper process that needs it.
-
-Failure to obtain the required optimisation should be surfaced clearly rather than silently ignored.
-
-## 7. Out of scope for v1
-
-The following are not required for the initial release:
-
-- full skeletal character animation;
-- continuous mining-swing animation;
-- walking animations;
-- animated transitions between chair, rock face and reward table;
-- front/side/seated rig systems;
-- complex particle simulations;
-- multiple animated celebration sequences;
-- a general-purpose mining-pool client;
-- non-Windows GUI releases.
-
-These may be reconsidered later based on demand.
-
-## 8. Release principle
-
-The initial public release should be judged primarily on:
-
-- reliability;
-- ease of use;
-- predictable performance;
-- clarity of status;
-- visual polish without unnecessary complexity.
-
-The state-driven visual system exists to make the application distinctive and enjoyable, not to compete with the mining workload.
+- final helper/backend packaging paths;
+- installer generation and clean-machine testing;
+- custom application icons;
+- release hardening/cleanup;
+- project licence selection;
+- final third-party licence bundle;
+- checksums and release notes;
+- antivirus/SmartScreen documentation;
+- public repository/release process.
