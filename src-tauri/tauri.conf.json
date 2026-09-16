@@ -33,15 +33,6 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ],
-    "resources": {
-      "helper/target/release/safex-mine-helper.exe": "runtime/safex-mine-helper.exe",
-      "binaries/safex-xmrig-x86_64-pc-windows-msvc.exe": "runtime/safex-xmrig-x86_64-pc-windows-msvc.exe",
-      "binaries/WinRing0x64.sys": "runtime/WinRing0x64.sys",
-      "../LICENSE": "licenses/LICENSE",
-      "../THIRD_PARTY_NOTICES.md": "licenses/THIRD_PARTY_NOTICES.md",
-      "../THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt": "licenses/WinRing0-LICENSE.txt"
-    },
-    "licenseFile": "../LICENSE"
+    ]
   }
 }
