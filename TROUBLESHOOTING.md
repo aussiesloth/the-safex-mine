@@ -33,19 +33,27 @@ Do not run the whole GUI as Administrator as a workaround.
 
 ## The helper executable cannot be found
 
-For the current development build, compile it with:
+For development, compile it with:
 
 ```powershell
 cargo build --manifest-path .\src-tauri\helper\Cargo.toml --release
 ```
 
-The current development path is:
+The development fallback path is:
 
 ```text
 src-tauri\helper\target\release\safex-mine-helper.exe
 ```
 
-See `BUILDING.md`.
+Packaged builds resolve:
+
+```text
+runtime\safex-mine-helper.exe
+```
+
+from Tauri's resource directory.
+
+Use `npm run tauri:build` for packaged builds so the helper is compiled before the release resources are evaluated. See `BUILDING.md`.
 
 ## The XMRig executable or WinRing driver cannot be found
 
@@ -56,7 +64,7 @@ src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
 src-tauri\binaries\WinRing0x64.sys
 ```
 
-Those files are intentionally excluded from Git. See `BUILDING.md` for the pinned backend source information.
+Those files are intentionally excluded from Git. During packaging they are mapped into the installed `runtime\` resource directory beside the elevated helper. See `BUILDING.md` for the pinned backend source information.
 
 ## MSR optimisation failed
 
