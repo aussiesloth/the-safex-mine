@@ -61,7 +61,25 @@ The Windows development/runtime layout uses:
 WinRing0x64.sys
 ```
 
-The driver binary is not tracked in this repository. Before a public binary release, the project must preserve the original licence/redistribution notice associated with the exact driver binary that is shipped. Do not substitute an unverified driver solely because it has the same filename.
+For the pinned Safex-compatible XMRig source commit `3a5617f99a858614dc0c5897fc44c1bdb2618cca`, the driver is present upstream at:
+
+```text
+bin/WinRing0/WinRing0x64.sys
+```
+
+and its redistribution notice is present upstream at:
+
+```text
+bin/WinRing0/LICENSE
+```
+
+That exact OpenLibSys notice is reproduced in this repository at:
+
+```text
+THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt
+```
+
+Binary releases that ship this WinRing0 driver must also ship that notice unchanged. Do not substitute an unverified driver solely because it has the same filename.
 
 ## Safex branding
 
@@ -78,6 +96,6 @@ Before publishing a binary release:
 1. confirm the project `LICENSE`;
 2. include the licence/notice material required by the bundled XMRig backend;
 3. make corresponding XMRig source available in the manner required by GPL-3.0;
-4. include the exact WinRing driver redistribution notice;
+4. include `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` with any release that ships the pinned WinRing0 driver;
 5. review the locked JavaScript/Rust dependency licences;
 6. publish SHA-256 checksums for the release artefacts.
