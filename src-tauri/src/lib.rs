@@ -176,6 +176,31 @@ fn backend_probe() -> String {
     )
 }
 
+const SAFEX_MAINNET_ADDRESS_PREFIX: u64 = 268_449_688;
+
+fn decode_varint(bytes: &[u8]) -> Option<(u64, usize)> {
+    let mut value = 0u64;
+    let mut shift = 0u32;
+
+    for (index, byte) in bytes.iter().copied().enumerate().take(10) {
+        let part = (byte & 0x7f) as u64;
+
+        if shift >= 64 {
+            return None;
+        }
+
+        value |= part.checked_shl(shift)?;
+
+        if byte & 0x80 == 0 {
+            return Some((value, index + 1));
+        }
+
+        shift += 7;
+    }
+
+    None
+}
+
 #[tauri::command]
 fn validate_safex_address(address: String) -> bool {
     let address = address.trim();
