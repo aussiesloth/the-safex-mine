@@ -88,7 +88,7 @@ Final installer packaging is still being completed. The current source tree is s
 6. Monitor hashrate, threads, session time and block/reject counters.
 7. Press **Stop Mining** to stop XMRig cleanly.
 
-Stop -> Start retains the current in-memory session counters and accumulated mining time. A full application restart starts a new session.
+Stop -> Start retains the current in-memory session counters and accumulated mining time. Changing the saved Safex address while stopped resets Blocks Found to 0, while Rejected and accumulated mining time are preserved. A full application restart starts a new session.
 
 ## Branding and project status
 
@@ -135,4 +135,4 @@ The application uses third-party open-source components, including the Safex-com
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-The licence for The Safex Mine application code itself still needs to be finalised before the repository is made public.
+The Safex Mine application code is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. See [LICENSE](LICENSE).
