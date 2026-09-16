@@ -6,10 +6,18 @@ This file identifies the primary direct dependencies and bundled runtime compone
 
 ## Safex-compatible XMRig backend
 
-Repository:
+Canonical Safex Mine backend repository:
 
 ```text
 https://github.com/aussiesloth/safex-xmrig
+```
+
+Upstream provenance:
+
+```text
+aussiesloth/safex-xmrig
+    -> galicone/xmrig
+    -> xmrig/xmrig
 ```
 
 Pinned source commit used by this project:
@@ -67,7 +75,7 @@ For the pinned Safex-compatible XMRig source commit `3a5617f99a858614dc0c5897fc4
 bin/WinRing0/WinRing0x64.sys
 ```
 
-and its redistribution notice is present upstream at:
+and its redistribution notice is present at the corresponding source path:
 
 ```text
 bin/WinRing0/LICENSE
