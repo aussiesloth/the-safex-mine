@@ -28,18 +28,17 @@ The project is currently pre-release, so the entries below describe the current 
 
 - Changing the saved Safex address while mining is stopped now resets Blocks Found to 0 while preserving Rejected and accumulated mining time.
 - The project is now licensed under GNU GPL v3.0.
-
+- Added release-only Tauri resource packaging for the helper, XMRig, WinRing driver and licence notices.
+- Restricted the registered Rust invoke command surface to production-used commands.
 - Replaced the earlier continuous-animation concept with authored static scenes and crossfades.
 - Reworked reward visuals from nuggets/coins to rectangular Safex Cash bullion bars.
 - Removed visible reward bars from the rock face; the successful BLOCK FOUND state reveals the discovered bar in the miner's hand.
 
 ### Pending before public release
 
-- Final packaged helper/backend paths.
 - Windows installer and clean-machine validation.
 - Custom application icon set.
-- Project licence selection.
-- Final third-party licence bundle.
+- Final third-party licence/release bundle validation.
 - Release checksum workflow.
 - Antivirus/SmartScreen release notes.
-- Final code tidy/release-hardening pass.
+- Remaining dead-code/source-format tidy pass.
