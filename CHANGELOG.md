@@ -26,7 +26,7 @@ The project is currently pre-release, so the entries below describe the current 
 
 ### Changed
 
-- Changing the saved Safex address while mining is stopped now resets Blocks Found to 0 while preserving Rejected and accumulated mining time.
+- Changing the saved Safex address to a different valid address while mining is stopped now starts a fresh in-memory session, resetting Blocks Found, Rejected and accumulated mining time to 0.
 - The project is now licensed under GNU GPL v3.0.
 - Added release-only Tauri resource packaging for the helper, XMRig, WinRing driver and licence notices.
 - Restricted the registered Rust invoke command surface to production-used commands.
