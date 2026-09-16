@@ -44,13 +44,15 @@ The main frontend entry point is `src/main.ts`, with application styling in `src
 
 ## 3. Tauri/Rust application backend
 
-The Rust side in `src-tauri/src/` exposes commands used by the frontend for:
+The Rust side in `src-tauri/src/` exposes the production command surface used by the frontend for:
 
+- backend connectivity;
 - Safex address validation;
 - daemon validation/status;
 - helper/session management;
-- mining Start/Stop/status;
-- backend diagnostics.
+- mining Start/Stop/status.
+
+Earlier development-only ping/XMRig/probe commands are not registered in the production invoke handler.
 
 The GUI does not construct a shell command and run it as Administrator. Instead, the Rust backend creates a controlled helper session and asks Windows to elevate only the helper executable.
 
@@ -84,13 +86,13 @@ If the GUI/helper pipe closes unexpectedly, the helper exits. Because the helper
 
 ## 6. Mining child process
 
-The helper launches:
+In development, the helper launches XMRig from:
 
 ```text
 src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
 ```
 
-with the working directory set to `src-tauri\binaries\` so the accompanying WinRing driver can be found.
+For packaged builds, the helper, XMRig and WinRing driver are bundled together under the Tauri `runtime/` resource directory. The helper resolves its own executable directory and uses that directory as the XMRig working directory so the bundled driver is found beside the miner.
 
 Current command-line shape:
 
@@ -185,8 +187,13 @@ The frontend stores ordinary user preferences in browser local storage:
 
 Mining-session counters and elapsed mining time are in-memory session state and reset when the application is fully restarted.
 
-## 14. Development-only paths
+## 14. Development and packaged paths
 
-The current Rust code still locates `safex-mine-helper.exe` under the helper crate's development `target\release` directory.
+The standard-user backend resolves the elevated helper in this order:
 
-That is not the final packaged architecture. Release packaging must move the helper and backend runtime files into explicit packaged locations before a public installer is considered complete.
+1. packaged Tauri resource: `runtime/safex-mine-helper.exe`;
+2. development fallback: `src-tauri/helper/target/release/safex-mine-helper.exe`.
+
+The release-only Tauri configuration maps the helper, XMRig and WinRing driver into one packaged `runtime/` directory. This keeps the installed privilege/process model the same as development while removing source-tree path assumptions from the packaged application.
+
+The remaining packaging work is validation of the generated installer on a clean Windows system.
