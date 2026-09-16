@@ -30,6 +30,7 @@ The project is currently pre-release, so the entries below describe the current 
 - The project is now licensed under GNU GPL v3.0.
 - Added release-only Tauri resource packaging for the helper, XMRig, WinRing driver and licence notices.
 - Restricted the registered Rust invoke command surface to production-used commands.
+- Switched the canonical backend source reference to `aussiesloth/safex-xmrig`, while retaining `galicone/xmrig` and `xmrig/xmrig` in the documented upstream provenance chain.
 - Replaced the earlier continuous-animation concept with authored static scenes and crossfades.
 - Reworked reward visuals from nuggets/coins to rectangular Safex Cash bullion bars.
 - Removed visible reward bars from the rock face; the successful BLOCK FOUND state reveals the discovered bar in the miner's hand.
