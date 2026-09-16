@@ -35,12 +35,23 @@ A locally rebuilt executable can legitimately have a different hash because of c
 
 ## Driver
 
-`WinRing0x64.sys` must correspond to the runtime/backend build being used. The exact driver binary and its redistribution notice must be reviewed and included as part of final public release packaging.
+`WinRing0x64.sys` must correspond to the runtime/backend build being used. The pinned upstream OpenLibSys notice is retained in `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` and is bundled by the release Tauri configuration.
 
 ## Build instructions
 
 See the repository root `BUILDING.md`.
 
-## Packaging note
+## Packaging
 
-The current development code resolves these files from this source-tree directory. Final installer packaging still needs to define the packaged runtime location and ensure required third-party notices are shipped beside/with the release.
+Development resolves these files from this directory.
+
+The release-only Tauri configuration maps them to:
+
+```text
+runtime/safex-xmrig-x86_64-pc-windows-msvc.exe
+runtime/WinRing0x64.sys
+```
+
+alongside the packaged elevated helper. Use `npm run tauri:build` for the packaged build path.
+
+The generated installer still requires clean-machine validation before public release.
