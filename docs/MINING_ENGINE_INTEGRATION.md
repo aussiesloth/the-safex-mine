@@ -20,7 +20,7 @@ The backend executable is not committed to this repository.
 
 ## 2. Expected Windows runtime files
 
-The current development layout expects:
+The development layout expects:
 
 ```text
 src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
@@ -28,6 +28,15 @@ src-tauri\binaries\WinRing0x64.sys
 ```
 
 The executable and driver are excluded by `.gitignore`.
+
+The release-only Tauri configuration packages them as:
+
+```text
+runtime\safex-xmrig-x86_64-pc-windows-msvc.exe
+runtime\WinRing0x64.sys
+```
+
+with `safex-mine-helper.exe` placed in the same packaged runtime directory.
 
 ## 3. Helper ownership
 
@@ -160,9 +169,19 @@ Compiler/toolchain differences can produce a different hash from the same source
 
 ## 15. Packaging status
 
-The development backend path is stable, but final installer packaging is not yet complete. The public release process still needs explicit packaged locations for:
+The packaged runtime layout is implemented through `src-tauri/tauri.release.conf.json`.
 
-- the helper;
-- the XMRig executable;
-- the WinRing driver;
-- required third-party notices.
+The dedicated release build command is:
+
+```powershell
+npm run tauri:build
+```
+
+It builds the helper before Tauri evaluates the release resources, then bundles:
+
+- `runtime/safex-mine-helper.exe`;
+- `runtime/safex-xmrig-x86_64-pc-windows-msvc.exe`;
+- `runtime/WinRing0x64.sys`;
+- project/third-party licence material under `licenses/`.
+
+The remaining release gate is real installer validation on a clean Windows machine or VM.
