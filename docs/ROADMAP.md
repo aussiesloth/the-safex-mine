@@ -52,10 +52,18 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 
 ### Packaging
 
-- replace development helper path with packaged runtime/sidecar path;
-- define bundled XMRig and WinRing locations for installer builds;
-- confirm `tauri build` produces a complete runtime;
-- create/test Windows installer;
+Implemented:
+
+- packaged helper resolution through the Tauri resource directory;
+- bundled `runtime/` locations for helper, XMRig and WinRing;
+- release-only merged Tauri configuration;
+- dedicated `npm run tauri:build` wrapper that builds the helper before packaging;
+- bundled project/third-party licence notices.
+
+Still required:
+
+- run the packaged build on Windows;
+- create/test the Windows installer artefact;
 - test uninstall behaviour.
 
 ### Build reproducibility
@@ -68,7 +76,7 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 
 - create final custom application icon set;
 - tidy source formatting where iterative development left uneven indentation;
-- review/remove development-only Rust diagnostic commands from release builds;
+- remove any remaining dead/unregistered development probe functions after compile validation;
 - review UI wording and remaining backend messages.
 
 ### Documentation and licensing
