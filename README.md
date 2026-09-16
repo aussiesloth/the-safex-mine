@@ -88,7 +88,7 @@ The packaged build now bundles the elevated helper, XMRig backend, WinRing drive
 6. Monitor hashrate, threads, session time and block/reject counters.
 7. Press **Stop Mining** to stop XMRig cleanly.
 
-Stop -> Start retains the current in-memory session counters and accumulated mining time. Changing the saved Safex address while stopped resets Blocks Found to 0, while Rejected and accumulated mining time are preserved. A full application restart starts a new session.
+Stop -> Start retains the current in-memory session counters and accumulated mining time. Changing the saved Safex address to a different valid address while stopped starts a fresh in-memory mining session: Blocks Found, Rejected and accumulated mining time all reset to 0. A full application restart also starts a new session.
 
 ## Branding and project status
 
