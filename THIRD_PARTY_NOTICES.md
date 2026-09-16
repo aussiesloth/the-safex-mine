@@ -9,7 +9,7 @@ This file identifies the primary direct dependencies and bundled runtime compone
 Repository:
 
 ```text
-https://github.com/galicone/xmrig
+https://github.com/aussiesloth/safex-xmrig
 ```
 
 Pinned source commit used by this project:
@@ -61,7 +61,7 @@ The Windows development/runtime layout uses:
 WinRing0x64.sys
 ```
 
-For the pinned Safex-compatible XMRig source commit `3a5617f99a858614dc0c5897fc44c1bdb2618cca`, the driver is present upstream at:
+For the pinned Safex-compatible XMRig source commit `3a5617f99a858614dc0c5897fc44c1bdb2618cca`, the driver is present in the canonical project fork at:
 
 ```text
 bin/WinRing0/WinRing0x64.sys
