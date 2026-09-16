@@ -155,12 +155,10 @@ Not required for the first public release:
 
 The core application is functioning. Remaining release work is primarily:
 
-- final helper/backend packaging paths;
 - installer generation and clean-machine testing;
 - custom application icons;
-- release hardening/cleanup;
-- project licence selection;
-- final third-party licence bundle;
+- final release hardening/cleanup;
+- final third-party licence/release bundle validation;
 - checksums and release notes;
 - antivirus/SmartScreen documentation;
 - public repository/release process.
