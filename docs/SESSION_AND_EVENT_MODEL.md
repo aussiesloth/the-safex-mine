@@ -1,129 +1,126 @@
 # Session and Event Model
 
-## 1. Purpose
+## 1. Session definition
 
-The session model separates mining-history behaviour from temporary scene effects.
+A Safex Mine session currently means the lifetime of the running desktop application.
 
-A five-second celebration should never be the source of truth for whether a block was found.
+Session counters are held in frontend memory rather than persisted to disk.
 
-## 2. Suggested session state
+## 2. Current session state
 
-Conceptually:
+The frontend tracks, among other values:
 
-```text
-SessionState
-├── miningAddress
-├── startedAt
-├── accumulatedMiningTime
-├── acceptedCount
-├── rejectedCount
-├── currentMode
-├── currentHashrate
-├── connectionState
-├── backendState
-└── treasureVisualState
-```
+- whether mining is running;
+- accumulated mining time;
+- current mining-start timestamp;
+- Blocks Found;
+- Rejected;
+- last accepted/rejected telemetry values;
+- current visual state;
+- transient celebration/rejection queue;
+- daemon-offline state.
 
-Additional metrics can be added later.
+## 3. Session boundaries
 
-## 3. Session boundary
+### Stop -> Start
 
-Current rules:
+Stop does **not** clear the current session.
 
-- pressing Stop does **not** end the current session;
-- pressing Start after Stop resumes the same session;
-- changing mining address clears the visual treasure/session reward state.
+The app preserves:
 
-The policy for application restart is still undecided and should be explicitly resolved before release.
+- accumulated mining time;
+- Blocks Found;
+- Rejected.
 
-## 4. Event normalisation
+Start resumes the same in-memory session.
 
-Backend-specific messages should become application events before they reach UI code.
+### Full application restart
 
-Suggested event set:
+A full app restart starts a new session. Counters/time reset to zero.
 
-```text
-APP_READY
-MINING_START_REQUESTED
-MINING_STARTED
-MINING_STOP_REQUESTED
-MINING_STOPPED
-MODE_CHANGED
-HASHRATE_UPDATED
-BLOCK_ACCEPTED
-BLOCK_REJECTED
-CONNECTION_LOST
-CONNECTION_RESTORED
-BACKEND_WARNING
-BACKEND_ERROR
-BACKEND_EXITED
-ADDRESS_CHANGED
-```
+### Address change
 
-## 5. Accepted event
+The current code does not clear counters/time merely because the mining address changes. The address field is locked while mining, so changes occur only while stopped.
 
-On `BLOCK_ACCEPTED`:
+This differs from an earlier design proposal that treated address change as a session reset.
 
-1. increment accepted count;
-2. update treasure/reward-table state;
-3. store any useful block metadata;
-4. trigger BLOCK_FOUND visual state;
-5. trigger positive message/effects;
-6. return to the correct base state after the transient presentation ends.
+## 4. Backend telemetry model
+
+The helper reports cumulative accepted/rejected counts for its current XMRig process.
+
+The frontend stores the last-seen helper totals and computes deltas.
+
+If helper counters reset because a new mining process/session is created, the frontend baseline is adjusted rather than treating the lower value as negative events.
+
+## 5. Accepted block event
+
+For each newly observed accepted result:
+
+1. increment `Blocks Found` immediately;
+2. update the counter display;
+3. if sound is not muted, restart/play the block-found WAV;
+4. queue/show the BLOCK FOUND scene;
+5. after approximately 5.5 seconds, return to the appropriate base state or play the next queued transient event.
+
+The block count is the state of record. The scene/sound are presentation effects.
 
 ## 6. Rejected event
 
-On `BLOCK_REJECTED`:
+For each newly observed rejected result:
 
-1. increment rejected count;
-2. preserve any available reason;
-3. do not modify reward-table treasure;
-4. trigger REJECTED visual state;
-5. show an appropriate message;
-6. return to the correct base state.
+1. increment `Rejected` immediately;
+2. update the counter display;
+3. queue/show the REJECTED scene;
+4. after approximately 2.5 seconds, return to the appropriate base state or play the next queued transient event.
 
-## 7. Connection loss
+A rejection does not play the block-found sound.
 
-On `CONNECTION_LOST`:
+## 7. Transient queue
 
-- mining status must change immediately;
-- transient decorative states may be interrupted if necessary;
-- move to OFFLINE_ERROR when mining is no longer operational;
-- preserve session counts.
+Accepted/rejected events are not discarded merely because another transient scene is already visible.
 
-On `CONNECTION_RESTORED`:
+If a transient timer is active, additional events are queued and played in order.
 
-- confirm actual mining resumption before returning to MINING.
+Counters are incremented when the events are observed, not when their later visual presentation begins.
 
-## 8. Backend crash
+## 8. User Stop during transient presentation
 
-On unexpected backend exit:
+Mining state remains authoritative.
 
-- record exit code and recent log context;
-- set backend state to failed;
-- stop presenting MINING;
-- move to OFFLINE_ERROR;
-- present Restart/Start controls as appropriate.
+If mining stops, the transient queue is cleared and the scene returns to READY / STOPPED rather than continuing to pretend that mining is active.
 
-## 9. Event priority
+## 9. Daemon loss
 
-Suggested priority:
+If XMRig loses its mining connection while the process remains alive:
 
-1. critical backend/application failure;
-2. connection unavailable;
-3. accepted block;
-4. rejected result;
-5. mode change;
-6. ordinary hashrate/stat updates;
-7. decorative visual timers.
+- the frontend records daemon-offline state;
+- current hashrate is displayed as zero;
+- the visual state becomes OFFLINE;
+- worker/process session remains available;
+- counters/time are preserved;
+- XMRig is allowed to reconnect.
 
-## 10. Queued accepted events
+When valid job telemetry resumes, the UI returns to MINING.
 
-If multiple accepted blocks arrive during one celebration:
+## 10. Helper/backend failure
 
-- all accepted events must be counted;
-- all rewards must be added to session treasure;
-- the renderer may combine or extend visual celebration;
-- no event may be discarded because a prior effect is still running.
+If the helper session fails unexpectedly:
 
-A later version may introduce special double/triple-hit presentation.
+- the dead helper session is discarded;
+- mining is marked unavailable;
+- fields/mode controls are unlocked;
+- Start becomes available again;
+- a later Start launches a fresh helper.
+
+Job Object protection ensures XMRig should not survive the helper that owns it.
+
+## 11. Persisted preferences are not session state
+
+Local storage persists:
+
+- address;
+- daemon;
+- mode;
+- sound-muted preference.
+
+Those values configure the next session but do not preserve session counters.
