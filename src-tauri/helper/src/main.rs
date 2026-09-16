@@ -452,22 +452,83 @@ struct MinerProcess {
 fn mining_backend_dir()
     -> Result<PathBuf, String>
 {
-    let helper_dir =
+    let executable =
+        std::env::current_exe()
+            .map_err(|error| {
+                format!(
+                    "Unable to locate Safex Mine helper executable: {error}"
+                )
+            })?;
+
+    let executable_dir =
+        executable
+            .parent()
+            .ok_or_else(|| {
+                "Unable to locate Safex Mine helper directory."
+                    .to_string()
+            })?
+            .to_path_buf();
+
+    /*
+       Packaged releases place the helper,
+       XMRig and WinRing driver together in
+       the Tauri runtime resource directory.
+
+       If either packaged backend file is
+       present, treat this as the runtime
+       directory so a missing companion file
+       is reported from the correct location.
+    */
+    if executable_dir
+        .join(
+            "safex-xmrig-x86_64-pc-windows-msvc.exe",
+        )
+        .exists()
+        ||
+        executable_dir
+            .join(
+                "WinRing0x64.sys",
+            )
+            .exists()
+    {
+        return Ok(
+            executable_dir
+        );
+    }
+
+    /*
+       Development builds keep the helper in
+       helper/target/release while the mining
+       backend lives in src-tauri/binaries.
+    */
+    let helper_source_dir =
         PathBuf::from(
             env!("CARGO_MANIFEST_DIR"),
         );
 
-    let src_tauri_dir =
-        helper_dir
-            .parent()
-            .ok_or_else(|| {
-                "Unable to locate src-tauri directory."
-                    .to_string()
-            })?;
+    if let Some(src_tauri_dir) =
+        helper_source_dir.parent()
+    {
+        let development_backend =
+            src_tauri_dir
+                .join("binaries");
 
+        if development_backend.exists() {
+            return Ok(
+                development_backend
+            );
+        }
+    }
+
+    /*
+       On an installed machine where both
+       packaged backend files are unexpectedly
+       missing, return the helper directory so
+       the later file checks report the real
+       installed runtime path.
+    */
     Ok(
-        src_tauri_dir
-            .join("binaries")
+        executable_dir
     )
 }
 
