@@ -26,6 +26,9 @@ The project is currently pre-release, so the entries below describe the current 
 
 ### Changed
 
+- Changing the saved Safex address while mining is stopped now resets Blocks Found to 0 while preserving Rejected and accumulated mining time.
+- The project is now licensed under GNU GPL v3.0.
+
 - Replaced the earlier continuous-animation concept with authored static scenes and crossfades.
 - Reworked reward visuals from nuggets/coins to rectangular Safex Cash bullion bars.
 - Removed visible reward bars from the rock face; the successful BLOCK FOUND state reveals the discovered bar in the miner's hand.
