@@ -1,187 +1,161 @@
 # Testing and Release
 
-## 1. Release philosophy
+## 1. Purpose
 
-The Safex Mine should not be released merely because the UI works on the development machine.
+The Safex Mine should be released only after the installed application, mining backend, privilege model and recovery paths work together on clean Windows systems.
 
-The release candidate should be tested as a complete Windows application:
+This file separates behaviour already exercised during development from release work that is still outstanding.
 
-- installation;
+## 2. Development validation completed
+
+### Mining
+
+Development testing has confirmed:
+
+- real Safex Cash mining through the integrated XMRig backend;
+- live hashrate/thread telemetry;
+- Calm/Balanced/Full Bore profile changes;
+- normal Stop -> Start behaviour;
+- multiple real accepted blocks;
+- frontend accepted-block counter tracking.
+
+### Real block-found presentation
+
+A real accepted block has been observed end-to-end with:
+
+- Blocks Found increment;
+- BLOCK FOUND scene transition;
+- block-found cash-register sound.
+
+This confirms that the audio/visual celebration is attached to the real accepted-block event path rather than only to a simulator.
+
+### MSR paths
+
+Development has exercised both:
+
+- hardware/system where XMRig MSR optimisation succeeds;
+- hardware/system where Windows security prevents MSR writes and mining continues in degraded mode.
+
+### Daemon loss/recovery
+
+Development testing has exercised live network loss while mining:
+
+- XMRig remains alive;
+- GUI enters OFFLINE;
+- hashrate goes to zero;
+- reconnection resumes MINING without launching a new helper.
+
+### Helper process protection
+
+Development testing has verified that terminating the elevated helper causes the Job Object to terminate XMRig.
+
+### Backend/helper failure recovery
+
+Unexpected session failure has been exercised so the frontend can leave MINING, discard the dead session and allow a fresh Start.
+
+## 3. Areas still requiring release validation
+
+### Real rejection case
+
+The rejection UI/parser path has been exercised through development/simulation, but a naturally occurring real rejected Safex result has not yet been relied upon as the primary validation case.
+
+If practical, capture and retain a real rejection example before v1.0.
+
+### Clean-machine installer test
+
+Still required:
+
+- fresh Windows machine or VM;
+- no development toolchain;
+- install;
 - first run;
-- UAC/MSR workflow;
-- backend launch;
+- UAC helper launch;
 - mining;
-- block detection;
-- rejects;
-- Stop/Start;
-- node loss;
-- crashes;
+- Stop/restart;
 - uninstall.
 
-## 2. Test categories
+### Packaged path test
 
-### 2.1 Functional mining tests
+Final release packaging must prove that the installed app finds:
 
-Verify:
+- packaged helper;
+- XMRig executable;
+- WinRing driver;
+- scene/branding/audio assets.
 
-- valid address starts mining;
-- default node works;
-- custom node works;
-- LAN node works;
-- hashrate is displayed;
-- Calm/Balanced/Full Bore apply the expected CPU profile;
-- Stop halts mining;
-- Start after Stop resumes the same session.
+Development `target\release` paths must not leak into the installed release.
 
-### 2.2 Accepted-block parser tests
+### Antivirus / SmartScreen
 
-Use captured real backend output from actual accepted Safex solo-mining events.
+Test the actual unsigned release artefacts and document observed behaviour.
 
-Verify:
+Do not write generic bypass instructions in advance of real release testing.
 
-- accepted event detected once;
-- no duplicate count;
-- session count increments;
-- nugget table increments;
-- BLOCK_FOUND state appears;
-- celebration ends correctly.
+## 4. Functional release checklist
 
-### 2.3 Rejection parser tests
+- [ ] valid address accepted;
+- [ ] invalid address rejected;
+- [ ] default daemon works;
+- [ ] custom/LAN daemon works;
+- [ ] Calm = 40%;
+- [ ] Balanced = 70%;
+- [ ] Full Bore = 100%;
+- [ ] hashrate displayed;
+- [ ] thread count displayed;
+- [ ] session timer behaves across Stop -> Start;
+- [ ] Stop shuts XMRig down;
+- [ ] Start after Stop reuses helper;
+- [ ] daemon loss enters OFFLINE;
+- [ ] daemon reconnection resumes MINING;
+- [ ] helper crash cannot orphan XMRig;
+- [ ] accepted block increments once;
+- [ ] BLOCK FOUND scene appears;
+- [ ] block-found sound plays once when unmuted;
+- [ ] mute preference survives restart;
+- [ ] rejected result increments/returns to mining;
+- [ ] full app restart resets session counters.
 
-Use captured real output where possible.
+## 5. Visual release checklist
 
-Verify:
+- [ ] all five scene images load;
+- [ ] scene crossfade does not move the fixed UI;
+- [ ] no duplicate/baked-in Safex wordmark;
+- [ ] Safex header wordmark is crisp;
+- [ ] table reward objects are rectangular Safex Cash bars;
+- [ ] no bars are visibly embedded in the ore wall;
+- [ ] BLOCK FOUND miner holds a bar;
+- [ ] OFFLINE pose clearly differs from READY;
+- [ ] speaker icon correctly reflects mute state;
+- [ ] resizing does not crop critical scene content.
 
-- reject/stale event detected;
-- rejection count increments;
-- no nugget added;
-- correct rejection visual/message;
-- return to mining.
+## 6. Privilege/security checklist
 
-### 2.4 Connection tests
+- [ ] GUI starts non-elevated;
+- [ ] UAC prompt is for helper;
+- [ ] denied UAC is handled cleanly;
+- [ ] MSR success is reported correctly;
+- [ ] MSR failure degrades rather than lying about success;
+- [ ] helper pipe remains local/authenticated;
+- [ ] Job Object assignment succeeds;
+- [ ] helper termination kills XMRig;
+- [ ] graceful Ctrl+C stop works;
+- [ ] no code disables antivirus/VBS automatically.
 
-Simulate:
+## 7. Release artefacts
 
-- node unavailable at launch;
-- node drops while mining;
-- node returns;
-- LAN node goes offline;
-- wrong endpoint.
+Planned release set:
 
-The UI must distinguish backend-running from mining-operational.
-
-### 2.5 Backend failure tests
-
-Test:
-
-- missing executable;
-- backend crash;
-- invalid arguments;
-- non-zero exit code;
-- forced termination.
-
-### 2.6 MSR/elevation tests
-
-Test:
-
-- UAC accepted;
-- UAC denied;
-- required operation succeeds;
-- required operation fails;
-- GUI remains non-elevated;
-- repeat Start/Stop does not cause broken privilege state.
-
-### 2.7 Session tests
-
-Verify:
-
-- Stop → Start retains session treasure;
-- Stop does not clear accepted count;
-- rejected count remains separate;
-- address change clears visual treasure/session reward state;
-- queued accepted events are not lost.
-
-Persistence across application restarts must be tested once that policy is decided.
-
-### 2.8 Visual tests
-
-Verify:
-
-- state scenes align during crossfade;
-- UI remains stationary;
-- no flicker when switching scenes;
-- fireworks/sparkles do not obscure controls;
-- nugget pile stays within table bounds;
-- visual FX do not materially reduce mining hashrate.
-
-## 3. Performance testing
-
-Benchmark the mining backend with:
-
-- UI closed/not rendering, where technically comparable;
-- normal MINING scene;
-- celebration effects active.
-
-The visual layer should have negligible practical effect on hashrate.
-
-## 4. Hardware coverage
-
-Test on more than one CPU class before release.
-
-At minimum, aim for:
-
-- high-core-count desktop Ryzen;
-- mainstream desktop CPU;
-- modern laptop CPU.
-
-The mining-mode calculation should be validated across differing logical-processor counts.
-
-## 5. Clean-machine testing
-
-Before public release, test on a Windows machine or VM that does not contain the development toolchain.
-
-This catches:
-
-- missing runtime dependencies;
-- path assumptions;
-- packaging mistakes;
-- permissions issues.
-
-## 6. Release artefacts
-
-Recommended release outputs:
-
-- Windows installer;
+- unsigned Windows installer/package;
 - versioned release notes;
-- SHA-256 checksum;
-- bundled third-party notices/licences;
-- known-issues section if necessary.
+- SHA-256 checksum(s);
+- source repository/tag;
+- third-party notices/licence bundle;
+- XMRig corresponding-source reference;
+- known issues;
+- troubleshooting link.
 
-## 7. Versioning
+## 8. Versioning
 
-Use consistent semantic-style versioning.
+Current project version is `0.1.0`.
 
-Example:
-
-```text
-v0.x   development / preview
-v1.0   first stable public release
-v1.x   bug fixes and incremental features
-v2.x   major feature expansion if warranted
-```
-
-Full animation does not need to define v2. It should only be added if it remains desirable.
-
-## 8. Release gate
-
-A public v1.0 should not ship until:
-
-- mining backend is stable;
-- MSR workflow is stable;
-- accepted-block detection is proven;
-- connection failure is handled cleanly;
-- settings survive ordinary use;
-- installer works on a clean system;
-- required licences/attribution are present;
-- branding permission is resolved;
-- visual state system is polished enough to represent the project professionally.
+Before the first public release, choose whether the release remains a preview (`0.x`) or is promoted to `1.0.0` after the release gates are satisfied.
