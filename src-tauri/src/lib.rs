@@ -1,11 +1,7 @@
 use std::{
-    io::{BufRead, BufReader},
     time::Duration,
     mem::size_of,
     path::PathBuf,
-    process::{Child, Command, Stdio},
-    sync::Mutex,
-    thread,
 };
 
 use tokio::{
@@ -73,22 +69,9 @@ use windows::{
 
 use tauri::{
     path::BaseDirectory,
-    Emitter,
     Manager,
     State,
 };
-
-struct ProcessState {
-    child: Mutex<Option<Child>>,
-}
-
-impl Default for ProcessState {
-    fn default() -> Self {
-        Self {
-            child: Mutex::new(None),
-        }
-    }
-}
 
 type HelperPipeReader =
     TokioBufReader<
@@ -191,232 +174,6 @@ fn backend_probe() -> String {
         "Rust backend connected — v{}",
         env!("CARGO_PKG_VERSION")
     )
-}
-
-#[tauri::command]
-fn start_test_process(
-    app: tauri::AppHandle,
-    state: State<ProcessState>,
-) -> Result<String, String> {
-    let mut guard = state
-        .child
-        .lock()
-        .map_err(|_| "Process state lock failed.".to_string())?;
-
-    if let Some(child) = guard.as_mut() {
-        match child.try_wait() {
-            Ok(None) => {
-                return Err(
-                    "Test process is already running.".to_string(),
-                );
-            }
-
-            Ok(Some(_)) => {
-                *guard = None;
-            }
-
-            Err(error) => {
-                return Err(format!(
-                    "Unable to check process state: {error}"
-                ));
-            }
-        }
-    }
-
-    let mut child = Command::new("ping.exe")
-        .args([
-            "127.0.0.1",
-            "-t",
-        ])
-        .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()
-        .map_err(|error| {
-            format!(
-                "Unable to start test process: {error}"
-            )
-        })?;
-
-    if let Some(stdout) = child.stdout.take() {
-        let app_handle = app.clone();
-
-        thread::spawn(move || {
-            let reader = BufReader::new(stdout);
-
-            for line in reader.lines() {
-                match line {
-                    Ok(line) => {
-                        let _ = app_handle.emit(
-                            "test-process-output",
-                            line,
-                        );
-                    }
-
-                    Err(_) => break,
-                }
-            }
-        });
-    }
-
-    if let Some(stderr) = child.stderr.take() {
-        let app_handle = app.clone();
-
-        thread::spawn(move || {
-            let reader = BufReader::new(stderr);
-
-            for line in reader.lines() {
-                match line {
-                    Ok(line) => {
-                        let _ = app_handle.emit(
-                            "test-process-error",
-                            line,
-                        );
-                    }
-
-                    Err(_) => break,
-                }
-            }
-        });
-    }
-
-    *guard = Some(child);
-
-    Ok(
-        "Test process started.".to_string()
-    )
-}
-
-#[tauri::command]
-fn stop_test_process(
-    state: State<ProcessState>,
-) -> Result<String, String> {
-    let mut guard = state
-        .child
-        .lock()
-        .map_err(|_| "Process state lock failed.".to_string())?;
-
-    let Some(mut child) = guard.take() else {
-        return Ok(
-            "Test process is not running.".to_string()
-        );
-    };
-
-    match child.try_wait() {
-        Ok(Some(_)) => {
-            return Ok(
-                "Test process had already exited.".to_string()
-            );
-        }
-
-        Ok(None) => {}
-
-        Err(error) => {
-            return Err(format!(
-                "Unable to check test process: {error}"
-            ));
-        }
-    }
-
-    child
-        .kill()
-        .map_err(|error| {
-            format!(
-                "Unable to stop test process: {error}"
-            )
-        })?;
-
-    let _ = child.wait();
-
-    Ok(
-        "Test process stopped.".to_string()
-    )
-}
-
-#[tauri::command]
-fn test_process_running(
-    state: State<ProcessState>,
-) -> Result<bool, String> {
-    let mut guard = state
-        .child
-        .lock()
-        .map_err(|_| "Process state lock failed.".to_string())?;
-
-    let Some(child) = guard.as_mut() else {
-        return Ok(false);
-    };
-
-    match child.try_wait() {
-        Ok(None) => Ok(true),
-
-        Ok(Some(_)) => {
-            *guard = None;
-            Ok(false)
-        }
-
-        Err(error) => Err(format!(
-            "Unable to check test process: {error}"
-        )),
-    }
-}
-
-#[tauri::command]
-fn safex_xmrig_version() -> Result<String, String> {
-    let binary_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("binaries")
-        .join("safex-xmrig-x86_64-pc-windows-msvc.exe");
-
-    if !binary_path.exists() {
-        return Err(format!(
-            "Safex XMRig binary not found: {}",
-            binary_path.display()
-        ));
-    }
-
-    let output = Command::new(&binary_path)
-        .arg("--version")
-        .output()
-        .map_err(|error| {
-            format!(
-                "Unable to run Safex XMRig: {error}"
-            )
-        })?;
-
-    if !output.status.success() {
-        return Err(format!(
-            "Safex XMRig exited with status: {}",
-            output.status
-        ));
-    }
-
-    let stdout =
-        String::from_utf8_lossy(&output.stdout);
-
-    Ok(stdout.trim().to_string())
-}
-
-const SAFEX_MAINNET_ADDRESS_PREFIX: u64 = 268_449_688;
-
-fn decode_varint(bytes: &[u8]) -> Option<(u64, usize)> {
-    let mut value = 0u64;
-    let mut shift = 0u32;
-
-    for (index, byte) in bytes.iter().copied().enumerate().take(10) {
-        let part = (byte & 0x7f) as u64;
-
-        if shift >= 64 {
-            return None;
-        }
-
-        value |= part.checked_shl(shift)?;
-
-        if byte & 0x80 == 0 {
-            return Some((value, index + 1));
-        }
-
-        shift += 7;
-    }
-
-    None
 }
 
 #[tauri::command]
@@ -1949,22 +1706,13 @@ async fn shutdown_helper_session(
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .manage(ProcessState::default())
         .manage(HelperSessionState::default())
         .invoke_handler(
             tauri::generate_handler![
                 backend_probe,
-                start_test_process,
-                stop_test_process,
-                test_process_running,
-                safex_xmrig_version,
                 validate_safex_address,
                 validate_safex_daemon,
-                launch_helper_probe,
-                test_secure_helper_pipe,
                 start_helper_session,
-                test_helper_commands,
-                shutdown_helper_session,
                 start_xmrig_test,
                 xmrig_test_status,
                 stop_xmrig_test,
