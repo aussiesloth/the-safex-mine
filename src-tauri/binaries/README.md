@@ -13,10 +13,18 @@ Both file types are intentionally excluded from Git history.
 
 ## XMRig source
 
-Safex-compatible fork:
+Canonical Safex Mine backend fork:
 
 ```text
-https://github.com/galicone/xmrig
+https://github.com/aussiesloth/safex-xmrig
+```
+
+Upstream provenance:
+
+```text
+aussiesloth/safex-xmrig
+    -> galicone/xmrig
+    -> xmrig/xmrig
 ```
 
 Pinned source commit:
