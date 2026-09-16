@@ -48,6 +48,19 @@ If PowerShell execution policy blocks the `npm.ps1` wrapper, use `npm.cmd` inste
 npm.cmd ci
 ```
 
+### Current lockfile caveat
+
+The present `package-lock.json` records some Safex Git dependencies with `git+ssh://git@github.com/...` URLs.
+
+That works on development systems with GitHub SSH access, but it is **not ideal for a public reproducible build** because a new contributor may not have a GitHub SSH key configured.
+
+Before public release, the project should either:
+
+- normalise those dependency URLs to anonymous HTTPS; or
+- remove any unused Safex package dependency that is not actually required by the application.
+
+If `npm ci` fails specifically while trying to clone a Safex GitHub dependency over SSH, this is the likely cause.
+
 ## 4. Build the elevated helper
 
 The helper is a separate Rust executable. Build it in release mode:
@@ -199,6 +212,8 @@ However, **do not treat the current output as the final supported public build p
 
 - relocate the helper from its development `target\release` path to a packaged runtime/sidecar location;
 - define how the XMRig executable and WinRing driver are included in release artefacts;
+- normalise public-build dependency URLs so contributors do not need project-specific GitHub SSH access;
+- review/remove any unused direct Safex frontend dependency;
 - complete custom application icons;
 - finalise third-party licence packaging;
 - test the installer on a clean Windows system;
