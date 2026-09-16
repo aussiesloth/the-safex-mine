@@ -133,10 +133,10 @@ The Safex Mine must never:
 
 Before public release:
 
-- remove or gate development-only backend diagnostic commands;
-- finalise packaged helper/backend paths;
-- test installed-file permissions;
+- remove any remaining dead/unregistered development probe code after compile validation;
+- test installed-file permissions for the packaged `runtime/` resources;
 - test the unsigned installer on a clean Windows system;
+- verify the installed helper is the only component requesting UAC;
 - document observed SmartScreen/AV behaviour;
 - publish release checksums;
-- finalise licence/notices.
+- verify all bundled licence/notices are present in the installed artefact.
