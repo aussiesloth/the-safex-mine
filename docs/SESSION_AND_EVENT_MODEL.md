@@ -2,7 +2,9 @@
 
 ## 1. Session definition
 
-A Safex Mine session currently means the lifetime of the running desktop application.
+A Safex Mine session is the current in-memory mining-statistics period.
+
+A new session begins when the desktop application starts and also when the saved Safex mining address is changed to a different valid address while mining is stopped.
 
 Session counters are held in frontend memory rather than persisted to disk.
 
