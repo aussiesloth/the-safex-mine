@@ -16,13 +16,23 @@ Permission has been given for Safex/Safex Cash branding to be used in this appli
 
 That branding permission is separate from software-distribution responsibility. The planned Windows release is unsigned, and the repository/source is intended to provide transparency for users who want to inspect how the miner works.
 
-## 3. Header wordmark
+## 3. Branding assets
 
-The app uses the Safex gradient wordmark from:
+The repository contains the Safex gradient wordmark used by the current app header:
 
 ```text
 src/assets/branding/safex-gradient-logo.svg
 ```
+
+It also retains the official Safex Cash logo asset at:
+
+```text
+src/assets/branding/safex-cash.svg
+```
+
+The official Safex Cash logo is included pursuant to the Safex/Safex Cash branding permission described above. It is a branding asset, not application code, and is not covered by The Safex Mine's GPL-3.0 software licence.
+
+### Header wordmark
 
 Current placement is the **top-right** of the app header, with:
 
