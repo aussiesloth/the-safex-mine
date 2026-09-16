@@ -95,6 +95,7 @@ Do not write generic bypass instructions in advance of real release testing.
 
 - [ ] valid address accepted;
 - [ ] invalid address rejected;
+- [ ] changing saved address while stopped resets Blocks Found to 0;
 - [ ] default daemon works;
 - [ ] custom/LAN daemon works;
 - [ ] Calm = 40%;
