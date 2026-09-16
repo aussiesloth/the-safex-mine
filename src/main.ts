@@ -730,8 +730,12 @@ addressInput.addEventListener(
       ) {
 
         blocksFound = 0;
+        rejectedCount = 0;
+        accumulatedMiningMs = 0;
+        miningStartedAt = null;
 
         updateCounters();
+        updateSessionTimer();
       }
 
       localStorage.setItem(
