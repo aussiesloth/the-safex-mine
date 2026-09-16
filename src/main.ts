@@ -4,6 +4,9 @@ import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
 import approvedScene from "./assets/scenes/APPROVED.png";
 import rejectScene from "./assets/scenes/REJECT.png";
+import offlineScene from "./assets/scenes/OFFLINE.png";
+
+import safexWordmark from "./assets/branding/safex-gradient-logo.svg";
 
 import "./styles.css";
 
@@ -39,37 +42,31 @@ const scenes: Record<
   {
     image: string;
     label: string;
-    description: string;
   }
 > = {
   ready: {
     image: readyScene,
     label: "READY / STOPPED",
-    description: "Miner seated in chair",
   },
 
   mining: {
     image: miningScene,
     label: "MINING",
-    description: "Miner working the rockface",
   },
 
   approved: {
     image: approvedScene,
     label: "BLOCK FOUND",
-    description: "Accepted block",
   },
 
   offline: {
-  image: readyScene,
+  image: offlineScene,
   label: "OFFLINE",
-  description: "Mining unavailable",
   },
 
   reject: {
     image: rejectScene,
     label: "REJECTED",
-    description: "Fool's gold",
   },
 };
 
@@ -77,25 +74,36 @@ const scenes: Record<
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="app-shell">
 
-    <header class="topbar">
+   <header class="topbar">
 
-      <div class="brand">
-        <div class="brand-title">The Safex Mine</div>
-        <div class="brand-subtitle">Safex Cash Solo Miner</div>
-      </div>
+  <div class="brand">
+    <div class="brand-title">The Safex Mine</div>
+    <div class="brand-subtitle">Safex Cash Solo Miner</div>
+  </div>
 
-      <div class="connection-status">
-        <span
-          class="status-dot stopped"
-          id="status-dot"
-        ></span>
 
-        <span id="connection-text">
-          Ready
-        </span>
-      </div>
+  <div class="topbar-right">
 
-    </header>
+    <div class="connection-status">
+      <span
+        class="status-dot stopped"
+        id="status-dot"
+      ></span>
+
+      <span id="connection-text">
+        Ready
+      </span>
+    </div>
+
+    <img
+      class="safex-wordmark"
+      src="${safexWordmark}"
+      alt="Safex"
+    />
+
+  </div>
+
+</header>
 
 
     <main class="workspace">
@@ -130,14 +138,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               READY / STOPPED
             </div>
 
-            <div
-              class="scene-description"
-              id="scene-description"
-            >
-              Miner seated in chair
             </div>
-
-          </div>
 
         </div>
 
@@ -365,11 +366,6 @@ const connectionText =
 const sceneState =
   document.querySelector<HTMLDivElement>(
     "#scene-state",
-  )!;
-
-const sceneDescription =
-  document.querySelector<HTMLDivElement>(
-    "#scene-description",
   )!;
 
 const imageA =
@@ -857,9 +853,6 @@ function setScene(state: SceneState) {
 
   sceneState.textContent =
     scene.label;
-
-  sceneDescription.textContent =
-    scene.description;
 
   currentState = state;
 }
