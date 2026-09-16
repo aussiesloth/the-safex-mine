@@ -60,9 +60,9 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 
 ### Build reproducibility
 
-- review the current Safex frontend dependency usage;
-- remove any unused direct package such as `@safex/wallet-core` if it is not required;
-- normalise any required GitHub dependencies from SSH-only lockfile URLs to anonymous HTTPS;
+- resolve the address-validator dependency history: `@safex/wallet-core` was used by an intermediate frontend validator, but the current committed runtime validator is Rust-based and uses `base58-monero`;
+- decide whether to remove the now-unreferenced `@safex/wallet-core` dependency or deliberately restore it as the canonical validator;
+- if retained, normalise its GitHub dependencies from SSH-only lockfile URLs to anonymous HTTPS;
 - verify `npm ci` works on a clean contributor machine without GitHub SSH configuration;
 - document the exact reproducible XMRig MSVC/dependency build process used for release binaries.
 
