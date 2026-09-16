@@ -76,14 +76,15 @@ Still required:
 
 ### Packaged path test
 
-Final release packaging must prove that the installed app finds:
+The release configuration now maps the helper, XMRig and WinRing driver into the installed `runtime/` resource directory. Release validation must prove that the generated installer actually preserves that layout and that the installed app finds:
 
-- packaged helper;
-- XMRig executable;
-- WinRing driver;
+- `runtime/safex-mine-helper.exe`;
+- `runtime/safex-xmrig-x86_64-pc-windows-msvc.exe`;
+- `runtime/WinRing0x64.sys`;
+- bundled licence/notices;
 - scene/branding/audio assets.
 
-Development `target\release` paths must not leak into the installed release.
+The installed app must not depend on source-tree development paths.
 
 ### Antivirus / SmartScreen
 
@@ -133,6 +134,8 @@ Do not write generic bypass instructions in advance of real release testing.
 
 - [ ] GUI starts non-elevated;
 - [ ] UAC prompt is for helper;
+- [ ] packaged helper launches from installed runtime resources;
+- [ ] packaged helper finds XMRig and WinRing beside it;
 - [ ] denied UAC is handled cleanly;
 - [ ] MSR success is reported correctly;
 - [ ] MSR failure degrades rather than lying about success;
