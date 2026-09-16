@@ -14,7 +14,7 @@ The current application targets:
 - Node.js/npm frontend tooling;
 - a Safex-compatible XMRig backend built with MSVC.
 
-Development has been exercised on Windows 11 with Node.js 24.x and Rust stable. The JavaScript dependency tree requires Node.js **20.19 or newer** because of the Safex wallet packages.
+Development has been exercised on Windows 11 with Node.js 24.x and Rust stable. The current Vite toolchain requires Node.js **20.19 or newer** (or Node.js 22.12+ on the Node 22 line).
 
 ## 2. Prerequisites
 
@@ -48,20 +48,11 @@ If PowerShell execution policy blocks the `npm.ps1` wrapper, use `npm.cmd` inste
 npm.cmd ci
 ```
 
-### Current lockfile caveat
+### Address validation
 
-The present `package-lock.json` records some Safex Git dependencies with `git+ssh://git@github.com/...` URLs.
+Safex Cash address validation is implemented in the Rust/Tauri backend using the `base58-monero` crate with checksum support, Safex mainnet prefix checks and address-structure validation.
 
-`@safex/wallet-core` was added during the address-validation implementation work. An intermediate frontend version used its `is_valid_wallet_address` helper directly, but the committed/current validator was moved to Rust and now uses the separate `base58-monero` crate while checking the Safex mainnet prefix and address structure.
-
-The `@safex/wallet-core` package remains declared in `package.json`, but the current application source no longer imports it.
-
-That means public-release cleanup must make an explicit choice:
-
-- remove `@safex/wallet-core` if the Rust validator remains the canonical runtime validator; or
-- deliberately restore/wire the Safex wallet-core validator if that is preferred.
-
-If the package remains, its Git dependencies should be normalised so a clean public build does not require project-specific GitHub SSH configuration.
+The earlier experimental frontend dependency on `@safex/wallet-core` has been removed. A clean JavaScript install therefore no longer depends on Safex Git repositories or project-specific GitHub SSH configuration.
 
 ## 4. Build the elevated helper
 
@@ -214,8 +205,6 @@ However, **do not treat the current output as the final supported public build p
 
 - relocate the helper from its development `target\release` path to a packaged runtime/sidecar location;
 - define how the XMRig executable and WinRing driver are included in release artefacts;
-- normalise public-build dependency URLs so contributors do not need project-specific GitHub SSH access;
-- review/remove any unused direct Safex frontend dependency;
 - complete custom application icons;
 - finalise third-party licence packaging;
 - test the installer on a clean Windows system;
