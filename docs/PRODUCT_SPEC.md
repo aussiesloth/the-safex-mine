@@ -46,7 +46,7 @@ The main window contains:
 
 ### Address
 
-A valid Safex Cash mainnet mining address is required. If the saved mining address is changed while stopped, the Blocks Found counter resets to 0 so accepted blocks from the previous address are not carried into the new address display. Rejected count and accumulated mining time remain part of the current application session.
+A valid Safex Cash mainnet mining address is required. If the saved mining address is changed to a different valid address while stopped, that change starts a fresh in-memory mining session: Blocks Found resets to 0, Rejected resets to 0, and accumulated mining time resets to 00:00:00.
 
 ### Daemon
 
