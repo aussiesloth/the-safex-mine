@@ -1,113 +1,131 @@
 # Configuration and First Run
 
-## 1. First-run objective
+## 1. Current first-run model
 
-A new user should be able to install The Safex Mine, enter a Safex Cash mining address, accept the default connection settings, and start mining without manually editing a configuration file.
+The current application does not use a separate first-run wizard or Settings screen.
 
-## 2. Minimum first-run flow
+Configuration is performed directly in the main interface. The user can start mining after supplying a valid Safex Cash address and confirming a reachable daemon.
 
-Suggested sequence:
+## 2. Safex Cash mining address
+
+The address field:
+
+- accepts paste/input directly;
+- trims surrounding whitespace on change;
+- validates the address before mining can start;
+- shows valid/invalid feedback;
+- stores a valid address in local storage.
+
+The Rust validator checks the Safex mainnet prefix and expected decoded address structure.
+
+## 3. Daemon endpoint
+
+Default:
 
 ```text
-Welcome
-  ↓
-Mining address
-  ↓
-Node/RPC choice
-  ↓
-Initial mining mode
-  ↓
-Review
-  ↓
-Ready
+rpc.safex.org:17402
 ```
 
-## 3. Mining address
+The user may replace this with a custom remote or LAN endpoint.
 
-The address field should:
+The application validates daemon availability and displays the current chain height when the endpoint is online.
 
-- be clearly labelled;
-- allow paste;
-- trim accidental whitespace;
-- be validated as far as the project can do so reliably;
-- never be silently changed.
+While the app is idle/ready, a silent background daemon refresh keeps the displayed status reasonably current.
 
-If validation is uncertain, warn rather than inventing a correction.
+## 4. Mining mode
 
-## 4. Default node
+Available modes:
 
-The application should provide a default public Safex node/RPC so most users can start without configuration work.
+| Mode | CPU allocation hint |
+|---|---:|
+| Calm | 40% |
+| Balanced | 70% |
+| Full Bore | 100% |
 
-The actual endpoint should be documented in the release build and easy to change in Settings.
+The selected mode is stored in local storage and restored on the next application launch.
 
-## 5. Custom / LAN node
+Balanced is the default when no valid saved mode exists.
 
-Advanced settings should allow a custom endpoint.
+## 5. Sound setting
 
-Useful fields may include:
+The top-bar speaker button controls the block-found sound.
 
-- hostname or IP;
-- port;
-- any required protocol setting.
+- sound is enabled by default;
+- clicking the control toggles muted/unmuted state;
+- the mute choice is stored in local storage;
+- the preference survives application restarts.
 
-The UI should make LAN-node use straightforward.
+Only the block-found celebration sound is affected.
 
-## 6. Mining mode
+## 6. Starting mining
 
-The first-run wizard should allow:
+When the address and daemon are valid:
 
-- Calm;
-- Balanced;
-- Full Bore.
+1. choose a mining mode;
+2. press **Start Mining**;
+3. Windows requests UAC approval for `safex-mine-helper.exe`;
+4. the helper launches XMRig;
+5. the UI transitions to MINING once the backend session is operating.
 
-Balanced is the natural candidate for the default, subject to testing.
+The whole Tauri GUI does not elevate.
 
-## 7. Settings screen
+## 7. Configuration locking while mining
 
-Settings should include at least:
+While mining is active:
 
-- mining address;
-- node/RPC endpoint;
+- the address field is locked;
+- the daemon field is locked;
+- mining-mode buttons are disabled;
+- Start is unavailable;
+- Stop remains available.
+
+This avoids changing backend identity/connection settings underneath a running mining process.
+
+## 8. Stop and restart
+
+Pressing Stop:
+
+- requests clean XMRig shutdown;
+- keeps the application open;
+- keeps current in-memory block/reject counters;
+- keeps accumulated mining time;
+- leaves the elevated helper available for a later Start in the same app session.
+
+## 9. What persists across full application restart
+
+Persisted:
+
+- valid mining address;
+- daemon endpoint;
 - mining mode;
-- startup behaviour if later supported;
-- log access;
-- application/backend version information.
+- sound-muted preference.
 
-Any setting that resets session state should warn the user first if that reset matters.
+Not persisted:
 
-## 8. Address-change rule
+- Blocks Found counter;
+- Rejected counter;
+- accumulated mining/session time;
+- transient visual state.
 
-Changing the mining address clears the visual reward/session treasure state.
+A new application launch begins a new mining session.
 
-The application should make that behaviour explicit.
+## 10. Changing the address
 
-## 9. MSR elevation
+The current implementation allows the address to be changed only while mining is stopped because the field is locked while mining.
 
-The first mining start may require an elevation prompt.
+Changing the address **does not currently reset** the in-memory counters or accumulated time. Earlier planning documents proposed an address-change reset, but that behaviour is not implemented in the current code.
 
-The UI should explain why:
+If that product rule changes before release, both the code and this document should be updated together.
 
-> The Safex Mine needs to allow the mining backend to apply the required Windows MSR optimisation. The main application itself does not need to run as Administrator.
+## 11. Invalid/unavailable configuration
 
-Do not present the elevation request without context.
+Mining is prevented or reported clearly when, for example:
 
-## 10. Invalid configuration
+- the Safex address is invalid;
+- the daemon is unavailable;
+- the helper cannot be launched;
+- the XMRig executable is missing;
+- the WinRing driver is missing;
+- the backend fails during startup.
 
-When mining cannot start, show a useful error.
-
-Examples:
-
-- invalid address;
-- node unavailable;
-- backend executable missing;
-- backend failed to start;
-- permission denied;
-- MSR setup failed.
-
-Avoid generic messages such as "Something went wrong" when a more useful reason is available.
-
-## 11. Configuration storage
-
-Configuration should be stored in a normal per-user application-data location rather than beside the executable where practical.
-
-Sensitive information is not expected in the normal mining configuration, but file permissions should still follow normal Windows application practice.
+MSR failure is treated differently: mining may continue in degraded-performance mode.
