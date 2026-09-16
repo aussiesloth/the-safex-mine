@@ -1,160 +1,168 @@
 # Mining Engine Integration
 
-## 1. Scope
+## 1. Backend
 
-The Safex Mine uses a Safex-compatible XMRig backend as its mining engine.
+The Safex Mine uses a Safex-compatible XMRig fork as its CPU-mining engine.
 
-The desktop application is responsible for making that backend manageable for ordinary Windows users.
-
-## 2. Process lifecycle
-
-The application should support:
+Source repository:
 
 ```text
-configure
-    ↓
-launch
-    ↓
-capture output
-    ↓
-parse status/events
-    ↓
-run
-    ↓
-stop cleanly
+https://github.com/galicone/xmrig
 ```
 
-It must also detect:
+Pinned source commit:
 
-- failure to start;
-- unexpected process exit;
-- node/RPC failure reported by the backend;
-- invalid address/configuration;
-- permission/elevation problems.
+```text
+3a5617f99a858614dc0c5897fc44c1bdb2618cca
+```
 
-## 3. Backend invocation
+The backend executable is not committed to this repository.
 
-The exact final command line and config-file strategy should be centralised in one module.
+## 2. Expected Windows runtime files
 
-Do not spread command-line construction across UI code.
+The current development layout expects:
 
-A single backend-launch component should own:
+```text
+src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
+src-tauri\binaries\WinRing0x64.sys
+```
 
-- executable path;
-- wallet/mining address;
-- node endpoint;
-- CPU/thread profile;
-- logging flags;
-- required Safex algorithm options;
-- privilege requirements.
+The executable and driver are excluded by `.gitignore`.
 
-## 4. MSR optimisation
+## 3. Helper ownership
 
-MSR optimisation is considered mandatory for the intended Windows performance profile.
+XMRig is not launched directly by the WebView/TypeScript frontend.
 
-The application should:
+The standard-user Tauri application creates an authenticated helper session and elevates `safex-mine-helper.exe` through UAC. The helper then launches and supervises XMRig.
 
-1. attempt the required elevated backend/helper operation;
-2. clearly report if elevation is denied;
-3. clearly report if MSR optimisation fails;
-4. avoid elevating the entire GUI.
+This design gives XMRig the opportunity to apply Windows MSR optimisation without elevating the entire GUI.
 
-The exact implementation should be validated on clean Windows systems.
+## 4. Backend command line
+
+The helper launches XMRig with:
+
+```text
+--daemon
+--algo=rx/sfx
+--url <daemon>
+--user <Safex Cash mining address>
+--cpu-max-threads-hint=<profile>
+--no-color
+--print-time=5
+```
+
+The working directory is the backend binary directory.
 
 ## 5. Mining profiles
 
-The application should translate user-facing modes into backend CPU/thread settings.
+The current profile mapping is fixed:
 
-### Calm
+| Profile | `--cpu-max-threads-hint` |
+|---|---:|
+| Calm | 40 |
+| Balanced | 70 |
+| Full Bore | 100 |
 
-Target approximately 40% CPU allocation.
+These values express CPU allocation targets. They are deliberately not presented as a performance ranking.
 
-### Balanced
+## 6. MSR handling
 
-Target approximately 70% CPU allocation.
+XMRig output is monitored for MSR success/failure.
 
-### Full Bore
+If MSR succeeds, startup continues normally.
 
-Target the maximum practical mining configuration while retaining system stability and enough capacity for the UI/Windows.
+If MSR explicitly fails, The Safex Mine keeps the mining process and reports a degraded start. This is important for systems where VBS/hypervisor protections prevent direct MSR writes.
 
-The profile calculation should be hardware-aware.
+The project should not weaken Windows security automatically to make MSR available.
 
-Do not hard-code thread counts for one development machine.
+## 7. Job Object protection
 
-## 6. Output parsing
-
-The parser should convert backend-specific text into normalised application events.
-
-Examples:
+Immediately after launch, the helper assigns XMRig to a Windows Job Object configured with:
 
 ```text
-HASHRATE_UPDATED
-BLOCK_ACCEPTED
-BLOCK_REJECTED
-CONNECTION_LOST
-CONNECTION_RESTORED
-BACKEND_WARNING
-BACKEND_ERROR
-BACKEND_EXITED
+JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
 ```
 
-The visual layer must never parse raw XMRig text directly.
+If Job Object creation/configuration/assignment fails, startup fails rather than leaving an unmanaged elevated mining child.
 
-## 7. Accepted-block detection
+If the helper later dies, closing the Job Object causes Windows to terminate XMRig.
 
-Accepted results are important enough to warrant dedicated testing.
+## 8. Output capture
 
-Development should capture real console/log output from known accepted Safex solo-mining events and create parser fixtures from those examples.
+The helper captures both stdout and stderr from XMRig.
 
-The parser should be tolerant of harmless formatting changes where practical, but not so loose that ordinary status messages are misclassified as accepted blocks.
+Relevant lines update a shared telemetry structure.
 
-## 8. Rejection detection
+Current telemetry includes:
 
-Rejected/stale results should also use captured real-world backend output where available.
+- MSR status;
+- daemon connected/disconnected state;
+- hashrate;
+- worker threads;
+- accepted count;
+- rejected count;
+- recent output lines.
 
-Where the backend exposes a meaningful reject reason, preserve that distinction internally even if the first UI release presents a simplified message.
+## 9. Daemon state parsing
 
-## 9. Connection state
+Current parsing behaviour includes:
 
-The application should distinguish between:
+- `new job from` -> daemon connected;
+- `no active pools, stop mining` -> daemon disconnected and current hashrate zero.
 
-- backend process running;
-- node connected;
-- mining operational.
+This allows the GUI to distinguish a live XMRig process from an operational mining connection.
 
-A running process with no usable node connection is not the same as healthy mining.
+## 10. Accepted/rejected parsing
 
-## 10. Stop behaviour
+Accepted and rejected counters are parsed from XMRig result lines.
 
-User Stop should:
+The frontend receives cumulative counts from helper status and computes the delta since the previous poll. Each new accepted event calls the application's real block-found handler; each new rejection calls the rejection handler.
 
-- request a clean backend shutdown where supported;
-- enforce termination only if the backend does not exit in a reasonable time;
-- leave the application open;
-- preserve the current session state;
-- transition the visual presentation to READY_STOPPED.
+That means the same event path drives:
 
-## 11. Restart behaviour
+- UI counters;
+- BLOCK FOUND / REJECTED scene changes;
+- block-found sound.
 
-Start after Stop should begin mining again without clearing the current session.
+## 11. Status polling
 
-Changing the mining address is a deliberate identity/session boundary and should clear the visual treasure state.
+The frontend polls mining status approximately every two seconds while a session is active.
 
-## 12. Logging
+Independent daemon validation also runs periodically so the UI can show endpoint status/height outside active mining.
 
-Retain enough backend output for useful diagnostics without overwhelming ordinary users.
+## 12. Graceful stop
 
-Recommended approach:
+Normal Stop sends a Windows Ctrl+C event to XMRig.
 
-- concise status panel in the main UI;
-- detailed log view or log file for troubleshooting;
-- timestamps;
-- backend exit code;
-- last known node state;
-- MSR/elevation result.
+The helper temporarily ignores Ctrl+C itself while directing the control event to the child process group. If XMRig does not exit cleanly within the shutdown window, the helper can fall back to forced termination.
 
-## 13. Version pinning
+The helper itself remains alive after a normal Stop.
 
-The public application should ship with a known, tested backend version.
+## 13. Recovery behaviour
 
-Updates to the mining backend should be deliberate and benchmarked before release rather than automatically following upstream changes.
+### Daemon/network interruption
+
+XMRig is kept alive and allowed to reconnect. The UI enters OFFLINE while jobs are unavailable, then automatically returns to MINING when connection/job telemetry resumes.
+
+### Helper/backend failure
+
+If status communication fails or the session dies, the application discards the dead helper session, moves out of MINING, unlocks configuration and permits a fresh Start/UAC session.
+
+## 14. Known-good backend build
+
+The repository records this SHA-256 for the known-good MSVC development executable:
+
+```text
+01097B87B2EA6C2213D221ABDFBBE5977094E97642EDABFFB444955C7DE5ACBE
+```
+
+Compiler/toolchain differences can produce a different hash from the same source. Release artefacts should publish the hash of the exact binary actually distributed.
+
+## 15. Packaging status
+
+The development backend path is stable, but final installer packaging is not yet complete. The public release process still needs explicit packaged locations for:
+
+- the helper;
+- the XMRig executable;
+- the WinRing driver;
+- required third-party notices.
