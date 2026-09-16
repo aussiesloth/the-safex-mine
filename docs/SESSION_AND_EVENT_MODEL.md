@@ -40,9 +40,15 @@ A full app restart starts a new session. Counters/time reset to zero.
 
 ### Address change
 
-The current code does not clear counters/time merely because the mining address changes. The address field is locked while mining, so changes occur only while stopped.
+The address field is locked while mining, so address changes can occur only while stopped.
 
-This differs from an earlier design proposal that treated address change as a session reset.
+When a newly validated Safex Cash address differs from the previously saved address:
+
+- `Blocks Found` resets immediately to `0`;
+- `Rejected` is preserved;
+- accumulated mining time is preserved.
+
+This prevents accepted blocks found for one mining address from being shown as though they belong to another address while retaining the broader application-session history.
 
 ## 4. Backend telemetry model
 
