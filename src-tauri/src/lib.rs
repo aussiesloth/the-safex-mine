@@ -71,7 +71,12 @@ use windows::{
     },
 };
 
-use tauri::{Emitter, State};
+use tauri::{
+    path::BaseDirectory,
+    Emitter,
+    Manager,
+    State,
+};
 
 struct ProcessState {
     child: Mutex<Option<Child>>,
@@ -119,6 +124,64 @@ impl Default
                     None,
                 ),
         }
+    }
+}
+
+
+fn safex_helper_path(
+    app: &tauri::AppHandle,
+) -> Result<PathBuf, String> {
+
+    let packaged_path =
+        app
+            .path()
+            .resolve(
+                "runtime/safex-mine-helper.exe",
+                BaseDirectory::Resource,
+            );
+
+    if let Ok(path) =
+        &packaged_path
+    {
+        if path.exists() {
+            return Ok(
+                path.clone()
+            );
+        }
+    }
+
+    let development_path =
+        PathBuf::from(
+            env!("CARGO_MANIFEST_DIR"),
+        )
+        .join("helper")
+        .join("target")
+        .join("release")
+        .join(
+            "safex-mine-helper.exe",
+        );
+
+    if development_path.exists() {
+        return Ok(
+            development_path
+        );
+    }
+
+    match packaged_path {
+        Ok(path) => Err(
+            format!(
+                "Safex Mine helper not found. Checked packaged path {} and development path {}.",
+                path.display(),
+                development_path.display(),
+            )
+        ),
+
+        Err(error) => Err(
+            format!(
+                "Safex Mine helper not found at development path {} and the packaged resource path could not be resolved: {error}",
+                development_path.display(),
+            )
+        ),
     }
 }
 
@@ -702,34 +765,14 @@ fn launch_helper_probe_blocking(
 
 
 #[tauri::command]
-async fn launch_helper_probe()
-    -> Result<String, String>
+async fn launch_helper_probe(
+    app: tauri::AppHandle,
+) -> Result<String, String>
 {
-    /*
-       Development location only.
-
-       Later this changes to the packaged
-       sidecar/helper location.
-    */
     let helper_path =
-        PathBuf::from(
-            env!("CARGO_MANIFEST_DIR"),
-        )
-        .join("helper")
-        .join("target")
-        .join("release")
-        .join("safex-mine-helper.exe");
-
-
-    if !helper_path.exists() {
-
-        return Err(
-            format!(
-                "Safex Mine helper not found: {}",
-                helper_path.display()
-            )
-        );
-    }
+        safex_helper_path(
+            &app,
+        )?;
 
 
     tauri::async_runtime::spawn_blocking(
@@ -1123,30 +1166,14 @@ fn create_user_locked_pipe(
 }
 
 #[tauri::command]
-async fn test_secure_helper_pipe()
-    -> Result<String, String>
+async fn test_secure_helper_pipe(
+    app: tauri::AppHandle,
+) -> Result<String, String>
 {
     let helper_path =
-        PathBuf::from(
-            env!("CARGO_MANIFEST_DIR"),
-        )
-        .join("helper")
-        .join("target")
-        .join("release")
-        .join(
-            "safex-mine-helper.exe",
-        );
-
-
-    if !helper_path.exists() {
-
-        return Err(
-            format!(
-                "Safex Mine helper not found: {}",
-                helper_path.display()
-            ),
-        );
-    }
+        safex_helper_path(
+            &app,
+        )?;
 
 
     /*
@@ -1422,6 +1449,7 @@ async fn helper_send_command(
 
 #[tauri::command]
 async fn start_helper_session(
+    app: tauri::AppHandle,
     state:
         State<
             '_,
@@ -1451,28 +1479,9 @@ async fn start_helper_session(
 
 
     let helper_path =
-        PathBuf::from(
-            env!(
-                "CARGO_MANIFEST_DIR"
-            ),
-        )
-        .join("helper")
-        .join("target")
-        .join("release")
-        .join(
-            "safex-mine-helper.exe",
-        );
-
-
-    if !helper_path.exists() {
-
-        return Err(
-            format!(
-                "Safex Mine helper not found: {}",
-                helper_path.display()
-            ),
-        );
-    }
+        safex_helper_path(
+            &app,
+        )?;
 
 
     let pipe_id =
