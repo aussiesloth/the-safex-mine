@@ -113,7 +113,7 @@ A new application launch begins a new mining session.
 
 The current implementation allows the address to be changed only while mining is stopped because the field is locked while mining.
 
-Changing the address **does not currently reset** the in-memory counters or accumulated time. Earlier planning documents proposed an address-change reset, but that behaviour is not implemented in the current code.
+When a newly validated address differs from the previously saved address, **Blocks Found resets immediately to 0**. The Rejected counter and accumulated mining time are preserved.
 
 If that product rule changes before release, both the code and this document should be updated together.
 
