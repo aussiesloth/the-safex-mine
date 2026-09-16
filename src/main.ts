@@ -7,6 +7,7 @@ import rejectScene from "./assets/scenes/REJECT.png";
 import offlineScene from "./assets/scenes/OFFLINE.png";
 
 import safexWordmark from "./assets/branding/safex-gradient-logo.svg";
+import blockFoundSound from "./assets/sounds/safex-block-cha-ching.wav";
 
 import "./styles.css";
 
@@ -36,6 +37,15 @@ const SETTINGS = {
   daemon: "safex-mine.daemon",
   mode: "safex-mine.mode",
 } as const;
+
+const blockFoundAudio =
+  new Audio(blockFoundSound);
+
+blockFoundAudio.preload =
+  "auto";
+
+blockFoundAudio.volume =
+  0.65;
 
 const scenes: Record<
   SceneState,
@@ -1549,10 +1559,6 @@ function queueTransient(
     );
 }
 
-/* ---------------------------------------------------------
-   SIMULATED BACKEND EVENTS
-   --------------------------------------------------------- */
-
 function handleBlockFound() {
 
   if (!miningRunning) {
@@ -1567,7 +1573,18 @@ function handleBlockFound() {
 
   updateCounters();
 
-  queueTransient("approved");
+  blockFoundAudio.currentTime = 0;
+
+void blockFoundAudio
+  .play()
+  .catch((error) => {
+    console.error(
+      "Unable to play block-found sound:",
+      error,
+    );
+  });
+
+    queueTransient("approved");
 }
 
 function handleReject() {
