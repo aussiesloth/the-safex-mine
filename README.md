@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** pre-release development. The mining core, live telemetry, recovery behaviour, state-driven artwork, block-found sound and persistent mute control are working. Packaging, final release hardening, installer testing and public-release documentation are still being completed.
+> **Project status:** pre-release development. The mining core, live telemetry, recovery behaviour, state-driven artwork, block-found sound and persistent mute control are working. Release packaging is now wired, while final icons, installer testing and remaining release validation are still being completed.
 
 ## What it does
 
@@ -76,7 +76,7 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Mining software may also attract antivirus or SmartScreen warnings; the project will document known behaviour and will never attempt to disable security software automatically.
 
-Final installer packaging is still being completed. The current source tree is suitable for development/testing, but the packaged-helper path has not yet been converted from its development location to its final sidecar/runtime location.
+The packaged build now bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The installer has not yet completed clean-machine release validation, so packaged artefacts should still be treated as pre-release.
 
 ## Default use
 
