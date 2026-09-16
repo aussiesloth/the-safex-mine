@@ -10,7 +10,6 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@safex/wallet-core": "github:safex/wallet-core",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2"
   },
