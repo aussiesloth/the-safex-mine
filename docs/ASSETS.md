@@ -48,25 +48,13 @@ This is the single intentional application sound in the current release design. 
 
 A final custom The Safex Mine icon set is still a release task.
 
-## 7. Unused template assets
-
-The repository also currently contains default/template assets such as:
-
-```text
-src/assets/tauri.svg
-src/assets/typescript.svg
-src/assets/vite.svg
-```
-
-They are not part of the current production interface and should be removed during the release-cleanup pass if no code reference remains.
-
-## 8. Historical animation assets/plans
+## 7. Historical animation assets/plans
 
 Earlier work explored articulated 2D/3D character animation. That material is historical/deferred and is not required for the current state-driven release.
 
 Where retained, it belongs under `docs/archive/` or outside the active runtime asset tree.
 
-## 9. Asset-change checklist
+## 8. Asset-change checklist
 
 When replacing a production scene:
 
