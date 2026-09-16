@@ -84,9 +84,43 @@ git checkout 3a5617f99a858614dc0c5897fc44c1bdb2618cca
 
 The canonical project fork is `aussiesloth/safex-xmrig`. It is derived from `galicone/xmrig`, which in turn derives from the original `xmrig/xmrig` project. The pinned commit above is present unchanged in both the canonical project fork and the Galicone upstream.
 
-Build that pinned source with the Microsoft Visual C++ toolchain using the normal XMRig Windows build process and its required dependencies.
+Build that pinned source with the Microsoft Visual C++ toolchain and the official XMRig dependency bundle.
 
-The application expects the resulting executable to be copied and renamed to:
+Clone the XMRig dependency repository alongside the Safex XMRig source:
+
+```powershell
+cd ..
+git clone https://github.com/xmrig/xmrig-deps.git
+```
+
+For the current Windows target, the dependency directory is:
+
+```text
+xmrig-deps\msvc2022\x64
+```
+
+Return to the `safex-xmrig` repository and configure a 64-bit Visual Studio 2022 build. Replace `<path-to>` with the parent directory containing `xmrig-deps`:
+
+```powershell
+cd ..\safex-xmrig
+
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64 `
+  -DXMRIG_DEPS="<path-to>\xmrig-deps\msvc2022\x64"
+```
+
+Build the Release configuration:
+
+```powershell
+cmake --build build --config Release
+```
+
+A successful MSVC build should produce:
+
+```text
+safex-xmrig\build\Release\xmrig.exe
+```
+
+The application expects that executable to be copied and renamed to:
 
 ```text
 <the-safex-mine>\src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
