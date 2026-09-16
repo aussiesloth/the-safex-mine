@@ -36,6 +36,7 @@ const SETTINGS = {
   address: "safex-mine.address",
   daemon: "safex-mine.daemon",
   mode: "safex-mine.mode",
+  soundMuted: "safex-mine.sound-muted",
 } as const;
 
 const blockFoundAudio =
@@ -104,6 +105,35 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         Ready
       </span>
     </div>
+
+    <button
+      class="sound-toggle"
+      id="sound-toggle"
+      type="button"
+      aria-label="Mute block-found sound"
+      aria-pressed="false"
+      title="Mute block-found sound"
+    >
+      <svg
+        class="sound-icon sound-icon-on"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12zm0-7.18v2.06A7 7 0 0 1 19 12a7 7 0 0 1-3.5 6.12v2.06A9 9 0 0 0 21 12a9 9 0 0 0-5.5-7.18z"
+        />
+      </svg>
+
+      <svg
+        class="sound-icon sound-icon-off"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 9v6h4l5 4V5L8 9H4zm11.3 1.3L14 11.6l2.4 2.4-2.4 2.4 1.3 1.3 2.4-2.4 2.4 2.4 1.3-1.3L19 14l2.4-2.4-1.3-1.3-2.4 2.4-2.4-2.4z"
+        />
+      </svg>
+    </button>
 
     <img
       class="safex-wordmark"
@@ -373,6 +403,11 @@ const connectionText =
     "#connection-text",
   )!;
 
+const soundToggle =
+  document.querySelector<HTMLButtonElement>(
+    "#sound-toggle",
+  )!;
+
 const sceneState =
   document.querySelector<HTMLDivElement>(
     "#scene-state",
@@ -599,6 +634,54 @@ function getSavedMode(): MiningMode {
   return "Balanced";
 }
 
+let soundMuted =
+  localStorage.getItem(
+    SETTINGS.soundMuted,
+  ) === "true";
+
+
+function updateSoundToggle() {
+
+  soundToggle.classList.toggle(
+    "muted",
+    soundMuted,
+  );
+
+  soundToggle.setAttribute(
+    "aria-pressed",
+    String(soundMuted),
+  );
+
+  const label =
+    soundMuted
+      ? "Enable block-found sound"
+      : "Mute block-found sound";
+
+  soundToggle.setAttribute(
+    "aria-label",
+    label,
+  );
+
+  soundToggle.title =
+    label;
+}
+
+
+soundToggle.addEventListener(
+  "click",
+  () => {
+
+    soundMuted =
+      !soundMuted;
+
+    localStorage.setItem(
+      SETTINGS.soundMuted,
+      String(soundMuted),
+    );
+
+    updateSoundToggle();
+  },
+);
 
 function setActiveMode(
   mode: MiningMode,
@@ -1573,18 +1656,23 @@ function handleBlockFound() {
 
   updateCounters();
 
-  blockFoundAudio.currentTime = 0;
+  if (!soundMuted) {
 
-void blockFoundAudio
-  .play()
-  .catch((error) => {
-    console.error(
-      "Unable to play block-found sound:",
-      error,
-    );
-  });
+    blockFoundAudio.currentTime =
+      0;
 
-    queueTransient("approved");
+    void blockFoundAudio
+      .play()
+      .catch((error) => {
+
+        console.error(
+          "Unable to play block-found sound:",
+          error,
+        );
+      });
+  }
+
+  queueTransient("approved");
 }
 
 function handleReject() {
@@ -2035,6 +2123,7 @@ updateCounters();
 updateSessionTimer();
 
 loadSettings();
+updateSoundToggle();
 
 void validateAddressField();
 void validateDaemonField();
