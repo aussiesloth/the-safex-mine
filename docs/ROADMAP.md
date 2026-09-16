@@ -1,107 +1,109 @@
 # Roadmap
 
-## Phase 0 — Documentation reset
+This roadmap reflects the **current implementation state**, not the earlier design plan.
 
-- adopt the state-driven release concept;
-- archive or remove obsolete full-animation planning from the main documentation;
-- define the new architecture;
-- define v1 scope;
-- confirm branding permission.
+## Completed: mining core
 
-## Phase 1 — Mining core
+- Safex-compatible XMRig integration;
+- Safex Cash address validation;
+- default public daemon;
+- custom/LAN daemon entry;
+- Calm/Balanced/Full Bore profiles;
+- Start/Stop;
+- live hashrate/thread telemetry;
+- accepted/rejected counters;
+- session timer.
 
-Priority: make the application mine correctly before adding presentation polish.
+## Completed: Windows privilege and lifecycle model
 
-Tasks:
+- standard-user Tauri GUI;
+- UAC-elevated narrow helper;
+- authenticated local named-pipe session;
+- persistent helper across Stop -> Start;
+- MSR success/failure telemetry;
+- degraded mining path when MSR is blocked;
+- graceful Ctrl+C stop;
+- XMRig Job Object with kill-on-close protection;
+- helper/backend failure detection and fresh-session recovery.
 
-- integrate the chosen Safex-compatible XMRig build;
-- centralise backend launch/configuration;
-- implement wallet address handling;
-- implement default node;
-- implement custom/LAN node;
-- implement Start/Stop;
-- implement Calm/Balanced/Full Bore;
-- implement required MSR workflow;
-- capture backend logs;
-- detect backend exit.
+## Completed: connection recovery
 
-## Phase 2 — Event parser and session model
+- live daemon status/height;
+- detection of mining connection loss;
+- OFFLINE visual state;
+- zero current hashrate while jobs are unavailable;
+- automatic return to MINING when XMRig reconnects;
+- no unnecessary new UAC prompt for ordinary daemon recovery.
 
-- capture real accepted-block output;
-- capture rejected/stale output;
-- normalise backend events;
-- implement hashrate updates;
-- implement connection-state tracking;
-- implement accepted/rejected counters;
-- implement Stop → Start session continuity;
-- implement address-change reset;
-- finalise persistence policy across application restart.
+## Completed: v1 visual/audio system
 
-## Phase 3 — Core Windows UI
-
-- first-run wizard;
-- main dashboard;
-- settings;
-- node status;
-- hashrate display;
-- session statistics;
-- useful errors;
-- log/diagnostic access.
-
-## Phase 4 — State-driven visual system
-
-Create and integrate:
-
-- READY_STOPPED scene;
+- READY / STOPPED scene;
 - MINING scene;
-- BLOCK_FOUND scene;
+- BLOCK FOUND scene;
 - REJECTED scene;
-- OFFLINE_ERROR treatment;
+- OFFLINE scene;
 - scene crossfades;
-- reward-table nugget layer.
+- Safex header branding;
+- Safex Cash bullion-bar visual motif;
+- block-found cash-register sound;
+- persistent mute/unmute control.
 
-## Phase 5 — Lightweight FX
+## Current phase: release readiness
 
-- block-found fireworks/sparklers;
-- gold sparkle/glow;
-- subtle mining dust;
-- optional lantern/headlamp polish;
-- visual performance validation.
+### Packaging
 
-## Phase 6 — Packaging and release candidate
+- replace development helper path with packaged runtime/sidecar path;
+- define bundled XMRig and WinRing locations for installer builds;
+- confirm `tauri build` produces a complete runtime;
+- create/test Windows installer;
+- test uninstall behaviour.
 
-- Windows installer;
-- clean-machine test;
-- multi-hardware test;
-- MSR/UAC test matrix;
-- antivirus/false-positive documentation;
-- third-party notices;
-- checksums;
-- release notes;
-- branding approval confirmed.
+### Product polish
 
-## Phase 7 — Community release
+- create final custom application icon set;
+- remove unused default template assets;
+- tidy source formatting where iterative development left uneven indentation;
+- review/remove development-only Rust diagnostic commands from release builds;
+- review UI wording and remaining backend messages.
 
-Release the functional state-driven application.
+### Documentation and licensing
 
-Collect feedback on:
+- finalise The Safex Mine project licence;
+- finalise third-party notices/licence bundle;
+- include corresponding Safex XMRig source information;
+- include exact WinRing redistribution notice;
+- complete README/build/troubleshooting/security documentation;
+- prepare release notes/changelog.
 
-- ease of setup;
-- node configuration;
-- mining modes;
-- stability;
-- visual presentation;
-- whether users actually want continuous animation.
+### Release validation
+
+- clean-machine/VM install test;
+- verify UAC/helper behaviour after installation;
+- verify MSR success and degraded paths;
+- verify default/custom daemon flows;
+- verify accepted-block event and sound;
+- attempt/collect a real rejected-result case if available;
+- test SmartScreen/antivirus behaviour;
+- generate SHA-256 checksums.
+
+## Public release
+
+Planned release characteristics:
+
+- unsigned Windows distribution;
+- public source repository for inspection;
+- clear community-project wording;
+- checksum and source/version information;
+- known-issues section if required.
 
 ## Deferred / optional future work
 
-Only pursue if worthwhile:
+Potential later features only if they are useful:
 
-- richer visual state variants;
-- special double/triple-hit celebration;
-- alternative mine themes;
-- more detailed reward-table progression;
-- fully animated miner;
-- additional platforms.
-
-The full-animation concept is explicitly **not** a prerequisite for a successful Safex Mine release.
+- additional visual-state variants;
+- special double-hit celebration;
+- richer diagnostics/log view;
+- automatic performance tuning;
+- alternative visual themes;
+- continuous character animation;
+- other platforms.
