@@ -1,8 +1,8 @@
 # Building The Safex Mine from Source
 
-This document describes the **current Windows development build**.
+This document describes the current Windows development and packaged-build paths.
 
-The project is not yet at the point where `npm run tauri build` alone produces the final public installer. The elevated helper is still located through its development path, and the XMRig executable and WinRing driver are intentionally excluded from Git. Final packaging will replace those development assumptions with packaged runtime paths.
+Development still uses the source-tree helper/backend layout. Packaged builds use a separate Tauri release configuration that bundles the elevated helper, XMRig executable, WinRing driver and required licence/notices into explicit runtime resource locations. The packaging wiring is implemented; clean-machine installer validation is still required before public release.
 
 ## 1. Supported development target
 
@@ -62,13 +62,13 @@ The helper is a separate Rust executable. Build it in release mode:
 cargo build --manifest-path .\src-tauri\helper\Cargo.toml --release
 ```
 
-The current Tauri backend expects the development helper at:
+During development, the Tauri backend falls back to:
 
 ```text
 src-tauri\helper\target\release\safex-mine-helper.exe
 ```
 
-That path is a **development-only implementation detail** and will change for packaged releases.
+Packaged builds resolve the helper from the Tauri resource directory instead.
 
 ## 5. Prepare the Safex XMRig backend
 
@@ -193,22 +193,66 @@ npm run build
 
 This runs TypeScript checking and Vite production bundling.
 
-## 12. Installer/package build status
+## 12. Packaged Windows build
 
-Tauri's normal package command is:
+Before packaging, ensure these files exist:
 
-```powershell
-npm run tauri build
+```text
+src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
+src-tauri\binaries\WinRing0x64.sys
 ```
 
-However, **do not treat the current output as the final supported public build process yet**. The project still needs to:
+Then run:
 
-- relocate the helper from its development `target\release` path to a packaged runtime/sidecar location;
-- define how the XMRig executable and WinRing driver are included in release artefacts;
-- complete custom application icons;
-- finalise third-party licence packaging;
-- test the installer on a clean Windows system;
-- document unsigned-binary/SmartScreen and antivirus behaviour;
-- publish checksums for release artefacts.
+```powershell
+npm run tauri:build
+```
 
-Once those items are complete, this file will be updated with the reproducible release-build procedure.
+This wrapper:
+
+1. builds `safex-mine-helper.exe` in release mode;
+2. runs Tauri using `src-tauri/tauri.release.conf.json`;
+3. builds the frontend through the normal Tauri `beforeBuildCommand`;
+4. bundles the runtime files and licence material.
+
+The release resource layout is:
+
+```text
+runtime/
+  safex-mine-helper.exe
+  safex-xmrig-x86_64-pc-windows-msvc.exe
+  WinRing0x64.sys
+
+licenses/
+  LICENSE
+  THIRD_PARTY_NOTICES.md
+  WinRing0-LICENSE.txt
+```
+
+The standard-user application resolves the packaged helper through Tauri's resource directory. The elevated helper then locates XMRig and `WinRing0x64.sys` beside its own packaged executable.
+
+The ordinary development command remains:
+
+```powershell
+npm run tauri dev
+```
+
+and continues to use the development fallback paths.
+
+## 13. Release validation still required
+
+Packaging code is now in place, but the public installer is not considered validated until the actual Windows artefact has been exercised on a clean system.
+
+Remaining release checks include:
+
+- create the final custom application icon set;
+- build the unsigned Windows installer/package;
+- install on a clean Windows machine or VM;
+- verify the packaged helper is found and receives UAC elevation;
+- verify packaged XMRig finds the bundled WinRing driver;
+- verify MSR-success and degraded-MSR paths;
+- verify Stop -> Start helper reuse;
+- verify uninstall behaviour;
+- record actual SmartScreen/antivirus behaviour;
+- publish SHA-256 checksums for the release artefacts.
+
