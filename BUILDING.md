@@ -52,14 +52,16 @@ npm.cmd ci
 
 The present `package-lock.json` records some Safex Git dependencies with `git+ssh://git@github.com/...` URLs.
 
-That works on development systems with GitHub SSH access, but it is **not ideal for a public reproducible build** because a new contributor may not have a GitHub SSH key configured.
+`@safex/wallet-core` was added during the address-validation implementation work. An intermediate frontend version used its `is_valid_wallet_address` helper directly, but the committed/current validator was moved to Rust and now uses the separate `base58-monero` crate while checking the Safex mainnet prefix and address structure.
 
-Before public release, the project should either:
+The `@safex/wallet-core` package remains declared in `package.json`, but the current application source no longer imports it.
 
-- normalise those dependency URLs to anonymous HTTPS; or
-- remove any unused Safex package dependency that is not actually required by the application.
+That means public-release cleanup must make an explicit choice:
 
-If `npm ci` fails specifically while trying to clone a Safex GitHub dependency over SSH, this is the likely cause.
+- remove `@safex/wallet-core` if the Rust validator remains the canonical runtime validator; or
+- deliberately restore/wire the Safex wallet-core validator if that is preferred.
+
+If the package remains, its Git dependencies should be normalised so a clean public build does not require project-specific GitHub SSH configuration.
 
 ## 4. Build the elevated helper
 
