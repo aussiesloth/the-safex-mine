@@ -22,15 +22,13 @@ Licence: **GNU General Public License v3.0 (GPL-3.0)**.
 
 The compiled XMRig executable is intentionally not committed to this repository. Public binary distributions that include the backend must satisfy the GPL's corresponding-source and notice requirements for the exact backend version distributed.
 
-## Safex wallet libraries
+## Rust address-validation library
 
-The frontend dependency tree includes:
+Safex Cash address validation uses the Rust crate:
 
-- `@safex/wallet-core` — BSD-3-Clause;
-- `@safex/base58` — BSD-3-Clause;
-- `@safex/swif` — BSD-3-Clause.
+- `base58-monero` — MIT licence.
 
-The locked versions/commits are recorded in `package-lock.json`.
+The exact resolved version is recorded in `src-tauri/Cargo.lock`.
 
 ## Tauri
 
@@ -80,7 +78,6 @@ Before publishing a binary release:
 1. confirm the project `LICENSE`;
 2. include the licence/notice material required by the bundled XMRig backend;
 3. make corresponding XMRig source available in the manner required by GPL-3.0;
-4. include the BSD-3-Clause notices required by Safex wallet dependencies;
-5. include the exact WinRing driver redistribution notice;
-6. review the locked JavaScript/Rust dependency licences;
-7. publish SHA-256 checksums for the release artefacts.
+4. include the exact WinRing driver redistribution notice;
+5. review the locked JavaScript/Rust dependency licences;
+6. publish SHA-256 checksums for the release artefacts.
