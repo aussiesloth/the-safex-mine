@@ -74,13 +74,15 @@ Packaged builds resolve the helper from the Tauri resource directory instead.
 
 The compiled mining backend is not committed to this repository.
 
-Clone the Safex-compatible XMRig fork:
+Clone The Safex Mine's canonical Safex-compatible XMRig fork:
 
 ```powershell
-git clone https://github.com/galicone/xmrig.git safex-xmrig
+git clone https://github.com/aussiesloth/safex-xmrig.git
 cd safex-xmrig
 git checkout 3a5617f99a858614dc0c5897fc44c1bdb2618cca
 ```
+
+The canonical project fork is `aussiesloth/safex-xmrig`. It is derived from `galicone/xmrig`, which in turn derives from the original `xmrig/xmrig` project. The pinned commit above is present unchanged in both the canonical project fork and the Galicone upstream.
 
 Build that pinned source with the Microsoft Visual C++ toolchain using the normal XMRig Windows build process and its required dependencies.
 
