@@ -4,11 +4,21 @@
 
 The Safex Mine uses a Safex-compatible XMRig fork as its CPU-mining engine.
 
-Source repository:
+Canonical Safex Mine backend repository:
 
 ```text
-https://github.com/galicone/xmrig
+https://github.com/aussiesloth/safex-xmrig
 ```
+
+Upstream provenance:
+
+```text
+aussiesloth/safex-xmrig
+    -> galicone/xmrig
+    -> xmrig/xmrig
+```
+
+The pinned commit is shared with the Galicone upstream; using the project fork therefore changes source ownership/provenance for release reproducibility without changing the mining source at that commit.
 
 Pinned source commit:
 
