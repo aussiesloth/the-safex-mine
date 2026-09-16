@@ -119,7 +119,13 @@ See [Branding](docs/BRANDING.md).
 
 ## Mining backend
 
-The Windows backend is based on the Safex-compatible XMRig fork at `galicone/xmrig`.
+The Windows backend uses the project-maintained Safex-compatible fork at `aussiesloth/safex-xmrig`.
+
+Source provenance:
+
+- canonical Safex Mine backend: `aussiesloth/safex-xmrig`;
+- upstream Safex-compatible fork: `galicone/xmrig`;
+- original XMRig project: `xmrig/xmrig`.
 
 Pinned source commit:
 
