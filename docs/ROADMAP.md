@@ -61,14 +61,12 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 ### Build reproducibility
 
 - keep the Rust `base58-monero` address validator covered by release testing, including checksum, Safex mainnet prefix and address-structure checks;
-- if retained, normalise its GitHub dependencies from SSH-only lockfile URLs to anonymous HTTPS;
-- verify `npm ci` works on a clean contributor machine without GitHub SSH configuration;
+- verify `npm ci` works on a clean contributor machine;
 - document the exact reproducible XMRig MSVC/dependency build process used for release binaries.
 
 ### Product polish
 
 - create final custom application icon set;
-- remove unused default template assets;
 - tidy source formatting where iterative development left uneven indentation;
 - review/remove development-only Rust diagnostic commands from release builds;
 - review UI wording and remaining backend messages.
