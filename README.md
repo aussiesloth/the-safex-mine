@@ -2,131 +2,137 @@
 
 **The Safex Mine** is a Windows desktop solo-mining application for **Safex Cash (SFX)**.
 
-Its goal is simple: make Safex Cash CPU solo mining easy to configure, easy to start, and easy to understand without requiring users to work directly with command-line mining software.
+It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-The application wraps a Safex-compatible XMRig backend in a graphical Windows interface, manages the mining configuration, exposes practical performance modes, and presents mining activity through a themed mine scene.
+> **Project status:** pre-release development. The mining core, live telemetry, recovery behaviour, state-driven artwork, block-found sound and persistent mute control are working. Packaging, final release hardening, installer testing and public-release documentation are still being completed.
 
-## Project direction
+## What it does
 
-The current release target uses a **state-driven visual presentation** rather than continuous character animation.
+- Windows desktop GUI built with Tauri.
+- Safex Cash solo mining using `rx/sfx`.
+- Default public daemon: `rpc.safex.org:17402`.
+- Optional custom or LAN daemon endpoint.
+- Safex Cash address validation before mining starts.
+- Three CPU allocation profiles:
+  - **Calm** — 40%
+  - **Balanced** — 70%
+  - **Full Bore** — 100%.
+- Live hashrate, worker-thread count, session time, accepted blocks and rejected results.
+- Automatic detection of daemon loss and recovery.
+- Recovery from unexpected mining-helper/backend failure.
+- Split-privilege Windows design: the GUI remains non-administrative while a narrowly scoped helper is elevated for the mining backend.
+- Windows Job Object protection so XMRig is terminated if the elevated helper unexpectedly disappears.
+- Graceful XMRig shutdown using Ctrl+C before forced termination is considered.
+- Five authored visual states:
+  - READY / STOPPED
+  - MINING
+  - BLOCK FOUND
+  - REJECTED
+  - OFFLINE
+- A short cash-register-style sound when a real block is found.
+- Persistent sound mute/unmute control.
 
-The miner changes between a small number of authored visual states:
+## Current interface
 
-- **Ready / Stopped** — the miner is seated in his chair.
-- **Mining** — the miner is working the rock face with pickaxe in hand.
-- **Block Found** — the miner celebrates while holding up a nugget.
-- **Rejected Result** — the miner tosses fool's gold toward the scrap heap.
-- **Offline / Error** — the application clearly indicates that mining is unavailable or interrupted.
+The visual layer is intentionally state-driven rather than continuously animated. The miner changes between authored scenes while the controls and statistics remain fixed.
 
-State changes use **fade or crossfade transitions**. Small GPU-driven effects such as sparkles or fireworks may appear during important events, but the application does not require a constantly animated character.
-
-Found blocks are also represented visually by **nuggets accumulating on the reward table** during the current mining session.
-
-A fully animated miner remains a possible future enhancement, but it is **not part of the current release scope**.
-
-## Core goals
-
-The Safex Mine is intended to provide:
-
-- a straightforward Windows solo-mining experience;
-- first-run wallet address setup;
-- default public Safex node/RPC configuration;
-- optional custom or LAN node configuration;
-- Start and Stop controls;
-- Calm, Balanced and Full Bore mining profiles;
-- clear hashrate, connection and session statistics;
-- accepted-block and rejected-result event handling;
-- required Windows MSR optimisation without requiring the entire GUI to run as Administrator;
-- useful logs and diagnostics;
-- a polished, recognisable Safex-themed interface.
+Safex Cash rewards are represented as rectangular bullion bars using the Safex Cash note motif. Bars are visible on the table as previous finds, but are not exposed in the rock face. When a block is found, the miner holds a newly discovered bar aloft.
 
 ## Mining modes
 
-The initial performance-mode targets are:
+| Mode | CPU allocation target | Intended use |
+|---|---:|---|
+| **Calm** | 40% | Lower load, heat and noise |
+| **Balanced** | 70% | Strong performance with more system headroom |
+| **Full Bore** | 100% | Highest CPU allocation available to the miner |
 
-| Mode | Intended behaviour |
-|---|---|
-| **Calm** | Approximately 40% CPU allocation |
-| **Balanced** | Approximately 70% CPU allocation |
-| **Full Bore** | Maximum practical mining allocation while reserving enough system capacity for Windows and the application |
-
-Exact thread counts should be derived at runtime for the user's CPU and validated during development.
-
-## Visual feedback
-
-The application scene is designed to make mining status understandable at a glance.
-
-### Before mining starts
-
-The miner sits in his chair and waits.
-
-### While mining
-
-The miner is shown at the rock face with the pickaxe.
-
-### When a block is found
-
-The scene crossfades to the celebration state. The miner holds up a gold nugget and lightweight celebratory effects can play for roughly five to six seconds before the scene returns to mining.
-
-The session's reward table is updated to show the new find.
-
-### When a result is rejected
-
-The scene crossfades to a rejection state in which the miner tosses a fool's-gold piece toward the scrap heap. A short rejection message is shown before returning to the mining state.
-
-### When mining becomes unavailable
-
-Connection loss, daemon/RPC failure, backend failure or another critical interruption should be shown clearly and must not be confused with an intentional stop.
-
-## Session behaviour
-
-Current design decisions:
-
-- **Stop → Start continues the current session.**
-- Changing the configured mining address **clears the current visual treasure/session reward display**.
-- Accepted and rejected events are tracked separately.
-- The exact persistence policy across full application restarts is still to be finalised.
+Mining performance varies by hardware. Full Bore uses the highest CPU allocation available to the miner, but this does not guarantee the highest hashrate on every system. CPU architecture, cache behaviour, power limits, thermal limits and laptop cooling can all affect efficiency. On some systems, particularly laptops, Balanced mode may produce a similar or higher hashrate with less heat and power use.
 
 ## Windows privilege model
 
-The Safex Mine uses a **split-privilege design** on Windows so the desktop GUI does not need to run as Administrator.
+The Safex Mine does **not** run the whole graphical application as Administrator.
 
-The current model is:
+On the first mining start of an application session:
 
-- the desktop GUI runs normally as a standard user;
-- when mining is first started during an application session, Windows requests Administrator approval to launch a dedicated `safex-mine-helper.exe`;
-- the elevated helper launches and supervises the bundled XMRig backend, allowing XMRig to apply Windows MSR optimisation;
-- the helper remains available for the application session, so a normal **Stop → Start** cycle does not require another UAC prompt;
-- if Windows prevents MSR optimisation from being applied, mining may continue in a clearly reported **degraded-performance mode** rather than failing to start;
-- the graphical application itself remains non-administrative.
+1. the standard-user GUI creates a private local helper session;
+2. Windows displays a UAC prompt for `safex-mine-helper.exe`;
+3. the elevated helper launches and supervises the Safex XMRig backend;
+4. XMRig attempts its Windows MSR optimisation;
+5. the helper remains available for later Stop -> Start cycles during the same app session.
 
-MSR optimisation is therefore the preferred high-performance path, but inability to apply it does not prevent the miner from operating.
+If Windows security features such as VBS/hypervisor protections prevent MSR writes, the miner can continue in degraded-performance mode rather than weakening Windows security.
 
-See [`docs/SECURITY_AND_PRIVILEGE_MODEL.md`](docs/SECURITY_AND_PRIVILEGE_MODEL.md).
+See [Security and Privilege Model](docs/SECURITY_AND_PRIVILEGE_MODEL.md).
+
+## Getting started
+
+### Running from source
+
+See [BUILDING.md](BUILDING.md) for the current Windows development-build process.
+
+The repository intentionally does **not** contain the compiled XMRig executable or WinRing driver. A complete source build therefore includes preparing the pinned Safex XMRig backend and placing the required runtime files in `src-tauri/binaries/`.
+
+### Packaged releases
+
+The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Mining software may also attract antivirus or SmartScreen warnings; the project will document known behaviour and will never attempt to disable security software automatically.
+
+Final installer packaging is still being completed. The current source tree is suitable for development/testing, but the packaged-helper path has not yet been converted from its development location to its final sidecar/runtime location.
+
+## Default use
+
+1. Enter a valid Safex Cash mining address.
+2. Leave the default daemon in place or enter a custom/LAN endpoint.
+3. Select Calm, Balanced or Full Bore.
+4. Press **Start Mining**.
+5. Approve the UAC prompt for the elevated helper.
+6. Monitor hashrate, threads, session time and block/reject counters.
+7. Press **Stop Mining** to stop XMRig cleanly.
+
+Stop -> Start retains the current in-memory session counters and accumulated mining time. A full application restart starts a new session.
+
+## Branding and project status
+
+The Safex/Safex Cash branding used in this application has been permitted for this project. That permission does **not** make The Safex Mine an official Safex desktop distribution, and it does not imply that Safex signs, publishes, maintains or supports the application.
+
+The Safex Mine should therefore be described as a **community Safex Cash mining application**.
+
+See [Branding](docs/BRANDING.md).
 
 ## Repository documentation
 
-- [Product Specification](docs/PRODUCT_SPEC.md)
+- [Building from Source](BUILDING.md)
 - [Architecture](docs/ARCHITECTURE.md)
-- [Visual State System](docs/VISUAL_STATE_SYSTEM.md)
+- [Security and Privilege Model](docs/SECURITY_AND_PRIVILEGE_MODEL.md)
 - [Mining Engine Integration](docs/MINING_ENGINE_INTEGRATION.md)
 - [Configuration and First Run](docs/CONFIGURATION_AND_FIRST_RUN.md)
 - [Session and Event Model](docs/SESSION_AND_EVENT_MODEL.md)
-- [Asset Plan](docs/ASSET_PLAN.md)
-- [Security and Privilege Model](docs/SECURITY_AND_PRIVILEGE_MODEL.md)
+- [Visual State System](docs/VISUAL_STATE_SYSTEM.md)
+- [Product Behaviour and Scope](docs/PRODUCT_SPEC.md)
+- [Assets](docs/ASSETS.md)
 - [Testing and Release](docs/TESTING_AND_RELEASE.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Branding](docs/BRANDING.md)
-- [GitHub Repository Setup](docs/GITHUB_REPO_SETUP.md)
+- [Troubleshooting](TROUBLESHOOTING.md)
+- [Security Reporting](SECURITY.md)
+- [Third-Party Notices](THIRD_PARTY_NOTICES.md)
+- [Changelog](CHANGELOG.md)
 
-## Status
+## Mining backend
 
-The project is under active development.
+The Windows backend is based on the Safex-compatible XMRig fork at `galicone/xmrig`.
 
-The current priority is to complete and validate the functional Windows solo-mining application first, then add the state-driven visual layer and release polish.
+Pinned source commit:
 
-## Licensing and attribution
+```text
+3a5617f99a858614dc0c5897fc44c1bdb2618cca
+```
 
-Licensing, third-party notices and upstream attribution must be finalised before public release. The mining backend is based on Safex-compatible XMRig work and must retain all notices required by its upstream licences.
+The app launches the backend with the Safex RandomX algorithm (`rx/sfx`) and the selected CPU allocation profile.
 
-No branding asset should be distributed without the necessary permission from its owner.
+## Licensing and third-party components
+
+The application uses third-party open-source components, including the Safex-compatible XMRig backend and Safex wallet libraries. Those components retain their own licences and attribution requirements.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+The licence for The Safex Mine application code itself still needs to be finalised before the repository is made public.
