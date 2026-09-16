@@ -87,13 +87,13 @@ Safex/Safex Cash logos and branding are not covered by the software licences abo
 
 ## The Safex Mine application licence
 
-The licence for The Safex Mine's own application code has not yet been finalised. A project `LICENSE` file must be added before the repository is made public.
+The Safex Mine's own application code is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. The complete licence text is provided in the repository root `LICENSE` file.
 
 ## Release checklist
 
 Before publishing a binary release:
 
-1. confirm the project `LICENSE`;
+1. include/preserve the project `LICENSE` (GPL-3.0);
 2. include the licence/notice material required by the bundled XMRig backend;
 3. make corresponding XMRig source available in the manner required by GPL-3.0;
 4. include `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` with any release that ships the pinned WinRing0 driver;
