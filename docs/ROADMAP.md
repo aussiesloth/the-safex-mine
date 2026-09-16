@@ -73,7 +73,6 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 
 ### Documentation and licensing
 
-- finalise The Safex Mine project licence;
 - finalise third-party notices/licence bundle;
 - include corresponding Safex XMRig source information;
 - ensure the bundled WinRing0 redistribution notice is included in release artefacts;
