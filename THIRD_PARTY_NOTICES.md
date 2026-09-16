@@ -91,7 +91,15 @@ Binary releases that ship this WinRing0 driver must also ship that notice unchan
 
 ## Safex branding
 
-Safex/Safex Cash logos and branding are not covered by the software licences above. Their use in this application is addressed separately in `docs/BRANDING.md`.
+Safex/Safex Cash logos and branding are not covered by the software licences above or by The Safex Mine's GPL-3.0 application licence.
+
+The repository includes the official Safex Cash logo asset at:
+
+```text
+src/assets/branding/safex-cash.svg
+```
+
+Its inclusion and use in The Safex Mine is pursuant to the branding permission documented in `docs/BRANDING.md`. No separate software-licence grant for the Safex/Safex Cash branding is implied by its presence in this repository.
 
 ## The Safex Mine application licence
 
