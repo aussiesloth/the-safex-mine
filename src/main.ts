@@ -715,10 +715,24 @@ addressInput.addEventListener(
     const address =
       addressInput.value.trim();
 
+    const previousAddress =
+      localStorage.getItem(
+        SETTINGS.address,
+      ) ?? "";
+
     addressInput.value =
       address;
 
     if (await validateAddressField()) {
+
+      if (
+        previousAddress !== address
+      ) {
+
+        blocksFound = 0;
+
+        updateCounters();
+      }
 
       localStorage.setItem(
         SETTINGS.address,
