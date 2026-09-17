@@ -78,6 +78,26 @@ The public release model is intended to be **unsigned**. Users will be able to i
 
 The packaged build now bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The installer has not yet completed clean-machine release validation, so packaged artefacts should still be treated as pre-release.
 
+### Before installing
+
+The Safex Mine is an unsigned mining application. The normal installation path is therefore likely to encounter one or more Windows/browser security warnings.
+
+Before running the installer:
+
+1. download it only from the official The Safex Mine GitHub release;
+2. verify its published SHA-256 checksum before overriding any browser, SmartScreen or antivirus warning;
+3. expect the browser to warn about or block an uncommon/unverified executable;
+4. expect antivirus software may detect or quarantine the installer or one of the mining runtime files during installation;
+5. when the final installation path has been validated, add **only the dedicated The Safex Mine installation folder** as an antivirus exclusion before installation where possible.
+
+Do **not** exclude the whole Downloads folder, user profile or drive.
+
+Some antivirus products may prevent the mining runtime from being written even when a narrow destination-folder exclusion has not yet been created. If installation cannot proceed any other way, a user who has first verified the installer may need to **temporarily pause real-time file scanning**, run only the verified installer, create the narrow The Safex Mine installation-folder exclusion immediately, and then re-enable real-time protection straight away. Do not browse, download other files or leave protection disabled during this window.
+
+If the installer or an expected runtime file has already been quarantined, verify it against the release information before restoring it. See [Troubleshooting](TROUBLESHOOTING.md) for the recovery guidance.
+
+> **Pre-release note:** the exact default installation folder, final installer filename, browser/SmartScreen screenshots and Defender exclusion path will be added after the packaged installer has been exercised on a clean Windows system.
+
 ## Default use
 
 1. Enter a valid Safex Cash mining address.
