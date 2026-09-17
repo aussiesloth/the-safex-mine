@@ -23,6 +23,7 @@ The project is currently pre-release, so the entries below describe the current 
 - Safex branding and Safex Cash bullion-bar scene motif.
 - Block-found cash-register sound effect.
 - Persistent sound mute/unmute control.
+- Custom The Safex Mine application icon set combining Safex Cash branding with a mining/pickaxe motif.
 
 ### Changed
 
@@ -38,7 +39,6 @@ The project is currently pre-release, so the entries below describe the current 
 ### Pending before public release
 
 - Windows installer and clean-machine validation.
-- Custom application icon set.
 - Final third-party licence/release bundle validation.
 - Release checksum workflow.
 - Antivirus/SmartScreen release notes.
