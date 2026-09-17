@@ -74,7 +74,7 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 ### Packaged releases
 
-The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Mining software may also attract antivirus or SmartScreen warnings; the project will document known behaviour and will never attempt to disable security software automatically.
+The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project will provide verification and narrowly scoped exclusion/restoration guidance, but will never disable security software or add antivirus exclusions automatically.
 
 The packaged build now bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The installer has not yet completed clean-machine release validation, so packaged artefacts should still be treated as pre-release.
 
