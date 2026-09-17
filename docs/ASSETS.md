@@ -27,7 +27,7 @@ src/assets/branding/safex-cash.svg
 
 `safex-gradient-logo.svg` is the Safex wordmark displayed in the app header at the top-right.
 
-`safex-cash.svg` is the official Safex Cash logo asset retained in the branding folder for approved Safex Cash branding use, including future application-icon work and other product branding where appropriate.
+`safex-cash.svg` is the official Safex Cash logo asset retained in the branding folder for approved Safex Cash branding use. It also served as the branding reference for the custom The Safex Mine application icon.
 
 Safex/Safex Cash branding assets are not covered by The Safex Mine's GPL-3.0 application licence. Their use in this project is addressed separately in `BRANDING.md`.
 
@@ -49,9 +49,19 @@ This is the single intentional application sound in the current release design. 
 
 ## 6. Application icons
 
-`src-tauri/icons/` still contains the Tauri application icon set used by the current project configuration.
+The custom The Safex Mine application-icon source is:
 
-A final custom The Safex Mine icon set is still a release task.
+```text
+src/assets/branding/app-icon/safex_cash_mining_icon.png
+```
+
+The generated Tauri icon set is stored under:
+
+```text
+src-tauri/icons/
+```
+
+The set includes the Windows `.ico` plus the standard PNG/Store/Square variants generated for Tauri packaging. The icon combines recognisable Safex Cash branding with a pickaxe/mining motif so it remains identifiable as The Safex Mine rather than the standalone Safex Cash logo.
 
 ## 7. Historical animation assets/plans
 
