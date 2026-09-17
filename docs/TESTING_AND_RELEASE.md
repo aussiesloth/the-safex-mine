@@ -53,20 +53,30 @@ Development testing has verified that terminating the elevated helper causes the
 
 Unexpected session failure has been exercised so the frontend can leave MINING, discard the dead session and allow a fresh Start.
 
-## 3. Areas still requiring release validation
-
 ### Mining Risk Acknowledgement
 
-The versioned first-run acknowledgement must be exercised in both development and packaged builds.
+Development validation has confirmed the versioned first-run acknowledgement flow:
 
-Verify that:
+- a fresh profile shows **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used;
+- **Exit** closes the application without recording acceptance;
+- **Acknowledge and Continue** requires the checkbox and then loads the miner interface;
+- reopening the application after acceptance does not show the first-run gate again;
+- the **Risk notice** control remains available in the top bar and reopens the full acknowledgement on demand.
+
+Packaged-build validation is still required to confirm the same behaviour after installation.
+
+## 3. Areas still requiring release validation
+
+### Mining Risk Acknowledgement — packaged build
+
+Confirm in the installed release build that:
 
 - a fresh application profile shows **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used;
 - the acknowledgement text is scrollable and readable at supported window sizes;
 - **Acknowledge and Continue** remains disabled until the checkbox is selected;
-- **Exit** closes the application without recording acceptance;
+- **Exit** closes the installed application without recording acceptance;
 - accepting the notice stores `safex-mine.mining-risk-acknowledgement-version=1.0` locally;
-- reopening the application after acceptance does not show the first-run gate again;
+- reopening the installed application after acceptance does not show the first-run gate again;
 - changing/removing the stored acknowledgement version causes the gate to appear again;
 - the **Risk notice** control reopens the complete acknowledgement after acceptance;
 - reviewing the acknowledgement later does not alter mining/session state;
@@ -123,10 +133,11 @@ User guidance must distinguish between an installer quarantined immediately afte
 
 ## 4. Functional release checklist
 
-- [ ] fresh profile is blocked by Mining Risk Acknowledgement until accepted;
-- [ ] acknowledgement Exit action closes the app without persisting acceptance;
-- [ ] acknowledgement version persists after acceptance and suppresses repeat display;
-- [ ] Risk notice control reopens the full acknowledgement after acceptance;
+- [x] fresh development profile is blocked by Mining Risk Acknowledgement until accepted;
+- [x] acknowledgement Exit action closes the development app without persisting acceptance;
+- [x] acknowledgement version persists after acceptance and suppresses repeat display in development;
+- [x] Risk notice control reopens the full acknowledgement after acceptance in development;
+- [ ] repeat the acknowledgement checks in the packaged/installed build;
 - [ ] valid address accepted;
 - [ ] invalid address rejected;
 - [ ] changing saved address while stopped resets Blocks Found, Rejected and accumulated mining time to 0;
@@ -161,7 +172,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [ ] BLOCK FOUND miner holds a bar;
 - [ ] OFFLINE pose clearly differs from READY;
 - [ ] speaker icon correctly reflects mute state;
-- [ ] Mining Risk Acknowledgement fits and scrolls correctly at supported window sizes;
+- [ ] Mining Risk Acknowledgement fits and scrolls correctly at supported window sizes in the packaged build;
 - [ ] custom application icon appears correctly in the executable, taskbar, Start menu and installer/package surfaces;
 - [ ] custom application icon remains recognisable at small Windows icon sizes;
 - [ ] resizing does not crop critical scene content.
