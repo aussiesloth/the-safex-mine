@@ -127,17 +127,29 @@ npm.cmd ci
 npm.cmd run tauri dev
 ```
 
-## Antivirus or SmartScreen warns about the application
+## Antivirus quarantines the miner or SmartScreen warns about the application
 
-Mining backends are commonly flagged by antivirus products, and the planned release is unsigned.
+The Safex Mine contains a CPU-mining backend, an elevated helper and the WinRing driver used by XMRig for Windows MSR access. Antivirus/endpoint-security products commonly classify or quarantine mining software, and the planned Windows release is unsigned. Users should therefore be prepared for the miner or related runtime files to be blocked or quarantined even when the release was obtained from the project repository.
 
-Do not disable security software wholesale. For public releases, verify:
+Before overriding any warning:
 
-- the download came from the project's GitHub release page;
-- the published SHA-256 checksum matches;
-- the corresponding source/version information is available.
+1. download The Safex Mine only from the project's official GitHub release;
+2. verify the published SHA-256 checksum for the installer/package;
+3. confirm the release notes identify the same version and bundled XMRig source commit;
+4. if the antivirus product identifies a specific quarantined file, confirm that it belongs to the expected The Safex Mine runtime before restoring it.
 
-Any project-specific false-positive guidance should be based on observed release behaviour, not generic advice to bypass security controls.
+If you understand the warning and deliberately choose to run the miner, use the narrowest practical antivirus exclusion. Prefer the dedicated The Safex Mine installation/runtime folder only.
+
+Do **not**:
+
+- disable antivirus or real-time protection globally;
+- exclude the whole Downloads folder, user profile, drive or another broad location;
+- restore unrelated files merely because they were detected at the same time;
+- assume every security warning is harmless.
+
+If the antivirus product has already quarantined an expected The Safex Mine runtime file, first verify the release and file identity, then restore that file using the antivirus product's normal quarantine/history controls. Add a narrowly scoped exclusion only if required to prevent the verified mining runtime from being quarantined again.
+
+Exact Windows Defender/SmartScreen screenshots and the final installed-folder guidance will be documented after the release installer has completed clean-machine validation.
 
 ## Session counters reset after closing the app
 
