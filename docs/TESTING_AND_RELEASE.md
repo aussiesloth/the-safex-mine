@@ -65,6 +65,17 @@ Development validation has confirmed the versioned first-run acknowledgement flo
 
 Packaged-build validation is still required to confirm the same behaviour after installation.
 
+### Windows package generation
+
+`npm run tauri:build` has completed successfully on Windows using the release configuration and produced both expected bundle types:
+
+```text
+src-tauri\target\release\bundle\msi\The Safex Mine_0.1.0_x64_en-US.msi
+src-tauri\target\release\bundle\nsis\The Safex Mine_0.1.0_x64-setup.exe
+```
+
+The NSIS `-setup.exe` is the current preferred normal-user installer candidate. Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
+
 ## 3. Areas still requiring release validation
 
 ### Mining Risk Acknowledgement — packaged build
