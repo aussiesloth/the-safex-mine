@@ -142,10 +142,12 @@ If you understand the warning and deliberately choose to run the miner, use the 
 
 Do **not**:
 
-- disable antivirus or real-time protection globally;
+- leave antivirus or real-time protection disabled;
 - exclude the whole Downloads folder, user profile, drive or another broad location;
 - restore unrelated files merely because they were detected at the same time;
 - assume every security warning is harmless.
+
+Where possible, create the narrow The Safex Mine installation-folder exclusion before running the installer. If the antivirus product prevents installation before that exclusion can be established, a user who has already verified the installer may need to temporarily pause real-time file scanning, install only the verified release, create the narrow installation-folder exclusion immediately, and then re-enable real-time protection straight away. Do not browse or download unrelated files while protection is paused.
 
 If the antivirus product has already quarantined an expected The Safex Mine runtime file, first verify the release and file identity, then restore that file using the antivirus product's normal quarantine/history controls. Add a narrowly scoped exclusion only if required to prevent the verified mining runtime from being quarantined again.
 
