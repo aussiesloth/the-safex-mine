@@ -85,16 +85,17 @@ The Safex Mine is an unsigned mining application. The normal installation path i
 Before running the installer:
 
 1. download it only from the official The Safex Mine GitHub release;
-2. verify its published SHA-256 checksum before overriding any browser, SmartScreen or antivirus warning;
-3. expect the browser to warn about or block an uncommon/unverified executable;
-4. expect antivirus software may detect or quarantine the installer or one of the mining runtime files during installation;
-5. when the final installation path has been validated, add **only the dedicated The Safex Mine installation folder** as an antivirus exclusion before installation where possible.
+2. if the installer remains accessible after download, verify its published SHA-256 checksum before running it;
+3. if antivirus immediately quarantines the installer and prevents checksum verification, restore/allow that specific installer first, then verify its SHA-256 against the checksum published on the official release **before executing it**;
+4. expect the browser to warn about or block an uncommon/unverified executable;
+5. expect antivirus software may detect or quarantine the installer or one of the mining runtime files during installation;
+6. when the final installation path has been validated, add **only the dedicated The Safex Mine installation folder** as an antivirus exclusion before installation where possible.
 
 Do **not** exclude the whole Downloads folder, user profile or drive.
 
 Some antivirus products may prevent the mining runtime from being written even when a narrow destination-folder exclusion has not yet been created. If installation cannot proceed any other way, a user who has first verified the installer may need to **temporarily pause real-time file scanning**, run only the verified installer, create the narrow The Safex Mine installation-folder exclusion immediately, and then re-enable real-time protection straight away. Do not browse, download other files or leave protection disabled during this window.
 
-If the installer or an expected runtime file has already been quarantined, verify it against the release information before restoring it. See [Troubleshooting](TROUBLESHOOTING.md) for the recovery guidance.
+If the installer is quarantined immediately after download, restore/allow that specific installer and then verify its SHA-256 before running it. If an expected runtime file is quarantined after installation, confirm that its filename/path matches an expected The Safex Mine component, restore it using the antivirus product's normal controls, then verify the restored file where a published component checksum is available. See [Troubleshooting](TROUBLESHOOTING.md) for the recovery guidance.
 
 > **Pre-release note:** the exact default installation folder, final installer filename, browser/SmartScreen screenshots and Defender exclusion path will be added after the packaged installer has been exercised on a clean Windows system.
 
