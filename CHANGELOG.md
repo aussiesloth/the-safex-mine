@@ -24,6 +24,7 @@ The project is currently pre-release, so the entries below describe the current 
 - Block-found cash-register sound effect.
 - Persistent sound mute/unmute control.
 - Custom The Safex Mine application icon set combining Safex Cash branding with a mining/pickaxe motif.
+- Versioned first-run Mining Risk Acknowledgement with explicit user acknowledgement before the mining interface can be used, plus a permanent in-app Risk notice control for later review.
 
 ### Changed
 
