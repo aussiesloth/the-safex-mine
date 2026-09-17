@@ -120,14 +120,17 @@ This means users may encounter SmartScreen/trust warnings. Public releases shoul
 
 ## 13. Antivirus considerations
 
-Mining software is commonly flagged by endpoint-security products.
+Mining software is commonly flagged or quarantined by endpoint-security products. The Safex Mine's bundled mining backend, elevated helper and WinRing driver should therefore be treated as components likely to attract additional scrutiny from antivirus products.
 
 The Safex Mine must never:
 
 - disable antivirus software;
 - silently add exclusions;
 - obscure the mining backend;
+- restore quarantined files automatically;
 - claim a warning is a false positive without release-specific evidence.
+
+Documentation may explain how a user who has independently verified the release can restore an expected quarantined runtime file or add a narrowly scoped exclusion for the dedicated installation/runtime folder. It must not recommend broad exclusions or disabling real-time protection.
 
 ## 14. Remaining release-security work
 
