@@ -67,15 +67,23 @@ Packaged-build validation is still required to confirm the same behaviour after 
 
 ### Windows package generation
 
-`npm run tauri:build` has completed successfully on Windows and proved the release packaging path can generate a working NSIS bundle. The validation build was performed before the release target was narrowed and also produced an MSI.
-
-The public release model is now deliberately **NSIS-only**. `src-tauri/tauri.release.conf.json` targets `nsis`, and the sole Windows installer intended for publication is:
+`npm run tauri:build` has completed successfully on Windows after the release target was narrowed to NSIS only. The build produced exactly one Windows bundle:
 
 ```text
 src-tauri\target\release\bundle\nsis\The Safex Mine_0.1.0_x64-setup.exe
 ```
 
-MSI is not part of the public release model. A fresh release build should be run after this configuration change to confirm NSIS-only generation. Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
+The public release model is deliberately **NSIS-only**. `src-tauri/tauri.release.conf.json` targets `nsis`; MSI is not part of the public release model.
+
+The SHA-256 recorded for the current clean-machine test artefact is:
+
+```text
+584DF8E7E83BEA4FF40B3DF24B5A565ACA6AED2D7651522DB9D24D27AF6A44D4
+```
+
+This checksum identifies the exact pre-release installer selected for clean-machine validation. Final public-release checksums must still be generated from the exact artefact ultimately published.
+
+Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
 
 ## 3. Areas still requiring release validation
 
