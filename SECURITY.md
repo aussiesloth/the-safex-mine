@@ -36,16 +36,17 @@ If Windows security features such as VBS/hypervisor protections prevent MSR writ
 
 ## Mining software and antivirus products
 
-Mining software is frequently classified or flagged by antivirus/endpoint-security products. The project must remain transparent about the included mining backend.
+Mining software is frequently classified, blocked or quarantined by antivirus/endpoint-security products. The project must remain transparent about the included mining backend, elevated helper and WinRing driver.
 
 The Safex Mine will not:
 
 - silently disable antivirus products;
 - silently add antivirus exclusions;
+- restore quarantined files automatically;
 - hide the presence of the mining backend;
 - install persistence unrelated to normal application behaviour.
 
-Public releases should provide checksums and source references so users can verify what they downloaded.
+Public releases should provide checksums and source references so users can verify what they downloaded. Documentation may describe how a user can restore a verified quarantined runtime file and apply a narrowly scoped exclusion to the dedicated application/runtime folder when necessary. It should not recommend disabling antivirus globally or excluding broad locations.
 
 ## Unsigned releases
 
