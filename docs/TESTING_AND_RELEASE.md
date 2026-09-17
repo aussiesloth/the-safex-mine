@@ -128,6 +128,8 @@ Do not write generic bypass instructions in advance of real release testing.
 - [ ] BLOCK FOUND miner holds a bar;
 - [ ] OFFLINE pose clearly differs from READY;
 - [ ] speaker icon correctly reflects mute state;
+- [ ] custom application icon appears correctly in the executable, taskbar, Start menu and installer/package surfaces;
+- [ ] custom application icon remains recognisable at small Windows icon sizes;
 - [ ] resizing does not crop critical scene content.
 
 ## 6. Privilege/security checklist
