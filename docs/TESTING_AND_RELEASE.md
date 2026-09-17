@@ -97,9 +97,11 @@ For the actual unsigned release artefacts:
 - record which packaged files, if any, are quarantined or removed by Microsoft Defender and any other products used during release testing;
 - verify that restoring an expected runtime file and applying a narrowly scoped installation/runtime-folder exclusion allows the verified release to operate;
 - verify the application never disables antivirus, changes antivirus settings or creates exclusions itself;
-- document the exact installed path users should exclude only after the final installer path has been validated.
+- document the exact installed path users should exclude only after the final installer path has been validated;
+- test the pre-install exclusion workflow;
+- test the fallback workflow where real-time scanning is paused only long enough to install the verified artefact, create the narrow installation-folder exclusion and re-enable protection.
 
-User guidance should require checksum/source verification before restoring quarantined files and should explicitly warn against disabling antivirus globally or excluding broad locations such as Downloads, a user profile or an entire drive.
+User guidance should require checksum/source verification before restoring quarantined files. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
 ## 4. Functional release checklist
 
