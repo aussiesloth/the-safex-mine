@@ -156,7 +156,6 @@ Not required for the first public release:
 The core application is functioning. Remaining release work is primarily:
 
 - installer generation and clean-machine testing;
-- custom application icons;
 - final release hardening/cleanup;
 - final third-party licence/release bundle validation;
 - checksums and release notes;
