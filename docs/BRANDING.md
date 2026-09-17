@@ -78,4 +78,14 @@ Avoid wording that implies:
 
 ## 7. Application icon
 
-A custom The Safex Mine application icon is still pending. The final icon may incorporate Safex visual identity while remaining clearly distinguishable as the solo-mining application.
+The custom The Safex Mine application icon is complete.
+
+Its production source is:
+
+```text
+src/assets/branding/app-icon/safex_cash_mining_icon.png
+```
+
+The generated Tauri icon set is stored under `src-tauri/icons/` and includes the Windows `.ico` and the standard PNG/Store/Square variants used by packaging.
+
+The icon combines recognisable Safex Cash branding with a pickaxe/mining motif and is intentionally distinguishable from the standalone official Safex Cash logo.
