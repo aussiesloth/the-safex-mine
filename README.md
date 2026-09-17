@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** pre-release development. The mining core, live telemetry, recovery behaviour, state-driven artwork, block-found sound and persistent mute control are working. Release packaging is now wired, while final icons, installer testing and remaining release validation are still being completed.
+> **Project status:** pre-release development. The mining core, live telemetry, recovery behaviour, state-driven artwork, block-found sound and persistent mute control are working. Release packaging and the custom application icon set are now in place, while installer testing and remaining release validation are still being completed.
 
 ## What it does
 
