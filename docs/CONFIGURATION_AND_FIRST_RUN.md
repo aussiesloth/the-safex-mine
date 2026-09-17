@@ -1,12 +1,55 @@
 # Configuration and First Run
 
-## 1. Current first-run model
+## 1. Mining Risk Acknowledgement
 
-The current application does not use a separate first-run wizard or Settings screen.
+On first launch, The Safex Mine presents **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used.
 
-Configuration is performed directly in the main interface. The user can start mining after supplying a valid Safex Cash address and confirming a reachable daemon.
+The acknowledgement explains the principal risks and responsibilities associated with cryptocurrency mining, including:
 
-## 2. Safex Cash mining address
+- uncertain rewards and cryptocurrency value;
+- sustained CPU load, heat, electricity use and hardware wear;
+- possible interaction with manufacturer warranty terms;
+- antivirus/SmartScreen detection and quarantine behaviour;
+- UAC/elevated-helper and MSR behaviour;
+- system stability and data-backup considerations;
+- responsibility for the configured mining address and daemon;
+- absence of guaranteed hashrate, profitability or rewards;
+- software warranty/liability limitations subject to rights that cannot lawfully be excluded.
+
+The user must actively check:
+
+> I have read and understand the Mining Risk Acknowledgement above and choose to continue.
+
+The available first-run actions are:
+
+- **Exit** — closes the application without recording acknowledgement;
+- **Acknowledge and Continue** — enabled only after the checkbox is selected.
+
+The accepted acknowledgement version is stored locally as:
+
+```text
+safex-mine.mining-risk-acknowledgement-version
+```
+
+with the current value:
+
+```text
+1.0
+```
+
+If a later release materially changes the acknowledgement, incrementing the acknowledgement version will cause the updated notice to be shown once again.
+
+After acceptance, the full notice remains available from the **Risk notice** control in the application header.
+
+The repository copy of the notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
+
+## 2. Current first-run configuration model
+
+The application does not use a separate configuration wizard or Settings screen.
+
+After the Mining Risk Acknowledgement has been accepted, configuration is performed directly in the main interface. The user can start mining after supplying a valid Safex Cash address and confirming a reachable daemon.
+
+## 3. Safex Cash mining address
 
 The address field:
 
@@ -18,7 +61,7 @@ The address field:
 
 The Rust validator checks the Safex mainnet prefix and expected decoded address structure.
 
-## 3. Daemon endpoint
+## 4. Daemon endpoint
 
 Default:
 
@@ -32,7 +75,7 @@ The application validates daemon availability and displays the current chain hei
 
 While the app is idle/ready, a silent background daemon refresh keeps the displayed status reasonably current.
 
-## 4. Mining mode
+## 5. Mining mode
 
 Available modes:
 
@@ -46,7 +89,7 @@ The selected mode is stored in local storage and restored on the next applicatio
 
 Balanced is the default when no valid saved mode exists.
 
-## 5. Sound setting
+## 6. Sound setting
 
 The top-bar speaker button controls the block-found sound.
 
@@ -57,9 +100,9 @@ The top-bar speaker button controls the block-found sound.
 
 Only the block-found celebration sound is affected.
 
-## 6. Starting mining
+## 7. Starting mining
 
-When the address and daemon are valid:
+When the acknowledgement has been accepted and the address/daemon are valid:
 
 1. choose a mining mode;
 2. press **Start Mining**;
@@ -69,7 +112,7 @@ When the address and daemon are valid:
 
 The whole Tauri GUI does not elevate.
 
-## 7. Configuration locking while mining
+## 8. Configuration locking while mining
 
 While mining is active:
 
@@ -81,7 +124,7 @@ While mining is active:
 
 This avoids changing backend identity/connection settings underneath a running mining process.
 
-## 8. Stop and restart
+## 9. Stop and restart
 
 Pressing Stop:
 
@@ -91,10 +134,11 @@ Pressing Stop:
 - keeps accumulated mining time;
 - leaves the elevated helper available for a later Start in the same app session.
 
-## 9. What persists across full application restart
+## 10. What persists across full application restart
 
 Persisted:
 
+- accepted Mining Risk Acknowledgement version;
 - valid mining address;
 - daemon endpoint;
 - mining mode;
@@ -109,7 +153,7 @@ Not persisted:
 
 A new application launch begins a new mining session.
 
-## 10. Changing the address
+## 11. Changing the address
 
 The current implementation allows the address to be changed only while mining is stopped because the field is locked while mining.
 
@@ -117,7 +161,7 @@ When a newly validated address differs from the previously saved address, it beg
 
 If that product rule changes before release, both the code and this document should be updated together.
 
-## 11. Invalid/unavailable configuration
+## 12. Invalid/unavailable configuration
 
 Mining is prevented or reported clearly when, for example:
 
