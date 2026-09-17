@@ -55,6 +55,23 @@ Unexpected session failure has been exercised so the frontend can leave MINING, 
 
 ## 3. Areas still requiring release validation
 
+### Mining Risk Acknowledgement
+
+The versioned first-run acknowledgement must be exercised in both development and packaged builds.
+
+Verify that:
+
+- a fresh application profile shows **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used;
+- the acknowledgement text is scrollable and readable at supported window sizes;
+- **Acknowledge and Continue** remains disabled until the checkbox is selected;
+- **Exit** closes the application without recording acceptance;
+- accepting the notice stores `safex-mine.mining-risk-acknowledgement-version=1.0` locally;
+- reopening the application after acceptance does not show the first-run gate again;
+- changing/removing the stored acknowledgement version causes the gate to appear again;
+- the **Risk notice** control reopens the complete acknowledgement after acceptance;
+- reviewing the acknowledgement later does not alter mining/session state;
+- the acknowledgement does not replace or modify the GPL-3.0 licence presentation.
+
 ### Real rejection case
 
 The rejection UI/parser path has been exercised through development/simulation, but a naturally occurring real rejected Safex result has not yet been relied upon as the primary validation case.
@@ -69,6 +86,7 @@ Still required:
 - no development toolchain;
 - install;
 - first run;
+- Mining Risk Acknowledgement;
 - UAC helper launch;
 - mining;
 - Stop/restart;
@@ -105,6 +123,10 @@ User guidance must distinguish between an installer quarantined immediately afte
 
 ## 4. Functional release checklist
 
+- [ ] fresh profile is blocked by Mining Risk Acknowledgement until accepted;
+- [ ] acknowledgement Exit action closes the app without persisting acceptance;
+- [ ] acknowledgement version persists after acceptance and suppresses repeat display;
+- [ ] Risk notice control reopens the full acknowledgement after acceptance;
 - [ ] valid address accepted;
 - [ ] invalid address rejected;
 - [ ] changing saved address while stopped resets Blocks Found, Rejected and accumulated mining time to 0;
@@ -139,6 +161,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [ ] BLOCK FOUND miner holds a bar;
 - [ ] OFFLINE pose clearly differs from READY;
 - [ ] speaker icon correctly reflects mute state;
+- [ ] Mining Risk Acknowledgement fits and scrolls correctly at supported window sizes;
 - [ ] custom application icon appears correctly in the executable, taskbar, Start menu and installer/package surfaces;
 - [ ] custom application icon remains recognisable at small Windows icon sizes;
 - [ ] resizing does not crop critical scene content.
@@ -146,6 +169,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 ## 6. Privilege/security checklist
 
 - [ ] GUI starts non-elevated;
+- [ ] acknowledgement Exit uses only the narrowly granted window-close capability;
 - [ ] UAC prompt is for helper;
 - [ ] packaged helper launches from installed runtime resources;
 - [ ] packaged helper finds XMRig and WinRing beside it;
