@@ -101,7 +101,7 @@ For the actual unsigned release artefacts:
 - test the pre-install exclusion workflow;
 - test the fallback workflow where real-time scanning is paused only long enough to install the verified artefact, create the narrow installation-folder exclusion and re-enable protection.
 
-User guidance should require checksum/source verification before restoring quarantined files. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
+User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
 ## 4. Functional release checklist
 
