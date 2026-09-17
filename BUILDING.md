@@ -281,7 +281,6 @@ Packaging code is now in place, but the public installer is not considered valid
 
 Remaining release checks include:
 
-- create the final custom application icon set;
 - build the unsigned Windows installer/package;
 - install on a clean Windows machine or VM;
 - verify the packaged helper is found and receives UAC elevation;
