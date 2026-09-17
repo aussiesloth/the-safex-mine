@@ -31,6 +31,7 @@ The project is currently pre-release, so the entries below describe the current 
 - Changing the saved Safex address to a different valid address while mining is stopped now starts a fresh in-memory session, resetting Blocks Found, Rejected and accumulated mining time to 0.
 - The project is now licensed under GNU GPL v3.0.
 - Added release-only Tauri resource packaging for the helper, XMRig, WinRing driver and licence notices.
+- Windows release packaging now targets the NSIS `-setup.exe` installer only; MSI is not part of the public release model.
 - Restricted the registered Rust invoke command surface to production-used commands.
 - Switched the canonical backend source reference to `aussiesloth/safex-xmrig`, while retaining `galicone/xmrig` and `xmrig/xmrig` in the documented upstream provenance chain.
 - Replaced the earlier continuous-animation concept with authored static scenes and crossfades.
