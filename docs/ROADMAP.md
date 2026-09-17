@@ -74,7 +74,6 @@ Still required:
 
 ### Product polish
 
-- create final custom application icon set;
 - tidy source formatting where iterative development left uneven indentation;
 - review UI wording and remaining backend messages.
 
