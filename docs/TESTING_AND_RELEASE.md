@@ -67,14 +67,15 @@ Packaged-build validation is still required to confirm the same behaviour after 
 
 ### Windows package generation
 
-`npm run tauri:build` has completed successfully on Windows using the release configuration and produced both expected bundle types:
+`npm run tauri:build` has completed successfully on Windows and proved the release packaging path can generate a working NSIS bundle. The validation build was performed before the release target was narrowed and also produced an MSI.
+
+The public release model is now deliberately **NSIS-only**. `src-tauri/tauri.release.conf.json` targets `nsis`, and the sole Windows installer intended for publication is:
 
 ```text
-src-tauri\target\release\bundle\msi\The Safex Mine_0.1.0_x64_en-US.msi
 src-tauri\target\release\bundle\nsis\The Safex Mine_0.1.0_x64-setup.exe
 ```
 
-The NSIS `-setup.exe` is the current preferred normal-user installer candidate. Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
+MSI is not part of the public release model. A fresh release build should be run after this configuration change to confirm NSIS-only generation. Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
 
 ## 3. Areas still requiring release validation
 
@@ -105,7 +106,7 @@ Still required:
 
 - fresh Windows machine or VM;
 - no development toolchain;
-- install;
+- install the NSIS `-setup.exe`;
 - first run;
 - Mining Risk Acknowledgement;
 - UAC helper launch;
@@ -115,7 +116,7 @@ Still required:
 
 ### Packaged path test
 
-The release configuration now maps the helper, XMRig and WinRing driver into the installed `runtime/` resource directory. Release validation must prove that the generated installer actually preserves that layout and that the installed app finds:
+The release configuration now maps the helper, XMRig and WinRing driver into the installed `runtime/` resource directory. Release validation must prove that the generated NSIS installer actually preserves that layout and that the installed app finds:
 
 - `runtime/safex-mine-helper.exe`;
 - `runtime/safex-xmrig-x86_64-pc-windows-msvc.exe`;
@@ -129,9 +130,9 @@ The installed app must not depend on source-tree development paths.
 
 The release contains components that antivirus/endpoint-security products commonly classify or quarantine: the CPU-mining backend, elevated helper and WinRing driver. Treat AV intervention as an expected release scenario that must be tested and documented rather than as an exceptional user error.
 
-For the actual unsigned release artefacts:
+For the actual unsigned NSIS release installer:
 
-- record whether the installer/package is blocked before launch;
+- record whether the installer is blocked before launch;
 - record the exact SmartScreen flow presented;
 - record which packaged files, if any, are quarantined or removed by Microsoft Defender and any other products used during release testing;
 - verify that restoring an expected runtime file and applying a narrowly scoped installation/runtime-folder exclusion allows the verified release to operate;
@@ -184,7 +185,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [ ] OFFLINE pose clearly differs from READY;
 - [ ] speaker icon correctly reflects mute state;
 - [ ] Mining Risk Acknowledgement fits and scrolls correctly at supported window sizes in the packaged build;
-- [ ] custom application icon appears correctly in the executable, taskbar, Start menu and installer/package surfaces;
+- [ ] custom application icon appears correctly in the executable, taskbar, Start menu and NSIS installer surfaces;
 - [ ] custom application icon remains recognisable at small Windows icon sizes;
 - [ ] resizing does not crop critical scene content.
 
@@ -208,14 +209,16 @@ User guidance must distinguish between an installer quarantined immediately afte
 
 Planned release set:
 
-- unsigned Windows installer/package;
+- one unsigned Windows NSIS `-setup.exe` installer;
 - versioned release notes;
-- SHA-256 checksum(s);
+- SHA-256 checksum for that installer;
 - source repository/tag;
 - third-party notices/licence bundle;
 - XMRig corresponding-source reference;
 - known issues;
 - troubleshooting link.
+
+MSI is not part of the public release set.
 
 ## 8. Versioning
 
