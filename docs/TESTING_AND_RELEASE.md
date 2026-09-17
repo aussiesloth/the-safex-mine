@@ -88,9 +88,18 @@ The installed app must not depend on source-tree development paths.
 
 ### Antivirus / SmartScreen
 
-Test the actual unsigned release artefacts and document observed behaviour.
+The release contains components that antivirus/endpoint-security products commonly classify or quarantine: the CPU-mining backend, elevated helper and WinRing driver. Treat AV intervention as an expected release scenario that must be tested and documented rather than as an exceptional user error.
 
-Do not write generic bypass instructions in advance of real release testing.
+For the actual unsigned release artefacts:
+
+- record whether the installer/package is blocked before launch;
+- record the exact SmartScreen flow presented;
+- record which packaged files, if any, are quarantined or removed by Microsoft Defender and any other products used during release testing;
+- verify that restoring an expected runtime file and applying a narrowly scoped installation/runtime-folder exclusion allows the verified release to operate;
+- verify the application never disables antivirus, changes antivirus settings or creates exclusions itself;
+- document the exact installed path users should exclude only after the final installer path has been validated.
+
+User guidance should require checksum/source verification before restoring quarantined files and should explicitly warn against disabling antivirus globally or excluding broad locations such as Downloads, a user profile or an entire drive.
 
 ## 4. Functional release checklist
 
