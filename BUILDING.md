@@ -2,7 +2,7 @@
 
 This document describes the current Windows development and packaged-build paths.
 
-Development still uses the source-tree helper/backend layout. Packaged builds use a separate Tauri release configuration that bundles the elevated helper, XMRig executable, WinRing driver and required licence/notices into explicit runtime resource locations. The packaging wiring is implemented; clean-machine installer validation is still required before public release.
+Development uses the source-tree helper/backend layout. Packaged builds use a separate Tauri release configuration that bundles the elevated helper, XMRig executable, WinRing driver and required licence/notices into explicit runtime resource locations. The NSIS packaging path and clean-machine install/mining/uninstall flow have been validated.
 
 ## 1. Supported development target
 
@@ -27,7 +27,7 @@ Install the following before cloning the project:
 - CMake for building the XMRig backend;
 - Microsoft Edge WebView2 Runtime if it is not already present on the system.
 
-For a final MSI release build, additional Windows installer prerequisites may be required. Those instructions will be added once release packaging is finalised.
+The public Windows release targets the NSIS `-setup.exe` only; MSI is not part of the release model.
 
 ## 3. Clone the application
 
@@ -275,19 +275,21 @@ npm run tauri dev
 
 and continues to use the development fallback paths.
 
-## 13. Release validation still required
+## 13. Release validation status
 
-Packaging code is now in place, but the public installer is not considered validated until the actual Windows artefact has been exercised on a clean system.
+The NSIS release path has been exercised end-to-end on a clean Windows machine:
 
-Remaining release checks include:
+- the installer was downloaded from a GitHub pre-release;
+- SmartScreen displayed the expected unsigned/unknown-publisher warning;
+- the application installed under `%LOCALAPPDATA%\The Safex Mine`;
+- the packaged helper launched through UAC;
+- the packaged XMRig backend mined successfully;
+- Stop -> Start reused the elevated helper;
+- Microsoft Defender quarantine/recovery and a narrow install-folder exclusion were exercised;
+- a subsequent Defender Full scan left the excluded runtime intact;
+- uninstall completed without UAC and removed the application folder.
 
-- build the unsigned Windows installer/package;
-- install on a clean Windows machine or VM;
-- verify the packaged helper is found and receives UAC elevation;
-- verify packaged XMRig finds the bundled WinRing driver;
-- verify MSR-success and degraded-MSR paths;
-- verify Stop -> Start helper reuse;
-- verify uninstall behaviour;
-- record actual SmartScreen/antivirus behaviour;
-- publish SHA-256 checksums for the release artefacts.
+See `docs/TESTING_AND_RELEASE.md` and `docs/WINDOWS_INSTALLATION.md` for the recorded behaviour.
+
+Before a public release, build the final installer from the intended release commit/tag and generate the SHA-256 checksum from **that exact final artefact**. Do not reuse the checksum from an earlier validation build.
 
