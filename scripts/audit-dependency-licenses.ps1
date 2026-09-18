@@ -48,19 +48,39 @@ function Get-ReachableCargoPackages {
 }
 
 function Get-NpmRuntimePackages {
-    $lock = Get-Content "package-lock.json" -Raw | ConvertFrom-Json
-    foreach ($property in $lock.packages.PSObject.Properties) {
-        if ([string]::IsNullOrWhiteSpace($property.Name)) { continue }
-        $package = $property.Value
-        if ($package.dev -eq $true) { continue }
-        if (-not $package.version) { continue }
+    # Windows PowerShell 5.1 ConvertFrom-Json rejects npm lockfiles because
+    # package-lock v3 contains an empty-string root package key. Let Node.js
+    # parse its own lockfile and return a simple JSON array instead.
+    $nodeScript = @'
+const fs = require("fs");
+const lock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+const rows = Object.entries(lock.packages || {})
+  .filter(([path, pkg]) => path && pkg && pkg.version && pkg.dev !== true)
+  .map(([path, pkg]) => ({
+    Ecosystem: "npm",
+    Name: path.replace(/^node_modules\//, ""),
+    Version: String(pkg.version),
+    License: pkg.license ? String(pkg.license) : "",
+    LicenseFile: "",
+    Source: pkg.resolved ? String(pkg.resolved) : ""
+  }));
+process.stdout.write(JSON.stringify(rows));
+'@
+
+    $raw = & node -e $nodeScript 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw ("Node.js could not parse package-lock.json" + [Environment]::NewLine + ($raw -join [Environment]::NewLine))
+    }
+
+    $rows = ($raw -join [Environment]::NewLine) | ConvertFrom-Json
+    foreach ($package in @($rows)) {
         [PSCustomObject]@{
-            Ecosystem = "npm"
-            Name = $property.Name -replace "^node_modules/", ""
-            Version = [string]$package.version
-            License = if ($package.license) { [string]$package.license } else { "" }
-            LicenseFile = ""
-            Source = if ($package.resolved) { [string]$package.resolved } else { "" }
+            Ecosystem = [string]$package.Ecosystem
+            Name = [string]$package.Name
+            Version = [string]$package.Version
+            License = [string]$package.License
+            LicenseFile = [string]$package.LicenseFile
+            Source = [string]$package.Source
         }
     }
 }
