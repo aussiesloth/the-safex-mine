@@ -83,7 +83,7 @@ The SHA-256 recorded for the current clean-machine test artefact is:
 
 This checksum identifies the exact pre-release installer selected for clean-machine validation. Final public-release checksums must still be generated from the exact artefact ultimately published.
 
-Successful NSIS-only bundle generation is confirmed. Clean-machine installation and Microsoft security behaviour have now also been exercised; remaining validation is focused on completing the installed-app checklist and final release documentation.
+Successful NSIS-only bundle generation and clean-machine installation/security behaviour are confirmed. The remaining release work is final source/document consistency, merge/tag preparation, the final v1.0.0 build, and checksum publication.
 
 ## 3. Remaining release preparation and optional evidence
 
@@ -147,7 +147,7 @@ Release documentation requirements:
 - the application does not disable antivirus, change antivirus settings or create exclusions itself;
 - a manual Microsoft Defender Full scan completed with the narrow `%LOCALAPPDATA%\The Safex Mine` exclusion in place and did not re-detect or remove the restored runtime;
 - temporary real-time-scanning suspension remains a documented fallback only for products that cannot complete the verified restore/exclusion flow;
-- add the final captured screenshots to `docs/WINDOWS_INSTALLATION.md` before public release.
+- the six captured clean-machine screenshots are included in `docs/WINDOWS_INSTALLATION.md`.
 
 User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
@@ -247,6 +247,6 @@ MSI is not part of the public release set.
 
 ## 8. Versioning
 
-Current project version is `0.1.0`.
+The first public release is **v1.0.0**.
 
-Before the first public release, choose whether the release remains a preview (`0.x`) or is promoted to `1.0.0` after the release gates are satisfied.
+The `0.1.0` installer and SHA-256 recorded earlier in this document are historical clean-machine validation artefacts only. The public v1.0.0 checksum must be generated from the exact final v1.0.0 installer after the release commit/tag is prepared.
