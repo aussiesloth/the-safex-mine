@@ -129,6 +129,8 @@ npm.cmd run tauri dev
 
 ## Antivirus quarantines the miner or SmartScreen warns about the application
 
+For the complete tested install flow with screenshot locations, see the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
+
 The Safex Mine contains a CPU-mining backend, an elevated helper and the WinRing driver used by XMRig for Windows MSR access. Antivirus/endpoint-security products commonly classify or quarantine mining software, and the Windows release is unsigned.
 
 ### Observed clean-machine Windows behaviour
