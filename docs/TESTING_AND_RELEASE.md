@@ -155,11 +155,12 @@ Observed with Microsoft Defender on the clean test machine:
 - Defender quarantined the installed XMRig backend as `Trojan:Win64/HashvaultMiner.A`;
 - restoring the two expected files and excluding only the installation folder allowed mining to run normally;
 - disabling Defender real-time protection was **not** required.
+- a subsequent manual Defender **Full scan** left the restored runtime intact while the narrow install-folder exclusion remained in place.
 
 Still required:
 
 - verify the application never disables antivirus, changes antivirus settings or creates exclusions itself;
-- confirm behaviour after a later manual/scheduled Defender scan with the narrow installation-folder exclusion in place;
+- [x] manual Microsoft Defender Full scan completed with the narrow `%LOCALAPPDATA%\The Safex Mine` exclusion in place; previously restored/excluded The Safex Mine files were not re-detected or removed;
 - retain temporary real-time-scanning suspension only as a documented fallback for products that cannot complete the verified restore/exclusion flow.
 
 User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
