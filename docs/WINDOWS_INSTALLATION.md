@@ -16,8 +16,6 @@ The Safex Mine_<version>_x64-setup.exe
 
 The release also publishes a SHA-256 checksum for that exact installer.
 
-[SCREENSHOT: `docs/images/windows-install/01-github-release.png` — GitHub release Assets showing the setup EXE and checksum information.]
-
 ## 2. Verify the SHA-256 checksum
 
 Before running the installer, verify that the downloaded file matches the checksum published with the release.
@@ -41,11 +39,15 @@ Because the public build is unsigned, Microsoft Defender SmartScreen may display
 
 During clean-machine testing, the first SmartScreen page showed **More info**.
 
-[SCREENSHOT: `docs/images/windows-install/02-smartscreen-warning.png` — initial “Windows protected your PC” screen with “More info”.]
+![Microsoft Defender SmartScreen initial warning showing Windows protected your PC and the More info link](images/windows-install/01-smartscreen-warning.png)
+
+*SmartScreen may initially show **Windows protected your PC**. Select **More info** to inspect the application details before deciding whether to continue.*
 
 Selecting **More info** displayed the application filename, **Publisher: Unknown publisher**, and a **Run anyway** button.
 
-[SCREENSHOT: `docs/images/windows-install/03-smartscreen-details.png` — expanded SmartScreen view showing the installer filename, Unknown publisher and Run anyway.]
+![Expanded Microsoft Defender SmartScreen warning showing the installer filename, Unknown publisher and Run anyway](images/windows-install/02-smartscreen-details.png)
+
+*The expanded SmartScreen view identifies the unsigned build as **Unknown publisher** and exposes **Run anyway**.*
 
 Only continue after verifying that the installer came from the official release and that its SHA-256 matches the published checksum.
 
@@ -65,7 +67,9 @@ C:\Users\<username>\AppData\Local\The Safex Mine
 
 The installer itself did **not** require UAC during the clean-machine test.
 
-[SCREENSHOT: `docs/images/windows-install/04-install-location.png` — NSIS Choose Install Location page showing the default Local AppData path.]
+![The Safex Mine NSIS installer showing the default Local AppData installation path](images/windows-install/03-install-location.png)
+
+*The tested NSIS installer uses the current user's Local AppData folder by default.*
 
 Allow the installer to complete normally.
 
@@ -80,9 +84,13 @@ On the verified clean-machine test build, Microsoft Defender produced two releva
 
 Detection names may change between Defender versions and other antivirus products.
 
-[SCREENSHOT: `docs/images/windows-install/05-defender-installer.png` — Protection History showing the downloaded installer detection and Downloads path.]
+![Microsoft Defender Protection History showing the downloaded The Safex Mine installer detection](images/windows-install/04-defender-installer.png)
 
-[SCREENSHOT: `docs/images/windows-install/06-defender-xmrig.png` — Protection History showing the XMRig detection and installed runtime path.]
+*Clean-machine testing observed Defender quarantining the downloaded installer. Check the affected filename and path before restoring anything.*
+
+![Microsoft Defender Protection History showing the packaged XMRig backend detection](images/windows-install/05-defender-xmrig.png)
+
+*Defender also quarantined the packaged XMRig backend in the installed `runtime` folder during the clean-machine test.*
 
 Before restoring anything, confirm that the affected file and path match an expected The Safex Mine component.
 
@@ -111,7 +119,9 @@ Do **not** exclude:
 - an entire drive;
 - another broad location.
 
-[SCREENSHOT: `docs/images/windows-install/07-defender-exclusion.png` — Windows Security exclusions page showing only the The Safex Mine installation folder.]
+![Windows Security Virus and threat protection settings showing the path into Exclusions](images/windows-install/06-defender-exclusion.png)
+
+*In **Virus & threat protection settings**, scroll to **Exclusions** and choose **Add or remove exclusions**. Add only the dedicated The Safex Mine installation folder.*
 
 Clean-machine testing confirmed that this narrow folder exclusion prevented the restored runtime from being re-detected during a later Microsoft Defender **Full scan**.
 
@@ -122,8 +132,6 @@ The clean-machine installation completed without disabling Defender real-time pr
 On first launch, The Safex Mine presents **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used.
 
 Read the notice, select the acknowledgement checkbox, and choose **Acknowledge and Continue** if you wish to proceed. Choosing **Exit** closes the application without recording acceptance.
-
-[OPTIONAL SCREENSHOT: `docs/images/windows-install/08-risk-acknowledgement.png` — first-run Mining Risk Acknowledgement.]
 
 The full notice remains available later through the **Risk notice** control in the application.
 
@@ -137,9 +145,7 @@ The first time **Start Mining** is pressed during an application session, Window
 safex-mine-helper.exe
 ```
 
-The helper is the narrowly scoped elevated component that launches and supervises XMRig and allows it to attempt MSR optimisation.
-
-[SCREENSHOT: `docs/images/windows-install/09-helper-uac.png` — UAC prompt for safex-mine-helper.exe. Use a tightly cropped still from the clean-machine installation-test video.]
+The helper is the narrowly scoped elevated component that launches and supervises XMRig and allows it to attempt MSR optimisation. The UAC prompt should identify `safex-mine-helper.exe`; the graphical application itself should not request Administrator elevation.
 
 After approval, mining should start and the GUI should display live hashrate and worker-thread information. A normal **Stop Mining -> Start Mining** cycle in the same application session reuses the already elevated helper and should not produce another UAC prompt.
 
