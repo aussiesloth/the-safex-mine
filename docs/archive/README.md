@@ -1,32 +1,39 @@
 # Archived Design Material
 
-This directory is for superseded or deferred project design work.
+This directory contains superseded planning documents retained for project history.
 
-The earlier concept for The Safex Mine used a fully animated miner with:
+Archived material is **not** the source of truth for the current application.
 
-- articulated side rigs;
-- front celebration rigs;
-- seated/offline rigs;
-- walking;
-- pickaxe swing cycles;
-- authored turn transitions;
-- continuous character-state animation.
+Current implementation documentation is linked from the repository root `README.md`.
 
-That concept informed the current state-driven design, but it is no longer part of the initial release scope.
+## Archived planning documents
 
-The current release uses:
+- `ASSET_PLAN.md` — early static-scene/reward/effects production plan, including obsolete nugget/reward-layer concepts.
+- `GITHUB_REPO_SETUP.md` — repository setup planning from before the repository/release structure was established.
 
-- authored still-state scenes;
-- fade/crossfade transitions;
-- lightweight sprite effects;
-- persistent reward-table visuals.
+Earlier animation work also explored:
 
-Historical animation documents may be retained under:
+- articulated 2D/3D miner rigs;
+- walk cycles;
+- continuous pickaxe animation;
+- seated/standing transitions;
+- skeletal character animation.
 
-```text
-docs/archive/animated-concept/
-```
+Those concepts informed the project but are not part of the current v1 release path.
 
-They should not be linked from the main README as current implementation requirements.
+## Current release direction
 
-If the community later shows strong interest in a fully animated edition, the archived material can be revisited without changing the mining core or event model.
+The active application uses:
+
+- five authored static state scenes;
+- image crossfades;
+- a fixed Tauri UI;
+- rectangular Safex Cash bullion bars as the reward motif;
+- a block-found sound with persistent mute control.
+
+For current documentation, see:
+
+- `../ASSETS.md`;
+- `../VISUAL_STATE_SYSTEM.md`;
+- `../ARCHITECTURE.md`;
+- `../PRODUCT_SPEC.md`.

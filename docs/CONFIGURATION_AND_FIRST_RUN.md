@@ -1,113 +1,175 @@
 # Configuration and First Run
 
-## 1. First-run objective
+## 1. Mining Risk Acknowledgement
 
-A new user should be able to install The Safex Mine, enter a Safex Cash mining address, accept the default connection settings, and start mining without manually editing a configuration file.
+On first launch, The Safex Mine presents **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used.
 
-## 2. Minimum first-run flow
+The acknowledgement explains the principal risks and responsibilities associated with cryptocurrency mining, including:
 
-Suggested sequence:
+- uncertain rewards and cryptocurrency value;
+- sustained CPU load, heat, electricity use and hardware wear;
+- possible interaction with manufacturer warranty terms;
+- antivirus/SmartScreen detection and quarantine behaviour;
+- UAC/elevated-helper and MSR behaviour;
+- system stability and data-backup considerations;
+- responsibility for the configured mining address and daemon;
+- absence of guaranteed hashrate, profitability or rewards;
+- software warranty/liability limitations subject to rights that cannot lawfully be excluded.
+
+The user must actively check:
+
+> I have read and understand the Mining Risk Acknowledgement above and choose to continue.
+
+The available first-run actions are:
+
+- **Exit** — closes the application without recording acknowledgement;
+- **Acknowledge and Continue** — enabled only after the checkbox is selected.
+
+The accepted acknowledgement version is stored locally as:
 
 ```text
-Welcome
-  ↓
-Mining address
-  ↓
-Node/RPC choice
-  ↓
-Initial mining mode
-  ↓
-Review
-  ↓
-Ready
+safex-mine.mining-risk-acknowledgement-version
 ```
 
-## 3. Mining address
+with the current value:
 
-The address field should:
+```text
+1.0
+```
 
-- be clearly labelled;
-- allow paste;
-- trim accidental whitespace;
-- be validated as far as the project can do so reliably;
-- never be silently changed.
+If a later release materially changes the acknowledgement, incrementing the acknowledgement version will cause the updated notice to be shown once again.
 
-If validation is uncertain, warn rather than inventing a correction.
+After acceptance, the full notice remains available from the **Risk notice** control in the application header.
 
-## 4. Default node
+The repository copy of the notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
 
-The application should provide a default public Safex node/RPC so most users can start without configuration work.
+## 2. Current first-run configuration model
 
-The actual endpoint should be documented in the release build and easy to change in Settings.
+The application does not use a separate configuration wizard or Settings screen.
 
-## 5. Custom / LAN node
+After the Mining Risk Acknowledgement has been accepted, configuration is performed directly in the main interface. The user can start mining after supplying a valid Safex Cash address and confirming a reachable daemon.
 
-Advanced settings should allow a custom endpoint.
+## 3. Safex Cash mining address
 
-Useful fields may include:
+The address field:
 
-- hostname or IP;
-- port;
-- any required protocol setting.
+- accepts paste/input directly;
+- trims surrounding whitespace on change;
+- validates the address before mining can start;
+- shows valid/invalid feedback;
+- stores a valid address in local storage.
 
-The UI should make LAN-node use straightforward.
+The Rust validator checks the Safex mainnet prefix and expected decoded address structure.
 
-## 6. Mining mode
+## 4. Daemon endpoint
 
-The first-run wizard should allow:
+Default:
 
-- Calm;
-- Balanced;
-- Full Bore.
+```text
+rpc.safex.org:17402
+```
 
-Balanced is the natural candidate for the default, subject to testing.
+The user may replace this with a custom remote or LAN endpoint.
 
-## 7. Settings screen
+The application validates daemon availability and displays the current chain height when the endpoint is online.
 
-Settings should include at least:
+While the app is idle/ready, a silent background daemon refresh keeps the displayed status reasonably current.
 
-- mining address;
-- node/RPC endpoint;
+## 5. Mining mode
+
+Available modes:
+
+| Mode | CPU allocation hint |
+|---|---:|
+| Calm | 40% |
+| Balanced | 70% |
+| Full Bore | 100% |
+
+The selected mode is stored in local storage and restored on the next application launch.
+
+Balanced is the default when no valid saved mode exists.
+
+## 6. Sound setting
+
+The top-bar speaker button controls the block-found sound.
+
+- sound is enabled by default;
+- clicking the control toggles muted/unmuted state;
+- the mute choice is stored in local storage;
+- the preference survives application restarts.
+
+Only the block-found celebration sound is affected.
+
+## 7. Starting mining
+
+When the acknowledgement has been accepted and the address/daemon are valid:
+
+1. choose a mining mode;
+2. press **Start Mining**;
+3. Windows requests UAC approval for `safex-mine-helper.exe`;
+4. the helper launches XMRig;
+5. the UI transitions to MINING once the backend session is operating.
+
+The whole Tauri GUI does not elevate.
+
+## 8. Configuration locking while mining
+
+While mining is active:
+
+- the address field is locked;
+- the daemon field is locked;
+- mining-mode buttons are disabled;
+- Start is unavailable;
+- Stop remains available.
+
+This avoids changing backend identity/connection settings underneath a running mining process.
+
+## 9. Stop and restart
+
+Pressing Stop:
+
+- requests clean XMRig shutdown;
+- keeps the application open;
+- keeps current in-memory block/reject counters;
+- keeps accumulated mining time;
+- leaves the elevated helper available for a later Start in the same app session.
+
+## 10. What persists across full application restart
+
+Persisted:
+
+- accepted Mining Risk Acknowledgement version;
+- valid mining address;
+- daemon endpoint;
 - mining mode;
-- startup behaviour if later supported;
-- log access;
-- application/backend version information.
+- sound-muted preference.
 
-Any setting that resets session state should warn the user first if that reset matters.
+Not persisted:
 
-## 8. Address-change rule
+- Blocks Found counter;
+- Rejected counter;
+- accumulated mining/session time;
+- transient visual state.
 
-Changing the mining address clears the visual reward/session treasure state.
+A new application launch begins a new mining session.
 
-The application should make that behaviour explicit.
+## 11. Changing the address
 
-## 9. MSR elevation
+The current implementation allows the address to be changed only while mining is stopped because the field is locked while mining.
 
-The first mining start may require an elevation prompt.
+When a newly validated address differs from the previously saved address, it begins a fresh in-memory mining session. **Blocks Found resets to 0, Rejected resets to 0, and accumulated mining time resets to 00:00:00.**
 
-The UI should explain why:
+If that product rule changes before release, both the code and this document should be updated together.
 
-> The Safex Mine needs to allow the mining backend to apply the required Windows MSR optimisation. The main application itself does not need to run as Administrator.
+## 12. Invalid/unavailable configuration
 
-Do not present the elevation request without context.
+Mining is prevented or reported clearly when, for example:
 
-## 10. Invalid configuration
+- the Safex address is invalid;
+- the daemon is unavailable;
+- the helper cannot be launched;
+- the XMRig executable is missing;
+- the WinRing driver is missing;
+- the backend fails during startup.
 
-When mining cannot start, show a useful error.
-
-Examples:
-
-- invalid address;
-- node unavailable;
-- backend executable missing;
-- backend failed to start;
-- permission denied;
-- MSR setup failed.
-
-Avoid generic messages such as "Something went wrong" when a more useful reason is available.
-
-## 11. Configuration storage
-
-Configuration should be stored in a normal per-user application-data location rather than beside the executable where practical.
-
-Sensitive information is not expected in the normal mining configuration, but file permissions should still follow normal Windows application practice.
+MSR failure is treated differently: mining may continue in degraded-performance mode.

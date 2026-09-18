@@ -715,10 +715,28 @@ addressInput.addEventListener(
     const address =
       addressInput.value.trim();
 
+    const previousAddress =
+      localStorage.getItem(
+        SETTINGS.address,
+      ) ?? "";
+
     addressInput.value =
       address;
 
     if (await validateAddressField()) {
+
+      if (
+        previousAddress !== address
+      ) {
+
+        blocksFound = 0;
+        rejectedCount = 0;
+        accumulatedMiningMs = 0;
+        miningStartedAt = null;
+
+        updateCounters();
+        updateSessionTimer();
+      }
 
       localStorage.setItem(
         SETTINGS.address,
@@ -1930,7 +1948,7 @@ startButton.addEventListener(
         "ready",
       );
 
-      
+
       statusDot.classList.remove(
         "mining",
       );

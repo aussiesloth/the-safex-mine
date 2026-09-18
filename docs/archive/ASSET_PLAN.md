@@ -1,3 +1,7 @@
+# Archived: Asset Plan
+
+> Historical planning document. This file predates the final static-scene production assets and is retained only for project history. For current assets, see `../ASSETS.md` and `../VISUAL_STATE_SYSTEM.md`.
+
 # Asset Plan
 
 ## 1. Production rule

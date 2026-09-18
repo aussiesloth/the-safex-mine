@@ -1,3 +1,7 @@
+# Archived: GitHub Repository Setup
+
+> Historical repository-planning notes. The repository is now established and release documentation lives in the root README, BUILDING, SECURITY, TROUBLESHOOTING and release files.
+
 # GitHub Repository Setup
 
 ## Suggested repository description

@@ -1,90 +1,145 @@
 # Security and Privilege Model
 
-## 1. Principle
+## 1. Implemented principle
 
-The Safex Mine GUI should run with ordinary user privileges.
+The Safex Mine runs its graphical application with ordinary user privileges and elevates only the component that needs to launch the MSR-capable mining backend.
 
-Administrator rights should be requested only when required for a narrowly defined mining operation, particularly Windows MSR optimisation.
+This split-privilege model is implemented, not merely planned.
 
-## 2. Why this matters
-
-Running the whole desktop application as Administrator would unnecessarily increase the privilege of:
-
-- the UI;
-- asset loading;
-- settings handling;
-- log viewing;
-- update logic;
-- any future web-rendered content.
-
-That is not required for ordinary application behaviour.
-
-## 3. Intended model
+## 2. Process model
 
 ```text
-Standard-user GUI
-      │
-      ├── ordinary configuration / UI work
-      │
-      └── requests privileged mining setup
-                    ↓
-          elevated backend/helper
-                    ↓
-               MSR operation
+Standard-user Tauri GUI
+        |
+        v
+Standard-user Rust backend
+        |  Create private helper session
+        |  Windows UAC / ShellExecute runas
+        v
+Elevated safex-mine-helper.exe
+        |
+        v
+Safex XMRig child process
 ```
 
-The exact implementation must be tested carefully on Windows.
+## 3. Why the GUI is not elevated
 
-## 4. Elevation UX
+Running the whole application as Administrator would unnecessarily elevate:
 
-The user should be told why elevation is being requested before Windows displays the UAC prompt.
+- the WebView/UI;
+- asset loading;
+- settings/local-storage operations;
+- ordinary daemon checks;
+- presentation logic.
 
-Suggested wording:
+None of those tasks requires Administrator privileges.
 
-> The Safex Mine needs to allow the mining backend to apply the required Windows MSR optimisation. The main application remains non-administrative.
+## 4. Helper elevation
 
-## 5. Denied elevation
+On the first Start during an application session, the Rust backend launches `safex-mine-helper.exe` with Windows UAC elevation.
 
-If the user denies elevation:
+The helper remains available across normal Stop -> Start cycles so the user is not repeatedly prompted for elevation.
 
-- do not pretend the optimisation succeeded;
-- show a clear status;
-- explain the mining-performance consequence or block mining if the project decides MSR is mandatory at runtime.
+If the helper session dies, the application discards it and a later Start launches a fresh elevated helper.
 
-The final product policy on whether mining may continue without MSR should be explicit before release.
+## 5. Authenticated IPC
 
-## 6. Backend path integrity
+GUI/backend communication with the elevated helper uses a local named pipe.
 
-The application should launch only the expected bundled/configured mining executable.
+Per-session protections include:
 
-Avoid constructing privileged executable paths from untrusted or user-editable text.
+- random pipe identifier;
+- random authentication token;
+- local-only pipe rejection behaviour;
+- explicit Windows access-control/security descriptor;
+- no persistent privileged network listener.
 
-## 7. Command-line safety
+The helper is not intended to act as a general system service.
 
-Wallet addresses, endpoints and other user-provided values should be passed safely.
+## 6. Executable path integrity
 
-Avoid shell command concatenation when direct process APIs are available.
+The helper launches the expected backend executable from the application's controlled binary directory:
 
-## 8. Logging
+```text
+safex-xmrig-x86_64-pc-windows-msvc.exe
+```
 
-Do not log unnecessary sensitive operating-system information.
+User input does not select an arbitrary privileged executable.
 
-Mining addresses and public node endpoints are not secret in the same way as passwords, but logs should still contain only what is useful for troubleshooting.
+Daemon/address/mode values are passed as process arguments through the native process API rather than shell command concatenation.
 
-## 9. Update security
+## 7. XMRig Job Object
 
-If automatic update functionality is added later, it should use a signed or otherwise verifiable release process.
+Before mining is accepted as running, XMRig is assigned to a Windows Job Object configured with:
 
-Do not make self-updating a blocker for the initial release.
+```text
+JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+```
 
-## 10. Antivirus considerations
+If the elevated helper exits unexpectedly, its Job Object closes and Windows terminates XMRig.
 
-Mining software is commonly flagged by security products.
+Failure to create/configure/assign the Job Object is treated as a startup failure.
 
-The project should:
+## 8. Graceful shutdown
 
-- be transparent that a mining backend is bundled;
-- avoid deceptive installation behaviour;
-- publish hashes for release files where practical;
-- document any known false-positive behaviour;
-- never attempt to disable security software automatically.
+Stop first uses a genuine Windows Ctrl+C console event for XMRig.
+
+The helper protects itself from that event while targeting the mining child. Forced termination is used only if the graceful path does not complete.
+
+## 9. MSR policy
+
+MSR optimisation is an important performance feature and the reason the mining helper is elevated.
+
+However, some systems intentionally block MSR writes through VBS/hypervisor security. The current implementation treats explicit MSR failure as a degraded-performance state rather than forcing users to weaken Windows security.
+
+The project should never automatically disable VBS, antivirus, firewall or similar security controls.
+
+## 10. Daemon/network failure
+
+Loss of the Safex daemon connection is not treated as a reason to elevate a new helper.
+
+XMRig remains alive and can reconnect. The GUI changes to OFFLINE and returns to MINING when jobs resume.
+
+## 11. Logging/telemetry
+
+Backend output is captured for operational telemetry. The project should keep logs limited to information useful for mining diagnosis.
+
+Safex mining addresses and public node endpoints are not passwords, but release diagnostics should still avoid unnecessary machine/user information.
+
+## 12. Unsigned release model
+
+The planned public Windows release is unsigned.
+
+This means users may encounter SmartScreen/trust warnings. Public releases should compensate with transparency:
+
+- public source;
+- exact version/source references;
+- SHA-256 checksums;
+- clear third-party notices;
+- no hidden security exclusions.
+
+## 13. Antivirus considerations
+
+Mining software is commonly flagged or quarantined by endpoint-security products. The Safex Mine's bundled mining backend, elevated helper and WinRing driver should therefore be treated as components likely to attract additional scrutiny from antivirus products.
+
+The Safex Mine must never:
+
+- disable antivirus software;
+- silently add exclusions;
+- obscure the mining backend;
+- restore quarantined files automatically;
+- claim a warning is a false positive without release-specific evidence.
+
+Documentation may explain how a user who has independently verified the release can restore an expected quarantined runtime file or add a narrowly scoped exclusion for the dedicated installation/runtime folder. It must not recommend broad exclusions or disabling real-time protection.
+
+## 14. Remaining release-security work
+
+Before public release:
+
+- remove any remaining dead/unregistered development probe code after compile validation;
+- test installed-file permissions for the packaged `runtime/` resources;
+- test the unsigned installer on a clean Windows system;
+- verify the installed helper is the only component requesting UAC;
+- document observed SmartScreen/AV behaviour;
+- publish release checksums;
+- verify all bundled licence/notices are present in the installed artefact.

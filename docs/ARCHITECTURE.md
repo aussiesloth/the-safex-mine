@@ -1,195 +1,199 @@
 # Architecture
 
-## 1. Architectural principle
+## 1. Overview
 
-The project should separate **mining functionality** from **presentation**.
+The Safex Mine is a Windows Tauri application that separates the ordinary-user graphical interface from the elevated mining process.
 
-The mining backend, process manager, configuration layer and event parser should function independently of the visual mine scene.
-
-This allows the project to:
-
-- validate mining correctness before visual polish;
-- keep the UI responsive;
-- minimise performance impact;
-- change the presentation system later without rewriting the mining core.
-
-## 2. High-level structure
+Current runtime shape:
 
 ```text
-The Safex Mine
-│
-├── Desktop Application
-│   ├── first-run setup
-│   ├── settings
-│   ├── Start / Stop
-│   ├── mining-mode selection
-│   ├── statistics
-│   ├── logs / diagnostics
-│   └── update / release handling
-│
-├── Mining Orchestration
-│   ├── XMRig process lifecycle
-│   ├── generated configuration
-│   ├── node/RPC selection
-│   ├── thread / CPU profile selection
-│   ├── MSR privilege workflow
-│   └── crash / restart detection
-│
-├── Event Layer
-│   ├── backend output parser
-│   ├── hashrate events
-│   ├── accepted-block events
-│   ├── reject/stale events
-│   ├── connection events
-│   └── backend error events
-│
-└── Presentation Layer
-    ├── static scene-state renderer
-    ├── crossfade transitions
-    ├── reward-table nugget layer
-    ├── lightweight FX layer
-    └── fixed application UI
+Tauri / TypeScript GUI (standard user)
+        |
+        | Tauri commands
+        v
+Rust application backend (standard user)
+        |
+        | authenticated local named pipe
+        v
+safex-mine-helper.exe (elevated by UAC)
+        |
+        | native child process
+        v
+Safex XMRig + WinRing0 driver
 ```
 
-## 3. Mining backend boundary
+The GUI owns presentation and configuration. The Rust application backend owns Windows process/session orchestration. The elevated helper owns the XMRig child process and the privilege-sensitive mining lifecycle.
 
-The desktop application should treat the mining engine as an external worker process.
+## 2. Frontend
 
-Responsibilities of the application:
+The frontend is implemented in TypeScript and rendered inside the Tauri WebView.
 
-- generate or validate mining configuration;
-- launch the backend;
-- capture stdout/stderr;
-- interpret relevant events;
-- stop the backend cleanly;
-- detect unexpected termination;
-- display errors in a useful form.
+It owns:
 
-Responsibilities of the backend:
+- Safex Cash address and daemon input;
+- mining-mode selection;
+- Start/Stop controls;
+- status and statistics;
+- scene transitions;
+- block/reject counters;
+- session-time display;
+- the block-found sound and mute preference;
+- local persistence of user-facing settings.
 
-- actual hashing;
-- node/RPC communication;
-- share/block submission;
-- low-level CPU optimisation;
-- MSR-related mining behaviour where supported.
+The main frontend entry point is `src/main.ts`, with application styling in `src/styles.css`.
 
-## 4. Event-driven UI
+## 3. Tauri/Rust application backend
 
-The application should not infer state from artwork.
+The Rust side in `src-tauri/src/` exposes the production command surface used by the frontend for:
 
-Instead:
+- backend connectivity;
+- Safex address validation;
+- daemon validation/status;
+- helper/session management;
+- mining Start/Stop/status.
+
+Earlier development-only ping/XMRig/probe commands are not registered in the production invoke handler.
+
+The GUI does not construct a shell command and run it as Administrator. Instead, the Rust backend creates a controlled helper session and asks Windows to elevate only the helper executable.
+
+## 4. Elevated helper
+
+`src-tauri/helper/` builds `safex-mine-helper.exe`.
+
+The helper:
+
+- starts elevated through Windows UAC;
+- accepts commands only through the expected local pipe session;
+- launches the expected XMRig executable;
+- passes the validated daemon, address and CPU-profile arguments;
+- captures XMRig stdout/stderr;
+- parses mining telemetry;
+- supervises graceful/forced shutdown;
+- owns a Windows Job Object that contains XMRig.
+
+## 5. GUI/helper IPC
+
+Each helper session uses:
+
+- a random local named-pipe identifier;
+- a random authentication token;
+- an explicit Windows security descriptor;
+- local-only pipe behaviour.
+
+The helper is intended to serve the launching application session rather than expose a general privileged service.
+
+If the GUI/helper pipe closes unexpectedly, the helper exits. Because the helper also owns the XMRig Job Object, helper termination tears down the mining child.
+
+## 6. Mining child process
+
+In development, the helper launches XMRig from:
 
 ```text
-backend output
-    ↓
-parser
-    ↓
-normalised application event
-    ↓
-session/state manager
-    ↓
-UI + scene response
+src-tauri\binaries\safex-xmrig-x86_64-pc-windows-msvc.exe
 ```
 
-Example:
+For packaged builds, the helper, XMRig and WinRing driver are bundled together under the Tauri `runtime/` resource directory. The helper resolves its own executable directory and uses that directory as the XMRig working directory so the bundled driver is found beside the miner.
+
+Current command-line shape:
 
 ```text
-Backend reports accepted block
-    ↓
-BLOCK_ACCEPTED
-    ↓
-increment session accepted count
-add reward-table nugget
-switch scene to BLOCK_FOUND
-run celebration FX
-wait configured duration
-return scene to MINING
+--daemon
+--algo=rx/sfx
+--url <daemon>
+--user <Safex Cash address>
+--cpu-max-threads-hint=<40|70|100>
+--no-color
+--print-time=5
 ```
 
-## 5. Visual layering
+## 7. Mining profiles
 
-A useful rendering order is:
+The UI profile names map directly to XMRig CPU allocation hints:
 
-```text
-background mine scene
-    ↓
-state image / miner scene
-    ↓
-reward-table nugget layer
-    ↓
-temporary effects
-    ↓
-fixed application UI
-    ↓
-branding
-```
+| UI mode | Helper profile | XMRig hint |
+|---|---|---:|
+| Calm | `calm` | 40 |
+| Balanced | `balanced` | 70 |
+| Full Bore | `full` | 100 |
 
-The fixed UI should not move or crossfade when the visual state changes.
+These are allocation hints, not guaranteed performance rankings.
 
-Only the scene layer should transition.
+## 8. Telemetry flow
 
-## 6. Crossfade behaviour
+XMRig stdout/stderr is read by the helper and converted into compact telemetry that includes, among other fields:
 
-State transitions should use a short fade or crossfade to avoid abrupt image replacement.
+- MSR success/failure;
+- daemon connection state;
+- current hashrate;
+- worker-thread count;
+- accepted count;
+- rejected count;
+- recent backend lines.
 
-The duration should be tuned experimentally. The first implementation should favour a subtle transition rather than a slow cinematic fade.
+The frontend polls helper status at approximately two-second intervals.
 
-Potential initial target:
+Accepted/rejected counters from the backend are compared with the frontend's last-seen values. Each newly observed accepted event invokes the same block-found handler that updates the counter, switches the scene and plays the optional sound.
 
-- 200–400 ms for ordinary state changes;
-- slightly longer only if visually justified.
+## 9. Connection model
 
-## 7. UI framework
+The application distinguishes between:
 
-The project may continue with the existing desktop-application framework decision, but the visual design no longer requires a heavy character-animation engine.
+- helper/backend process availability;
+- daemon connection availability;
+- active mining telemetry.
 
-If a lightweight 2D renderer is already part of the project, it can still be used for:
+When XMRig reports that there are no active pools/jobs, the frontend enters OFFLINE without immediately destroying the mining session. XMRig can reconnect on its own. When a new job arrives, the UI returns to MINING.
 
-- crossfades;
-- nugget sprites;
-- fireworks;
-- sparkles;
-- glow;
-- dust.
+The configured daemon is also validated independently so the user can see whether the endpoint itself is reachable.
 
-The state system should not depend on any specific rendering library.
+## 10. Failure containment and recovery
 
-## 8. State ownership
+### Helper/XMRig failure
 
-The application state manager should be authoritative for:
+Unexpected helper/session failure is treated as a failed mining session. The UI leaves MINING, unlocks the configuration fields and allows a fresh Start, which launches a new elevated helper.
 
-- whether mining is running;
-- which mining profile is active;
-- whether the backend is connected;
-- current session counters;
-- current visual state;
-- whether a transient celebration/rejection state is in progress.
+### Daemon/network loss
 
-The renderer should remain a consumer of that state.
+Daemon loss does not automatically kill XMRig. The session remains alive so the backend can reconnect without a new UAC prompt.
 
-## 9. Failure isolation
+### Job Object
 
-Visual failure must never stop mining.
+XMRig is assigned to a Windows Job Object with `JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`. If the helper terminates unexpectedly, Windows terminates the attached mining process.
 
-Examples:
+## 11. Stop behaviour
 
-- missing fireworks asset;
-- failed sparkle emitter;
-- state image load error.
+A normal Stop requests a genuine Ctrl+C event for XMRig. The helper temporarily protects itself from that console control event so the request reaches the mining child without killing the helper.
 
-These should degrade gracefully while mining continues.
+If graceful shutdown does not complete, forced termination is available as a fallback.
 
-Mining-backend failure, by contrast, must be surfaced immediately because it affects the user's primary task.
+The elevated helper remains alive after a normal Stop so another Start in the same application session does not need a new UAC prompt.
 
-## 10. Future animation compatibility
+## 12. Presentation architecture
 
-If full character animation is revisited later, it should plug into the existing event layer.
+The visual system uses five authored static images in `src/assets/scenes/`.
 
-The mining core should not need to know whether `BLOCK_ACCEPTED` is represented by:
+Two image elements are alternated for crossfades. The controls/statistics/header stay fixed while only the scene layer changes.
 
-- a still image;
-- a 5-second celebration animation;
-- a 3D character;
-- no visual character at all.
+No continuously animated character rig is part of the current release path.
 
-That separation is intentional.
+## 13. Configuration persistence
+
+The frontend stores ordinary user preferences in browser local storage:
+
+- mining address;
+- daemon endpoint;
+- selected mining mode;
+- sound-muted state.
+
+Mining-session counters and elapsed mining time are in-memory session state and reset when the application is fully restarted.
+
+## 14. Development and packaged paths
+
+The standard-user backend resolves the elevated helper in this order:
+
+1. packaged Tauri resource: `runtime/safex-mine-helper.exe`;
+2. development fallback: `src-tauri/helper/target/release/safex-mine-helper.exe`.
+
+The release-only Tauri configuration maps the helper, XMRig and WinRing driver into one packaged `runtime/` directory. This keeps the installed privilege/process model the same as development while removing source-tree path assumptions from the packaged application.
+
+The remaining packaging work is validation of the generated installer on a clean Windows system.

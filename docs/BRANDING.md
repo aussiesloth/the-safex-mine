@@ -1,57 +1,91 @@
 # Branding
 
-## 1. Product name
+## 1. Product identity
 
-Current project name:
+The product name is:
 
 **The Safex Mine**
 
-The application is intended as a community-facing Safex Cash solo miner.
+It should be described as a **community Safex Cash mining application**.
 
-## 2. Safex logo
+The Safex Mine is not presented as an official Safex desktop distribution and should not imply that Safex signs, publishes, maintains or supports the application.
 
-A candidate Safex gradient wordmark has been identified for use in the application.
+## 2. Safex branding permission
 
-Preferred placement:
+Permission has been given for Safex/Safex Cash branding to be used in this application.
 
-- top-left of the application window;
-- fixed in place across all visual states;
-- sufficient clear space around the mark;
-- not crossfaded with the scene.
+That branding permission is separate from software-distribution responsibility. The planned Windows release is unsigned, and the repository/source is intended to provide transparency for users who want to inspect how the miner works.
 
-## 3. Permission
+## 3. Branding assets
 
-Use of the Safex logo/wordmark in the distributed application and repository should be confirmed with the appropriate rights holder before public release.
+The repository contains the Safex gradient wordmark used by the current app header:
 
-Until permission is confirmed:
+```text
+src/assets/branding/safex-gradient-logo.svg
+```
 
-- treat the logo as a candidate asset;
-- do not assume redistribution rights;
-- do not include it in public release packages.
+It also retains the official Safex Cash logo asset at:
 
-## 4. Vector use
+```text
+src/assets/branding/safex-cash.svg
+```
 
-If permission is granted, retain the logo as SVG where the application framework supports vector rendering.
+The official Safex Cash logo is included pursuant to the Safex/Safex Cash branding permission described above. It is a branding asset, not application code, and is not covered by The Safex Mine's GPL-3.0 software licence.
 
-This provides:
+### Header wordmark
 
-- sharp display at varying Windows scale factors;
-- smaller and cleaner asset handling;
-- consistent rendering at multiple resolutions.
+Current placement is the **top-right** of the app header, with:
 
-## 5. Product identity
+- The Safex Mine product title on the left;
+- connection/mining status near the right;
+- the sound toggle;
+- the Safex wordmark at the far right.
 
-The mine artwork should establish the project's personality without creating confusion about what the software does.
+The wordmark remains part of the fixed app chrome and does not crossfade with scene artwork.
 
-Branding should support, not obscure:
+## 4. Safex Cash visual motif
 
-- mining status;
-- performance mode;
-- hashrate;
-- connection status;
-- accepted/rejected results;
-- Start/Stop controls.
+The scene artwork uses rectangular gold bullion bars to represent successful Safex Cash finds.
+
+Each bar uses the full Safex Cash rectangular-note motif rather than a round coin symbol.
+
+Visual rules:
+
+- rectangular bars on the table represent previous finds/treasure;
+- reward bars are **not** visibly embedded in the rock face;
+- the rock face shows only glowing ore/mineral seams;
+- on BLOCK FOUND, the miner proudly holds one newly discovered Safex Cash bar;
+- rejected material remains an ordinary rock/fool's-gold object rather than a Safex Cash bar.
+
+## 5. Scene branding
+
+The Safex wordmark is not baked into the scene images. This avoids duplicate branding and keeps the header as the single stable wordmark location.
+
+The Safex Cash bar motif is part of the scene art itself.
 
 ## 6. Repository wording
 
-Unless permission or official project status explicitly supports stronger wording, describe The Safex Mine as a **Safex Cash community mining application** rather than implying that it is official Safex software.
+Use wording such as:
+
+> Community Windows solo miner for Safex Cash.
+
+Avoid wording that implies:
+
+- official Safex desktop software;
+- Safex code-signing responsibility;
+- Safex maintenance/support responsibility;
+- distribution through an official Safex release channel unless that later becomes true.
+
+## 7. Application icon
+
+The custom The Safex Mine application icon is complete.
+
+Its production source is:
+
+```text
+src/assets/branding/app-icon/safex_cash_mining_icon.png
+```
+
+The generated Tauri icon set is stored under `src-tauri/icons/` and includes the Windows `.ico` and the standard PNG/Store/Square variants used by packaging.
+
+The icon combines recognisable Safex Cash branding with a pickaxe/mining motif and is intentionally distinguishable from the standalone official Safex Cash logo.
