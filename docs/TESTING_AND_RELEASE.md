@@ -213,6 +213,14 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [x] graceful Ctrl+C stop works;
 - [x] no code disables antivirus/VBS automatically.
 
+### Documentation screenshots
+
+The tested Windows installation flow is now documented in `docs/WINDOWS_INSTALLATION.md`. Before public release, replace its bracketed screenshot placeholders with the captured clean-machine images. The helper UAC image may be taken as a tightly cropped still from the clean-machine test video.
+
+### Licence/notices status
+
+Mechanical checks confirm that the project GPL-3.0 file, GPL-3.0-only package metadata, `THIRD_PARTY_NOTICES.md`, and the exact WinRing0 redistribution notice are present and mapped into the release bundle. The remaining licence task is a final review of the exact locked JavaScript/Rust dependency licences and any attribution texts they require.
+
 ## 7. Release artefacts
 
 Planned release set:
