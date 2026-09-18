@@ -2,9 +2,9 @@
 
 All notable public-facing changes to The Safex Mine will be recorded here.
 
-The project is currently pre-release, so the entries below describe the current development state rather than a published stable release.
+The first public release is version **1.0.0**.
 
-## [Unreleased]
+## [1.0.0] - 2026-09-18
 
 ### Added
 
@@ -48,9 +48,8 @@ The project is currently pre-release, so the entries below describe the current 
 - Defender Full scan with the narrow exclusion in place.
 - Uninstall without UAC, including confirmation that user-created Defender exclusions remain for manual cleanup.
 
-### Pending before public release
+### Release preparation
 
-- Add final installation-guide screenshots.
-- Final third-party licence/release bundle review.
-- Build the final installer from the release commit/tag and publish its SHA-256.
-- Final source-format/documentation tidy pass.
+- Clean-machine installation screenshots are included in the Windows installation guide.
+- The locked Windows dependency graph has been audited and dependency licence/attribution material is included in the release bundle.
+- The final public installer must be built from the v1.0.0 release commit/tag and its SHA-256 published with the release.
