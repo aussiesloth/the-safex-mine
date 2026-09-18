@@ -1,6 +1,8 @@
 {
   "bundle": {
-    "targets": ["nsis"],
+    "targets": [
+      "nsis"
+    ],
     "licenseFile": "../LICENSE",
     "resources": {
       "helper/target/release/safex-mine-helper.exe": "runtime/safex-mine-helper.exe",
@@ -8,7 +10,8 @@
       "binaries/WinRing0x64.sys": "runtime/WinRing0x64.sys",
       "../LICENSE": "licenses/LICENSE",
       "../THIRD_PARTY_NOTICES.md": "licenses/THIRD_PARTY_NOTICES.md",
-      "../THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt": "licenses/WinRing0-LICENSE.txt"
+      "../THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt": "licenses/WinRing0-LICENSE.txt",
+      "../THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt": "licenses/DEPENDENCY_LICENSES.txt"
     }
   }
 }
