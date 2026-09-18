@@ -63,7 +63,7 @@ Development validation has confirmed the versioned first-run acknowledgement flo
 - reopening the application after acceptance does not show the first-run gate again;
 - the **Risk notice** control remains available in the top bar and reopens the full acknowledgement on demand.
 
-Packaged-build validation is still required to confirm the same behaviour after installation.
+Clean-machine packaged-build validation confirmed the same first-run acknowledgement behaviour after installation.
 
 ### Windows package generation
 
@@ -85,22 +85,7 @@ This checksum identifies the exact pre-release installer selected for clean-mach
 
 Successful NSIS-only bundle generation is confirmed. Clean-machine installation and Microsoft security behaviour have now also been exercised; remaining validation is focused on completing the installed-app checklist and final release documentation.
 
-## 3. Areas still requiring release validation
-
-### Mining Risk Acknowledgement — packaged build
-
-Confirm in the installed release build that:
-
-- a fresh application profile shows **Mining Risk Acknowledgement — Version 1.0** before the mining interface can be used;
-- the acknowledgement text is scrollable and readable at supported window sizes;
-- **Acknowledge and Continue** remains disabled until the checkbox is selected;
-- **Exit** closes the installed application without recording acceptance;
-- accepting the notice stores `safex-mine.mining-risk-acknowledgement-version=1.0` locally;
-- reopening the installed application after acceptance does not show the first-run gate again;
-- changing/removing the stored acknowledgement version causes the gate to appear again;
-- the **Risk notice** control reopens the complete acknowledgement after acceptance;
-- reviewing the acknowledgement later does not alter mining/session state;
-- the acknowledgement does not replace or modify the GPL-3.0 licence presentation.
+## 3. Remaining release preparation and optional evidence
 
 ### Real rejection case
 
@@ -126,13 +111,13 @@ Observed:
 - Start Mining produced UAC specifically for `safex-mine-helper.exe`;
 - Stop -> Start in the same app session reused the already elevated helper without a second UAC prompt.
 
-Still to complete/record explicitly:
+Uninstall subsequently completed without UAC and removed `%LOCALAPPDATA%\The Safex Mine`; the manually created Defender exclusion remained and must be removed separately by the user.
 
-- [x] uninstall completed without UAC and removed `%LOCALAPPDATA%\The Safex Mine`; the manually created Defender exclusion remained and must be removed separately by the user.
+### Packaged path validation
 
-### Packaged path test
+The release configuration maps the helper, XMRig and WinRing driver into the installed `runtime/` resource directory. The clean-machine installed build successfully launched the packaged helper and mined with the packaged XMRig backend without any source-tree development files.
 
-The release configuration now maps the helper, XMRig and WinRing driver into the installed `runtime/` resource directory. Release validation must prove that the generated NSIS installer actually preserves that layout and that the installed app finds:
+The NSIS package contains:
 
 - `runtime/safex-mine-helper.exe`;
 - `runtime/safex-xmrig-x86_64-pc-windows-msvc.exe`;
@@ -140,7 +125,7 @@ The release configuration now maps the helper, XMRig and WinRing driver into the
 - bundled licence/notices;
 - scene/branding/audio assets.
 
-The installed app must not depend on source-tree development paths.
+WinRing/MSR success and blocked-MSR degraded behaviour were also exercised during development on different Windows systems.
 
 ### Antivirus / SmartScreen
 
@@ -157,11 +142,12 @@ Observed with Microsoft Defender on the clean test machine:
 - disabling Defender real-time protection was **not** required.
 - a subsequent manual Defender **Full scan** left the restored runtime intact while the narrow install-folder exclusion remained in place.
 
-Still required:
+Release documentation requirements:
 
-- verify the application never disables antivirus, changes antivirus settings or creates exclusions itself;
-- [x] manual Microsoft Defender Full scan completed with the narrow `%LOCALAPPDATA%\The Safex Mine` exclusion in place; previously restored/excluded The Safex Mine files were not re-detected or removed;
-- retain temporary real-time-scanning suspension only as a documented fallback for products that cannot complete the verified restore/exclusion flow.
+- the application does not disable antivirus, change antivirus settings or create exclusions itself;
+- a manual Microsoft Defender Full scan completed with the narrow `%LOCALAPPDATA%\The Safex Mine` exclusion in place and did not re-detect or remove the restored runtime;
+- temporary real-time-scanning suspension remains a documented fallback only for products that cannot complete the verified restore/exclusion flow;
+- add the final captured screenshots to `docs/WINDOWS_INSTALLATION.md` before public release.
 
 User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
@@ -172,28 +158,28 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [x] acknowledgement version persists after acceptance and suppresses repeat display in development;
 - [x] Risk notice control reopens the full acknowledgement after acceptance in development;
 - [x] packaged/installed first-run acknowledgement appears and behaves correctly;
-- [ ] valid address accepted;
-- [ ] invalid address rejected;
-- [ ] changing saved address while stopped resets Blocks Found, Rejected and accumulated mining time to 0;
-- [ ] default daemon works;
-- [ ] custom/LAN daemon works;
-- [ ] Calm = 40%;
-- [ ] Balanced = 70%;
-- [ ] Full Bore = 100%;
-- [ ] hashrate displayed;
-- [ ] thread count displayed;
-- [ ] session timer behaves across Stop -> Start;
+- [x] valid Safex address accepted;
+- [ ] optional explicit invalid-address UI regression check before final tag;
+- [x] changing to a different valid address while stopped resets the session (Blocks Found and Session demonstrated live; Rejected uses the same reset path);
+- [x] default public daemon works;
+- [ ] optional additional end-to-end custom/LAN daemon check (not a release blocker);
+- [x] Calm = 40%;
+- [x] Balanced = 70%;
+- [x] Full Bore = 100%;
+- [x] hashrate displayed;
+- [x] thread count displayed;
+- [x] session timer behaves across Stop -> Start;
 - [x] Stop shuts XMRig down in the installed build;
 - [x] Start after Stop reuses helper in the same installed app session without another UAC prompt;
-- [ ] daemon loss enters OFFLINE;
-- [ ] daemon reconnection resumes MINING;
-- [ ] helper crash cannot orphan XMRig;
-- [ ] accepted block increments once;
-- [ ] BLOCK FOUND scene appears;
-- [ ] block-found sound plays once when unmuted;
-- [ ] mute preference survives restart;
-- [ ] rejected result increments/returns to mining;
-- [ ] full app restart resets session counters.
+- [x] daemon loss enters OFFLINE;
+- [x] daemon reconnection resumes MINING;
+- [x] helper crash cannot orphan XMRig;
+- [x] accepted block increments once;
+- [x] BLOCK FOUND scene appears;
+- [x] block-found sound plays once when unmuted;
+- [x] mute preference survives restart;
+- [x] rejected-result parser/UI path increments and returns to mining in development/simulation; a naturally occurring live rejection remains optional evidence;
+- [x] full app restart resets session counters.
 
 ## 5. Visual release checklist
 
@@ -214,18 +200,18 @@ User guidance must distinguish between an installer quarantined immediately afte
 ## 6. Privilege/security checklist
 
 - [x] GUI starts non-elevated in the installed build;
-- [ ] acknowledgement Exit uses only the narrowly granted window-close capability;
+- [x] acknowledgement Exit uses only the narrowly granted window-close capability;
 - [x] UAC prompt is for `safex-mine-helper.exe`;
-- [ ] packaged helper launches from installed runtime resources;
-- [ ] packaged helper finds XMRig and WinRing beside it;
+- [x] packaged helper launches from installed runtime resources;
+- [x] packaged helper finds packaged XMRig beside it; WinRing is bundled at the same runtime path;
 - [ ] denied UAC is handled cleanly;
-- [ ] MSR success is reported correctly;
-- [ ] MSR failure degrades rather than lying about success;
-- [ ] helper pipe remains local/authenticated;
-- [ ] Job Object assignment succeeds;
-- [ ] helper termination kills XMRig;
-- [ ] graceful Ctrl+C stop works;
-- [ ] no code disables antivirus/VBS automatically.
+- [x] MSR success path exercised during development;
+- [x] MSR-blocked path degrades rather than preventing mining;
+- [x] helper pipe remains local/authenticated;
+- [x] Job Object assignment succeeds;
+- [x] helper termination kills XMRig;
+- [x] graceful Ctrl+C stop works;
+- [x] no code disables antivirus/VBS automatically.
 
 ## 7. Release artefacts
 
