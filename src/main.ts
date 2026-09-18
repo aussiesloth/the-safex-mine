@@ -1948,7 +1948,7 @@ startButton.addEventListener(
         "ready",
       );
 
-      
+
       statusDot.classList.remove(
         "mining",
       );
