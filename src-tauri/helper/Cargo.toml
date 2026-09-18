@@ -1,6 +1,6 @@
 [package]
 name = "safex-mine-helper"
-version = "0.1.0"
+version = "1.0.0"
 description = "Elevated Windows mining helper for The Safex Mine"
 authors = ["aussiesloth"]
 license = "GPL-3.0-only"
