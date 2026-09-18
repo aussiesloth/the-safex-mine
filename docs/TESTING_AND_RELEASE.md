@@ -83,7 +83,7 @@ The SHA-256 recorded for the current clean-machine test artefact is:
 
 This checksum identifies the exact pre-release installer selected for clean-machine validation. Final public-release checksums must still be generated from the exact artefact ultimately published.
 
-Successful bundle generation does not by itself validate the installed resource paths, antivirus behaviour or clean-machine experience; those checks remain outstanding.
+Successful NSIS-only bundle generation is confirmed. Clean-machine installation and Microsoft security behaviour have now also been exercised; remaining validation is focused on completing the installed-app checklist and final release documentation.
 
 ## 3. Areas still requiring release validation
 
@@ -110,17 +110,24 @@ If practical, capture and retain a real rejection example before v1.0.
 
 ### Clean-machine installer test
 
-Still required:
+A clean Windows test machine with no development toolchain has successfully exercised the NSIS installer.
 
-- fresh Windows machine or VM;
-- no development toolchain;
-- install the NSIS `-setup.exe`;
-- first run;
-- Mining Risk Acknowledgement;
-- UAC helper launch;
-- mining;
-- Stop/restart;
-- uninstall.
+Observed:
+
+- GitHub-hosted installer downloaded successfully;
+- SmartScreen displayed **Windows protected your PC** / **Unknown publisher** and allowed continuation through **More info -> Run anyway**;
+- NSIS installed to `%LOCALAPPDATA%\The Safex Mine`;
+- installation completed successfully;
+- Microsoft Defender quarantined the downloaded installer as `Trojan:Win32/Bearfoos.A!ml`;
+- Microsoft Defender quarantined the packaged XMRig backend as `Trojan:Win64/HashvaultMiner.A`;
+- restoring both expected files and excluding only `%LOCALAPPDATA%\The Safex Mine` allowed the installed miner to run normally;
+- no helper or WinRing quarantine was observed in this test.
+
+Still to complete/record explicitly:
+
+- packaged Mining Risk Acknowledgement checks;
+- Stop/restart behaviour in the installed build;
+- uninstall behaviour.
 
 ### Packaged path test
 
@@ -138,16 +145,21 @@ The installed app must not depend on source-tree development paths.
 
 The release contains components that antivirus/endpoint-security products commonly classify or quarantine: the CPU-mining backend, elevated helper and WinRing driver. Treat AV intervention as an expected release scenario that must be tested and documented rather than as an exceptional user error.
 
-For the actual unsigned NSIS release installer:
+Observed with Microsoft Defender on the clean test machine:
 
-- record whether the installer is blocked before launch;
-- record the exact SmartScreen flow presented;
-- record which packaged files, if any, are quarantined or removed by Microsoft Defender and any other products used during release testing;
-- verify that restoring an expected runtime file and applying a narrowly scoped installation/runtime-folder exclusion allows the verified release to operate;
+- SmartScreen blocked first execution until **More info -> Run anyway** was selected;
+- the installer reported **Unknown publisher**;
+- the installed path was `%LOCALAPPDATA%\The Safex Mine`;
+- Defender quarantined the downloaded installer as `Trojan:Win32/Bearfoos.A!ml`;
+- Defender quarantined the installed XMRig backend as `Trojan:Win64/HashvaultMiner.A`;
+- restoring the two expected files and excluding only the installation folder allowed mining to run normally;
+- disabling Defender real-time protection was **not** required.
+
+Still required:
+
 - verify the application never disables antivirus, changes antivirus settings or creates exclusions itself;
-- document the exact installed path users should exclude only after the final installer path has been validated;
-- test the pre-install exclusion workflow;
-- test the fallback workflow where real-time scanning is paused only long enough to install the verified artefact, create the narrow installation-folder exclusion and re-enable protection.
+- confirm behaviour after a later manual/scheduled Defender scan with the narrow installation-folder exclusion in place;
+- retain temporary real-time-scanning suspension only as a documented fallback for products that cannot complete the verified restore/exclusion flow.
 
 User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
