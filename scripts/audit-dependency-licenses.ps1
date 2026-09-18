@@ -50,7 +50,8 @@ function Get-ReachableCargoPackages {
 function Get-NpmRuntimePackages {
     # Windows PowerShell 5.1 ConvertFrom-Json rejects npm lockfiles because
     # package-lock v3 contains an empty-string root package key. Let Node.js
-    # parse its own lockfile and return a simple JSON array instead.
+    # parse its own lockfile. Use a temporary script file instead of node -e
+    # so PowerShell 5.1 cannot mangle multiline JavaScript quoting.
     $nodeScript = @'
 const fs = require("fs");
 const lock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
@@ -67,9 +68,24 @@ const rows = Object.entries(lock.packages || {})
 process.stdout.write(JSON.stringify(rows));
 '@
 
-    $raw = & node -e $nodeScript 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        throw ("Node.js could not parse package-lock.json" + [Environment]::NewLine + ($raw -join [Environment]::NewLine))
+    $tempScript = Join-Path ([System.IO.Path]::GetTempPath()) "safex-mine-license-audit-npm.js"
+
+    try {
+        [System.IO.File]::WriteAllText(
+            $tempScript,
+            $nodeScript,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+
+        $raw = & node $tempScript 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw ("Node.js could not parse package-lock.json" + [Environment]::NewLine + ($raw -join [Environment]::NewLine))
+        }
+    }
+    finally {
+        if (Test-Path $tempScript) {
+            Remove-Item $tempScript -Force -ErrorAction SilentlyContinue
+        }
     }
 
     $rows = ($raw -join [Environment]::NewLine) | ConvertFrom-Json
