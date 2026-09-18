@@ -228,7 +228,7 @@ The GitHub release page, Mining Risk Acknowledgement and helper UAC steps are do
 
 ### Licence/notices status
 
-Mechanical checks confirm that the project GPL-3.0 file, GPL-3.0-only package metadata, `THIRD_PARTY_NOTICES.md`, and the exact WinRing0 redistribution notice are present and mapped into the release bundle. The locked Windows dependency graph has now been audited with zero missing licence metadata. The release build regenerates and bundles `THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt` from package-provided licence/notice files, and exact-version source locations are documented for the MPL-2.0 components.
+Mechanical checks confirm that the project GPL-3.0 file, GPL-3.0-only package metadata, `THIRD_PARTY_NOTICES.md`, and the exact WinRing0 redistribution notice are present and mapped into the release bundle. The locked Windows dependency graph has now been audited with zero missing licence metadata. The release build regenerates and bundles `THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt` from package-provided licence/notice files. `THIRD_PARTY_LICENSES/PACKAGE_ATTRIBUTIONS.md` supplies package-specific fallback attribution/source details for the small set of published crate archives without a root licence file, and exact-version source locations are documented for the MPL-2.0 components.
 
 ## 7. Release artefacts
 
