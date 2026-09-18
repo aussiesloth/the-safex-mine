@@ -60,11 +60,21 @@ Implemented:
 - dedicated `npm run tauri:build` wrapper that builds the helper before packaging;
 - bundled project/third-party licence notices.
 
-Still required:
+Validated:
 
-- run the packaged build on Windows;
-- create/test the Windows installer artefact;
-- test uninstall behaviour.
+- NSIS-only packaged build on Windows;
+- GitHub-hosted clean-machine installer download;
+- SmartScreen/Defender installation and recovery path;
+- installed mining/helper UAC behaviour;
+- Defender Full scan with the narrow install-folder exclusion;
+- uninstall behaviour.
+
+Remaining release-preparation work:
+
+- add the captured installation-guide screenshots;
+- complete the final dependency-licence/notices review;
+- perform the final source-format/documentation tidy;
+- build and checksum the final installer from the intended release commit/tag.
 
 ### Build reproducibility
 
