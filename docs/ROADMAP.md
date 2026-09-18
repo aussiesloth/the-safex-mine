@@ -48,7 +48,7 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 - block-found cash-register sound;
 - persistent mute/unmute control.
 
-## Current phase: release readiness
+## Current phase: v1.0.0 release
 
 ### Packaging
 
@@ -71,10 +71,10 @@ Validated:
 
 Remaining release-preparation work:
 
-- add the captured installation-guide screenshots;
-- complete the final dependency-licence/notices review;
-- perform the final source-format/documentation tidy;
-- build and checksum the final installer from the intended release commit/tag.
+- perform the final source/documentation consistency check;
+- merge the release-preparation branch;
+- build the final v1.0.0 installer from the merged release commit/tag;
+- publish the SHA-256 for that exact installer.
 
 ### Build reproducibility
 
@@ -89,22 +89,24 @@ Remaining release-preparation work:
 
 ### Documentation and licensing
 
-- finalise third-party notices/licence bundle;
-- include corresponding Safex XMRig source information;
-- ensure the bundled WinRing0 redistribution notice is included in release artefacts;
-- complete README/build/troubleshooting/security documentation;
-- prepare release notes/changelog.
+Completed for v1.0.0 preparation:
+
+- third-party dependency licence audit;
+- generated dependency licence bundle;
+- fallback package attributions;
+- corresponding Safex XMRig source information;
+- bundled WinRing0 redistribution notice;
+- README/build/troubleshooting/security documentation;
+- Windows installation guide with clean-machine screenshots;
+- v1.0.0 changelog preparation.
 
 ### Release validation
 
-- clean-machine/VM install test;
-- verify UAC/helper behaviour after installation;
-- verify MSR success and degraded paths;
-- verify default/custom daemon flows;
-- verify accepted-block event and sound;
-- attempt/collect a real rejected-result case if available;
-- test SmartScreen/antivirus behaviour;
-- generate SHA-256 checksums.
+Completed release-gate validation includes clean-machine installation/uninstall, helper UAC behaviour, MSR success and degraded paths, default-daemon mining, accepted-block presentation/sound, SmartScreen/Defender behaviour and full-scan survival with the narrow exclusion.
+
+A naturally occurring rejected-result capture and an additional custom/LAN daemon regression run remain optional evidence, not v1.0.0 release blockers.
+
+The final SHA-256 is generated only after the exact v1.0.0 public installer is built.
 
 ## Public release
 
