@@ -4,7 +4,7 @@
 
 **The Safex Mine** is a Windows graphical solo miner for Safex Cash (SFX). It wraps a Safex-compatible XMRig backend with configuration, privilege handling, telemetry, recovery and a themed state-driven user interface.
 
-Current development version: `0.1.0`.
+Current release version: `1.0.0`.
 
 ## 2. Current release target
 
