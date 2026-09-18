@@ -750,7 +750,7 @@ fn record_miner_line(
                     hashrate,
                 );
         }
-    }    
+    }
 
 
     if telemetry.recent_lines.len()
@@ -859,7 +859,7 @@ fn telemetry_summary(
         .unwrap_or_else(|| {
             "0.0"
                 .to_string()
-        });    
+        });
 
     let threads =
     telemetry
@@ -871,7 +871,7 @@ fn telemetry_summary(
             "PENDING"
                 .to_string()
         });
-        
+
     let last =
         telemetry
             .recent_lines
