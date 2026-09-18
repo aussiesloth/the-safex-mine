@@ -85,6 +85,8 @@ Those links provide the exact-version source archives used by Cargo's registry e
 
 The generated dependency-licence bundle also preserves the licence/notice material supplied by those packages.
 
+A small set of published crate archives does not contain a root-level licence file despite declaring a licence in package metadata. Package-specific fallback attribution/source details for those cases are preserved in `THIRD_PARTY_LICENSES/PACKAGE_ATTRIBUTIONS.md` and bundled with the release.
+
 ## WinRing driver
 
 The Windows development/runtime layout uses:
@@ -139,5 +141,5 @@ Current release-preparation status:
 - [x] the release configuration bundles this `THIRD_PARTY_NOTICES.md`;
 - [x] the exact OpenLibSys WinRing0 redistribution notice is preserved in `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` and bundled with the release;
 - [x] the pinned Safex-compatible XMRig source repository and commit are documented so corresponding source can be obtained;
-- [x] audited the locked Windows dependency graph; no missing licence metadata was found, MPL-2.0 source availability is documented, and package-provided licence/notice files are generated into the release bundle;
+- [x] audited the locked Windows dependency graph; no missing licence metadata was found, MPL-2.0 source availability is documented, package-provided licence/notice files are generated into the release bundle, and fallback package-specific attributions are bundled for archives without a root licence file;
 - [ ] publish the SHA-256 checksum generated from the exact final public installer.
