@@ -56,4 +56,4 @@ Unsigned distribution is not an invitation to bypass security warnings blindly. 
 
 ## Supported versions
 
-The project is currently pre-release. A formal supported-version table will be added when public versioned releases begin.
+The first public release is **v1.0.0**. Security fixes are provided against the current public release unless a later support policy explicitly states otherwise.
