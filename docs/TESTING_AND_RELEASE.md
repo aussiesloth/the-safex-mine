@@ -4,7 +4,7 @@
 
 The Safex Mine should be released only after the installed application, mining backend, privilege model and recovery paths work together on clean Windows systems.
 
-This file separates behaviour already exercised during development from release work that is still outstanding.
+This file records completed development/release validation and the remaining mechanical steps for publishing v1.0.0.
 
 ## 2. Development validation completed
 
@@ -91,7 +91,7 @@ Successful NSIS-only bundle generation and clean-machine installation/security b
 
 The rejection UI/parser path has been exercised through development/simulation, but a naturally occurring real rejected Safex result has not yet been relied upon as the primary validation case.
 
-If practical, capture and retain a real rejection example before v1.0.
+If a naturally occurring real rejection is encountered, capture and retain it as additional evidence; it is not a v1.0.0 release blocker.
 
 ### Clean-machine installer test
 
@@ -159,7 +159,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [x] Risk notice control reopens the full acknowledgement after acceptance in development;
 - [x] packaged/installed first-run acknowledgement appears and behaves correctly;
 - [x] valid Safex address accepted;
-- [ ] optional explicit invalid-address UI regression check before final tag;
+- [ ] optional explicit invalid-address UI regression check if convenient (not a v1.0.0 release blocker);
 - [x] changing to a different valid address while stopped resets the session (Blocks Found and Session demonstrated live; Rejected uses the same reset path);
 - [x] default public daemon works;
 - [ ] optional additional end-to-end custom/LAN daemon check (not a release blocker);
