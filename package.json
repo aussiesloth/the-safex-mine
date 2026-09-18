@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "build:helper": "cargo build --manifest-path src-tauri/helper/Cargo.toml --release",
-    "tauri:build": "npm run build:helper && tauri build --config src-tauri/tauri.release.conf.json"
+    "tauri:build": "npm run build:helper && npm run licenses:bundle && tauri build --config src-tauri/tauri.release.conf.json",
+    "licenses:audit": "powershell -ExecutionPolicy Bypass -File .\\scripts\\audit-dependency-licenses.ps1",
+    "licenses:bundle": "powershell -ExecutionPolicy Bypass -File .\\scripts\\generate-third-party-licenses.ps1"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
