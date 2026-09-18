@@ -38,10 +38,19 @@ The project is currently pre-release, so the entries below describe the current 
 - Reworked reward visuals from nuggets/coins to rectangular Safex Cash bullion bars.
 - Removed visible reward bars from the rock face; the successful BLOCK FOUND state reveals the discovered bar in the miner's hand.
 
+### Validation completed
+
+- NSIS-only Windows package generation.
+- Clean-machine GitHub download and SmartScreen flow.
+- Microsoft Defender quarantine/recovery and narrow install-folder exclusion.
+- Installed first-run Mining Risk Acknowledgement.
+- Helper-specific UAC and same-session Stop -> Start reuse.
+- Defender Full scan with the narrow exclusion in place.
+- Uninstall without UAC, including confirmation that user-created Defender exclusions remain for manual cleanup.
+
 ### Pending before public release
 
-- Windows installer and clean-machine validation.
-- Final third-party licence/release bundle validation.
-- Release checksum workflow.
-- Antivirus/SmartScreen release notes.
-- Remaining dead-code/source-format tidy pass.
+- Add final installation-guide screenshots.
+- Final third-party licence/release bundle review.
+- Build the final installer from the release commit/tag and publish its SHA-256.
+- Final source-format/documentation tidy pass.
