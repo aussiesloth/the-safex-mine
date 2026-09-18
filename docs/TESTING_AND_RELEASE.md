@@ -128,7 +128,7 @@ Observed:
 
 Still to complete/record explicitly:
 
-- uninstall behaviour.
+- [x] uninstall removed `%LOCALAPPDATA%\The Safex Mine`; the manually created Defender exclusion remained and must be removed separately by the user.
 
 ### Packaged path test
 
