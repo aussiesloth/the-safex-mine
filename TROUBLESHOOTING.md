@@ -129,16 +129,42 @@ npm.cmd run tauri dev
 
 ## Antivirus quarantines the miner or SmartScreen warns about the application
 
-The Safex Mine contains a CPU-mining backend, an elevated helper and the WinRing driver used by XMRig for Windows MSR access. Antivirus/endpoint-security products commonly classify or quarantine mining software, and the planned Windows release is unsigned. Users should therefore be prepared for the miner or related runtime files to be blocked or quarantined even when the release was obtained from the project repository.
+The Safex Mine contains a CPU-mining backend, an elevated helper and the WinRing driver used by XMRig for Windows MSR access. Antivirus/endpoint-security products commonly classify or quarantine mining software, and the Windows release is unsigned.
+
+### Observed clean-machine Windows behaviour
+
+A clean-machine test of the unsigned NSIS installer produced the following Microsoft security flow:
+
+- Windows Defender SmartScreen displayed **Windows protected your PC** and identified the publisher as **Unknown publisher**;
+- choosing **More info** exposed the **Run anyway** option;
+- the installer completed successfully to `%LOCALAPPDATA%\The Safex Mine`;
+- Microsoft Defender later quarantined the downloaded installer under the detection name `Trojan:Win32/Bearfoos.A!ml`;
+- Microsoft Defender quarantined the installed XMRig backend at `%LOCALAPPDATA%\The Safex Mine\runtime\safex-xmrig-x86_64-pc-windows-msvc.exe` under the detection name `Trojan:Win64/HashvaultMiner.A`;
+- restoring those two expected files through Protection History and adding an exclusion for **only** `%LOCALAPPDATA%\The Safex Mine` allowed The Safex Mine to run normally.
+
+Those detection names are the labels observed in that Microsoft Defender test; other Defender versions or antivirus products may use different names or behave differently. The helper and `WinRing0x64.sys` were not observed being quarantined in this test, but that should not be assumed for every system.
+
+### Recommended installation/security sequence
 
 Before running the installer:
 
 1. download The Safex Mine only from the project's official GitHub release;
 2. if the installer remains accessible after download, verify its published SHA-256 checksum;
 3. if antivirus immediately quarantines the installer and prevents checksum verification, restore/allow that specific installer first, then verify its SHA-256 against the checksum published on the official release **before executing it**;
-4. confirm the release notes identify the same version and bundled XMRig source commit.
+4. confirm the release notes identify the same version and bundled XMRig source commit;
+5. if SmartScreen shows **Windows protected your PC**, use **More info** to inspect the application and publisher information before choosing whether to continue.
 
-If you understand the warning and deliberately choose to run the miner, use the narrowest practical antivirus exclusion. Prefer the dedicated The Safex Mine installation/runtime folder only.
+If Defender quarantines an expected The Safex Mine file:
+
+1. open **Windows Security -> Virus & threat protection -> Protection history**;
+2. confirm the affected filename/path matches the installer you just downloaded or an expected The Safex Mine runtime component;
+3. restore/allow that specific expected file;
+4. after installation, add an exclusion for the dedicated install folder only: `%LOCALAPPDATA%\The Safex Mine`;
+5. do not exclude Downloads, your whole user profile, an entire drive or another broad location.
+
+The clean-machine test completed successfully **without disabling Microsoft Defender real-time protection**. Temporarily pausing real-time scanning should therefore be treated only as a fallback for security products that will not permit the verified installer/runtime to be restored or narrowly excluded.
+
+If a temporary pause is genuinely required, verify the installer first, run only the verified release, create the narrow install-folder exclusion immediately, and re-enable protection straight away. Do not browse or download unrelated files while protection is paused.
 
 Do **not**:
 
@@ -146,12 +172,6 @@ Do **not**:
 - exclude the whole Downloads folder, user profile, drive or another broad location;
 - restore unrelated files merely because they were detected at the same time;
 - assume every security warning is harmless.
-
-Where possible, create the narrow The Safex Mine installation-folder exclusion before running the installer. If the antivirus product prevents installation before that exclusion can be established, a user who has already verified the installer may need to temporarily pause real-time file scanning, install only the verified release, create the narrow installation-folder exclusion immediately, and then re-enable real-time protection straight away. Do not browse or download unrelated files while protection is paused.
-
-If the antivirus product has already quarantined an expected The Safex Mine runtime file after installation, confirm that the detected filename/path matches an expected project component, restore that file using the antivirus product's normal quarantine/history controls, then verify the restored file's checksum where a published checksum for that component is available. Add a narrowly scoped exclusion only if required to prevent the verified mining runtime from being quarantined again.
-
-Exact Windows Defender/SmartScreen screenshots and the final installed-folder guidance will be documented after the release installer has completed clean-machine validation.
 
 ## Session counters reset after closing the app
 
