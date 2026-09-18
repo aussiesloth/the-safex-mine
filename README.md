@@ -76,7 +76,7 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project will provide verification and narrowly scoped exclusion/restoration guidance, but will never disable security software or add antivirus exclusions automatically.
 
-The packaged build now bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The installer has not yet completed clean-machine release validation, so packaged artefacts should still be treated as pre-release.
+The packaged build bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The NSIS installer has now completed an initial clean-machine installation/mining test; final release validation is still in progress.
 
 ### Before installing
 
@@ -88,16 +88,16 @@ Before running the installer:
 2. if the installer remains accessible after download, verify its published SHA-256 checksum before running it;
 3. if antivirus immediately quarantines the installer and prevents checksum verification, restore/allow that specific installer first, then verify its SHA-256 against the checksum published on the official release **before executing it**;
 4. expect the browser to warn about or block an uncommon/unverified executable;
-5. expect antivirus software may detect or quarantine the installer or one of the mining runtime files during installation;
-6. when the final installation path has been validated, add **only the dedicated The Safex Mine installation folder** as an antivirus exclusion before installation where possible.
+5. expect Microsoft Defender or another antivirus product may quarantine the installer or one of the mining runtime files;
+6. the validated default install folder is `%LOCALAPPDATA%\The Safex Mine`; if an exclusion is required, exclude **only that dedicated folder**.
 
 Do **not** exclude the whole Downloads folder, user profile or drive.
 
-Some antivirus products may prevent the mining runtime from being written even when a narrow destination-folder exclusion has not yet been created. If installation cannot proceed any other way, a user who has first verified the installer may need to **temporarily pause real-time file scanning**, run only the verified installer, create the narrow The Safex Mine installation-folder exclusion immediately, and then re-enable real-time protection straight away. Do not browse, download other files or leave protection disabled during this window.
+In the clean-machine Microsoft Defender test, the installer completed without disabling real-time protection. SmartScreen required **More info -> Run anyway**, Defender quarantined the installer and bundled XMRig backend, and restoring those expected files plus excluding only `%LOCALAPPDATA%\The Safex Mine` allowed mining to run normally. Temporarily pausing real-time scanning should therefore be treated only as a fallback for products that cannot complete this restore/exclusion workflow.
 
 If the installer is quarantined immediately after download, restore/allow that specific installer and then verify its SHA-256 before running it. If an expected runtime file is quarantined after installation, confirm that its filename/path matches an expected The Safex Mine component, restore it using the antivirus product's normal controls, then verify the restored file where a published component checksum is available. See [Troubleshooting](TROUBLESHOOTING.md) for the recovery guidance.
 
-> **Pre-release note:** the exact default installation folder, final installer filename, browser/SmartScreen screenshots and Defender exclusion path will be added after the packaged installer has been exercised on a clean Windows system.
+> **Pre-release note:** clean-machine testing has validated the default install folder and Microsoft Defender/SmartScreen flow. Final release screenshots and wording will be polished before the public release.
 
 ## Default use
 
