@@ -215,7 +215,16 @@ User guidance must distinguish between an installer quarantined immediately afte
 
 ### Documentation screenshots
 
-The tested Windows installation flow is now documented in `docs/WINDOWS_INSTALLATION.md`. Before public release, replace its bracketed screenshot placeholders with the captured clean-machine images. The helper UAC image may be taken as a tightly cropped still from the clean-machine test video.
+The tested Windows installation flow is documented in `docs/WINDOWS_INSTALLATION.md` using six clean-machine screenshots:
+
+- SmartScreen initial warning;
+- SmartScreen expanded details;
+- NSIS install location;
+- Defender installer detection;
+- Defender XMRig detection;
+- Windows Security route into the Exclusions controls.
+
+The GitHub release page, Mining Risk Acknowledgement and helper UAC steps are documented textually and do not require screenshots for the current release guide.
 
 ### Licence/notices status
 
