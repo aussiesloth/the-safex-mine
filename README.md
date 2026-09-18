@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** pre-release. Core mining, telemetry, recovery behaviour, state-driven artwork, block-found sound, the versioned Mining Risk Acknowledgement and the NSIS release package are working. Clean-machine download/install/mining/uninstall validation has been completed; final release documentation, screenshots, notices and release artefact preparation are in progress.
+> **Project status:** **v1.0.0 release candidate.** Core mining, telemetry, recovery behaviour, state-driven artwork, block-found sound, the versioned Mining Risk Acknowledgement and the NSIS release package have been validated. Clean-machine download, installation, mining, Defender recovery/full-scan and uninstall testing are complete.
 
 ## What it does
 
@@ -22,7 +22,7 @@ It provides a graphical interface around a Safex-compatible XMRig backend so use
 - Recovery from unexpected mining-helper/backend failure.
 - Split-privilege Windows design: the GUI remains non-administrative while a narrowly scoped helper is elevated for the mining backend.
 - Windows Job Object protection so XMRig is terminated if the elevated helper unexpectedly disappears.
-- Graceful XMRig shutdown using Ctrl+C before forced termination is considered.
+- Graceful XMRig shutdown using Ctrl+C, with forced termination only as a fallback.
 - Five authored visual states:
   - READY / STOPPED
   - MINING
@@ -74,7 +74,7 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 ### Packaged releases
 
-The public release model is intended to be **unsigned**. Users will be able to inspect the source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project will provide verification and narrowly scoped exclusion/restoration guidance, but will never disable security software or add antivirus exclusions automatically.
+The Windows release is **unsigned**. Users can inspect the public source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project provides verification and narrowly scoped exclusion/restoration guidance, but never disables security software or adds antivirus exclusions automatically.
 
 The packaged build bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The NSIS installer has completed clean-machine download, installation, mining, Defender full-scan and uninstall validation.
 
@@ -101,7 +101,6 @@ If the installer is quarantined immediately after download, restore/allow that s
 
 After uninstalling, remove any Defender exclusion you created for `%LOCALAPPDATA%\The Safex Mine`; the uninstaller removes the application folder but does not alter user-created antivirus settings.
 
-> **Pre-release note:** clean-machine testing has validated the default install folder and Microsoft Defender/SmartScreen flow. The installation guide contains explicit screenshot placeholders to be replaced with the captured clean-machine images before public release.
 
 ## Default use
 
