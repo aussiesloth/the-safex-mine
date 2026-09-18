@@ -176,3 +176,17 @@ Do **not**:
 ## Session counters reset after closing the app
 
 This is current behaviour. Blocks Found, Rejected and accumulated mining time are maintained in memory for the current app session and survive Stop -> Start, but a full application restart begins a new session.
+
+## Defender exclusion remains after uninstall
+
+If you manually added an antivirus exclusion for:
+
+```text
+%LOCALAPPDATA%\The Safex Mine
+```
+
+Windows will not remove that exclusion automatically when The Safex Mine is uninstalled.
+
+Clean-machine testing confirmed that the application folder itself is removed by uninstall, but the manually created Defender exclusion remains.
+
+After uninstalling The Safex Mine, remove that exclusion manually through Windows Security if you no longer need it. The application and uninstaller deliberately do not modify Microsoft Defender settings on your behalf.
