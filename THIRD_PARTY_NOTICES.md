@@ -107,11 +107,13 @@ The Safex Mine's own application code is licensed under the **GNU General Public
 
 ## Release checklist
 
-Before publishing a binary release:
+Current release-preparation status:
 
-1. include/preserve the project `LICENSE` (GPL-3.0);
-2. include the licence/notice material required by the bundled XMRig backend;
-3. make corresponding XMRig source available in the manner required by GPL-3.0;
-4. include `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` with any release that ships the pinned WinRing0 driver;
-5. review the locked JavaScript/Rust dependency licences;
-6. publish SHA-256 checksums for the release artefacts.
+- [x] project `LICENSE` contains GPL-3.0;
+- [x] npm, application Cargo and helper Cargo metadata declare `GPL-3.0-only`;
+- [x] the release configuration bundles `LICENSE`;
+- [x] the release configuration bundles this `THIRD_PARTY_NOTICES.md`;
+- [x] the exact OpenLibSys WinRing0 redistribution notice is preserved in `THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt` and bundled with the release;
+- [x] the pinned Safex-compatible XMRig source repository and commit are documented so corresponding source can be obtained;
+- [ ] complete a final review of the locked JavaScript/Rust dependency licences and any attribution texts they require;
+- [ ] publish the SHA-256 checksum generated from the exact final public installer.
