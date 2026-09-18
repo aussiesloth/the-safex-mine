@@ -128,7 +128,7 @@ Observed:
 
 Still to complete/record explicitly:
 
-- [x] uninstall removed `%LOCALAPPDATA%\The Safex Mine`; the manually created Defender exclusion remained and must be removed separately by the user.
+- [x] uninstall completed without UAC and removed `%LOCALAPPDATA%\The Safex Mine`; the manually created Defender exclusion remained and must be removed separately by the user.
 
 ### Packaged path test
 
