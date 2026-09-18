@@ -97,6 +97,8 @@ In the clean-machine Microsoft Defender test, the installer completed without di
 
 If the installer is quarantined immediately after download, restore/allow that specific installer and then verify its SHA-256 before running it. If an expected runtime file is quarantined after installation, confirm that its filename/path matches an expected The Safex Mine component, restore it using the antivirus product's normal controls, then verify the restored file where a published component checksum is available. See [Troubleshooting](TROUBLESHOOTING.md) for the recovery guidance.
 
+After uninstalling, remove any Defender exclusion you created for `%LOCALAPPDATA%\The Safex Mine`; the uninstaller removes the application folder but does not alter user-created antivirus settings.
+
 > **Pre-release note:** clean-machine testing has validated the default install folder and Microsoft Defender/SmartScreen flow. Final release screenshots and wording will be polished before the public release.
 
 ## Default use
