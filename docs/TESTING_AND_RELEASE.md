@@ -122,11 +122,12 @@ Observed:
 - Microsoft Defender quarantined the packaged XMRig backend as `Trojan:Win64/HashvaultMiner.A`;
 - restoring both expected files and excluding only `%LOCALAPPDATA%\The Safex Mine` allowed the installed miner to run normally;
 - no helper or WinRing quarantine was observed in this test.
+- first installed launch presented Mining Risk Acknowledgement v1.0 as intended;
+- Start Mining produced UAC specifically for `safex-mine-helper.exe`;
+- Stop -> Start in the same app session reused the already elevated helper without a second UAC prompt.
 
 Still to complete/record explicitly:
 
-- packaged Mining Risk Acknowledgement checks;
-- Stop/restart behaviour in the installed build;
 - uninstall behaviour.
 
 ### Packaged path test
@@ -169,7 +170,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [x] acknowledgement Exit action closes the development app without persisting acceptance;
 - [x] acknowledgement version persists after acceptance and suppresses repeat display in development;
 - [x] Risk notice control reopens the full acknowledgement after acceptance in development;
-- [ ] repeat the acknowledgement checks in the packaged/installed build;
+- [x] packaged/installed first-run acknowledgement appears and behaves correctly;
 - [ ] valid address accepted;
 - [ ] invalid address rejected;
 - [ ] changing saved address while stopped resets Blocks Found, Rejected and accumulated mining time to 0;
@@ -181,8 +182,8 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [ ] hashrate displayed;
 - [ ] thread count displayed;
 - [ ] session timer behaves across Stop -> Start;
-- [ ] Stop shuts XMRig down;
-- [ ] Start after Stop reuses helper;
+- [x] Stop shuts XMRig down in the installed build;
+- [x] Start after Stop reuses helper in the same installed app session without another UAC prompt;
 - [ ] daemon loss enters OFFLINE;
 - [ ] daemon reconnection resumes MINING;
 - [ ] helper crash cannot orphan XMRig;
@@ -211,9 +212,9 @@ User guidance must distinguish between an installer quarantined immediately afte
 
 ## 6. Privilege/security checklist
 
-- [ ] GUI starts non-elevated;
+- [x] GUI starts non-elevated in the installed build;
 - [ ] acknowledgement Exit uses only the narrowly granted window-close capability;
-- [ ] UAC prompt is for helper;
+- [x] UAC prompt is for `safex-mine-helper.exe`;
 - [ ] packaged helper launches from installed runtime resources;
 - [ ] packaged helper finds XMRig and WinRing beside it;
 - [ ] denied UAC is handled cleanly;
