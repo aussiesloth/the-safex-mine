@@ -247,9 +247,10 @@ npm run tauri:build
 This wrapper:
 
 1. builds `safex-mine-helper.exe` in release mode;
-2. runs Tauri using `src-tauri/tauri.release.conf.json`;
-3. builds the frontend through the normal Tauri `beforeBuildCommand`;
-4. bundles the runtime files and licence material.
+2. regenerates `THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt` from the exact locked Cargo/npm packages on the build machine;
+3. runs Tauri using `src-tauri/tauri.release.conf.json`;
+4. builds the frontend through the normal Tauri `beforeBuildCommand`;
+5. bundles the runtime files and licence material.
 
 The release resource layout is:
 
@@ -263,6 +264,7 @@ licenses/
   LICENSE
   THIRD_PARTY_NOTICES.md
   WinRing0-LICENSE.txt
+  DEPENDENCY_LICENSES.txt
 ```
 
 The standard-user application resolves the packaged helper through Tauri's resource directory. The elevated helper then locates XMRig and `WinRing0x64.sys` beside its own packaged executable.
@@ -274,6 +276,16 @@ npm run tauri dev
 ```
 
 and continues to use the development fallback paths.
+
+### Dependency licence audit
+
+The locked Windows dependency graph can be re-audited independently with:
+
+```powershell
+npm run licenses:audit
+```
+
+This writes `docs/DEPENDENCY_LICENSE_AUDIT.md`. The release build itself runs `npm run licenses:bundle` automatically before Tauri packaging.
 
 ## 13. Release validation status
 
