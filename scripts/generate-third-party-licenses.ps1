@@ -104,7 +104,7 @@ function Get-LicenseFiles {
     }
 
     @(Get-ChildItem -LiteralPath $Root -File | Where-Object {
-        $_.Name -match "^(?i)(LICENSE|LICENCE|COPYING|NOTICE|COPYRIGHT|UNLICENSE)([._-].*)?$"
+        $_.Name -match "(?i)^(LICENSE|LICENCE|COPYING|NOTICE|COPYRIGHT|UNLICENSE)([._-].*)?$"
     } | Sort-Object Name)
 }
 
