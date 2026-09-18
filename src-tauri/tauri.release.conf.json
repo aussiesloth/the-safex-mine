@@ -11,7 +11,8 @@
       "../LICENSE": "licenses/LICENSE",
       "../THIRD_PARTY_NOTICES.md": "licenses/THIRD_PARTY_NOTICES.md",
       "../THIRD_PARTY_LICENSES/WinRing0-LICENSE.txt": "licenses/WinRing0-LICENSE.txt",
-      "../THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt": "licenses/DEPENDENCY_LICENSES.txt"
+      "../THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt": "licenses/DEPENDENCY_LICENSES.txt",
+      "../THIRD_PARTY_LICENSES/PACKAGE_ATTRIBUTIONS.md": "licenses/PACKAGE_ATTRIBUTIONS.md"
     }
   }
 }
