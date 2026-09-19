@@ -193,5 +193,3 @@ It builds the helper before Tauri evaluates the release resources, then bundles:
 - `runtime/safex-xmrig-x86_64-pc-windows-msvc.exe`;
 - `runtime/WinRing0x64.sys`;
 - project/third-party licence material under `licenses/`.
-
-The remaining release gate is real installer validation on a clean Windows machine or VM.
