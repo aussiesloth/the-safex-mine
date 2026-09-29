@@ -375,9 +375,8 @@ fn launch_helper_with_arguments(
     info.nShow = SW_HIDE.0;
 
     unsafe {
-        ShellExecuteExW(&mut info).map_err(|error| {
-            BackendError::with_detail("helper.launchFailed", error.to_string())
-        })?;
+        ShellExecuteExW(&mut info)
+            .map_err(|error| BackendError::with_detail("helper.launchFailed", error.to_string()))?;
 
         /*
            For this handshake test we don't
@@ -587,9 +586,7 @@ async fn helper_send_command(
     )
     .await
     .map_err(|_| BackendError::new("helper.responseTimedOut"))?
-    .map_err(|error| {
-        BackendError::with_detail("helper.responseReadFailed", error.to_string())
-    })?;
+    .map_err(|error| BackendError::with_detail("helper.responseReadFailed", error.to_string()))?;
 
     if count == 0 {
         return Err(BackendError::new("helper.disconnected"));
@@ -637,9 +634,7 @@ async fn start_helper_session(
     timeout(Duration::from_secs(60), server.connect())
         .await
         .map_err(|_| BackendError::new("helper.approvalTimedOut"))?
-        .map_err(|error| {
-            BackendError::with_detail("helper.connectFailed", error.to_string())
-        })?;
+        .map_err(|error| BackendError::with_detail("helper.connectFailed", error.to_string()))?;
 
     let (reader, mut writer) = tokio::io::split(server);
 
@@ -650,9 +645,7 @@ async fn start_helper_session(
     let hello_count = timeout(Duration::from_secs(5), reader.read_line(&mut hello))
         .await
         .map_err(|_| BackendError::new("helper.handshakeTimedOut"))?
-        .map_err(|error| {
-            BackendError::with_detail("helper.handshakeFailed", error.to_string())
-        })?;
+        .map_err(|error| BackendError::with_detail("helper.handshakeFailed", error.to_string()))?;
 
     if hello_count == 0 {
         return Err(BackendError::new("helper.handshakeDisconnected"));
@@ -677,9 +670,7 @@ async fn start_helper_session(
     timeout(Duration::from_secs(5), reader.read_line(&mut ready))
         .await
         .map_err(|_| BackendError::new("helper.sessionAckTimedOut"))?
-        .map_err(|error| {
-            BackendError::with_detail("helper.sessionAckFailed", error.to_string())
-        })?;
+        .map_err(|error| BackendError::with_detail("helper.sessionAckFailed", error.to_string()))?;
 
     if ready.trim() != "SESSION READY ELEVATED" {
         return Err(BackendError::with_detail(
@@ -800,9 +791,7 @@ async fn start_xmrig_test(
 }
 
 #[tauri::command]
-async fn xmrig_test_status(
-    state: State<'_, HelperSessionState>,
-) -> Result<String, BackendError> {
+async fn xmrig_test_status(state: State<'_, HelperSessionState>) -> Result<String, BackendError> {
     let mut guard = state.session.lock().await;
 
     let result = {
@@ -871,13 +860,17 @@ mod tests {
 
     #[test]
     fn stop_response_maps_forced_and_clean_success() {
-        assert!(parse_stop_response("OK STOPPED_FORCED")
-            .expect("forced stop")
-            .forced);
+        assert!(
+            parse_stop_response("OK STOPPED_FORCED")
+                .expect("forced stop")
+                .forced
+        );
 
-        assert!(!parse_stop_response("OK STOPPED_GRACEFULLY (exit code: 0)")
-            .expect("clean stop")
-            .forced);
+        assert!(
+            !parse_stop_response("OK STOPPED_GRACEFULLY (exit code: 0)")
+                .expect("clean stop")
+                .forced
+        );
     }
 
     #[test]
