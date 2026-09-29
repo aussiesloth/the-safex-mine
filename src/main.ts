@@ -1,5 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 
+import { formatRegionalNumber, translate } from "./i18n";
+
 import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
 import approvedScene from "./assets/scenes/APPROVED.png";
@@ -10,6 +12,8 @@ import safexWordmark from "./assets/branding/safex-gradient-logo.svg";
 import blockFoundSound from "./assets/sounds/safex-block-cha-ching.wav";
 
 import "./styles.css";
+
+document.title = translate("app.name");
 
 type SceneState =
   | "ready"
@@ -39,6 +43,17 @@ const SETTINGS = {
   soundMuted: "safex-mine.sound-muted",
 } as const;
 
+function getMiningModeLabel(mode: MiningMode): string {
+  switch (mode) {
+    case "Calm":
+      return translate("mode.calm");
+    case "Balanced":
+      return translate("mode.balanced");
+    case "Full Bore":
+      return translate("mode.fullBore");
+  }
+}
+
 const blockFoundAudio =
   new Audio(blockFoundSound);
 
@@ -52,32 +67,32 @@ const scenes: Record<
   SceneState,
   {
     image: string;
-    label: string;
+    labelKey: string;
   }
 > = {
   ready: {
     image: readyScene,
-    label: "READY / STOPPED",
+    labelKey: "scene.ready",
   },
 
   mining: {
     image: miningScene,
-    label: "MINING",
+    labelKey: "scene.mining",
   },
 
   approved: {
     image: approvedScene,
-    label: "BLOCK FOUND",
+    labelKey: "scene.blockFound",
   },
 
   offline: {
-  image: offlineScene,
-  label: "OFFLINE",
+    image: offlineScene,
+    labelKey: "scene.offline",
   },
 
   reject: {
     image: rejectScene,
-    label: "REJECTED",
+    labelKey: "scene.rejected",
   },
 };
 
@@ -88,8 +103,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
    <header class="topbar">
 
   <div class="brand">
-    <div class="brand-title">The Safex Mine</div>
-    <div class="brand-subtitle">Safex Cash Solo Miner</div>
+    <div class="brand-title">${translate("app.name")}</div>
+    <div class="brand-subtitle">${translate("app.subtitle")}</div>
   </div>
 
 
@@ -102,7 +117,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       ></span>
 
       <span id="connection-text">
-        Ready
+        ${translate("connection.ready")}
       </span>
     </div>
 
@@ -110,9 +125,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       class="sound-toggle"
       id="sound-toggle"
       type="button"
-      aria-label="Mute block-found sound"
+      aria-label="${translate("sound.mute")}"
       aria-pressed="false"
-      title="Mute block-found sound"
+      title="${translate("sound.mute")}"
     >
       <svg
         class="sound-icon sound-icon-on"
@@ -138,7 +153,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <img
       class="safex-wordmark"
       src="${safexWordmark}"
-      alt="Safex"
+      alt="${translate("accessibility.safexWordmarkAlt")}"
     />
 
   </div>
@@ -175,7 +190,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               class="scene-state"
               id="scene-state"
             >
-              READY / STOPPED
+              ${translate("scene.ready")}
             </div>
 
             </div>
@@ -189,13 +204,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>Mining Status</h2>
+          <h2>${translate("section.miningStatus")}</h2>
 
           <div class="stat-grid">
 
             <div class="stat">
               <span class="stat-label">
-                Hashrate
+                ${translate("stat.hashrate")}
               </span>
 
               <strong id="hashrate-value">
@@ -205,7 +220,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
             <div class="stat">
               <span class="stat-label">
-                Threads
+                ${translate("stat.threads")}
               </span>
 
               <strong id="threads-value">
@@ -215,7 +230,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
             <div class="stat">
               <span class="stat-label">
-                Blocks Found
+                ${translate("stat.blocksFound")}
               </span>
 
               <strong id="blocks-found-value">
@@ -225,7 +240,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
             <div class="stat">
               <span class="stat-label">
-                Rejected
+                ${translate("stat.rejected")}
               </span>
 
               <strong id="rejected-value">
@@ -235,7 +250,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
             <div class="stat session-stat">
               <span class="stat-label">
-                Session
+                ${translate("stat.session")}
               </span>
 
               <strong id="session-time-value">
@@ -250,7 +265,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>Mining Mode</h2>
+          <h2>${translate("section.miningMode")}</h2>
 
           <div class="mode-buttons">
 
@@ -258,21 +273,21 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
               class="mode-button"
               data-mode="Calm"
             >
-              Calm
+              ${translate("mode.calm")}
             </button>
 
             <button
               class="mode-button active"
               data-mode="Balanced"
             >
-              Balanced
+              ${translate("mode.balanced")}
             </button>
 
             <button
               class="mode-button"
               data-mode="Full Bore"
             >
-              Full Bore
+              ${translate("mode.fullBore")}
             </button>
 
           </div>
@@ -282,18 +297,18 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>Connection</h2>
+          <h2>${translate("section.connection")}</h2>
 
           <div class="field">
 
             <label for="address">
-              Safex Address
+              ${translate("field.safexAddress")}
             </label>
 
             <input
               id="address"
               type="text"
-              placeholder="Enter mining address"
+              placeholder="${translate("field.safexAddress.placeholder")}"
             />
 
           <div
@@ -306,13 +321,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <div class="field">
 
             <label for="node">
-              Node / RPC
+              ${translate("field.nodeRpc")}
             </label>
 
             <input
               id="node"
               type="text"
-              placeholder="Default public node"
+              placeholder="${translate("field.nodeRpc.placeholder")}"
             />
 
             <div
@@ -331,7 +346,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             id="start-button"
             class="primary-button"
           >
-            Start Mining
+            ${translate("action.startMining")}
           </button>
 
           <button
@@ -339,7 +354,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             class="secondary-button"
             disabled
           >
-            Stop Mining
+            ${translate("action.stopMining")}
           </button>
 
         </section>
@@ -349,7 +364,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   class="backend-note"
   id="backend-note"
 >
-  Connecting to application backend...
+  ${translate("status.backend.connecting")}
 </div>
 
       </aside>
@@ -492,7 +507,7 @@ async function validateDaemonField(
   if (!silent) {
 
     nodeValidation.textContent =
-      "Checking Safex daemon...";
+      translate("validation.daemon.checking");
 
     nodeValidation.className =
       "field-validation";
@@ -532,7 +547,9 @@ async function validateDaemonField(
         "field-validation valid";
 
       nodeValidation.textContent =
-        `Safex daemon online — height ${result.height.toLocaleString()}`;
+        translate("validation.daemon.online", {
+          height: formatRegionalNumber(result.height),
+        });
 
       return true;
     }
@@ -559,7 +576,7 @@ async function validateDaemonField(
       "field-validation invalid";
 
     nodeValidation.textContent =
-      "Unable to check daemon.";
+      translate("validation.daemon.unableToCheck");
 
     console.error(
       "Daemon validation failed:",
@@ -595,7 +612,7 @@ async function validateAddressField(): Promise<boolean> {
     );
 
     addressValidation.textContent =
-      "Valid Safex Address";
+      translate("validation.address.valid");
 
     addressValidation.className =
       "field-validation valid";
@@ -608,7 +625,7 @@ async function validateAddressField(): Promise<boolean> {
   );
 
   addressValidation.textContent =
-    "Invalid Safex Address";
+    translate("validation.address.invalid");
 
   addressValidation.className =
     "field-validation invalid";
@@ -654,8 +671,8 @@ function updateSoundToggle() {
 
   const label =
     soundMuted
-      ? "Enable block-found sound"
-      : "Mute block-found sound";
+      ? translate("sound.enable")
+      : translate("sound.mute");
 
   soundToggle.setAttribute(
     "aria-label",
@@ -764,7 +781,7 @@ nodeInput.addEventListener(
     }
 
     nodeValidation.textContent =
-      "Waiting to check daemon...";
+      translate("validation.daemon.waiting");
 
     nodeValidation.className =
       "field-validation";
@@ -963,7 +980,7 @@ function setScene(state: SceneState) {
   inactiveImage = previousActive;
 
   sceneState.textContent =
-    scene.label;
+    translate(scene.labelKey);
 
   currentState = state;
 }
@@ -1082,7 +1099,7 @@ function handleUnexpectedMiningStop(
 
 
   connectionText.textContent =
-    "Offline";
+    translate("connection.offline");
 
 
   startButton.disabled =
@@ -1092,7 +1109,9 @@ function handleUnexpectedMiningStop(
     true;
 
   backendNote.textContent =
-    `Mining stopped unexpectedly: ${reason}`;
+    translate("status.mining.stoppedUnexpectedly", {
+      reason,
+    });
 
 
   updateSessionTimer();
@@ -1145,7 +1164,7 @@ function handleDaemonOffline() {
 
 
   connectionText.textContent =
-    "Offline";
+    translate("connection.offline");
 
     nodeInput.classList.remove(
   "input-valid",
@@ -1160,7 +1179,7 @@ function handleDaemonOffline() {
     "field-validation invalid";
 
   nodeValidation.textContent =
-    "Connection lost";
+    translate("validation.daemon.connectionLost");
 
   /*
     Do not enable Start. XMRig is still
@@ -1173,7 +1192,7 @@ function handleDaemonOffline() {
     false;
 
   backendNote.textContent =
-    "Safex daemon connection lost. Waiting to reconnect...";
+    translate("status.daemon.connectionLost");
 }
 
 
@@ -1199,7 +1218,7 @@ function handleDaemonReconnected() {
     true;
 
   hashrateValue.textContent =
-    "Resuming…";
+    translate("status.hashrate.resuming");
 
 
   setScene(
@@ -1217,12 +1236,12 @@ function handleDaemonReconnected() {
 
 
   connectionText.textContent =
-    "Mining";
+    translate("connection.mining");
 
     void validateDaemonField();
 
    backendNote.textContent =
-    "Safex daemon connection restored. Mining resumed.";
+    translate("status.daemon.connectionRestored");
 }
 
 async function refreshMiningTelemetry() {
@@ -1303,7 +1322,7 @@ async function refreshMiningTelemetry() {
             false;
 
           connectionText.textContent =
-            "Mining";
+            translate("connection.mining");
         }
 
 
@@ -1436,7 +1455,7 @@ async function refreshMiningTelemetry() {
   ) {
 
     handleUnexpectedMiningStop(
-      "XMRig is no longer running.",
+      translate("status.xmrig.noLongerRunning"),
     );
 
     return;
@@ -1531,11 +1550,14 @@ function formatDuration(ms: number): string {
     ].join(":");
 
   if (weeks > 0) {
-    return `${weeks}w ${days}d ${time}`;
+    return `${translate("duration.weeksShort", { count: weeks })} ${translate(
+      "duration.daysShort",
+      { count: days },
+    )} ${time}`;
   }
 
   if (days > 0) {
-    return `${days}d ${time}`;
+    return `${translate("duration.daysShort", { count: days })} ${time}`;
   }
 
   return time;
@@ -1767,7 +1789,7 @@ startButton.addEventListener(
         addressInput.focus();
 
         backendNote.textContent =
-          "Enter a valid Safex Address before starting.";
+          translate("validation.address.requiredBeforeStart");
 
         return;
       }
@@ -1778,14 +1800,14 @@ startButton.addEventListener(
         nodeInput.focus();
 
         backendNote.textContent =
-          "A live Safex daemon is required before mining can start.";
+          translate("validation.daemon.requiredBeforeStart");
 
         return;
       }
 
 
       backendNote.textContent =
-        "Waiting for Administrator approval...";
+        translate("status.helper.waitingForAdministrator");
 
 
       /*
@@ -1799,7 +1821,7 @@ startButton.addEventListener(
 
 
       backendNote.textContent =
-        "Starting Safex XMRig...";
+        translate("status.xmrig.starting");
 
 
       const mode =
@@ -1858,10 +1880,10 @@ startButton.addEventListener(
         true;
 
       hashrateValue.textContent =
-        "Starting…";
+        translate("status.hashrate.starting");
 
       connectionText.textContent =
-        "Launching miner…";
+        translate("connection.launchingMiner");
 
       setConnectionFieldsLocked(
         true,
@@ -1907,12 +1929,16 @@ startButton.addEventListener(
     ) {
 
       backendNote.textContent =
-        `Mining started — ${mode} mode. MSR optimisation unavailable; reduced hashrate expected.`;
+        translate("status.miningStarted.msrUnavailable", {
+          mode: getMiningModeLabel(mode),
+        });
 
     } else {
 
       backendNote.textContent =
-        `Mining started — ${mode} mode. MSR optimisation active.`;
+        translate("status.miningStarted.msrActive", {
+          mode: getMiningModeLabel(mode),
+        });
     }
 
 
@@ -1967,7 +1993,7 @@ startButton.addEventListener(
 
 
       connectionText.textContent =
-        "Ready";
+        translate("connection.ready");
 
 
       stopButton.disabled =
@@ -1975,7 +2001,9 @@ startButton.addEventListener(
 
 
       backendNote.textContent =
-        `Unable to start mining: ${String(error)}`;
+        translate("status.mining.unableToStart", {
+          error: String(error),
+        });
 
     } finally {
 
@@ -2006,7 +2034,7 @@ stopButton.addEventListener(
 
 
     backendNote.textContent =
-      "Stopping Safex XMRig gracefully...";
+      translate("status.xmrig.stoppingGracefully");
 
 
     try {
@@ -2088,7 +2116,7 @@ stopButton.addEventListener(
 
 
       connectionText.textContent =
-        "Ready";
+        translate("connection.ready");
 
 
       startButton.disabled =
@@ -2105,12 +2133,12 @@ stopButton.addEventListener(
       ) {
 
         backendNote.textContent =
-          "Mining stopped, but XMRig required forced termination.";
+          translate("status.mining.stoppedForced");
 
       } else {
 
         backendNote.textContent =
-          "Mining stopped cleanly. Elevated helper remains ready.";
+          translate("status.mining.stoppedCleanly");
       }
 
 
@@ -2124,7 +2152,9 @@ stopButton.addEventListener(
         still be alive.
       */
       backendNote.textContent =
-        `Unable to stop mining: ${String(error)}`;
+        translate("status.mining.unableToStop", {
+          error: String(error),
+        });
 
 
       stopButton.disabled =
@@ -2171,7 +2201,7 @@ async function probeBackend() {
   } catch (error) {
 
     backendNote.textContent =
-      "Rust backend unavailable.";
+      translate("status.backend.unavailable");
 
     console.error(
       "Backend probe failed:",
