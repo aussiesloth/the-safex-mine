@@ -125,13 +125,20 @@ fn normalise_locale_id(value: &str) -> String {
     parts[0] = parts[0].to_ascii_lowercase();
 
     for part in parts.iter_mut().skip(1) {
-        if part.len() == 4 && part.chars().all(|character| character.is_ascii_alphabetic()) {
+        if part.len() == 4
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic())
+        {
             let lower = part.to_ascii_lowercase();
             let mut characters = lower.chars();
             if let Some(first) = characters.next() {
                 *part = first.to_ascii_uppercase().to_string() + characters.as_str();
             }
-        } else if (part.len() == 2 && part.chars().all(|character| character.is_ascii_alphabetic()))
+        } else if (part.len() == 2
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic()))
             || (part.len() == 3 && part.chars().all(|character| character.is_ascii_digit()))
         {
             *part = part.to_ascii_uppercase();
@@ -146,15 +153,20 @@ fn locale_language(locale_id: &str) -> &str {
 }
 
 fn locale_script(locale_id: &str) -> Option<&str> {
-    locale_id
-        .split('-')
-        .skip(1)
-        .find(|part| part.len() == 4 && part.chars().all(|character| character.is_ascii_alphabetic()))
+    locale_id.split('-').skip(1).find(|part| {
+        part.len() == 4
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic())
+    })
 }
 
 fn locale_region(locale_id: &str) -> Option<&str> {
     locale_id.split('-').skip(1).find(|part| {
-        (part.len() == 2 && part.chars().all(|character| character.is_ascii_alphabetic()))
+        (part.len() == 2
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic()))
             || (part.len() == 3 && part.chars().all(|character| character.is_ascii_digit()))
     })
 }
@@ -196,7 +208,8 @@ fn match_preferred_locale(
 
         let preferred_special = match language {
             "zh" => {
-                if script == Some("Hant") || matches!(region, Some("TW") | Some("HK") | Some("MO")) {
+                if script == Some("Hant") || matches!(region, Some("TW") | Some("HK") | Some("MO"))
+                {
                     Some("zh-Hant")
                 } else if script == Some("Hans") || matches!(region, Some("CN") | Some("SG")) {
                     Some("zh-Hans")
@@ -1050,7 +1063,9 @@ async fn stop_xmrig_test(
 
 #[cfg(test)]
 mod tests {
-    use super::{match_preferred_locale, parse_language_multisz, parse_start_response, parse_stop_response};
+    use super::{
+        match_preferred_locale, parse_language_multisz, parse_start_response, parse_stop_response,
+    };
 
     #[test]
     fn locale_multisz_parser_preserves_windows_preference_order() {
@@ -1109,11 +1124,8 @@ mod tests {
         let supported = vec!["en-AU".to_string(), "de".to_string()];
 
         assert_eq!(
-            match_preferred_locale(
-                &["fr-FR".to_string(), "de-DE".to_string()],
-                &supported,
-            )
-            .as_deref(),
+            match_preferred_locale(&["fr-FR".to_string(), "de-DE".to_string()], &supported,)
+                .as_deref(),
             Some("de")
         );
 
