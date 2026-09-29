@@ -1124,6 +1124,16 @@ mod tests {
     }
 
     #[test]
+    fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
+        let supported = vec!["en-AU".to_string()];
+
+        assert_eq!(
+            match_preferred_locale(&["es-MX".to_string()], &supported),
+            None
+        );
+    }
+
+    #[test]
     fn start_response_maps_normal_and_degraded_success() {
         let normal = parse_start_response("OK STARTED | MSR=OK").expect("normal start");
         assert_eq!(normal.status, "started");
