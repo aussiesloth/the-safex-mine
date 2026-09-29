@@ -1,6 +1,15 @@
 import { invoke } from "@tauri-apps/api/core";
 
-import { formatRegionalNumber, translate } from "./i18n";
+import {
+  formatRegionalNumber,
+  translate,
+  type InterpolationValues,
+} from "./i18n";
+import { createLanguageSelector } from "./i18n/languageSelector";
+import {
+  initializeUiLanguage,
+  onUiLanguageChanged,
+} from "./i18n/runtime";
 
 import readyScene from "./assets/scenes/READY-STOPPED.png";
 import miningScene from "./assets/scenes/MINING.png";
@@ -12,6 +21,8 @@ import safexWordmark from "./assets/branding/safex-gradient-logo.svg";
 import blockFoundSound from "./assets/sounds/safex-block-cha-ching.wav";
 
 import "./styles.css";
+
+await initializeUiLanguage();
 
 document.title = translate("app.name");
 
@@ -340,6 +351,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
   <div class="topbar-right">
 
+    <div id="language-selector-host"></div>
+
     <div class="connection-status">
       <span
         class="status-dot stopped"
@@ -653,6 +666,11 @@ const soundToggle =
     "#sound-toggle",
   )!;
 
+const languageSelectorHost =
+  document.querySelector<HTMLDivElement>(
+    "#language-selector-host",
+  )!;
+
 const sceneState =
   document.querySelector<HTMLDivElement>(
     "#scene-state",
@@ -692,6 +710,194 @@ const sessionTimeValue =
   document.querySelector<HTMLElement>(
     "#threads-value",
   )!;
+
+type TranslatedTextBinding = {
+  key: string;
+  values: InterpolationValues;
+};
+
+const translatedTextBindings =
+  new Map<HTMLElement, TranslatedTextBinding>();
+
+function setTranslatedText(
+  target: HTMLElement,
+  key: string,
+  values: InterpolationValues = {},
+) {
+  translatedTextBindings.set(
+    target,
+    {
+      key,
+      values,
+    },
+  );
+
+  target.textContent =
+    translate(key, values);
+}
+
+function refreshTranslatedTextBindings() {
+  for (const [target, binding] of translatedTextBindings) {
+    target.textContent =
+      translate(
+        binding.key,
+        binding.values,
+      );
+  }
+}
+
+function refreshMainUiText() {
+  document.title =
+    translate("app.name");
+
+  const brandTitle =
+    document.querySelector<HTMLElement>(
+      ".brand-title",
+    );
+
+  const brandSubtitle =
+    document.querySelector<HTMLElement>(
+      ".brand-subtitle",
+    );
+
+  if (brandTitle) {
+    brandTitle.textContent =
+      translate("app.name");
+  }
+
+  if (brandSubtitle) {
+    brandSubtitle.textContent =
+      translate("app.subtitle");
+  }
+
+  const sectionHeadingKeys = [
+    "section.miningStatus",
+    "section.miningMode",
+    "section.connection",
+  ];
+
+  document
+    .querySelectorAll<HTMLElement>(
+      ".panel-section > h2",
+    )
+    .forEach((heading, index) => {
+      const key = sectionHeadingKeys[index];
+
+      if (key) {
+        heading.textContent =
+          translate(key);
+      }
+    });
+
+  const statLabelKeys = [
+    "stat.hashrate",
+    "stat.threads",
+    "stat.blocksFound",
+    "stat.rejected",
+    "stat.session",
+  ];
+
+  document
+    .querySelectorAll<HTMLElement>(
+      ".stat-label",
+    )
+    .forEach((label, index) => {
+      const key = statLabelKeys[index];
+
+      if (key) {
+        label.textContent =
+          translate(key);
+      }
+    });
+
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      ".mode-button",
+    )
+    .forEach((button) => {
+      const mode =
+        button.dataset.mode as MiningMode | undefined;
+
+      if (mode) {
+        button.textContent =
+          getMiningModeLabel(mode);
+      }
+    });
+
+  const addressLabel =
+    document.querySelector<HTMLLabelElement>(
+      'label[for="address"]',
+    );
+
+  const nodeLabel =
+    document.querySelector<HTMLLabelElement>(
+      'label[for="node"]',
+    );
+
+  if (addressLabel) {
+    addressLabel.textContent =
+      translate("field.safexAddress");
+  }
+
+  if (nodeLabel) {
+    nodeLabel.textContent =
+      translate("field.nodeRpc");
+  }
+
+  addressInput.placeholder =
+    translate(
+      "field.safexAddress.placeholder",
+    );
+
+  nodeInput.placeholder =
+    translate(
+      "field.nodeRpc.placeholder",
+    );
+
+  startButton.textContent =
+    translate("action.startMining");
+
+  stopButton.textContent =
+    translate("action.stopMining");
+
+  const wordmark =
+    document.querySelector<HTMLImageElement>(
+      ".safex-wordmark",
+    );
+
+  if (wordmark) {
+    wordmark.alt =
+      translate(
+        "accessibility.safexWordmarkAlt",
+      );
+  }
+
+  refreshTranslatedTextBindings();
+
+  sceneState.textContent =
+    translate(
+      scenes[currentState].labelKey,
+    );
+
+  updateSoundToggle();
+  updateSessionTimer();
+
+  void validateAddressField();
+
+  if (nodeInput.value.trim()) {
+    void validateDaemonField(true);
+  }
+}
+
+languageSelectorHost.append(
+  createLanguageSelector({
+    className: "language-selector-topbar",
+  }),
+);
+
+onUiLanguageChanged(
+  refreshMainUiText,
+);
 
 /* ---------------------------------------------------------
    PERSISTENT SETTINGS
@@ -1328,8 +1534,10 @@ function handleUnexpectedMiningStop(
   );
 
 
-  connectionText.textContent =
-    translate("connection.offline");
+  setTranslatedText(
+    connectionText,
+    "connection.offline",
+  );
 
 
   startButton.disabled =
@@ -1338,10 +1546,13 @@ function handleUnexpectedMiningStop(
   stopButton.disabled =
     true;
 
-  backendNote.textContent =
-    translate("status.mining.stoppedUnexpectedly", {
+  setTranslatedText(
+    backendNote,
+    "status.mining.stoppedUnexpectedly",
+    {
       reason,
-    });
+    },
+  );
 
 
   updateSessionTimer();
@@ -1393,8 +1604,10 @@ function handleDaemonOffline() {
   );
 
 
-  connectionText.textContent =
-    translate("connection.offline");
+  setTranslatedText(
+    connectionText,
+    "connection.offline",
+  );
 
     nodeInput.classList.remove(
   "input-valid",
@@ -1421,8 +1634,10 @@ function handleDaemonOffline() {
   stopButton.disabled =
     false;
 
-  backendNote.textContent =
-    translate("status.daemon.connectionLost");
+  setTranslatedText(
+    backendNote,
+    "status.daemon.connectionLost",
+  );
 }
 
 
@@ -1465,13 +1680,17 @@ function handleDaemonReconnected() {
   );
 
 
-  connectionText.textContent =
-    translate("connection.mining");
+  setTranslatedText(
+    connectionText,
+    "connection.mining",
+  );
 
     void validateDaemonField();
 
-   backendNote.textContent =
-    translate("status.daemon.connectionRestored");
+   setTranslatedText(
+    backendNote,
+    "status.daemon.connectionRestored",
+  );
 }
 
 async function refreshMiningTelemetry() {
@@ -2026,8 +2245,10 @@ startButton.addEventListener(
 
         addressInput.focus();
 
-        backendNote.textContent =
-          translate("validation.address.requiredBeforeStart");
+        setTranslatedText(
+          backendNote,
+          "validation.address.requiredBeforeStart",
+        );
 
         return;
       }
@@ -2037,15 +2258,19 @@ startButton.addEventListener(
 
         nodeInput.focus();
 
-        backendNote.textContent =
-          translate("validation.daemon.requiredBeforeStart");
+        setTranslatedText(
+          backendNote,
+          "validation.daemon.requiredBeforeStart",
+        );
 
         return;
       }
 
 
-      backendNote.textContent =
-        translate("status.helper.waitingForAdministrator");
+      setTranslatedText(
+        backendNote,
+        "status.helper.waitingForAdministrator",
+      );
 
 
       /*
@@ -2058,8 +2283,10 @@ startButton.addEventListener(
       );
 
 
-      backendNote.textContent =
-        translate("status.xmrig.starting");
+      setTranslatedText(
+        backendNote,
+        "status.xmrig.starting",
+      );
 
 
       const mode =
@@ -2103,8 +2330,10 @@ startButton.addEventListener(
       hashrateValue.textContent =
         translate("status.hashrate.starting");
 
-      connectionText.textContent =
-        translate("connection.launchingMiner");
+      setTranslatedText(
+        connectionText,
+        "connection.launchingMiner",
+      );
 
       setConnectionFieldsLocked(
         true,
@@ -2141,17 +2370,23 @@ startButton.addEventListener(
 
     if (!result.msrAvailable) {
 
-      backendNote.textContent =
-        translate("status.miningStarted.msrUnavailable", {
+      setTranslatedText(
+        backendNote,
+        "status.miningStarted.msrUnavailable",
+        {
           mode: getMiningModeLabel(mode),
-        });
+        },
+      );
 
     } else {
 
-      backendNote.textContent =
-        translate("status.miningStarted.msrActive", {
+      setTranslatedText(
+        backendNote,
+        "status.miningStarted.msrActive",
+        {
           mode: getMiningModeLabel(mode),
-        });
+        },
+      );
     }
 
 
@@ -2205,18 +2440,23 @@ startButton.addEventListener(
             "0";
 
 
-      connectionText.textContent =
-        translate("connection.ready");
+      setTranslatedText(
+        connectionText,
+        "connection.ready",
+      );
 
 
       stopButton.disabled =
         true;
 
 
-      backendNote.textContent =
-        translate("status.mining.unableToStart", {
+      setTranslatedText(
+        backendNote,
+        "status.mining.unableToStart",
+        {
           error: backendErrorMessage(error),
-        });
+        },
+      );
 
     } finally {
 
@@ -2246,8 +2486,10 @@ stopButton.addEventListener(
       true;
 
 
-    backendNote.textContent =
-      translate("status.xmrig.stoppingGracefully");
+    setTranslatedText(
+      backendNote,
+      "status.xmrig.stoppingGracefully",
+    );
 
 
     try {
@@ -2328,8 +2570,10 @@ stopButton.addEventListener(
       );
 
 
-      connectionText.textContent =
-        translate("connection.ready");
+      setTranslatedText(
+        connectionText,
+        "connection.ready",
+      );
 
 
       startButton.disabled =
@@ -2341,13 +2585,17 @@ stopButton.addEventListener(
 
       if (result.forced) {
 
-        backendNote.textContent =
-          translate("status.mining.stoppedForced");
+        setTranslatedText(
+          backendNote,
+          "status.mining.stoppedForced",
+        );
 
       } else {
 
-        backendNote.textContent =
-          translate("status.mining.stoppedCleanly");
+        setTranslatedText(
+          backendNote,
+          "status.mining.stoppedCleanly",
+        );
       }
 
 
@@ -2360,10 +2608,13 @@ stopButton.addEventListener(
         mining has stopped. The process may
         still be alive.
       */
-      backendNote.textContent =
-        translate("status.mining.unableToStop", {
+      setTranslatedText(
+        backendNote,
+        "status.mining.unableToStop",
+        {
           error: backendErrorMessage(error),
-        });
+        },
+      );
 
 
       stopButton.disabled =
@@ -2378,6 +2629,16 @@ stopButton.addEventListener(
 
 updateCounters();
 updateSessionTimer();
+
+setTranslatedText(
+  connectionText,
+  "connection.ready",
+);
+
+setTranslatedText(
+  backendNote,
+  "status.backend.connecting",
+);
 
 loadSettings();
 updateSoundToggle();
@@ -2409,19 +2670,21 @@ async function probeBackend() {
       "backend.connected"
     ) {
 
-      backendNote.textContent =
-        translate(
-          "status.backend.connected",
-          {
-            version: result.version,
-          },
-        );
+      setTranslatedText(
+        backendNote,
+        "status.backend.connected",
+        {
+          version: result.version,
+        },
+      );
 
       return;
     }
 
-    backendNote.textContent =
-      translate("status.backend.unavailable");
+    setTranslatedText(
+      backendNote,
+      "status.backend.unavailable",
+    );
 
     console.error(
       "Unexpected backend probe status:",
@@ -2430,8 +2693,10 @@ async function probeBackend() {
 
   } catch (error) {
 
-    backendNote.textContent =
-      translate("status.backend.unavailable");
+    setTranslatedText(
+      backendNote,
+      "status.backend.unavailable",
+    );
 
     console.error(
       "Backend probe failed:",
