@@ -2,11 +2,11 @@
 
 The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
-## L1 scope
+## Current scope
 
-Localisation Slice L1 establishes the framework only. English (Australia), en-AU, is the canonical source locale and the only enabled locale in this slice. Existing user-facing strings in src/main.ts are intentionally not migrated yet; that work belongs to L2.
+Localisation Slice L1 established the framework. Localisation Slice L2 extracts the existing normal frontend UI into the canonical English catalogue while preserving the v1.0.0 English wording and behaviour.
 
-The locked release locale set is already present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue in L1.
+English (Australia), en-AU, remains the canonical source locale and the only enabled locale. The locked release locale set is present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue yet.
 
 ## Structure
 
@@ -57,4 +57,19 @@ Run:
 
     npm run i18n:check
 
-The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. In L1 it validates the canonical en-AU catalogue against the same rules future translations will use, while also validating metadata for the locked release locale set.
+The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. It also scans the normal frontend source for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue.
+
+## L2 extraction notes
+
+The normal user-facing wording owned by src/main.ts now comes from src/i18n/catalogues/en-AU.json. Stable internal values and protocol tokens remain unchanged. For example, Calm, Balanced and Full Bore remain the MiningMode values passed to the backend, while their displayed labels come from localisation keys.
+
+The following English text is intentionally not treated as an L2 frontend translation:
+
+- src/riskAcknowledgement.ts remains unchanged because the Mining Risk Acknowledgement is reserved for L4.
+- Rust/helper-originating message payloads that are currently passed through to the UI remain source text from the backend. L3 will replace ordinary expected backend UI messages with stable machine-readable codes plus frontend translation. L2 localises the frontend-owned explanation or prefix around those details where one already exists.
+- Internal protocol markers such as STATUS EXITED, STATUS IDLE, DAEMON=CONNECTED, STARTED_DEGRADED and MSR=UNAVAILABLE remain stable machine values and are not displayed as translated labels.
+- Developer-only console diagnostics remain in English.
+- Technical units and identifiers such as H/s, kH/s, MH/s, RPC, MSR and XMRig remain technical content rather than translated prose.
+- The bootstrap title in index.html remains the product name The Safex Mine. main.ts sets document.title from app.name when the frontend starts.
+
+The L2 source audit should therefore treat any future ordinary user-facing English added directly to main.ts as localisation debt, while leaving the deferred/backend/technical categories above for their designated slices.

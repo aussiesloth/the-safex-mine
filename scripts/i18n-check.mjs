@@ -7,7 +7,14 @@ const repositoryRoot = path.resolve(scriptDirectory, "..");
 const i18nDirectory = path.join(repositoryRoot, "src", "i18n");
 const cataloguesDirectory = path.join(i18nDirectory, "catalogues");
 const registryPath = path.join(i18nDirectory, "locales.json");
+const frontendSourcePaths = [
+  path.join(repositoryRoot, "src", "main.ts"),
+];
 const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
+const FRONTEND_KEY_PATTERNS = [
+  /translate\(\s*["']([^"']+)["']/g,
+  /labelKey:\s*["']([^"']+)["']/g,
+];
 
 const errors = [];
 
@@ -157,10 +164,37 @@ if (registry?.locales && Array.isArray(registry.locales)) {
 const canonicalLocale = registry?.canonicalLocale ?? "en-AU";
 const canonicalCatalogue = catalogues.get(canonicalLocale);
 
+const frontendTranslationKeys = new Set();
+
+for (const sourcePath of frontendSourcePaths) {
+  let sourceText;
+
+  try {
+    sourceText = await readFile(sourcePath, "utf8");
+  } catch (error) {
+    addError(`${path.relative(repositoryRoot, sourcePath)}: ${String(error)}`);
+    continue;
+  }
+
+  for (const pattern of FRONTEND_KEY_PATTERNS) {
+    pattern.lastIndex = 0;
+
+    for (const match of sourceText.matchAll(pattern)) {
+      frontendTranslationKeys.add(match[1]);
+    }
+  }
+}
+
 if (!canonicalCatalogue) {
   addError(`Missing canonical catalogue ${canonicalLocale}.json.`);
 } else {
   const canonicalKeys = Object.keys(canonicalCatalogue).sort();
+
+  for (const key of [...frontendTranslationKeys].sort()) {
+    if (!(key in canonicalCatalogue)) {
+      addError(`frontend: translation key ${key} is missing from ${canonicalLocale}.`);
+    }
+  }
 
   for (const [key, value] of Object.entries(canonicalCatalogue)) {
     if (typeof value !== "string") {
@@ -213,7 +247,7 @@ if (!canonicalCatalogue) {
 
   if (errors.length === 0) {
     console.log(
-      `i18n:check passed (${catalogues.size} locale, ${canonicalKeys.length} keys).`,
+      `i18n:check passed (${catalogues.size} locale, ${canonicalKeys.length} keys, ${frontendTranslationKeys.size} frontend references).`,
     );
   }
 }
