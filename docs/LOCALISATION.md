@@ -4,7 +4,7 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moves ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording.
+Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactors Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics.
 
 English (Australia), en-AU, remains the canonical source locale and the only enabled locale. The locked release locale set is present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue yet.
 
@@ -15,7 +15,9 @@ English (Australia), en-AU, remains the canonical source locale and the only ena
 - src/i18n/index.ts — locale resolution, translation lookup, interpolation, English fallback and persistent UI-language override hooks.
 - src/i18n/formatting.ts — number/date formatting helpers that use regional formatting independently of the UI language.
 - src/i18n/types.ts — shared localisation types.
-- scripts/i18n-check.mjs — catalogue and metadata validation.
+- src/i18n/riskAcknowledgements/ — versioned structured Mining Risk Acknowledgement translations.
+- src/i18n/riskAcknowledgements/types.ts — acknowledgement content structure (sections, paragraphs, lists and inline emphasis).
+- scripts/i18n-check.mjs — catalogue, metadata and Risk Acknowledgement validation.
 
 Each locale registry entry contains:
 
@@ -57,7 +59,7 @@ Run:
 
     npm run i18n:check
 
-The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. It also scans the normal frontend source for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue.
+The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. It scans the normal frontend source, including the Risk Acknowledgement dialog chrome, for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue. It also validates each versioned Risk Acknowledgement document and compares its section/paragraph/list/emphasis structure with the canonical en-AU source.
 
 ## L2 extraction notes
 
@@ -91,3 +93,22 @@ The Tauri command boundary now follows these rules:
 The frontend maps backend error/status codes to keys in the canonical en-AU catalogue. Unknown or low-level failures fall back to a translated explanation while preserving useful original diagnostic detail.
 
 Rust unit tests cover the start/stop helper-response mapping that feeds the structured frontend results. Run the localisation validator, frontend build and Rust tests before merging L3.
+
+
+## L4 Mining Risk Acknowledgement structure
+
+Mining Risk Acknowledgement v1.0 is stored independently from the ordinary UI catalogue under `src/i18n/riskAcknowledgements/v1.0/`. The canonical source is `en-AU.json`.
+
+The acknowledgement is data rather than arbitrary translated HTML. Stable structural IDs identify sections, paragraphs and list items; inline segments record deliberate strong emphasis; paragraph metadata records the highlighted statutory-rights paragraph. The frontend renderer creates DOM/text nodes from this structure.
+
+A future translation of acknowledgement v1.0 must:
+
+- retain acknowledgementVersion `1.0` and schemaVersion `1`;
+- use the same structural IDs, block types, list-item count and emphasis pattern as the canonical en-AU source;
+- contain non-blank translated headings and text;
+- preserve technical product names and legal references accurately;
+- pass `npm run i18n:check` before that locale is enabled.
+
+The acknowledgement acceptance storage key and `ACKNOWLEDGEMENT_VERSION` remain unchanged in L4. Existing users who already accepted v1.0 therefore remain accepted, while first-run and permanent review behaviour continue to use the same acknowledgement version.
+
+Translating Mining Risk Acknowledgement v1.0 into another language does **not** create acknowledgement v1.1. The acknowledgement version changes only when the substantive canonical source wording changes. A translation correction that preserves the same source meaning likewise does not, by itself, create a new acknowledgement version.

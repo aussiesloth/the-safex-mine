@@ -7,8 +7,13 @@ const repositoryRoot = path.resolve(scriptDirectory, "..");
 const i18nDirectory = path.join(repositoryRoot, "src", "i18n");
 const cataloguesDirectory = path.join(i18nDirectory, "catalogues");
 const registryPath = path.join(i18nDirectory, "locales.json");
+const riskAcknowledgementsDirectory = path.join(
+  i18nDirectory,
+  "riskAcknowledgements",
+);
 const frontendSourcePaths = [
   path.join(repositoryRoot, "src", "main.ts"),
+  path.join(repositoryRoot, "src", "riskAcknowledgement.ts"),
 ];
 const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
 const FRONTEND_KEY_PATTERNS = [
@@ -41,6 +46,173 @@ function sameStrings(left, right) {
   return (
     left.length === right.length &&
     left.every((value, index) => value === right[index])
+  );
+}
+
+
+function isNonBlankString(value) {
+  return typeof value === "string" && value.trim() !== "";
+}
+
+function validateRiskSegments(segments, prefix) {
+  if (!Array.isArray(segments) || segments.length === 0) {
+    addError(`${prefix}.segments must be a non-empty array.`);
+    return [];
+  }
+
+  return segments.map((segment, index) => {
+    const segmentPrefix = `${prefix}.segments[${index}]`;
+
+    if (!segment || typeof segment !== "object") {
+      addError(`${segmentPrefix} must be an object.`);
+      return { strong: null };
+    }
+
+    if (!isNonBlankString(segment.text)) {
+      addError(`${segmentPrefix}.text must be non-blank.`);
+    }
+
+    if (typeof segment.strong !== "boolean") {
+      addError(`${segmentPrefix}.strong must be boolean.`);
+    }
+
+    return { strong: segment.strong };
+  });
+}
+
+function validateRiskBlock(block, prefix, seenIds) {
+  if (!block || typeof block !== "object") {
+    addError(`${prefix} must be an object.`);
+    return { type: "invalid" };
+  }
+
+  if (!isNonBlankString(block.id)) {
+    addError(`${prefix}.id must be non-blank.`);
+  } else if (seenIds.has(block.id)) {
+    addError(`${prefix}.id duplicates ${block.id}.`);
+  } else {
+    seenIds.add(block.id);
+  }
+
+  if (block.type === "paragraph") {
+    if (typeof block.emphasis !== "boolean") {
+      addError(`${prefix}.emphasis must be boolean.`);
+    }
+
+    return {
+      id: block.id,
+      type: block.type,
+      emphasis: block.emphasis,
+      segments: validateRiskSegments(block.segments, prefix),
+    };
+  }
+
+  if (block.type === "list") {
+    if (!Array.isArray(block.items) || block.items.length === 0) {
+      addError(`${prefix}.items must be a non-empty array.`);
+      return {
+        id: block.id,
+        type: block.type,
+        items: [],
+      };
+    }
+
+    const items = block.items.map((item, index) => {
+      const itemPrefix = `${prefix}.items[${index}]`;
+
+      if (!item || typeof item !== "object") {
+        addError(`${itemPrefix} must be an object.`);
+        return { id: null, segments: [] };
+      }
+
+      if (!isNonBlankString(item.id)) {
+        addError(`${itemPrefix}.id must be non-blank.`);
+      } else if (seenIds.has(item.id)) {
+        addError(`${itemPrefix}.id duplicates ${item.id}.`);
+      } else {
+        seenIds.add(item.id);
+      }
+
+      return {
+        id: item.id,
+        segments: validateRiskSegments(item.segments, itemPrefix),
+      };
+    });
+
+    return {
+      id: block.id,
+      type: block.type,
+      items,
+    };
+  }
+
+  if (block.type === "section") {
+    if (!isNonBlankString(block.heading)) {
+      addError(`${prefix}.heading must be non-blank.`);
+    }
+
+    if (!Array.isArray(block.blocks) || block.blocks.length === 0) {
+      addError(`${prefix}.blocks must be a non-empty array.`);
+      return {
+        id: block.id,
+        type: block.type,
+        blocks: [],
+      };
+    }
+
+    return {
+      id: block.id,
+      type: block.type,
+      blocks: block.blocks.map((child, index) =>
+        validateRiskBlock(
+          child,
+          `${prefix}.blocks[${index}]`,
+          seenIds,
+        ),
+      ),
+    };
+  }
+
+  addError(`${prefix}.type is not recognised.`);
+  return {
+    id: block.id,
+    type: block.type,
+  };
+}
+
+function validateRiskDocument(document, prefix, expectedVersion, expectedLocale) {
+  if (!document || typeof document !== "object" || Array.isArray(document)) {
+    addError(`${prefix}: document must be a JSON object.`);
+    return null;
+  }
+
+  if (document.schemaVersion !== 1) {
+    addError(`${prefix}: schemaVersion must be 1.`);
+  }
+
+  if (document.acknowledgementVersion !== expectedVersion) {
+    addError(
+      `${prefix}: acknowledgementVersion must be "${expectedVersion}".`,
+    );
+  }
+
+  if (document.locale !== expectedLocale) {
+    addError(`${prefix}: locale must be "${expectedLocale}".`);
+  }
+
+  if (!Array.isArray(document.blocks) || document.blocks.length === 0) {
+    addError(`${prefix}: blocks must be a non-empty array.`);
+    return null;
+  }
+
+  const seenIds = new Set();
+
+  return document.blocks.map((block, index) =>
+    validateRiskBlock(
+      block,
+      `${prefix}: blocks[${index}]`,
+      seenIds,
+    ),
   );
 }
 
@@ -245,11 +417,132 @@ if (!canonicalCatalogue) {
     }
   }
 
-  if (errors.length === 0) {
-    console.log(
-      `i18n:check passed (${catalogues.size} locale, ${canonicalKeys.length} keys, ${frontendTranslationKeys.size} frontend references).`,
+}
+
+let riskAcknowledgementVersionCount = 0;
+
+try {
+  const versionDirectories = (
+    await readdir(riskAcknowledgementsDirectory, {
+      withFileTypes: true,
+    })
+  )
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        /^v[0-9]+(?:\.[0-9]+)*$/.test(entry.name),
+    )
+    .sort((left, right) => left.name.localeCompare(right.name));
+
+  riskAcknowledgementVersionCount = versionDirectories.length;
+
+  if (versionDirectories.length === 0) {
+    addError(
+      "src/i18n/riskAcknowledgements: no versioned acknowledgement data found.",
     );
   }
+
+  const registeredLocaleIds = new Set(
+    Array.isArray(registry?.locales)
+      ? registry.locales.map((locale) => locale?.id)
+      : [],
+  );
+
+  const enabledLocaleIds = Array.isArray(registry?.locales)
+    ? registry.locales
+        .filter((locale) => locale?.enabled === true)
+        .map((locale) => locale.id)
+    : [];
+
+  for (const versionEntry of versionDirectories) {
+    const expectedVersion = versionEntry.name.slice(1);
+    const versionDirectory = path.join(
+      riskAcknowledgementsDirectory,
+      versionEntry.name,
+    );
+
+    const files = (await readdir(versionDirectory))
+      .filter((name) => name.endsWith(".json"))
+      .sort();
+
+    const documents = new Map();
+
+    for (const fileName of files) {
+      const localeId = fileName.slice(0, -".json".length);
+      const relativePath = path.join(
+        "src",
+        "i18n",
+        "riskAcknowledgements",
+        versionEntry.name,
+        fileName,
+      );
+      const document = await readJson(
+        path.join(versionDirectory, fileName),
+      );
+
+      if (!registeredLocaleIds.has(localeId)) {
+        addError(`${relativePath}: locale is not registered.`);
+      }
+
+      const structure = validateRiskDocument(
+        document,
+        relativePath,
+        expectedVersion,
+        localeId,
+      );
+
+      if (document && structure) {
+        documents.set(localeId, {
+          document,
+          structure,
+        });
+      }
+    }
+
+    for (const localeId of enabledLocaleIds) {
+      if (!documents.has(localeId)) {
+        addError(
+          `Missing Mining Risk Acknowledgement ${expectedVersion} for enabled locale ${localeId}.`,
+        );
+      }
+    }
+
+    const canonicalRisk =
+      documents.get(canonicalLocale);
+
+    if (!canonicalRisk) {
+      addError(
+        `Missing canonical Mining Risk Acknowledgement ${expectedVersion} for ${canonicalLocale}.`,
+      );
+      continue;
+    }
+
+    const canonicalStructure =
+      JSON.stringify(canonicalRisk.structure);
+
+    for (const [localeId, risk] of documents.entries()) {
+      if (
+        JSON.stringify(risk.structure) !==
+        canonicalStructure
+      ) {
+        addError(
+          `Mining Risk Acknowledgement ${expectedVersion} for ${localeId} does not match the canonical ${canonicalLocale} structure.`,
+        );
+      }
+    }
+  }
+} catch (error) {
+  addError(
+    `src/i18n/riskAcknowledgements: ${String(error)}`,
+  );
+}
+
+if (errors.length === 0 && canonicalCatalogue) {
+  const canonicalKeys = Object.keys(canonicalCatalogue).sort();
+
+  console.log(
+    `i18n:check passed (${catalogues.size} locale, ${canonicalKeys.length} keys, ${frontendTranslationKeys.size} frontend references, ${riskAcknowledgementVersionCount} risk acknowledgement version).`,
+  );
 }
 
 if (errors.length > 0) {
