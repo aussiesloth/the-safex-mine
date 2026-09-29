@@ -50,6 +50,11 @@
 .risk-acknowledgement-header {
   flex: 0 0 auto;
 
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+
   padding:
     22px 26px 18px;
 
@@ -88,6 +93,20 @@
   color: #929794;
 
   font-size: 12px;
+}
+
+.risk-acknowledgement-language {
+  flex: 0 0 auto;
+}
+
+.language-selector-risk .language-selector-label {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.language-selector-risk .language-selector-select {
+  min-width: 178px;
 }
 
 .risk-acknowledgement-content {
@@ -310,6 +329,17 @@
   .risk-acknowledgement-dialog {
     width: 100%;
     max-height: 95vh;
+  }
+
+  .risk-acknowledgement-header {
+    flex-direction: column;
+  }
+
+  .risk-acknowledgement-language,
+  .language-selector-risk,
+  .language-selector-risk .language-selector-label,
+  .language-selector-risk .language-selector-select {
+    width: 100%;
   }
 
   .risk-acknowledgement-header,
