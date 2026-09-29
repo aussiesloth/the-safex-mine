@@ -42,7 +42,11 @@ export function createLanguageSelector(
   select.append(windowsOption);
 
   for (const locale of supportedLocales) {
-    if (!locale.enabled) {
+    const availableInCurrentBuild =
+      locale.enabled ||
+      (import.meta.env.DEV && locale.developerOnly === true);
+
+    if (!availableInCurrentBuild) {
       continue;
     }
 

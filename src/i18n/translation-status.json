@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "canonicalSourceLocale": "en-AU",
+  "riskAcknowledgementVersion": "1.0",
+  "reviewedOn": "2026-09-30",
+  "reviewMethod": "AI-assisted translation followed by a separate clause-by-clause semantic/back-translation review against the canonical en-AU source.",
+  "certification": "Translations are project-maintained community translations. No native-speaker, solicitor, or legal certification is claimed.",
+  "locales": {
+    "de": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete"
+    },
+    "es": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete"
+    },
+    "sr-Cyrl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete",
+      "derivedFrom": "sr-Latn with script transliteration and terminology review"
+    },
+    "sr-Latn": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete"
+    },
+    "zh-Hans": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete"
+    },
+    "ja": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "semantic-back-translation-complete"
+    },
+    "en-XA": {
+      "releaseEnabled": false,
+      "developerOnly": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "generated-layout-stress-locale"
+    }
+  }
+}
