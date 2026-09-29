@@ -4,7 +4,7 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slice L1 established the framework. Localisation Slice L2 extracts the existing normal frontend UI into the canonical English catalogue while preserving the v1.0.0 English wording and behaviour.
+Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moves ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording.
 
 English (Australia), en-AU, remains the canonical source locale and the only enabled locale. The locked release locale set is present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue yet.
 
@@ -73,3 +73,21 @@ The following English text is intentionally not treated as an L2 frontend transl
 - The bootstrap title in index.html remains the product name The Safex Mine. main.ts sets document.title from app.name when the frontend starts.
 
 The L2 source audit should therefore treat any future ordinary user-facing English added directly to main.ts as localisation debt, while leaving the deferred/backend/technical categories above for their designated slices.
+
+
+## L3 backend-boundary notes
+
+The elevated helper's named-pipe/XMRig protocol remains an internal technical protocol. L3 does not redesign that protocol or the mining process lifecycle.
+
+The Tauri command boundary now follows these rules:
+
+- expected daemon-validation outcomes return stable codes and structured data rather than English display strings;
+- the backend probe returns a stable code plus the application version;
+- helper/UAC/session failures return a serialisable backend error object with a stable code and optional diagnostic detail;
+- mining start and stop responses are converted from helper protocol tokens into structured frontend results;
+- raw helper/XMRig/Windows detail may still be carried as diagnostic detail, but the frontend presents it only after a translated human-readable explanation;
+- telemetry protocol markers such as STATUS ACTIVE, STATUS EXITED, DAEMON=CONNECTED and HASHRATE_HS remain internal machine values and are not themselves treated as translatable UI wording.
+
+The frontend maps backend error/status codes to keys in the canonical en-AU catalogue. Unknown or low-level failures fall back to a translated explanation while preserving useful original diagnostic detail.
+
+Rust unit tests cover the start/stop helper-response mapping that feeds the structured frontend results. Run the localisation validator, frontend build and Rust tests before merging L3.

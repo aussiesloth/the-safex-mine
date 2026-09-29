@@ -52,7 +52,56 @@ impl Default for HelperSessionState {
     }
 }
 
-fn safex_helper_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct BackendError {
+    code: String,
+    detail: Option<String>,
+}
+
+impl BackendError {
+    fn new(code: &str) -> Self {
+        Self {
+            code: code.to_string(),
+            detail: None,
+        }
+    }
+
+    fn with_detail(code: &str, detail: impl Into<String>) -> Self {
+        Self {
+            code: code.to_string(),
+            detail: Some(detail.into()),
+        }
+    }
+}
+
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct BackendStatus {
+    code: &'static str,
+}
+
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct BackendProbeResult {
+    code: &'static str,
+    version: &'static str,
+}
+
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct StartMiningResult {
+    status: &'static str,
+    msr_available: bool,
+}
+
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct StopMiningResult {
+    forced: bool,
+}
+
+fn safex_helper_path(app: &tauri::AppHandle) -> Result<PathBuf, BackendError> {
     let packaged_path = app
         .path()
         .resolve("runtime/safex-mine-helper.exe", BaseDirectory::Resource);
@@ -74,26 +123,31 @@ fn safex_helper_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
     }
 
     match packaged_path {
-        Ok(path) => Err(
+        Ok(path) => Err(BackendError::with_detail(
+            "helper.notFound",
             format!(
-                "Safex Mine helper not found. Checked packaged path {} and development path {}.",
+                "Checked packaged path {} and development path {}.",
                 path.display(),
                 development_path.display(),
-            )
-        ),
+            ),
+        )),
 
-        Err(error) => Err(
+        Err(error) => Err(BackendError::with_detail(
+            "helper.notFound",
             format!(
-                "Safex Mine helper not found at development path {} and the packaged resource path could not be resolved: {error}",
+                "Development path {} was not present; packaged resource resolution failed: {error}",
                 development_path.display(),
-            )
-        ),
+            ),
+        )),
     }
 }
 
 #[tauri::command]
-fn backend_probe() -> String {
-    format!("Rust backend connected — v{}", env!("CARGO_PKG_VERSION"))
+fn backend_probe() -> BackendProbeResult {
+    BackendProbeResult {
+        code: "backend.connected",
+        version: env!("CARGO_PKG_VERSION"),
+    }
 }
 
 const SAFEX_MAINNET_ADDRESS_PREFIX: u64 = 268_449_688;
@@ -157,10 +211,12 @@ fn validate_safex_address(address: String) -> bool {
 }
 
 #[derive(serde::Serialize)]
+#[serde(rename_all = "camelCase")]
 struct DaemonCheckResult {
     valid: bool,
     height: Option<u64>,
-    message: String,
+    code: &'static str,
+    detail: Option<String>,
 }
 
 #[tauri::command]
@@ -171,7 +227,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
         return DaemonCheckResult {
             valid: false,
             height: None,
-            message: "Daemon address is empty.".to_string(),
+            code: "daemon.empty",
+            detail: None,
         };
     }
 
@@ -201,7 +258,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
             return DaemonCheckResult {
                 valid: false,
                 height: None,
-                message: "Unable to create daemon connection.".to_string(),
+                code: "daemon.connectionSetupFailed",
+                detail: None,
             };
         }
     };
@@ -213,7 +271,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
             return DaemonCheckResult {
                 valid: false,
                 height: None,
-                message: "Daemon unavailable.".to_string(),
+                code: "daemon.unavailable",
+                detail: None,
             };
         }
     };
@@ -222,7 +281,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
         return DaemonCheckResult {
             valid: false,
             height: None,
-            message: format!("Daemon returned HTTP {}.", response.status()),
+            code: "daemon.httpError",
+            detail: Some(response.status().to_string()),
         };
     }
 
@@ -233,7 +293,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
             return DaemonCheckResult {
                 valid: false,
                 height: None,
-                message: "Invalid daemon response.".to_string(),
+                code: "daemon.invalidResponse",
+                detail: None,
             };
         }
     };
@@ -258,7 +319,8 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
             return DaemonCheckResult {
                 valid: false,
                 height,
-                message: format!("Daemon status: {status}"),
+                code: "daemon.statusError",
+                detail: Some(status.to_string()),
             };
         }
     }
@@ -267,14 +329,16 @@ async fn validate_safex_daemon(daemon: String) -> DaemonCheckResult {
         return DaemonCheckResult {
             valid: false,
             height: None,
-            message: "Response is not a valid Safex daemon.".to_string(),
+            code: "daemon.notSafex",
+            detail: None,
         };
     };
 
     DaemonCheckResult {
         valid: true,
         height: Some(height),
-        message: "Safex daemon online.".to_string(),
+        code: "daemon.online",
+        detail: None,
     }
 }
 
@@ -282,10 +346,13 @@ fn to_wide_null(value: &str) -> Vec<u16> {
     value.encode_utf16().chain(std::iter::once(0)).collect()
 }
 
-fn launch_helper_with_arguments(helper_path: &PathBuf, parameters: &str) -> Result<(), String> {
+fn launch_helper_with_arguments(
+    helper_path: &PathBuf,
+    parameters: &str,
+) -> Result<(), BackendError> {
     let helper_text = helper_path
         .to_str()
-        .ok_or_else(|| "Helper path contains invalid Unicode.".to_string())?;
+        .ok_or_else(|| BackendError::new("helper.invalidPath"))?;
 
     let verb = to_wide_null("runas");
 
@@ -308,13 +375,8 @@ fn launch_helper_with_arguments(helper_path: &PathBuf, parameters: &str) -> Resu
     info.nShow = SW_HIDE.0;
 
     unsafe {
-        ShellExecuteExW(&mut info).map_err(|error| {
-            format!(
-                "Unable to launch elevated helper. \
-                 The UAC request may have been cancelled. \
-                 Error: {error}"
-            )
-        })?;
+        ShellExecuteExW(&mut info)
+            .map_err(|error| BackendError::with_detail("helper.launchFailed", error.to_string()))?;
 
         /*
            For this handshake test we don't
@@ -331,12 +393,16 @@ fn launch_helper_with_arguments(helper_path: &PathBuf, parameters: &str) -> Resu
     Ok(())
 }
 
-fn current_user_sid_string() -> Result<String, String> {
+fn current_user_sid_string() -> Result<String, BackendError> {
     unsafe {
         let mut token = windows::Win32::Foundation::HANDLE::default();
 
-        OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &mut token)
-            .map_err(|error| format!("Unable to open current-user token: {error}"))?;
+        OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &mut token).map_err(|error| {
+            BackendError::with_detail(
+                "helper.securitySetupFailed",
+                format!("Unable to open current-user token: {error}"),
+            )
+        })?;
 
         /*
            First call asks Windows how large
@@ -349,7 +415,10 @@ fn current_user_sid_string() -> Result<String, String> {
         if required == 0 {
             let _ = CloseHandle(token);
 
-            return Err("Windows returned no user-token size.".to_string());
+            return Err(BackendError::with_detail(
+                "helper.securitySetupFailed",
+                "Windows returned no user-token size.",
+            ));
         }
 
         let mut buffer = vec![0u8; required as usize];
@@ -364,7 +433,12 @@ fn current_user_sid_string() -> Result<String, String> {
 
         let _ = CloseHandle(token);
 
-        info_result.map_err(|error| format!("Unable to read current-user token: {error}"))?;
+        info_result.map_err(|error| {
+            BackendError::with_detail(
+                "helper.securitySetupFailed",
+                format!("Unable to read current-user token: {error}"),
+            )
+        })?;
 
         /*
            TOKEN_USER begins at the start of
@@ -378,12 +452,19 @@ fn current_user_sid_string() -> Result<String, String> {
 
         let mut sid_text = PWSTR::default();
 
-        ConvertSidToStringSidW(token_user.User.Sid, &mut sid_text)
-            .map_err(|error| format!("Unable to convert current-user SID: {error}"))?;
+        ConvertSidToStringSidW(token_user.User.Sid, &mut sid_text).map_err(|error| {
+            BackendError::with_detail(
+                "helper.securitySetupFailed",
+                format!("Unable to convert current-user SID: {error}"),
+            )
+        })?;
 
-        let sid_result = sid_text
-            .to_string()
-            .map_err(|error| format!("Unable to read current-user SID: {error}"));
+        let sid_result = sid_text.to_string().map_err(|error| {
+            BackendError::with_detail(
+                "helper.securitySetupFailed",
+                format!("Unable to read current-user SID: {error}"),
+            )
+        });
 
         /*
            ConvertSidToStringSidW allocated
@@ -397,7 +478,7 @@ fn current_user_sid_string() -> Result<String, String> {
 
 fn create_user_locked_pipe(
     pipe_name: &str,
-) -> Result<tokio::net::windows::named_pipe::NamedPipeServer, String> {
+) -> Result<tokio::net::windows::named_pipe::NamedPipeServer, BackendError> {
     let user_sid = current_user_sid_string()?;
 
     /*
@@ -431,7 +512,12 @@ fn create_user_locked_pipe(
             &mut descriptor,
             None,
         )
-        .map_err(|error| format!("Unable to build named-pipe security descriptor: {error}"))?;
+        .map_err(|error| {
+            BackendError::with_detail(
+                "helper.securitySetupFailed",
+                format!("Unable to build named-pipe security descriptor: {error}"),
+            )
+        })?;
     }
 
     let mut attributes = SECURITY_ATTRIBUTES {
@@ -468,21 +554,29 @@ fn create_user_locked_pipe(
         let _ = LocalFree(Some(HLOCAL(descriptor.0.cast())));
     }
 
-    create_result.map_err(|error| format!("Unable to create secured Safex Mine pipe: {error}"))
+    create_result.map_err(|error| {
+        BackendError::with_detail(
+            "helper.securitySetupFailed",
+            format!("Unable to create secured Safex Mine pipe: {error}"),
+        )
+    })
 }
 
-async fn helper_send_command(session: &mut HelperSession, command: &str) -> Result<String, String> {
+async fn helper_send_command(
+    session: &mut HelperSession,
+    command: &str,
+) -> Result<String, BackendError> {
     session
         .writer
         .write_all(format!("{command}\n").as_bytes())
         .await
-        .map_err(|error| format!("Unable to send helper command: {error}"))?;
+        .map_err(|error| {
+            BackendError::with_detail("helper.commandWriteFailed", error.to_string())
+        })?;
 
-    session
-        .writer
-        .flush()
-        .await
-        .map_err(|error| format!("Unable to flush helper command: {error}"))?;
+    session.writer.flush().await.map_err(|error| {
+        BackendError::with_detail("helper.commandFlushFailed", error.to_string())
+    })?;
 
     let mut response = String::new();
 
@@ -491,11 +585,11 @@ async fn helper_send_command(session: &mut HelperSession, command: &str) -> Resu
         session.reader.read_line(&mut response),
     )
     .await
-    .map_err(|_| "Timed out waiting for elevated helper.".to_string())?
-    .map_err(|error| format!("Unable to read helper response: {error}"))?;
+    .map_err(|_| BackendError::new("helper.responseTimedOut"))?
+    .map_err(|error| BackendError::with_detail("helper.responseReadFailed", error.to_string()))?;
 
     if count == 0 {
-        return Err("Elevated helper disconnected.".to_string());
+        return Err(BackendError::new("helper.disconnected"));
     }
 
     Ok(response.trim().to_string())
@@ -505,7 +599,7 @@ async fn helper_send_command(session: &mut HelperSession, command: &str) -> Resu
 async fn start_helper_session(
     app: tauri::AppHandle,
     state: State<'_, HelperSessionState>,
-) -> Result<String, String> {
+) -> Result<BackendStatus, BackendError> {
     let mut session_guard = state.session.lock().await;
 
     /*
@@ -514,7 +608,9 @@ async fn start_helper_session(
        the existing elevated helper.
     */
     if session_guard.is_some() {
-        return Ok("Elevated helper is already connected.".to_string());
+        return Ok(BackendStatus {
+            code: "helper.alreadyConnected",
+        });
     }
 
     let helper_path = safex_helper_path(&app)?;
@@ -537,8 +633,8 @@ async fn start_helper_session(
 
     timeout(Duration::from_secs(60), server.connect())
         .await
-        .map_err(|_| "Timed out waiting for Administrator approval.".to_string())?
-        .map_err(|error| format!("Elevated helper could not connect: {error}"))?;
+        .map_err(|_| BackendError::new("helper.approvalTimedOut"))?
+        .map_err(|error| BackendError::with_detail("helper.connectFailed", error.to_string()))?;
 
     let (reader, mut writer) = tokio::io::split(server);
 
@@ -548,46 +644,106 @@ async fn start_helper_session(
 
     let hello_count = timeout(Duration::from_secs(5), reader.read_line(&mut hello))
         .await
-        .map_err(|_| "Timed out waiting for helper handshake.".to_string())?
-        .map_err(|error| format!("Unable to read helper handshake: {error}"))?;
+        .map_err(|_| BackendError::new("helper.handshakeTimedOut"))?
+        .map_err(|error| BackendError::with_detail("helper.handshakeFailed", error.to_string()))?;
 
     if hello_count == 0 {
-        return Err("Elevated helper disconnected during handshake.".to_string());
+        return Err(BackendError::new("helper.handshakeDisconnected"));
     }
 
     let expected_hello = format!("HELLO {token}");
 
     if hello.trim() != expected_hello {
-        return Err("Elevated helper handshake token was invalid.".to_string());
+        return Err(BackendError::new("helper.handshakeInvalid"));
     }
 
-    writer
-        .write_all(b"SESSION\n")
-        .await
-        .map_err(|error| format!("Unable to start helper session: {error}"))?;
+    writer.write_all(b"SESSION\n").await.map_err(|error| {
+        BackendError::with_detail("helper.sessionStartFailed", error.to_string())
+    })?;
 
-    writer
-        .flush()
-        .await
-        .map_err(|error| format!("Unable to flush helper session command: {error}"))?;
+    writer.flush().await.map_err(|error| {
+        BackendError::with_detail("helper.sessionStartFailed", error.to_string())
+    })?;
 
     let mut ready = String::new();
 
     timeout(Duration::from_secs(5), reader.read_line(&mut ready))
         .await
-        .map_err(|_| "Timed out waiting for helper session acknowledgement.".to_string())?
-        .map_err(|error| format!("Unable to read helper session acknowledgement: {error}"))?;
+        .map_err(|_| BackendError::new("helper.sessionAckTimedOut"))?
+        .map_err(|error| BackendError::with_detail("helper.sessionAckFailed", error.to_string()))?;
 
     if ready.trim() != "SESSION READY ELEVATED" {
-        return Err(format!(
-            "Unexpected helper session response: {}",
-            ready.trim()
+        return Err(BackendError::with_detail(
+            "helper.sessionUnexpected",
+            ready.trim(),
         ));
     }
 
     *session_guard = Some(HelperSession { reader, writer });
 
-    Ok("Persistent elevated helper connected.".to_string())
+    Ok(BackendStatus {
+        code: "helper.connected",
+    })
+}
+
+fn parse_start_response(response: &str) -> Result<StartMiningResult, BackendError> {
+    if response.starts_with("OK STARTED_DEGRADED") {
+        return Ok(StartMiningResult {
+            status: "started",
+            msr_available: false,
+        });
+    }
+
+    if response.starts_with("OK STARTED") {
+        return Ok(StartMiningResult {
+            status: "started",
+            msr_available: true,
+        });
+    }
+
+    if response.starts_with("OK ALREADY_ACTIVE") {
+        return Ok(StartMiningResult {
+            status: "alreadyActive",
+            msr_available: true,
+        });
+    }
+
+    if let Some(detail) = response.strip_prefix("ERR ") {
+        return Err(BackendError::with_detail(
+            "mining.helperCommandFailed",
+            detail,
+        ));
+    }
+
+    Err(BackendError::with_detail(
+        "mining.helperUnexpectedResponse",
+        response,
+    ))
+}
+
+fn parse_stop_response(response: &str) -> Result<StopMiningResult, BackendError> {
+    if response.starts_with("OK STOPPED_FORCED") {
+        return Ok(StopMiningResult { forced: true });
+    }
+
+    if response.starts_with("OK STOPPED_GRACEFULLY")
+        || response.starts_with("OK ALREADY_EXITED")
+        || response.starts_with("OK ALREADY_STOPPED")
+    {
+        return Ok(StopMiningResult { forced: false });
+    }
+
+    if let Some(detail) = response.strip_prefix("ERR ") {
+        return Err(BackendError::with_detail(
+            "mining.helperCommandFailed",
+            detail,
+        ));
+    }
+
+    Err(BackendError::with_detail(
+        "mining.helperUnexpectedResponse",
+        response,
+    ))
 }
 
 #[tauri::command]
@@ -596,7 +752,7 @@ async fn start_xmrig_test(
     daemon: String,
     mode: String,
     state: State<'_, HelperSessionState>,
-) -> Result<String, String> {
+) -> Result<StartMiningResult, BackendError> {
     let address = address.trim();
 
     let daemon = daemon.trim();
@@ -609,37 +765,39 @@ async fn start_xmrig_test(
         "Full Bore" => "full",
 
         _ => {
-            return Err("Invalid mining mode.".to_string());
+            return Err(BackendError::new("mining.invalidMode"));
         }
     };
 
     if address.is_empty() {
-        return Err("Safex Address is empty.".to_string());
+        return Err(BackendError::new("mining.addressEmpty"));
     }
 
     if daemon.is_empty() {
-        return Err("Safex daemon is empty.".to_string());
+        return Err(BackendError::new("mining.daemonEmpty"));
     }
 
     let mut guard = state.session.lock().await;
 
     let session = guard
         .as_mut()
-        .ok_or_else(|| "Elevated helper is not connected.".to_string())?;
+        .ok_or_else(|| BackendError::new("helper.notConnected"))?;
 
     let command = format!("START {address} {daemon} {profile}");
 
-    helper_send_command(session, &command).await
+    let response = helper_send_command(session, &command).await?;
+
+    parse_start_response(&response)
 }
 
 #[tauri::command]
-async fn xmrig_test_status(state: State<'_, HelperSessionState>) -> Result<String, String> {
+async fn xmrig_test_status(state: State<'_, HelperSessionState>) -> Result<String, BackendError> {
     let mut guard = state.session.lock().await;
 
     let result = {
         let session = guard
             .as_mut()
-            .ok_or_else(|| "Elevated helper is not connected.".to_string())?;
+            .ok_or_else(|| BackendError::new("helper.notConnected"))?;
 
         helper_send_command(session, "STATUS").await
     };
@@ -658,14 +816,70 @@ async fn xmrig_test_status(state: State<'_, HelperSessionState>) -> Result<Strin
 }
 
 #[tauri::command]
-async fn stop_xmrig_test(state: State<'_, HelperSessionState>) -> Result<String, String> {
+async fn stop_xmrig_test(
+    state: State<'_, HelperSessionState>,
+) -> Result<StopMiningResult, BackendError> {
     let mut guard = state.session.lock().await;
 
     let session = guard
         .as_mut()
-        .ok_or_else(|| "Elevated helper is not connected.".to_string())?;
+        .ok_or_else(|| BackendError::new("helper.notConnected"))?;
 
-    helper_send_command(session, "STOP").await
+    let response = helper_send_command(session, "STOP").await?;
+
+    parse_stop_response(&response)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{parse_start_response, parse_stop_response};
+
+    #[test]
+    fn start_response_maps_normal_and_degraded_success() {
+        let normal = parse_start_response("OK STARTED | MSR=OK").expect("normal start");
+        assert_eq!(normal.status, "started");
+        assert!(normal.msr_available);
+
+        let degraded =
+            parse_start_response("OK STARTED_DEGRADED | MSR=Unavailable").expect("degraded start");
+        assert_eq!(degraded.status, "started");
+        assert!(!degraded.msr_available);
+    }
+
+    #[test]
+    fn start_response_preserves_helper_error_as_diagnostic_detail() {
+        let error = parse_start_response("ERR Unable to launch Safex XMRig: access denied")
+            .expect_err("helper error");
+
+        assert_eq!(error.code, "mining.helperCommandFailed");
+        assert_eq!(
+            error.detail.as_deref(),
+            Some("Unable to launch Safex XMRig: access denied")
+        );
+    }
+
+    #[test]
+    fn stop_response_maps_forced_and_clean_success() {
+        assert!(
+            parse_stop_response("OK STOPPED_FORCED")
+                .expect("forced stop")
+                .forced
+        );
+
+        assert!(
+            !parse_stop_response("OK STOPPED_GRACEFULLY (exit code: 0)")
+                .expect("clean stop")
+                .forced
+        );
+    }
+
+    #[test]
+    fn unexpected_helper_response_becomes_structured_error() {
+        let error = parse_stop_response("SURPRISE").expect_err("unexpected response");
+
+        assert_eq!(error.code, "mining.helperUnexpectedResponse");
+        assert_eq!(error.detail.as_deref(), Some("SURPRISE"));
+    }
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
