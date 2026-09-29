@@ -196,9 +196,9 @@ fn match_preferred_locale(
 
         let preferred_special = match language {
             "zh" => {
-                if script == Some("Hant") || matches!(region, Some("TW" | "HK" | "MO")) {
+                if script == Some("Hant") || matches!(region, Some("TW") | Some("HK") | Some("MO")) {
                     Some("zh-Hant")
-                } else if script == Some("Hans") || matches!(region, Some("CN" | "SG")) {
+                } else if script == Some("Hans") || matches!(region, Some("CN") | Some("SG")) {
                     Some("zh-Hans")
                 } else {
                     Some("zh-Hans")
