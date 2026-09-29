@@ -1,0 +1,12 @@
+{
+  "canonicalLocale": "en-AU",
+  "locales": [
+    {
+      "id": "en-AU",
+      "nativeName": "English",
+      "direction": "ltr",
+      "fallback": null,
+      "enabled": true
+    }
+  ]
+}
