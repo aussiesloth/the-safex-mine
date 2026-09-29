@@ -85,6 +85,69 @@ input {
   gap: clamp(18px, 2vw, 28px);
 }
 
+#language-selector-host {
+  flex: 0 0 auto;
+}
+
+.language-selector {
+  flex: 0 0 auto;
+}
+
+.language-selector-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-selector-label-text {
+  color: #a6aaa8;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.language-selector-label-visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+
+  border: 0;
+}
+
+.language-selector-select {
+  min-width: 132px;
+  max-width: 190px;
+
+  padding: 6px 28px 6px 9px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 7px;
+
+  color: #c4c2bc;
+  background: #15191b;
+
+  font: inherit;
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.language-selector-select:focus-visible {
+  outline:
+    2px solid rgba(232, 164, 67, 0.8);
+
+  outline-offset: 2px;
+}
+
 .safex-wordmark {
   width: clamp(105px, 8vw, 135px);
   height: auto;
