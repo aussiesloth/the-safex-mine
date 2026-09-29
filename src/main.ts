@@ -30,7 +30,31 @@ type MiningMode =
 type DaemonCheckResult = {
   valid: boolean;
   height: number | null;
-  message: string;
+  code: string;
+  detail: string | null;
+};
+
+type BackendStatus = {
+  code: string;
+};
+
+type BackendProbeResult = {
+  code: string;
+  version: string;
+};
+
+type StartMiningResult = {
+  status: "started" | "alreadyActive";
+  msrAvailable: boolean;
+};
+
+type StopMiningResult = {
+  forced: boolean;
+};
+
+type BackendErrorPayload = {
+  code: string;
+  detail: string | null;
 };
 
 const DEFAULT_DAEMON =
@@ -51,6 +75,210 @@ function getMiningModeLabel(mode: MiningMode): string {
       return translate("mode.balanced");
     case "Full Bore":
       return translate("mode.fullBore");
+  }
+}
+
+function getBackendErrorPayload(
+  error: unknown,
+): BackendErrorPayload | null {
+
+  if (
+    typeof error !== "object" ||
+    error === null
+  ) {
+    return null;
+  }
+
+  const candidate =
+    error as {
+      code?: unknown;
+      detail?: unknown;
+    };
+
+  if (typeof candidate.code !== "string") {
+    return null;
+  }
+
+  return {
+    code: candidate.code,
+    detail:
+      typeof candidate.detail === "string"
+        ? candidate.detail
+        : null,
+  };
+}
+
+function backendErrorMessage(
+  error: unknown,
+  fallbackKey = "error.backend.unexpected",
+): string {
+
+  const payload =
+    getBackendErrorPayload(error);
+
+  let message =
+    translate(fallbackKey);
+
+  switch (payload?.code) {
+    case "helper.notFound":
+      message = translate("error.helper.notFound");
+      break;
+
+    case "helper.invalidPath":
+      message = translate("error.helper.invalidPath");
+      break;
+
+    case "helper.launchFailed":
+      message = translate("error.helper.launchFailed");
+      break;
+
+    case "helper.securitySetupFailed":
+      message = translate("error.helper.securitySetupFailed");
+      break;
+
+    case "helper.approvalTimedOut":
+      message = translate("error.helper.approvalTimedOut");
+      break;
+
+    case "helper.connectFailed":
+      message = translate("error.helper.connectFailed");
+      break;
+
+    case "helper.handshakeTimedOut":
+      message = translate("error.helper.handshakeTimedOut");
+      break;
+
+    case "helper.handshakeFailed":
+      message = translate("error.helper.handshakeFailed");
+      break;
+
+    case "helper.handshakeDisconnected":
+    case "helper.disconnected":
+      message = translate("error.helper.disconnected");
+      break;
+
+    case "helper.handshakeInvalid":
+      message = translate("error.helper.handshakeInvalid");
+      break;
+
+    case "helper.sessionStartFailed":
+      message = translate("error.helper.sessionStartFailed");
+      break;
+
+    case "helper.sessionAckTimedOut":
+      message = translate("error.helper.sessionAckTimedOut");
+      break;
+
+    case "helper.sessionAckFailed":
+      message = translate("error.helper.sessionAckFailed");
+      break;
+
+    case "helper.sessionUnexpected":
+      message = translate("error.helper.sessionUnexpected");
+      break;
+
+    case "helper.commandWriteFailed":
+    case "helper.commandFlushFailed":
+    case "helper.responseReadFailed":
+      message = translate("error.helper.communicationFailed");
+      break;
+
+    case "helper.responseTimedOut":
+      message = translate("error.helper.responseTimedOut");
+      break;
+
+    case "helper.notConnected":
+      message = translate("error.helper.notConnected");
+      break;
+
+    case "mining.invalidMode":
+      message = translate("error.mining.invalidMode");
+      break;
+
+    case "mining.addressEmpty":
+      message = translate("error.mining.addressEmpty");
+      break;
+
+    case "mining.daemonEmpty":
+      message = translate("error.mining.daemonEmpty");
+      break;
+
+    case "mining.helperCommandFailed":
+      message = translate("error.mining.helperCommandFailed");
+      break;
+
+    case "mining.helperUnexpectedResponse":
+      message = translate("error.mining.helperUnexpectedResponse");
+      break;
+  }
+
+  const detail =
+    payload?.detail?.trim() ||
+    (
+      typeof error === "string"
+        ? error.trim()
+        : ""
+    );
+
+  if (!detail) {
+    return message;
+  }
+
+  return translate(
+    "error.withTechnicalDetail",
+    {
+      message,
+      detail,
+    },
+  );
+}
+
+function daemonCheckMessage(
+  result: DaemonCheckResult,
+): string {
+
+  switch (result.code) {
+    case "daemon.empty":
+      return translate("validation.daemon.empty");
+
+    case "daemon.connectionSetupFailed":
+      return translate(
+        "validation.daemon.connectionSetupFailed",
+      );
+
+    case "daemon.unavailable":
+      return translate("validation.daemon.unavailable");
+
+    case "daemon.httpError":
+      return translate(
+        "validation.daemon.httpError",
+        {
+          status: result.detail ?? "?",
+        },
+      );
+
+    case "daemon.invalidResponse":
+      return translate(
+        "validation.daemon.invalidResponse",
+      );
+
+    case "daemon.statusError":
+      return translate(
+        "validation.daemon.statusError",
+        {
+          status: result.detail ?? "?",
+        },
+      );
+
+    case "daemon.notSafex":
+      return translate(
+        "validation.daemon.notSafex",
+      );
+
+    default:
+      return translate(
+        "validation.daemon.unableToCheck",
+      );
   }
 }
 
@@ -562,7 +790,7 @@ async function validateDaemonField(
       "field-validation invalid";
 
     nodeValidation.textContent =
-      result.message;
+      daemonCheckMessage(result);
 
     return false;
 
@@ -1442,7 +1670,12 @@ async function refreshMiningTelemetry() {
   ) {
 
     handleUnexpectedMiningStop(
-      status,
+      translate(
+        "status.xmrig.exitedUnexpectedly",
+        {
+          detail: status,
+        },
+      ),
     );
 
     return;
@@ -1470,7 +1703,10 @@ async function refreshMiningTelemetry() {
 
 
     handleUnexpectedMiningStop(
-      String(error),
+      backendErrorMessage(
+        error,
+        "error.telemetry.failed",
+      ),
     );
   }
 }
@@ -1815,7 +2051,7 @@ startButton.addEventListener(
         helper. Once it exists, Stop -> Start
         does not cause another UAC prompt.
       */
-      await invoke<string>(
+      await invoke<BackendStatus>(
         "start_helper_session",
       );
 
@@ -1828,7 +2064,7 @@ startButton.addEventListener(
         getSavedMode();
 
       const result =
-        await invoke<string>(
+        await invoke<StartMiningResult>(
           "start_xmrig_test",
           {
             address:
@@ -1840,23 +2076,6 @@ startButton.addEventListener(
             mode,
           },
         );
-
-      const started =
-        result.startsWith(
-          "OK STARTED",
-        )
-        ||
-        result.startsWith(
-          "OK ALREADY_ACTIVE",
-        );
-
-
-      if (!started) {
-
-        throw new Error(
-          result,
-        );
-      }
 
 
       /*
@@ -1918,15 +2137,7 @@ startButton.addEventListener(
         false;
 
 
-    if (
-      result.includes(
-        "STARTED_DEGRADED",
-      )
-      ||
-      result.includes(
-        "MSR=UNAVAILABLE",
-      )
-    ) {
+    if (!result.msrAvailable) {
 
       backendNote.textContent =
         translate("status.miningStarted.msrUnavailable", {
@@ -2002,7 +2213,7 @@ startButton.addEventListener(
 
       backendNote.textContent =
         translate("status.mining.unableToStart", {
-          error: String(error),
+          error: backendErrorMessage(error),
         });
 
     } finally {
@@ -2040,7 +2251,7 @@ stopButton.addEventListener(
     try {
 
       const result =
-        await invoke<string>(
+        await invoke<StopMiningResult>(
           "stop_xmrig_test",
         );
 
@@ -2126,11 +2337,7 @@ stopButton.addEventListener(
         true;
 
 
-      if (
-        result.includes(
-          "STOPPED_FORCED",
-        )
-      ) {
+      if (result.forced) {
 
         backendNote.textContent =
           translate("status.mining.stoppedForced");
@@ -2153,7 +2360,7 @@ stopButton.addEventListener(
       */
       backendNote.textContent =
         translate("status.mining.unableToStop", {
-          error: String(error),
+          error: backendErrorMessage(error),
         });
 
 
@@ -2190,13 +2397,34 @@ async function probeBackend() {
 
   try {
 
-    const message =
-      await invoke<string>(
+    const result =
+      await invoke<BackendProbeResult>(
         "backend_probe",
       );
 
+    if (
+      result.code ===
+      "backend.connected"
+    ) {
+
+      backendNote.textContent =
+        translate(
+          "status.backend.connected",
+          {
+            version: result.version,
+          },
+        );
+
+      return;
+    }
+
     backendNote.textContent =
-      message;
+      translate("status.backend.unavailable");
+
+    console.error(
+      "Unexpected backend probe status:",
+      result,
+    );
 
   } catch (error) {
 
@@ -2209,6 +2437,7 @@ async function probeBackend() {
     );
   }
 }
+
 
 
 void probeBackend();
