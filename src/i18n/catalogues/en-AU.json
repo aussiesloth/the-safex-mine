@@ -1,0 +1,5 @@
+{
+  "app.name": "The Safex Mine",
+  "status.miningStarted.msrActive": "Mining started — {mode} mode. MSR optimisation active.",
+  "status.miningStarted.msrUnavailable": "Mining started — {mode} mode. MSR optimisation unavailable; reduced hashrate expected."
+}
