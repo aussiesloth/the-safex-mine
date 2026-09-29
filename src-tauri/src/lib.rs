@@ -13,6 +13,7 @@ use windows::{
     core::{PCWSTR, PWSTR},
     Win32::{
         Foundation::{CloseHandle, LocalFree, HLOCAL},
+        Globalization::{GetUserPreferredUILanguages, MUI_LANGUAGE_NAME},
         Security::{
             Authorization::{
                 ConvertSidToStringSidW, ConvertStringSecurityDescriptorToSecurityDescriptorW,
@@ -99,6 +100,236 @@ struct StartMiningResult {
 #[serde(rename_all = "camelCase")]
 struct StopMiningResult {
     forced: bool,
+}
+
+#[derive(Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct WindowsLocaleSelection {
+    preferred_languages: Vec<String>,
+    matched_locale: Option<String>,
+}
+
+fn normalise_locale_id(value: &str) -> String {
+    let mut parts = value
+        .trim()
+        .replace('_', "-")
+        .split('-')
+        .filter(|part| !part.is_empty())
+        .map(str::to_string)
+        .collect::<Vec<_>>();
+
+    if parts.is_empty() {
+        return String::new();
+    }
+
+    parts[0] = parts[0].to_ascii_lowercase();
+
+    for part in parts.iter_mut().skip(1) {
+        if part.len() == 4
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic())
+        {
+            let lower = part.to_ascii_lowercase();
+            let mut characters = lower.chars();
+            if let Some(first) = characters.next() {
+                *part = first.to_ascii_uppercase().to_string() + characters.as_str();
+            }
+        } else if (part.len() == 2
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic()))
+            || (part.len() == 3 && part.chars().all(|character| character.is_ascii_digit()))
+        {
+            *part = part.to_ascii_uppercase();
+        }
+    }
+
+    parts.join("-")
+}
+
+fn locale_language(locale_id: &str) -> &str {
+    locale_id.split('-').next().unwrap_or(locale_id)
+}
+
+fn locale_script(locale_id: &str) -> Option<&str> {
+    locale_id.split('-').skip(1).find(|part| {
+        part.len() == 4
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic())
+    })
+}
+
+fn locale_region(locale_id: &str) -> Option<&str> {
+    locale_id.split('-').skip(1).find(|part| {
+        (part.len() == 2
+            && part
+                .chars()
+                .all(|character| character.is_ascii_alphabetic()))
+            || (part.len() == 3 && part.chars().all(|character| character.is_ascii_digit()))
+    })
+}
+
+fn find_supported_locale(supported_locales: &[String], target: &str) -> Option<String> {
+    supported_locales
+        .iter()
+        .find(|locale| locale.eq_ignore_ascii_case(target))
+        .cloned()
+}
+
+fn match_preferred_locale(
+    preferred_languages: &[String],
+    supported_locales: &[String],
+) -> Option<String> {
+    let normalised_supported = supported_locales
+        .iter()
+        .map(|locale| normalise_locale_id(locale))
+        .filter(|locale| !locale.is_empty())
+        .collect::<Vec<_>>();
+
+    for preferred in preferred_languages {
+        let preferred = normalise_locale_id(preferred);
+
+        if preferred.is_empty() {
+            continue;
+        }
+
+        if let Some(exact) = find_supported_locale(&normalised_supported, &preferred) {
+            return supported_locales
+                .iter()
+                .find(|locale| locale.eq_ignore_ascii_case(&exact))
+                .cloned();
+        }
+
+        let language = locale_language(&preferred);
+        let script = locale_script(&preferred);
+        let region = locale_region(&preferred);
+
+        let preferred_special = match language {
+            "zh" => {
+                if script == Some("Hant") || matches!(region, Some("TW") | Some("HK") | Some("MO"))
+                {
+                    Some("zh-Hant")
+                } else if script == Some("Hans") || matches!(region, Some("CN") | Some("SG")) {
+                    Some("zh-Hans")
+                } else {
+                    Some("zh-Hans")
+                }
+            }
+            "pt" => {
+                if region == Some("BR") {
+                    Some("pt-BR")
+                } else {
+                    Some("pt-PT")
+                }
+            }
+            "sr" => {
+                if script == Some("Latn") {
+                    Some("sr-Latn")
+                } else {
+                    Some("sr-Cyrl")
+                }
+            }
+            _ => None,
+        };
+
+        if let Some(target) = preferred_special {
+            if let Some(matched) = find_supported_locale(&normalised_supported, target) {
+                return supported_locales
+                    .iter()
+                    .find(|locale| locale.eq_ignore_ascii_case(&matched))
+                    .cloned();
+            }
+        }
+
+        if let Some(base_match) = find_supported_locale(&normalised_supported, language) {
+            return supported_locales
+                .iter()
+                .find(|locale| locale.eq_ignore_ascii_case(&base_match))
+                .cloned();
+        }
+
+        let same_language = normalised_supported
+            .iter()
+            .filter(|locale| locale_language(locale) == language)
+            .collect::<Vec<_>>();
+
+        if same_language.len() == 1 {
+            let matched = same_language[0];
+            return supported_locales
+                .iter()
+                .find(|locale| locale.eq_ignore_ascii_case(matched))
+                .cloned();
+        }
+    }
+
+    None
+}
+
+fn parse_language_multisz(buffer: &[u16]) -> Vec<String> {
+    buffer
+        .split(|character| *character == 0)
+        .filter(|slice| !slice.is_empty())
+        .map(String::from_utf16_lossy)
+        .collect()
+}
+
+fn user_preferred_ui_languages() -> Result<Vec<String>, BackendError> {
+    let mut language_count = 0u32;
+    let mut buffer_length = 0u32;
+
+    unsafe {
+        GetUserPreferredUILanguages(
+            MUI_LANGUAGE_NAME,
+            &mut language_count,
+            None,
+            &mut buffer_length,
+        )
+    }
+    .map_err(|error| {
+        BackendError::with_detail(
+            "locale.windowsDetectionFailed",
+            format!("Unable to query Windows UI language buffer size: {error}"),
+        )
+    })?;
+
+    if buffer_length == 0 {
+        return Ok(Vec::new());
+    }
+
+    let mut buffer = vec![0u16; buffer_length as usize];
+
+    unsafe {
+        GetUserPreferredUILanguages(
+            MUI_LANGUAGE_NAME,
+            &mut language_count,
+            Some(PWSTR(buffer.as_mut_ptr())),
+            &mut buffer_length,
+        )
+    }
+    .map_err(|error| {
+        BackendError::with_detail(
+            "locale.windowsDetectionFailed",
+            format!("Unable to read Windows preferred UI languages: {error}"),
+        )
+    })?;
+
+    let used_length = usize::min(buffer_length as usize, buffer.len());
+    Ok(parse_language_multisz(&buffer[..used_length]))
+}
+
+#[tauri::command]
+fn windows_locale_selection(
+    supported_locales: Vec<String>,
+) -> Result<WindowsLocaleSelection, BackendError> {
+    let preferred_languages = user_preferred_ui_languages()?;
+    let matched_locale = match_preferred_locale(&preferred_languages, &supported_locales);
+
+    Ok(WindowsLocaleSelection {
+        preferred_languages,
+        matched_locale,
+    })
 }
 
 fn safex_helper_path(app: &tauri::AppHandle) -> Result<PathBuf, BackendError> {
@@ -832,7 +1063,87 @@ async fn stop_xmrig_test(
 
 #[cfg(test)]
 mod tests {
-    use super::{parse_start_response, parse_stop_response};
+    use super::{
+        match_preferred_locale, parse_language_multisz, parse_start_response, parse_stop_response,
+    };
+
+    #[test]
+    fn locale_multisz_parser_preserves_windows_preference_order() {
+        let buffer = "de-DE\0es-MX\0\0".encode_utf16().collect::<Vec<_>>();
+        assert_eq!(
+            parse_language_multisz(&buffer),
+            vec!["de-DE".to_string(), "es-MX".to_string()]
+        );
+    }
+
+    #[test]
+    fn locale_matcher_handles_future_regional_and_script_mappings() {
+        let supported = vec![
+            "en-AU".to_string(),
+            "es".to_string(),
+            "pt-BR".to_string(),
+            "pt-PT".to_string(),
+            "zh-Hans".to_string(),
+            "zh-Hant".to_string(),
+            "sr-Cyrl".to_string(),
+            "sr-Latn".to_string(),
+        ];
+
+        assert_eq!(
+            match_preferred_locale(&["es-MX".to_string()], &supported).as_deref(),
+            Some("es")
+        );
+        assert_eq!(
+            match_preferred_locale(&["pt-BR".to_string()], &supported).as_deref(),
+            Some("pt-BR")
+        );
+        assert_eq!(
+            match_preferred_locale(&["pt-PT".to_string()], &supported).as_deref(),
+            Some("pt-PT")
+        );
+        assert_eq!(
+            match_preferred_locale(&["zh-CN".to_string()], &supported).as_deref(),
+            Some("zh-Hans")
+        );
+        assert_eq!(
+            match_preferred_locale(&["zh-HK".to_string()], &supported).as_deref(),
+            Some("zh-Hant")
+        );
+        assert_eq!(
+            match_preferred_locale(&["sr-Cyrl-RS".to_string()], &supported).as_deref(),
+            Some("sr-Cyrl")
+        );
+        assert_eq!(
+            match_preferred_locale(&["sr-Latn-RS".to_string()], &supported).as_deref(),
+            Some("sr-Latn")
+        );
+    }
+
+    #[test]
+    fn locale_matcher_uses_preference_order_and_single_language_fallback() {
+        let supported = vec!["en-AU".to_string(), "de".to_string()];
+
+        assert_eq!(
+            match_preferred_locale(&["fr-FR".to_string(), "de-DE".to_string()], &supported,)
+                .as_deref(),
+            Some("de")
+        );
+
+        assert_eq!(
+            match_preferred_locale(&["en-US".to_string()], &supported).as_deref(),
+            Some("en-AU")
+        );
+    }
+
+    #[test]
+    fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
+        let supported = vec!["en-AU".to_string()];
+
+        assert_eq!(
+            match_preferred_locale(&["es-MX".to_string()], &supported),
+            None
+        );
+    }
 
     #[test]
     fn start_response_maps_normal_and_degraded_success() {
@@ -889,6 +1200,7 @@ pub fn run() {
         .manage(HelperSessionState::default())
         .invoke_handler(tauri::generate_handler![
             backend_probe,
+            windows_locale_selection,
             validate_safex_address,
             validate_safex_daemon,
             start_helper_session,

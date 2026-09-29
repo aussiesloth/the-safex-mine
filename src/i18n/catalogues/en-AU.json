@@ -39,6 +39,8 @@
   "field.nodeRpc.placeholder": "Default public node",
   "field.safexAddress": "Safex Address",
   "field.safexAddress.placeholder": "Enter mining address",
+  "language.selector.label": "Language",
+  "language.selector.useWindows": "Use Windows language",
   "mode.balanced": "Balanced",
   "mode.calm": "Calm",
   "mode.fullBore": "Full Bore",

@@ -4,12 +4,19 @@ import {
   getUiLocale,
   translate,
 } from "./i18n";
+import { createLanguageSelector } from "./i18n/languageSelector";
+import {
+  initializeUiLanguage,
+  onUiLanguageChanged,
+} from "./i18n/runtime";
 import {
   getRiskAcknowledgement,
   type RiskContentBlock,
   type RiskTextSegment,
 } from "./i18n/riskAcknowledgements";
 import "./riskAcknowledgement.css";
+
+await initializeUiLanguage();
 
 const ACKNOWLEDGEMENT_VERSION = "1.0";
 const ACKNOWLEDGEMENT_KEY =
@@ -318,6 +325,11 @@ function buildAcknowledgementUi() {
           <h2 id="risk-acknowledgement-title"></h2>
           <div class="risk-acknowledgement-version"></div>
         </div>
+
+        <div
+          class="risk-acknowledgement-language"
+          id="risk-acknowledgement-language"
+        ></div>
       </header>
 
       <div class="risk-acknowledgement-content"></div>
@@ -363,6 +375,19 @@ function buildAcknowledgementUi() {
   `;
 
   document.body.append(overlay);
+
+  const languageHost =
+    overlay.querySelector<HTMLDivElement>(
+      "#risk-acknowledgement-language",
+    );
+
+  languageHost?.append(
+    createLanguageSelector({
+      className: "language-selector-risk",
+      showLabel: true,
+    }),
+  );
+
   refreshAcknowledgementText();
 
   const checkbox =
@@ -444,6 +469,10 @@ function addPermanentAcknowledgementButton() {
 
 function initializeRiskAcknowledgement() {
   buildAcknowledgementUi();
+
+  onUiLanguageChanged(
+    refreshAcknowledgementText,
+  );
   addPermanentAcknowledgementButton();
 
   if (!hasAcknowledgedCurrentVersion()) {

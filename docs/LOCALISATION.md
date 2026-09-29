@@ -4,7 +4,7 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactors Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics.
+Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactored Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics. Localisation Slice L5 adds Windows preferred-UI-language detection, locale matching and the persistent user language selector.
 
 English (Australia), en-AU, remains the canonical source locale and the only enabled locale. The locked release locale set is present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue yet.
 
@@ -14,6 +14,8 @@ English (Australia), en-AU, remains the canonical source locale and the only ena
 - src/i18n/catalogues/en-AU.json — canonical English translation catalogue.
 - src/i18n/index.ts — locale resolution, translation lookup, interpolation, English fallback and persistent UI-language override hooks.
 - src/i18n/formatting.ts — number/date formatting helpers that use regional formatting independently of the UI language.
+- src/i18n/runtime.ts — Windows locale detection startup, override priority, document lang/dir updates and live language-change notifications.
+- src/i18n/languageSelector.ts — reusable no-flag language selector used by the main UI and Risk Acknowledgement.
 - src/i18n/types.ts — shared localisation types.
 - src/i18n/riskAcknowledgements/ — versioned structured Mining Risk Acknowledgement translations.
 - src/i18n/riskAcknowledgements/types.ts — acknowledgement content structure (sections, paragraphs, lists and inline emphasis).
@@ -37,9 +39,22 @@ Interpolation uses named placeholders such as {height} and {mode}. Values are su
 
 ## Persistent UI-language override
 
-LANGUAGE_OVERRIDE_STORAGE_KEY, getLanguageOverride() and setLanguageOverride() provide the persistence mechanism for a future user-selected UI language. L1 does not expose a selector and does not yet apply a stored override during startup.
+LANGUAGE_OVERRIDE_STORAGE_KEY, getLanguageOverride() and setLanguageOverride() persist an explicit user-selected language. L5 applies locale selection in this order:
 
-The UI language and regional formatting locale are separate concerns. Changing the UI language must not implicitly force number/date formatting to the same locale. formatting.ts therefore uses the runtime regional formatting locale unless a caller explicitly supplies another formatting locale.
+1. explicit stored user override;
+2. the best enabled match from Windows preferred UI languages;
+3. language/script fallback where appropriate;
+4. en-AU.
+
+Selecting “Use Windows language” removes the explicit override and returns the application to Windows-driven language selection. The selector is available in the normal top bar and inside the first-run Mining Risk Acknowledgement before acceptance.
+
+Windows preference detection is performed in Rust with GetUserPreferredUILanguages using language-name format. The frontend passes only currently enabled application locales to the matcher, so disabled future catalogues cannot become active prematurely.
+
+The matcher is designed for the locked locale set. Regional Spanish variants collapse to es when enabled; Brazilian and European Portuguese remain distinct; Simplified and Traditional Chinese are selected using script/region information; Serbian Cyrillic and Latin remain distinct. Rust tests exercise these future mappings before those translations are enabled.
+
+The active locale updates document lang and dir immediately. The normal application chrome, persistent status text and Risk Acknowledgement refresh without discarding mining/settings state.
+
+The UI language and regional formatting locale remain separate concerns. Changing the UI language does not force number/date formatting to the same locale. formatting.ts continues to use the runtime regional formatting locale unless a caller explicitly supplies another formatting locale.
 
 ## Adding another locale later
 
@@ -112,3 +127,12 @@ A future translation of acknowledgement v1.0 must:
 The acknowledgement acceptance storage key and `ACKNOWLEDGEMENT_VERSION` remain unchanged in L4. Existing users who already accepted v1.0 therefore remain accepted, while first-run and permanent review behaviour continue to use the same acknowledgement version.
 
 Translating Mining Risk Acknowledgement v1.0 into another language does **not** create acknowledgement v1.1. The acknowledgement version changes only when the substantive canonical source wording changes. A translation correction that preserves the same source meaning likewise does not, by itself, create a new acknowledgement version.
+
+
+## L5 Windows locale and selector notes
+
+The Windows API feature is enabled through the existing windows crate rather than introducing a new localisation dependency. The Rust command returns both the ordered Windows preferred-language list and the best match from the enabled locale IDs supplied by the frontend.
+
+At L5, en-AU remains the only enabled catalogue. The selector therefore offers “Use Windows language” and English (Australia). Unsupported Windows languages safely resolve to en-AU. L6 will enable the first translated catalogues without changing the L5 selection priority.
+
+Language names come from locale metadata and are displayed in their own language. Country flags are not used. The language selector does not alter the saved Safex address, daemon, mining mode or sound preference, and selecting a UI language does not modify regional number/date conventions.
