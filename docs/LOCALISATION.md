@@ -6,6 +6,8 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 Localisation Slice L1 establishes the framework only. English (Australia), en-AU, is the canonical source locale and the only enabled locale in this slice. Existing user-facing strings in src/main.ts are intentionally not migrated yet; that work belongs to L2.
 
+The locked release locale set is already present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue in L1.
+
 ## Structure
 
 - src/i18n/locales.json — locale registry and metadata.
@@ -23,7 +25,7 @@ Each locale registry entry contains:
 - fallback locale information;
 - whether the locale is enabled.
 
-The metadata is deliberately suitable for later right-to-left languages and for Windows preferred-UI-language matching. Country flags are not used as language identifiers.
+The metadata is deliberately suitable for later right-to-left languages and for Windows preferred-UI-language matching. Arabic, Persian and Urdu are marked RTL in the registry now, although they remain disabled. Country flags are not used as language identifiers.
 
 ## Translation lookup and fallback
 
@@ -39,7 +41,7 @@ The UI language and regional formatting locale are separate concerns. Changing t
 
 ## Adding another locale later
 
-1. Add locale metadata to src/i18n/locales.json.
+1. Add or update locale metadata in src/i18n/locales.json.
 2. Add a matching catalogue under src/i18n/catalogues.
 3. Register the catalogue in src/i18n/index.ts.
 4. Keep the complete key set aligned with en-AU.
@@ -55,4 +57,4 @@ Run:
 
     npm run i18n:check
 
-The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. In L1 it validates the canonical en-AU catalogue against the same rules future translations will use.
+The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. In L1 it validates the canonical en-AU catalogue against the same rules future translations will use, while also validating metadata for the locked release locale set.
