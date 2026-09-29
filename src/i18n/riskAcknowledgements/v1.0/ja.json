@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "ja",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine はコミュニティによって開発された、",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": " のソロマイニング用アプリケーションです。マイニング機能を使用する前に、以下の情報を読み、内容を確認してください。",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "マイニング報酬と価値",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "暗号資産のマイニングには投機性があります。The Safex Mine は、お使いのコンピューターがブロックを発見すること、マイニング報酬を得ること、利益を上げて動作すること、または電気代や機器費用を回収できることを保証しません。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Safex Cash の価値は上昇または下落する可能性があり、ある時点では現実の市場価値がほとんど、またはまったくない場合があります。過去のマイニング結果は将来の結果を示すものでも、保証するものでもありません。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine は、金融、投資、税務または法律に関する助言を提供しません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "ハードウェア負荷、発熱、消費電力",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "暗号資産のマイニングは、CPU やその他のコンピューター部品に継続的な負荷をかける可能性があります。これにより、次の項目が増加することがあります。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "プロセッサー温度とシステムの発熱。",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "ファン速度と冷却システムの使用量。",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "電力消費。",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "マザーボードの電源供給部品への負荷。",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "長時間運転による一般的なハードウェアの摩耗。",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "お使いのコンピューター、冷却システム、電源が継続的なマイニングに適しているかを判断し、必要に応じてシステムを監視する責任は利用者にあります。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "暗号資産マイニングソフトウェアの使用は、メーカーの任意保証の条件および故障の状況によっては、その保証範囲に影響する場合があります。この確認書は、法律上排除できない法定の権利または救済手段に影響を与えません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows のセキュリティと管理者権限アクセス",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine には、Safex 対応の XMRig マイニングバックエンド、管理者権限ヘルパー、および Windows の MSR パフォーマンス最適化を試みるために使用される WinRing ドライバーが含まれています。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "これらのコンポーネントは、Microsoft Defender、Windows SmartScreen、またはその他のセキュリティソフトウェアによって検出、ブロック、隔離される場合があります。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine が自動的にウイルス対策を無効化したり、隔離されたファイルを復元したり、ウイルス対策の除外設定を作成したりすることはありません。検出されたファイルを復元するか、除外設定を作成するか、セキュリティソフトウェアの設定を一時的に変更するかは、利用者自身の判断です。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "マイニングを開始するには、管理者権限のマイニングヘルパーに対する Windows UAC プロンプトを承認する必要があります。グラフィカルアプリケーション自体は、管理者権限なしで引き続き実行されるよう設計されています。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Windows のセキュリティ機能により MSR 最適化が妨げられる場合があります。その場合でも、性能が低下した状態でマイニングを続行できることがあります。より高いマイニング性能を得ることだけを目的として Windows のセキュリティ機能を無効化する必要はありません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "システムの安定性とデータ",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "CPU に継続的な高負荷がかかると、冷却不足、不安定なハードウェア、オーバークロック、電源の問題、その他の既存の問題があるシステムでは不安定性の一因となる可能性があります。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "長時間または無人でマイニングする前に、重要なデータがバックアップされ、コンピューターが安定して動作していることを確認してください。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "クラッシュ、データ損失、ハードウェア故障、その他のシステム問題が決して発生しないことを保証できるソフトウェアはありません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "マイニング設定",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "アプリケーションに入力した Safex Cash アドレスとデーモン設定については、利用者が責任を負います。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "開始前に、マイニングアドレスが正しいことを確認してください。誤ったアドレスに送信または付与された暗号資産を、開発者が回収することはできません。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "暗号資産マイニングの利用に適用される法律、税務上の要件、電力契約、その他の義務を遵守する責任は引き続き利用者にあります。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "性能の保証なし",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "ハッシュレートとマイニング性能はコンピューターごとに異なり、CPU アーキテクチャ、メモリ構成、冷却、電力制限、Windows のセキュリティ機能、システム上で動作する他のソフトウェアの影響を受ける場合があります。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "低負荷、バランス、全開の各プロファイルは、マイナーが利用できる CPU リソース量を制御します。特定のハッシュレート、報酬率、または収益性を保証するものではありません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "ソフトウェアの保証と責任",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine は ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " に基づいて提供され、法律上排除できないものを除き、保証なしで提供されます。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "適用法で認められる最大限の範囲において、本ソフトウェアにエラーがないこと、中断なく動作すること、すべてのコンピューターと互換性があること、または他のソフトウェアやハードウェアとの有害な相互作用がないことは保証されません。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "適用法で認められる最大限の範囲において、開発者は、利用者が暗号資産マイニングソフトウェアを使用すると判断したことから生じる損失または損害について責任を負いません。これには、ハードウェアの動作、発熱、電力消費、システムの不安定性、データ損失、コンピューター利用の中断、得られなかったマイニング報酬、または暗号資産価値の変動に関連する損失が含まれます。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "この確認書のいかなる内容も、法律上排除、制限または変更できない権利、保証または救済手段を排除、制限または変更するものではありません。",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "この確認書は、GPL-3.0 ライセンスまたは The Safex Mine に含まれる第三者コンポーネントに適用されるライセンスを置き換えたり、変更したり、追加の制限を課したりするものではありません。",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
