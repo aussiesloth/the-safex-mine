@@ -753,6 +753,12 @@ function refreshTranslatedTextBindings() {
   }
 }
 
+function clearTranslatedTextBinding(
+  target: HTMLElement,
+) {
+  translatedTextBindings.delete(target);
+}
+
 function refreshMainUiText() {
   document.title =
     translate("app.name");
@@ -1429,6 +1435,10 @@ function handleUnexpectedMiningStop(
     0;
 
 
+  clearTranslatedTextBinding(
+    hashrateValue,
+  );
+
   hashrateValue.textContent =
     "0 H/s";
 
@@ -1511,6 +1521,10 @@ function handleDaemonOffline() {
     0;
 
 
+  clearTranslatedTextBinding(
+    hashrateValue,
+  );
+
   hashrateValue.textContent =
     "0 H/s";
 
@@ -1587,8 +1601,10 @@ function handleDaemonReconnected() {
   waitingForFirstHashrate =
     true;
 
-  hashrateValue.textContent =
-    translate("status.hashrate.resuming");
+  setTranslatedText(
+    hashrateValue,
+    "status.hashrate.resuming",
+  );
 
 
   setScene(
@@ -1705,6 +1721,10 @@ async function refreshMiningTelemetry() {
         if (
           !waitingForFirstHashrate
         ) {
+
+          clearTranslatedTextBinding(
+            hashrateValue,
+          );
 
           hashrateValue.textContent =
             formatHashrate(
@@ -2254,8 +2274,10 @@ startButton.addEventListener(
       waitingForFirstHashrate =
         true;
 
-      hashrateValue.textContent =
-        translate("status.hashrate.starting");
+      setTranslatedText(
+        hashrateValue,
+        "status.hashrate.starting",
+      );
 
       setTranslatedText(
         connectionText,
@@ -2360,6 +2382,10 @@ startButton.addEventListener(
 
       stopTelemetryPolling();
 
+        clearTranslatedTextBinding(
+          hashrateValue,
+        );
+
         hashrateValue.textContent =
           "0 H/s";
 
@@ -2455,6 +2481,10 @@ stopButton.addEventListener(
         false;
 
         stopTelemetryPolling();
+
+          clearTranslatedTextBinding(
+            hashrateValue,
+          );
 
           hashrateValue.textContent =
             "0 H/s";
