@@ -344,8 +344,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
    <header class="topbar">
 
   <div class="brand">
-    <div class="brand-title">${translate("app.name")}</div>
-    <div class="brand-subtitle">${translate("app.subtitle")}</div>
+    <div class="brand-title" data-i18n="app.name">${translate("app.name")}</div>
+    <div class="brand-subtitle" data-i18n="app.subtitle">${translate("app.subtitle")}</div>
   </div>
 
 
@@ -447,12 +447,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>${translate("section.miningStatus")}</h2>
+          <h2 data-i18n="section.miningStatus">${translate("section.miningStatus")}</h2>
 
           <div class="stat-grid">
 
             <div class="stat">
-              <span class="stat-label">
+              <span class="stat-label" data-i18n="stat.hashrate">
                 ${translate("stat.hashrate")}
               </span>
 
@@ -462,7 +462,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </div>
 
             <div class="stat">
-              <span class="stat-label">
+              <span class="stat-label" data-i18n="stat.threads">
                 ${translate("stat.threads")}
               </span>
 
@@ -472,7 +472,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </div>
 
             <div class="stat">
-              <span class="stat-label">
+              <span class="stat-label" data-i18n="stat.blocksFound">
                 ${translate("stat.blocksFound")}
               </span>
 
@@ -482,7 +482,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </div>
 
             <div class="stat">
-              <span class="stat-label">
+              <span class="stat-label" data-i18n="stat.rejected">
                 ${translate("stat.rejected")}
               </span>
 
@@ -492,7 +492,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             </div>
 
             <div class="stat session-stat">
-              <span class="stat-label">
+              <span class="stat-label" data-i18n="stat.session">
                 ${translate("stat.session")}
               </span>
 
@@ -508,13 +508,14 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>${translate("section.miningMode")}</h2>
+          <h2 data-i18n="section.miningMode">${translate("section.miningMode")}</h2>
 
           <div class="mode-buttons">
 
             <button
               class="mode-button"
               data-mode="Calm"
+              data-i18n="mode.calm"
             >
               ${translate("mode.calm")}
             </button>
@@ -522,6 +523,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             <button
               class="mode-button active"
               data-mode="Balanced"
+              data-i18n="mode.balanced"
             >
               ${translate("mode.balanced")}
             </button>
@@ -529,6 +531,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             <button
               class="mode-button"
               data-mode="Full Bore"
+              data-i18n="mode.fullBore"
             >
               ${translate("mode.fullBore")}
             </button>
@@ -540,17 +543,18 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
         <section class="panel-section">
 
-          <h2>${translate("section.connection")}</h2>
+          <h2 data-i18n="section.connection">${translate("section.connection")}</h2>
 
           <div class="field">
 
-            <label for="address">
+            <label for="address" data-i18n="field.safexAddress">
               ${translate("field.safexAddress")}
             </label>
 
             <input
               id="address"
               type="text"
+              data-i18n-placeholder="field.safexAddress.placeholder"
               placeholder="${translate("field.safexAddress.placeholder")}"
             />
 
@@ -563,13 +567,14 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
           <div class="field">
 
-            <label for="node">
+            <label for="node" data-i18n="field.nodeRpc">
               ${translate("field.nodeRpc")}
             </label>
 
             <input
               id="node"
               type="text"
+              data-i18n-placeholder="field.nodeRpc.placeholder"
               placeholder="${translate("field.nodeRpc.placeholder")}"
             />
 
@@ -588,6 +593,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <button
             id="start-button"
             class="primary-button"
+            data-i18n="action.startMining"
           >
             ${translate("action.startMining")}
           </button>
@@ -595,6 +601,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <button
             id="stop-button"
             class="secondary-button"
+            data-i18n="action.stopMining"
             disabled
           >
             ${translate("action.stopMining")}
@@ -750,115 +757,33 @@ function refreshMainUiText() {
   document.title =
     translate("app.name");
 
-  const brandTitle =
-    document.querySelector<HTMLElement>(
-      ".brand-title",
-    );
-
-  const brandSubtitle =
-    document.querySelector<HTMLElement>(
-      ".brand-subtitle",
-    );
-
-  if (brandTitle) {
-    brandTitle.textContent =
-      translate("app.name");
-  }
-
-  if (brandSubtitle) {
-    brandSubtitle.textContent =
-      translate("app.subtitle");
-  }
-
-  const sectionHeadingKeys = [
-    "section.miningStatus",
-    "section.miningMode",
-    "section.connection",
-  ];
-
   document
     .querySelectorAll<HTMLElement>(
-      ".panel-section > h2",
+      "[data-i18n]",
     )
-    .forEach((heading, index) => {
-      const key = sectionHeadingKeys[index];
+    .forEach((element) => {
+      const key =
+        element.dataset.i18n;
 
       if (key) {
-        heading.textContent =
-          translate(key);
-      }
-    });
-
-  const statLabelKeys = [
-    "stat.hashrate",
-    "stat.threads",
-    "stat.blocksFound",
-    "stat.rejected",
-    "stat.session",
-  ];
-
-  document
-    .querySelectorAll<HTMLElement>(
-      ".stat-label",
-    )
-    .forEach((label, index) => {
-      const key = statLabelKeys[index];
-
-      if (key) {
-        label.textContent =
+        element.textContent =
           translate(key);
       }
     });
 
   document
-    .querySelectorAll<HTMLButtonElement>(
-      ".mode-button",
+    .querySelectorAll<HTMLInputElement>(
+      "[data-i18n-placeholder]",
     )
-    .forEach((button) => {
-      const mode =
-        button.dataset.mode as MiningMode | undefined;
+    .forEach((element) => {
+      const key =
+        element.dataset.i18nPlaceholder;
 
-      if (mode) {
-        button.textContent =
-          getMiningModeLabel(mode);
+      if (key) {
+        element.placeholder =
+          translate(key);
       }
     });
-
-  const addressLabel =
-    document.querySelector<HTMLLabelElement>(
-      'label[for="address"]',
-    );
-
-  const nodeLabel =
-    document.querySelector<HTMLLabelElement>(
-      'label[for="node"]',
-    );
-
-  if (addressLabel) {
-    addressLabel.textContent =
-      translate("field.safexAddress");
-  }
-
-  if (nodeLabel) {
-    nodeLabel.textContent =
-      translate("field.nodeRpc");
-  }
-
-  addressInput.placeholder =
-    translate(
-      "field.safexAddress.placeholder",
-    );
-
-  nodeInput.placeholder =
-    translate(
-      "field.nodeRpc.placeholder",
-    );
-
-  startButton.textContent =
-    translate("action.startMining");
-
-  stopButton.textContent =
-    translate("action.stopMining");
 
   const wordmark =
     document.querySelector<HTMLImageElement>(
