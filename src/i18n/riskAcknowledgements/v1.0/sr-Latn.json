@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "sr-Latn",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine je aplikacija koju razvija zajednica za solo rudarenje ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Pre korišćenja funkcija rudarenja, pročitajte i potvrdite sledeće informacije.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Nagrade od rudarenja i vrednost",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Rudarenje kriptovaluta je spekulativno. The Safex Mine ne garantuje da će vaš računar pronaći blok, dobiti bilo kakvu nagradu za rudarenje, raditi profitabilno ili nadoknaditi trošak električne energije ili opreme.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Vrednost Safex Cash može porasti ili pasti i u bilo kom trenutku može imati malu ili nikakvu stvarnu tržišnu vrednost. Prethodni rezultati rudarenja ne ukazuju na buduće rezultate niti ih garantuju.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine ne pruža finansijske, investicione, poreske niti pravne savete.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Opterećenje hardvera, toplota i potrošnja električne energije",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Rudarenje kriptovaluta može trajno opteretiti vaš CPU i druge komponente računara. To može povećati:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "temperaturu procesora i zagrevanje sistema;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "brzinu ventilatora i korišćenje sistema za hlađenje;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "potrošnju električne energije;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "opterećenje komponenti za napajanje na matičnoj ploči; i",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "opšte habanje hardvera tokom dugotrajnog rada.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Vi ste odgovorni za odluku da li su vaš računar, sistem za hlađenje i napajanje pogodni za dugotrajno rudarenje, kao i za odgovarajući nadzor sistema.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Korišćenje softvera za rudarenje kriptovaluta može uticati na pokriće dobrovoljne garancije proizvođača, u zavisnosti od uslova te garancije i okolnosti bilo kog kvara. Ova potvrda ne utiče na zakonska prava ili pravne lekove koji se po zakonu ne mogu isključiti.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows bezbednost i pristup sa povišenim privilegijama",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine sadrži XMRig backend za rudarenje kompatibilan sa Safex, pomoćni proces sa povišenim privilegijama i WinRing drajver koji se koriste za pokušaj Windows MSR optimizacije performansi.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Microsoft Defender, Windows SmartScreen ili drugi bezbednosni softver mogu otkriti, blokirati ili staviti ove komponente u karantin.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine neće automatski isključivati antivirusnu zaštitu, vraćati datoteke iz karantina niti praviti antivirusne izuzetke. Odluka da vratite otkrivenu datoteku, napravite izuzetak ili privremeno promenite podešavanja bezbednosnog softvera ostaje na vama.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Pokretanje rudarenja zahteva odobrenje Windows UAC upita za pomoćni proces rudarenja sa povišenim privilegijama. Sama grafička aplikacija je namenjena da nastavi da radi bez administratorskih privilegija.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Windows bezbednosne funkcije mogu sprečiti MSR optimizaciju. Kada se to dogodi, rudarenje može da se nastavi sa smanjenim performansama. Nije potrebno da isključite Windows bezbednosne funkcije samo radi većih performansi rudarenja.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Stabilnost sistema i podaci",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Trajno visoko opterećenje CPU-a može doprineti nestabilnosti sistema na računarima sa nedovoljnim hlađenjem, nestabilnim hardverom, overklokovanjem, problemima sa napajanjem ili drugim postojećim problemima.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Pre dugotrajnog ili nenadziranog rudarenja treba da obezbedite rezervnu kopiju važnih podataka i da proverite da računar pouzdano radi.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Nijedan softver ne može garantovati da se padovi sistema, gubitak podataka, kvarovi hardvera ili drugi sistemski problemi nikada neće dogoditi.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Konfiguracija rudarenja",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Vi ste odgovorni za Safex Cash adresu i konfiguraciju daemona unete u aplikaciju.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Pre pokretanja treba da potvrdite da je adresa za rudarenje tačna. Programer ne može povratiti kriptovalutu poslatu ili pripisanu pogrešnoj adresi.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "I dalje ste odgovorni za poštovanje svih zakona, poreskih zahteva, ugovora o električnoj energiji ili drugih obaveza koje se odnose na vaše korišćenje rudarenja kriptovaluta.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Bez garancije performansi",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hashrate i performanse rudarenja razlikuju se između računara i na njih mogu uticati arhitektura CPU-a, konfiguracija memorije, hlađenje, ograničenja snage, Windows bezbednosne funkcije i drugi softver koji radi na sistemu.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Profili Mirno, Uravnoteženo i Puna snaga određuju količinu CPU resursa dostupnih rudaru. Oni ne garantuju određeni hashrate, stopu nagrade niti profitabilnost.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Garancija softvera i odgovornost",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine se pruža pod ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " i pruža se bez garancija osim onih koje se po zakonu ne mogu isključiti.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "U najvećoj meri dozvoljenoj važećim zakonom, ne garantuje se da će softver biti bez grešaka, neprekidno dostupan, kompatibilan sa svakim računarom niti bez štetnih međudejstava sa drugim softverom ili hardverom.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "U najvećoj meri dozvoljenoj važećim zakonom, programer nije odgovoran za gubitak ili štetu koja nastane zbog odluke korisnika da koristi softver za rudarenje kriptovaluta, uključujući gubitke povezane sa radom hardvera, toplotom, potrošnjom električne energije, nestabilnošću sistema, gubitkom podataka, prekidom korišćenja računara, propuštenim nagradama za rudarenje ili promenama vrednosti kriptovalute.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Ništa u ovoj potvrdi ne isključuje, ograničava niti menja bilo koje pravo, garanciju ili pravni lek koji se po zakonu ne može isključiti, ograničiti ili izmeniti.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ova potvrda ne zamenjuje, ne menja niti nameće dodatna ograničenja na GPL-3.0 licencu ili licence koje se primenjuju na komponente trećih strana uključene u The Safex Mine.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
