@@ -117,7 +117,9 @@ function backendErrorMessage(
     getBackendErrorPayload(error);
 
   let message =
-    translate(fallbackKey);
+    fallbackKey === "error.telemetry.failed"
+      ? translate("error.telemetry.failed")
+      : translate("error.backend.unexpected");
 
   switch (payload?.code) {
     case "helper.notFound":
