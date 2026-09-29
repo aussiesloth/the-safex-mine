@@ -14,6 +14,7 @@ const riskAcknowledgementsDirectory = path.join(
 const frontendSourcePaths = [
   path.join(repositoryRoot, "src", "main.ts"),
   path.join(repositoryRoot, "src", "riskAcknowledgement.ts"),
+  path.join(repositoryRoot, "src", "i18n", "languageSelector.ts"),
 ];
 const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
 const FRONTEND_KEY_PATTERNS = [
