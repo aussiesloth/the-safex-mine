@@ -1770,8 +1770,10 @@ async function refreshMiningTelemetry() {
           waitingForFirstHashrate =
             false;
 
-          connectionText.textContent =
-            translate("connection.mining");
+          setTranslatedText(
+            connectionText,
+            "connection.mining",
+          );
         }
 
 
