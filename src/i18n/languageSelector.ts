@@ -27,9 +27,12 @@ export function createLanguageSelector(
     .join(" ");
 
   const label = document.createElement("label");
-  label.className = options.showLabel
-    ? "language-selector-label"
-    : "language-selector-label language-selector-label-visually-hidden";
+  label.className = "language-selector-label";
+
+  const labelTextElement = document.createElement("span");
+  labelTextElement.className = options.showLabel
+    ? "language-selector-label-text"
+    : "language-selector-label-text language-selector-label-visually-hidden";
 
   const select = document.createElement("select");
   select.className = "language-selector-select";
@@ -49,16 +52,29 @@ export function createLanguageSelector(
     select.append(option);
   }
 
-  label.append(select);
+  label.append(
+    labelTextElement,
+    select,
+  );
+
   wrapper.append(label);
 
   const refresh = () => {
-    const labelText = translate("language.selector.label");
+    const labelText =
+      translate("language.selector.label");
 
-    label.setAttribute("aria-label", labelText);
-    select.setAttribute("aria-label", labelText);
+    labelTextElement.textContent =
+      labelText;
+
+    select.setAttribute(
+      "aria-label",
+      labelText,
+    );
+
     windowsOption.textContent =
-      translate("language.selector.useWindows");
+      translate(
+        "language.selector.useWindows",
+      );
 
     select.value =
       getLanguageOverride() ??
