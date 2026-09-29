@@ -7,6 +7,10 @@ const repositoryRoot = path.resolve(scriptDirectory, "..");
 const i18nDirectory = path.join(repositoryRoot, "src", "i18n");
 const cataloguesDirectory = path.join(i18nDirectory, "catalogues");
 const registryPath = path.join(i18nDirectory, "locales.json");
+const translationStatusPath = path.join(
+  i18nDirectory,
+  "translation-status.json",
+);
 const riskAcknowledgementsDirectory = path.join(
   i18nDirectory,
   "riskAcknowledgements",
@@ -268,6 +272,19 @@ if (!registry || typeof registry !== "object") {
       if (typeof locale.enabled !== "boolean") {
         addError(`${prefix}.enabled must be boolean.`);
       }
+
+      if (
+        locale.developerOnly !== undefined &&
+        typeof locale.developerOnly !== "boolean"
+      ) {
+        addError(`${prefix}.developerOnly must be boolean when present.`);
+      }
+
+      if (locale.enabled === true && locale.developerOnly === true) {
+        addError(
+          `${prefix} cannot be both release-enabled and developer-only.`,
+        );
+      }
     }
 
     for (const locale of registry.locales) {
@@ -328,8 +345,105 @@ if (registry?.locales && Array.isArray(registry.locales)) {
   }
 
   for (const locale of registry.locales) {
-    if (locale?.enabled === true && !catalogues.has(locale.id)) {
-      addError(`Missing catalogue for enabled locale ${locale.id}.`);
+    if (
+      (locale?.enabled === true || locale?.developerOnly === true) &&
+      !catalogues.has(locale.id)
+    ) {
+      addError(
+        `Missing catalogue for available locale ${locale.id}.`,
+      );
+    }
+  }
+}
+
+const translationStatus = await readJson(translationStatusPath);
+
+if (
+  !translationStatus ||
+  typeof translationStatus !== "object" ||
+  Array.isArray(translationStatus)
+) {
+  addError("translation-status.json: status data is missing or invalid.");
+} else {
+  if (translationStatus.schemaVersion !== 1) {
+    addError("translation-status.json: schemaVersion must be 1.");
+  }
+
+  if (translationStatus.canonicalSourceLocale !== "en-AU") {
+    addError(
+      'translation-status.json: canonicalSourceLocale must be "en-AU".',
+    );
+  }
+
+  if (translationStatus.riskAcknowledgementVersion !== "1.0") {
+    addError(
+      'translation-status.json: riskAcknowledgementVersion must be "1.0".',
+    );
+  }
+
+  if (
+    !translationStatus.locales ||
+    typeof translationStatus.locales !== "object" ||
+    Array.isArray(translationStatus.locales)
+  ) {
+    addError("translation-status.json: locales must be an object.");
+  } else if (Array.isArray(registry?.locales)) {
+    for (const locale of registry.locales) {
+      if (
+        locale?.enabled !== true &&
+        locale?.developerOnly !== true
+      ) {
+        continue;
+      }
+
+      if (locale.id === registry.canonicalLocale) {
+        continue;
+      }
+
+      const status = translationStatus.locales[locale.id];
+
+      if (!status || typeof status !== "object") {
+        addError(
+          `translation-status.json: missing status for ${locale.id}.`,
+        );
+        continue;
+      }
+
+      for (const field of [
+        "ui",
+        "accessibilityAndStatus",
+        "riskAcknowledgement",
+      ]) {
+        if (status[field] !== "complete") {
+          addError(
+            `translation-status.json: ${locale.id}.${field} must be "complete".`,
+          );
+        }
+      }
+
+      if (!isNonBlankString(status.review)) {
+        addError(
+          `translation-status.json: ${locale.id}.review must be non-blank.`,
+        );
+      }
+
+      if (
+        locale.developerOnly === true &&
+        status.developerOnly !== true
+      ) {
+        addError(
+          `translation-status.json: ${locale.id} must be marked developerOnly.`,
+        );
+      }
+
+      if (
+        locale.enabled === true &&
+        status.releaseEnabled !== true
+      ) {
+        addError(
+          `translation-status.json: ${locale.id} must be marked releaseEnabled.`,
+        );
+      }
     }
   }
 }
@@ -449,9 +563,13 @@ try {
       : [],
   );
 
-  const enabledLocaleIds = Array.isArray(registry?.locales)
+  const availableLocaleIds = Array.isArray(registry?.locales)
     ? registry.locales
-        .filter((locale) => locale?.enabled === true)
+        .filter(
+          (locale) =>
+            locale?.enabled === true ||
+            locale?.developerOnly === true,
+        )
         .map((locale) => locale.id)
     : [];
 
@@ -500,10 +618,10 @@ try {
       }
     }
 
-    for (const localeId of enabledLocaleIds) {
+    for (const localeId of availableLocaleIds) {
       if (!documents.has(localeId)) {
         addError(
-          `Missing Mining Risk Acknowledgement ${expectedVersion} for enabled locale ${localeId}.`,
+          `Missing Mining Risk Acknowledgement ${expectedVersion} for available locale ${localeId}.`,
         );
       }
     }
