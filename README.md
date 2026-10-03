@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** **v1.0.0 release candidate.** Core mining, telemetry, recovery behaviour, state-driven artwork, block-found sound, the versioned Mining Risk Acknowledgement and the NSIS release package have been validated. Clean-machine download, installation, mining, Defender recovery/full-scan and uninstall testing are complete.
+> **Project status:** **v1.0.0 publicly released on 18 September 2026.** The first Windows x64 release is available from the [v1.0.0 GitHub Release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0), with the NSIS installer and published SHA-256 checksum. Core mining, telemetry, recovery behaviour, state-driven artwork, block-found sound and the versioned Mining Risk Acknowledgement are included in the published release. Clean-machine download, installation, mining, Defender recovery/full-scan and uninstall testing were completed before publication. Further localisation work is in progress; unmerged translations are not part of the existing v1.0.0 installer.
 
 ## What it does
 
@@ -73,6 +73,8 @@ See [BUILDING.md](BUILDING.md) for the current Windows development-build process
 The repository intentionally does **not** contain the compiled XMRig executable or WinRing driver. A complete source build therefore includes preparing the pinned Safex XMRig backend and placing the required runtime files in `src-tauri/binaries/`.
 
 ### Packaged releases
+
+**Published download:** [The Safex Mine v1.0.0 for Windows x64](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0). Download `The-Safex-Mine_1.0.0_x64-setup.exe` and verify its hash using the accompanying `SHA256SUMS.txt` before executing it, following the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
 
 The Windows release is **unsigned**. Users can inspect the public source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project provides verification and narrowly scoped exclusion/restoration guidance, but never disables security software or adds antivirus exclusions automatically.
 

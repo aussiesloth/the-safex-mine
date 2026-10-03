@@ -48,8 +48,10 @@ The first public release is version **1.0.0**.
 - Defender Full scan with the narrow exclusion in place.
 - Uninstall without UAC, including confirmation that user-created Defender exclusions remain for manual cleanup.
 
-### Release preparation
+### Release publication
 
+- Version **1.0.0** was published as the first public release on **18 September 2026**; it is not a release candidate.
+- The public Windows x64 NSIS installer is `The-Safex-Mine_1.0.0_x64-setup.exe`, published with `SHA256SUMS.txt` at the [v1.0.0 release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0).
+- The release is tagged `v1.0.0` and its published SHA-256 is provided in the release notes and checksum file.
 - Clean-machine installation screenshots are included in the Windows installation guide.
 - The locked Windows dependency graph has been audited and dependency licence/attribution material is included in the release bundle.
-- The final public installer must be built from the v1.0.0 release commit/tag and its SHA-256 published with the release.
