@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "nl",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine is een door de gemeenschap ontwikkelde toepassing voor het zelfstandig minen van ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Lees de onderstaande informatie en bevestig dat u deze hebt begrepen voordat u de miningfuncties gebruikt.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Miningbeloningen en waarde",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Het minen van cryptovaluta is speculatief. The Safex Mine garandeert niet dat uw computer een blok vindt, een miningbeloning ontvangt, winstgevend werkt of de kosten van elektriciteit of apparatuur terugverdient.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Safex Cash kan in waarde stijgen of dalen en op enig moment weinig of geen werkelijke marktwaarde hebben. Eerdere miningresultaten vormen geen aanwijzing of garantie voor toekomstige resultaten.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine biedt geen financieel, beleggings-, belasting- of juridisch advies.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Hardwarebelasting, warmte en stroomverbruik",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Het minen van cryptovaluta kan uw CPU en andere computeronderdelen langdurig belasten. Hierdoor kunnen toenemen:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "de processortemperatuur en de warmteontwikkeling in het systeem;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "de ventilatorsnelheid en het gebruik van het koelsysteem;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "het elektriciteitsverbruik;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "de belasting van de voedingscomponenten van het moederbord; en",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "de algemene hardwareslijtage bij langdurig gebruik.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "U bent zelf verantwoordelijk voor de beoordeling of uw computer, koelsysteem en voeding geschikt zijn voor langdurig minen en voor het waar nodig bewaken van uw systeem.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Het gebruik van software voor het minen van cryptovaluta kan gevolgen hebben voor de dekking van een vrijwillige fabrieksgarantie, afhankelijk van de garantievoorwaarden van de fabrikant en de omstandigheden van een eventueel defect. Deze verklaring doet geen afbreuk aan wettelijke rechten of rechtsmiddelen die niet rechtsgeldig kunnen worden uitgesloten.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows-beveiliging en verhoogde toegang",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine bevat een met Safex compatibele XMRig-miningbackend, een hulpprogramma met verhoogde rechten en het WinRing-stuurprogramma waarmee Windows MSR-prestatieoptimalisatie wordt geprobeerd.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Deze onderdelen kunnen worden gedetecteerd, geblokkeerd of in quarantaine geplaatst door Microsoft Defender, Windows SmartScreen of andere beveiligingssoftware.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine schakelt antivirusbescherming niet automatisch uit, herstelt geen bestanden uit quarantaine en maakt geen antivirusuitsluitingen aan. Elke beslissing om een gedetecteerd bestand te herstellen, een uitsluiting aan te maken of beveiligingsinstellingen tijdelijk te wijzigen, is uw eigen verantwoordelijkheid.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Om het minen te starten, moet u een Windows UAC-melding voor het mininghulpprogramma met verhoogde rechten goedkeuren. De grafische toepassing zelf is bedoeld om zonder beheerdersrechten te blijven draaien.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Windows-beveiligingsfuncties kunnen MSR-optimalisatie verhinderen. In dat geval kan het minen met lagere prestaties doorgaan. U hoeft Windows-beveiligingsfuncties niet uit te schakelen enkel om hogere miningprestaties te behalen.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Systeemstabiliteit en gegevens",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Een langdurige hoge CPU-belasting kan bijdragen aan systeeminstabiliteit bij onvoldoende koeling, instabiele hardware, overklokken, voedingsproblemen of andere bestaande problemen.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Zorg vóór langdurig minen of minen zonder toezicht dat er back-ups van belangrijke gegevens zijn en dat uw computer betrouwbaar werkt.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Geen enkele software kan garanderen dat crashes, gegevensverlies, hardwarestoringen of andere systeemproblemen nooit zullen optreden.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Miningconfiguratie",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "U bent zelf verantwoordelijk voor het Safex Cash-adres en de daemonconfiguratie die u in de toepassing invoert.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Controleer vóór de start of het miningadres juist is. De ontwikkelaar kan geen cryptovaluta terughalen die naar een onjuist adres is verzonden of daarop is bijgeschreven.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "U blijft verantwoordelijk voor de naleving van alle wetten, belastingverplichtingen, elektriciteitscontracten of andere verplichtingen die van toepassing zijn op uw gebruik van cryptovalutamining.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Geen prestatiegarantie",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "De hashrate en miningprestaties verschillen per computer en kunnen worden beïnvloed door CPU-architectuur, geheugenconfiguratie, koeling, vermogenslimieten, Windows-beveiligingsfuncties en andere actieve software.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "De profielen Rustig, Gebalanceerd en Vol vermogen bepalen hoeveel CPU-capaciteit aan de miner beschikbaar wordt gesteld. Ze garanderen geen bepaalde hashrate, beloningsfrequentie of winstgevendheid.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Softwaregarantie en aansprakelijkheid",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine wordt gedistribueerd onder de ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " en wordt geleverd zonder andere garanties dan die welke niet rechtsgeldig kunnen worden uitgesloten.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Voor zover maximaal toegestaan volgens het toepasselijke recht wordt niet gegarandeerd dat de software foutloos, ononderbroken, compatibel met iedere computer of vrij van nadelige wisselwerkingen met andere software of hardware is.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Voor zover maximaal toegestaan volgens het toepasselijke recht is de ontwikkelaar niet verantwoordelijk voor verlies of schade die voortvloeit uit de beslissing van een gebruiker om cryptovalutaminingsoftware te gebruiken, waaronder verliezen in verband met hardwaregebruik, warmte, elektriciteitsverbruik, systeeminstabiliteit, gegevensverlies, onderbroken computergebruik, misgelopen miningbeloningen of veranderingen in de waarde van cryptovaluta.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Niets in deze verklaring sluit rechten, garanties of rechtsmiddelen uit, beperkt of wijzigt deze voor zover ze niet rechtsgeldig kunnen worden uitgesloten, beperkt of gewijzigd.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Deze verklaring vervangt of wijzigt de GPL-3.0-licentie of de licenties die van toepassing zijn op onderdelen van derden die in The Safex Mine zijn opgenomen niet en legt daarop geen aanvullende beperkingen.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
