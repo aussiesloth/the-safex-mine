@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "Nie udało się ukończyć uzgadniania z pomocniczym procesem o podwyższonych uprawnieniach.",
   "error.helper.handshakeInvalid": "Token uzgadniania z procesem pomocniczym był nieprawidłowy.",
   "error.helper.handshakeTimedOut": "Upłynął czas oczekiwania na uzgadnianie z procesem pomocniczym.",
-  "error.helper.invalidPath": "Ścieżka do procesu pomocniczego zawiera nieprawidłowy zapis Unicode.",
+  "error.helper.invalidPath": "Ścieżka do procesu pomocniczego zawiera nieprawidłowe znaki Unicode.",
   "error.helper.launchFailed": "Nie można uruchomić procesu pomocniczego z podwyższonymi uprawnieniami. Żądanie UAC mogło zostać anulowane.",
   "error.helper.notConnected": "Pomocniczy proces o podwyższonych uprawnieniach nie jest połączony.",
   "error.helper.notFound": "Nie znaleziono procesu pomocniczego The Safex Mine.",
