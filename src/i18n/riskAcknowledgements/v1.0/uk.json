@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "uk",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine — застосунок, розроблений спільнотою для соло-майнінгу ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Перед використанням функцій майнінгу прочитайте наведені нижче відомості та підтвердьте ознайомлення з ними.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Винагороди за майнінг і вартість",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Майнінг криптовалют має спекулятивний характер. The Safex Mine не гарантує, що ваш комп'ютер знайде блок, отримає будь-яку винагороду за майнінг, працюватиме прибутково або окупить витрати на електроенергію чи обладнання.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Вартість Safex Cash може зростати або знижуватися, а в будь-який момент його реальна ринкова вартість може бути низькою або нульовою. Минулі результати майнінгу не є показником і не гарантують майбутніх результатів.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine не надає фінансових, інвестиційних, податкових або юридичних консультацій.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Навантаження на обладнання, нагрівання та споживання електроенергії",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Майнінг криптовалют може створювати тривале навантаження на CPU та інші компоненти комп'ютера. Це може збільшити:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "температуру процесора та нагрівання системи;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "швидкість вентиляторів і використання системи охолодження;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "споживання електроенергії;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "навантаження на компоненти живлення материнської плати; та",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "загальний знос обладнання під час тривалої роботи.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ви несете відповідальність за рішення про те, чи придатні ваш комп'ютер, система охолодження та блок живлення для тривалого майнінгу, а також за належний контроль стану системи.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Використання програмного забезпечення для майнінгу криптовалют може вплинути на дію добровільної гарантії виробника залежно від її умов і обставин можливої несправності. Це підтвердження не впливає на передбачені законом права або засоби правового захисту, які не можуть бути законно виключені.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Безпека Windows і підвищені привілеї",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine містить сумісну із Safex серверну частину XMRig для майнінгу, допоміжний процес із підвищеними привілеями та драйвер WinRing, що використовується для спроби оптимізації продуктивності MSR у Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ці компоненти можуть бути виявлені, заблоковані або переміщені до карантину Microsoft Defender, Windows SmartScreen чи іншим захисним програмним забезпеченням.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine не вимикає автоматично антивірусний захист, не відновлює файли з карантину та не створює винятків антивіруса. Рішення про відновлення виявленого файла, створення винятку або тимчасову зміну налаштувань захисного програмного забезпечення залишається за вами.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Для початку майнінгу потрібно підтвердити запит Windows UAC для допоміжного процесу майнінгу з підвищеними привілеями. Сам графічний застосунок призначений для подальшої роботи без прав адміністратора.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Функції безпеки Windows можуть перешкоджати оптимізації MSR. У такому разі майнінг може тривати зі зниженою продуктивністю. Вам не потрібно вимикати функції безпеки Windows лише заради підвищення продуктивності майнінгу.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Стабільність системи та дані",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Тривале високе навантаження на CPU може сприяти нестабільності систем із недостатнім охолодженням, нестабільним обладнанням, розгоном, проблемами живлення або іншими наявними несправностями.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Перед тривалим майнінгом або майнінгом без нагляду переконайтеся, що важливі дані мають резервні копії, а комп'ютер працює надійно.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Жодне програмне забезпечення не може гарантувати, що збої, втрата даних, несправності обладнання чи інші системні проблеми ніколи не виникнуть.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Налаштування майнінгу",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ви несете відповідальність за адресу Safex Cash і конфігурацію демона, введені в застосунку.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Перед початком переконайтеся, що адресу для майнінгу вказано правильно. Розробник не може повернути криптовалюту, надіслану або зараховану на неправильну адресу.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ви й надалі несете відповідальність за дотримання законів, податкових вимог, договорів на електроенергію та інших зобов'язань, що застосовуються до використання вами майнінгу криптовалют.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Відсутність гарантії продуктивності",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Хешрейт і продуктивність майнінгу відрізняються між комп'ютерами та можуть залежати від архітектури CPU, конфігурації пам'яті, охолодження, обмежень потужності, функцій безпеки Windows та іншого програмного забезпечення, що працює в системі.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Профілі Спокійний, Збалансований і Повна потужність визначають обсяг ресурсів CPU, доступних майнеру. Вони не гарантують певний хешрейт, частоту отримання винагород або прибутковість.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Гарантії на програмне забезпечення та відповідальність",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine розповсюджується на умовах ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " і надається без гарантій, окрім тих, які не можуть бути законно виключені.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "У максимальному обсязі, дозволеному чинним законодавством, не гарантується, що програмне забезпечення буде безпомилковим, безперервним, сумісним із кожним комп'ютером або вільним від несприятливої взаємодії з іншим програмним чи апаратним забезпеченням.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "У максимальному обсязі, дозволеному чинним законодавством, розробник не несе відповідальності за збитки або шкоду, що виникли через рішення користувача використовувати програмне забезпечення для майнінгу криптовалют, включно з втратами, пов'язаними з роботою обладнання, нагріванням, споживанням електроенергії, нестабільністю системи, втратою даних, неможливістю користуватися комп'ютером, пропущеними винагородами за майнінг або змінами вартості криптовалют.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Ніщо в цьому підтвердженні не виключає, не обмежує та не змінює жодних прав, гарантій або засобів правового захисту, які не можуть бути законно виключені, обмежені чи змінені.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Це підтвердження не замінює й не змінює ліцензію GPL-3.0 або ліцензії, що застосовуються до сторонніх компонентів, включених до The Safex Mine, і не накладає на них додаткових обмежень.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
