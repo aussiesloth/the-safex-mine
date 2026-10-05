@@ -140,6 +140,33 @@
       "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "ru": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "uk": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "el": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     }
   },
   "lastReconciledOn": "2026-10-05",
