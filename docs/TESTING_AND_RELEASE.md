@@ -366,15 +366,17 @@ cargo test --manifest-path .\src-tauri\Cargo.toml
 cargo fmt --manifest-path .\src-tauri\Cargo.toml --check
 ```
 
-Physical Windows review should be proportional to the changed source text rather than repeating every L6/L7 mining regression:
+Physical Windows review should be proportional to the changed source text rather than repeating every L6/L7 mining regression.
+
+**Manual acceptance completed 5 October 2026:** all existing human-language Mining Risk Acknowledgements were reviewed in the running Windows application with no formatting, clipping, wrapping or script-rendering issues observed. The targeted live-mining language-switch check also passed: mining remained active across the language change and stopped normally afterward.
 
 | Focus | Manual check |
 | --- | --- |
 | Changed UI strings | Inspect each changed language in the dashboard/settings/status surfaces and confirm revised wording is rendered completely with no clipping or unintended wrapping |
-| Risk Acknowledgement | Open the revised acknowledgement languages and verify headings, paragraphs, five-item hardware list, highlighted statutory-rights paragraph, scrolling and footer controls |
-| Script rendering | Recheck representative corrected strings in Latin, Cyrillic, CJK, Devanagari and Bengali scripts for glyph shaping, line height and word-boundary behaviour |
+| Risk Acknowledgement | **PASS (5 October 2026):** every existing human-language Risk Acknowledgement was reviewed; headings, paragraphs, five-item hardware list, highlighted statutory-rights paragraph, scrolling and footer controls rendered correctly with no formatting issues observed |
+| Script rendering | **PASS (5 October 2026):** the all-language Risk Acknowledgement review showed no clipping, shaping, line-height or word-boundary issues across the represented scripts |
 | Mining modes | Confirm revised prose uses the same translated Calm/Balanced/Full Bore labels shown by the UI and remains grammatically natural |
 | First run | Confirm the language selector and Risk notice presentation still work before acceptance and that acknowledgement version remains `1.0` |
-| Targeted mining | In one changed locale: Start → UAC → live telemetry → change language while mining → Stop; confirm mining/settings state is preserved |
+| Targeted mining | **PASS (5 October 2026):** Start → UAC → live telemetry → language switch while mining → Stop completed successfully; mining/settings state remained intact |
 
 The unchanged exhaustive mining/MSR/degraded/daemon-loss suites do not need to be repeated unless the final diff unexpectedly touches implementation code.
