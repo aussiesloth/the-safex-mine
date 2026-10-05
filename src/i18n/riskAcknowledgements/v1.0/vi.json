@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "vi",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine là ứng dụng do cộng đồng phát triển để đào solo ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Trước khi sử dụng các chức năng đào, vui lòng đọc và xác nhận thông tin sau.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Phần thưởng và giá trị từ việc đào",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Việc đào tiền mã hóa mang tính đầu cơ. The Safex Mine không bảo đảm rằng máy tính của bạn sẽ tìm thấy khối, nhận được bất kỳ phần thưởng đào nào, hoạt động có lãi hoặc thu hồi được chi phí điện hay thiết bị.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Giá trị Safex Cash có thể tăng hoặc giảm và tại bất kỳ thời điểm nào cũng có thể có rất ít hoặc không có giá trị thị trường thực tế. Kết quả đào trong quá khứ không cho biết hoặc bảo đảm kết quả trong tương lai.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine không cung cấp tư vấn tài chính, đầu tư, thuế hoặc pháp lý.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Tải phần cứng, nhiệt và điện năng tiêu thụ",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Việc đào tiền mã hóa có thể tạo tải liên tục lên CPU và các thành phần khác của máy tính. Điều này có thể làm tăng:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "nhiệt độ bộ xử lý và nhiệt của hệ thống;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "tốc độ quạt và mức sử dụng hệ thống làm mát;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "mức tiêu thụ điện;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "tải lên các thành phần cấp điện của bo mạch chủ; và",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "hao mòn phần cứng nói chung khi vận hành trong thời gian dài.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bạn chịu trách nhiệm quyết định máy tính, hệ thống làm mát và bộ nguồn của mình có phù hợp để đào liên tục hay không, cũng như theo dõi hệ thống khi cần thiết.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Việc sử dụng phần mềm đào tiền mã hóa có thể ảnh hưởng đến phạm vi bảo hành tự nguyện của nhà sản xuất, tùy thuộc vào điều khoản bảo hành của nhà sản xuất đó và hoàn cảnh xảy ra sự cố. Xác nhận này không ảnh hưởng đến bất kỳ quyền hoặc biện pháp khắc phục theo luật định nào mà pháp luật không cho phép loại trừ.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Bảo mật Windows và quyền truy cập nâng cao",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine bao gồm backend đào XMRig tương thích với Safex, một trình trợ giúp chạy với quyền nâng cao và driver WinRing dùng để thử tối ưu hiệu năng MSR trên Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Các thành phần này có thể bị Microsoft Defender, Windows SmartScreen hoặc phần mềm bảo mật khác phát hiện, chặn hoặc cách ly.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine sẽ không tự động tắt chức năng bảo vệ chống vi-rút, khôi phục tệp bị cách ly hoặc tạo ngoại lệ chống vi-rút. Mọi quyết định khôi phục tệp bị phát hiện, tạo ngoại lệ hoặc tạm thời thay đổi cài đặt phần mềm bảo mật vẫn do bạn quyết định.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Để bắt đầu đào, bạn phải chấp thuận lời nhắc UAC của Windows dành cho trình trợ giúp đào chạy với quyền nâng cao. Bản thân ứng dụng đồ họa được thiết kế để tiếp tục chạy mà không cần quyền Administrator.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Các tính năng bảo mật của Windows có thể ngăn tối ưu hóa MSR. Khi điều này xảy ra, việc đào vẫn có thể tiếp tục nhưng với hiệu năng thấp hơn. Bạn không bắt buộc phải tắt các tính năng bảo mật của Windows chỉ để đạt hiệu năng đào cao hơn.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Độ ổn định hệ thống và dữ liệu",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Tải CPU cao kéo dài có thể góp phần gây mất ổn định hệ thống trên những máy có khả năng làm mát không đầy đủ, phần cứng không ổn định, ép xung, vấn đề nguồn điện hoặc các vấn đề sẵn có khác.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Trước khi đào trong thời gian dài hoặc không có người giám sát, bạn nên bảo đảm rằng dữ liệu quan trọng đã được sao lưu và máy tính đang hoạt động ổn định.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Không phần mềm nào có thể bảo đảm rằng sự cố hệ thống, mất dữ liệu, lỗi phần cứng hoặc các vấn đề hệ thống khác sẽ không bao giờ xảy ra.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Cấu hình đào",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bạn chịu trách nhiệm về địa chỉ Safex Cash và cấu hình daemon được nhập vào ứng dụng.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bạn nên xác nhận địa chỉ đào là chính xác trước khi bắt đầu. Nhà phát triển không thể khôi phục tiền mã hóa đã được gửi hoặc ghi có vào địa chỉ không chính xác.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bạn vẫn chịu trách nhiệm tuân thủ mọi luật, yêu cầu về thuế, thỏa thuận điện hoặc nghĩa vụ khác áp dụng cho việc bạn sử dụng hoạt động đào tiền mã hóa.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Không bảo đảm hiệu năng",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hashrate và hiệu năng đào khác nhau giữa các máy tính và có thể bị ảnh hưởng bởi kiến trúc CPU, cấu hình bộ nhớ, khả năng làm mát, giới hạn công suất, các tính năng bảo mật của Windows và phần mềm khác đang chạy trên hệ thống.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Các cấu hình Nhẹ, Cân bằng và Tối đa kiểm soát lượng tài nguyên CPU được cung cấp cho trình đào. Chúng không bảo đảm bất kỳ hashrate, tỷ lệ nhận phần thưởng hoặc mức lợi nhuận cụ thể nào.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Bảo hành phần mềm và trách nhiệm pháp lý",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine được phân phối theo ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " và được cung cấp mà không có bảo hành nào ngoài những bảo hành mà pháp luật không cho phép loại trừ.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Trong phạm vi tối đa được pháp luật hiện hành cho phép, không có bảo đảm nào rằng phần mềm sẽ không có lỗi, không bị gián đoạn, tương thích với mọi máy tính hoặc không phát sinh tương tác bất lợi với phần mềm hay phần cứng khác.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Trong phạm vi tối đa được pháp luật hiện hành cho phép, nhà phát triển không chịu trách nhiệm về tổn thất hoặc thiệt hại phát sinh từ quyết định của người dùng khi vận hành phần mềm đào tiền mã hóa, bao gồm tổn thất liên quan đến hoạt động của phần cứng, nhiệt, mức tiêu thụ điện, mất ổn định hệ thống, mất dữ liệu, gián đoạn việc sử dụng máy tính, phần thưởng đào bị bỏ lỡ hoặc thay đổi giá trị tiền mã hóa.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Không nội dung nào trong xác nhận này loại trừ, hạn chế hoặc sửa đổi bất kỳ quyền, bảo đảm hoặc biện pháp khắc phục nào mà pháp luật không cho phép loại trừ, hạn chế hoặc sửa đổi.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Xác nhận này không thay thế, sửa đổi hoặc áp đặt thêm hạn chế đối với giấy phép GPL-3.0 hay các giấy phép áp dụng cho thành phần của bên thứ ba đi kèm The Safex Mine.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
