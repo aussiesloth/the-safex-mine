@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "pt-BR",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine é um aplicativo desenvolvido pela comunidade para mineração solo de ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Antes de usar os recursos de mineração, leia e declare ciência das informações a seguir.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Recompensas e valor da mineração",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A mineração de criptomoedas é especulativa. The Safex Mine não garante que seu computador encontrará um bloco, receberá qualquer recompensa de mineração, operará com lucro ou recuperará os gastos com energia elétrica ou equipamentos.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "O valor do Safex Cash pode subir ou cair e seu valor real de mercado pode ser pequeno ou inexistente em determinado momento. Resultados anteriores da mineração não indicam nem garantem resultados futuros.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine não oferece aconselhamento financeiro, de investimento, tributário ou jurídico.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Carga de hardware, calor e consumo de energia",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A mineração de criptomoedas pode impor carga contínua à CPU e a outros componentes do computador. Isso pode aumentar:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "a temperatura do processador e o calor do sistema;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "a velocidade das ventoinhas e o uso do sistema de refrigeração;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "o consumo de energia elétrica;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "a carga dos componentes de alimentação da placa-mãe; e",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "o desgaste geral do hardware durante operação prolongada.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Cabe a você decidir se seu computador, sistema de refrigeração e fonte de alimentação são adequados para mineração contínua e monitorar o sistema quando apropriado.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "O uso de software de mineração de criptomoedas pode afetar a cobertura da garantia voluntária do fabricante, dependendo dos termos dessa garantia e das circunstâncias de eventual falha. Esta declaração não afeta direitos ou medidas de reparação previstos em lei que não possam ser legalmente excluídos.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Segurança do Windows e acesso elevado",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine inclui um backend de mineração XMRig compatível com Safex, um auxiliar com privilégios elevados e o driver WinRing usado para tentar otimizar o desempenho MSR no Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Esses componentes podem ser detectados, bloqueados ou colocados em quarentena pelo Microsoft Defender, Windows SmartScreen ou outros programas de segurança.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine não desativa automaticamente a proteção antivírus, não restaura arquivos em quarentena nem cria exclusões de antivírus. Qualquer decisão de restaurar um arquivo detectado, criar uma exclusão ou alterar temporariamente as configurações de segurança é sua.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Para iniciar a mineração, é preciso aprovar uma solicitação UAC do Windows para o auxiliar de mineração com privilégios elevados. O aplicativo gráfico em si foi projetado para continuar funcionando sem privilégios de administrador.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Os recursos de segurança do Windows podem impedir a otimização MSR. Nesse caso, a mineração poderá continuar com desempenho reduzido. Você não precisa desativar recursos de segurança do Windows apenas para obter maior desempenho de mineração.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Estabilidade do sistema e dados",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A carga elevada e contínua da CPU pode contribuir para a instabilidade de sistemas com refrigeração inadequada, hardware instável, overclock, problemas de alimentação ou outras condições preexistentes.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Antes de minerar por períodos prolongados ou sem supervisão, assegure-se de manter cópias de segurança de dados importantes e de que seu computador esteja funcionando de forma confiável.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Nenhum software pode garantir que travamentos, perda de dados, falhas de hardware ou outros problemas do sistema jamais ocorrerão.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Configuração da mineração",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Você é responsável pelo endereço Safex Cash e pela configuração do daemon informados no aplicativo.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Confira se o endereço de mineração está correto antes de iniciar. O desenvolvedor não pode recuperar criptomoedas enviadas ou creditadas a um endereço incorreto.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Você continua sendo responsável por cumprir as leis, obrigações tributárias, contratos de fornecimento de energia elétrica e outras exigências aplicáveis à sua atividade de mineração de criptomoedas.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Sem garantia de desempenho",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A taxa de hash e o desempenho da mineração variam entre computadores e podem ser afetados pela arquitetura da CPU, configuração da memória, refrigeração, limites de energia, recursos de segurança do Windows e outros programas em execução.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Os perfis Tranquilo, Equilibrado e Potência máxima controlam a quantidade de recursos da CPU disponibilizada ao minerador. Eles não garantem nenhuma taxa de hash, frequência de recompensas ou lucratividade específica.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Garantia de software e responsabilidade",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine é distribuído sob a ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " e é fornecido sem garantias além daquelas que não podem ser legalmente excluídas.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Até o limite máximo permitido pela legislação aplicável, não há garantia de que o software funcionará sem erros ou interrupções, será compatível com todos os computadores ou não apresentará interações adversas com outros softwares ou componentes de hardware.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Até o limite máximo permitido pela legislação aplicável, o desenvolvedor não é responsável por perdas ou danos decorrentes da decisão do usuário de operar software de mineração de criptomoedas, inclusive perdas relacionadas ao uso de hardware, calor, consumo de energia elétrica, instabilidade do sistema, perda de dados, interrupção do uso do computador, recompensas de mineração não obtidas ou mudanças no valor das criptomoedas.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Nada nesta declaração exclui, restringe ou modifica qualquer direito, garantia ou medida de reparação que não possa ser legalmente excluído, restringido ou modificado.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Esta declaração não substitui, altera nem impõe restrições adicionais à licença GPL-3.0 ou às licenças aplicáveis a componentes de terceiros incluídos no The Safex Mine.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
