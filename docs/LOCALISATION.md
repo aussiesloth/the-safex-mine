@@ -6,7 +6,32 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactored Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics. Localisation Slice L5 adds Windows preferred-UI-language detection, locale matching and the persistent user language selector.
 
-English (Australia), en-AU, remains the canonical source locale and the only enabled locale. The locked release locale set is present in the metadata registry so script and direction information can be validated early, but every non-English locale remains disabled and has no translation catalogue yet.
+English (Australia), en-AU, is the canonical source locale. At the merged L5 baseline it remains the only enabled locale; the first pilot translations exist separately in unmerged L6 PR #9. Locale registrations are extensible metadata, not a locked release-language list. A proposed language is not automatically enabled merely because it is registered or has a review draft.
+
+
+## Governing coverage policy for v1.1.0 and later
+
+The revised governing programme (5 October 2026) **does not impose a locked language total, a permanent maximum, or an obligation to deliver every locale named in an earlier plan**. Scope is an approved per-release planning snapshot. Adding further languages or script variants is possible in any future separately governed slice; no new numerical ceiling should be introduced by a registry, validation script, installer, test plan or documentation.
+
+The present proposed v1.1.0 target is **en-AU plus 23 LTR translations**, subject to completion and normal release approval. It is not the current published v1.0.0 feature set and is not a future limit:
+
+| Delivery group | Planned release-intended locales |
+| --- | --- |
+| L6 pilots retained for release | `de`, `es`, `sr-Latn`, `zh-Hans`, `ja` |
+| L7a — European and related Latin scripts | `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl` |
+| L7b — Cyrillic and Greek | `ru`, `uk`, `el` |
+| L7c — Southeast Asian Latin scripts | `id`, `vi`, `fil` |
+| L7d — remaining Asian LTR scripts | `ko`, `hi`, `bn` |
+
+Serbian Cyrillic (`sr-Cyrl`) was included in L6 as a pilot and its completed material should be retained for future development, but it is **not** proposed as a selectable v1.1.0 release locale. Traditional Chinese (`zh-Hant`) is likewise deferred. Existing L6 PR #9 must reconcile the registry and translation-status flags to this approved release intent before merge; this documentation change does not itself enable/disable a locale or alter that PR.
+
+The `en-XA` pseudo-locale remains a developer-only layout tool, not a release language. An additional release language can be proposed and added by an approved new or adjusted slice without changing any programme-wide total.
+
+**RTL is optional, not a gate.** Retain useful direction metadata, but there is no mandatory RTL implementation, deadline, release deliverable or release-blocking RTL test for v1.1.0 or any later release. A future RTL experiment requires its own explicit feasibility, accessibility, bidirectional technical-field and UI approval. Inactive RTL records do not imply an obligation to publish them.
+
+For each release, the actual release-approved and enabled locale registry is the test scope. UI, accessibility/status strings, the complete matching version of the Risk Acknowledgement, placeholders, recorded translation review/provenance, Windows/manual selection and proportionate script-family visual QA must be complete before enabling a locale. Installer-language support may be a documented subset of app UI languages, with clear fallback.
+
+The proposed canonical Risk Acknowledgement clause 7.1 wording change (“is **distributed under** the GNU General Public License” in place of “is provided under”, retaining “is provided without warranties”) requires separate reconciliation with the structured en-AU v1.0 source and corresponding translations. Assess its non-substantive status under the acknowledgement-version rule; do not silently modify published v1.0.0 assets or existing acceptance records. This governance-only document does not implement that wording change.
 
 ## Structure
 
@@ -29,7 +54,7 @@ Each locale registry entry contains:
 - fallback locale information;
 - whether the locale is enabled.
 
-The metadata is deliberately suitable for later right-to-left languages and for Windows preferred-UI-language matching. Arabic, Persian and Urdu are marked RTL in the registry now, although they remain disabled. Country flags are not used as language identifiers.
+Direction metadata is retained for extensibility and Windows preferred-UI-language matching. RTL implementation (including Arabic, Persian and Urdu) is optional future work requiring separate approval; neither v1.1.0 nor a later release is obliged by this programme to implement RTL. Such deferred entries remain disabled. Country flags are not used as language identifiers.
 
 ## Translation lookup and fallback
 
@@ -50,7 +75,7 @@ Selecting “Use Windows language” removes the explicit override and returns t
 
 Windows preference detection is performed in Rust with GetUserPreferredUILanguages using language-name format. The frontend passes only currently enabled application locales to the matcher, so disabled future catalogues cannot become active prematurely.
 
-The matcher is designed for the locked locale set. Regional Spanish variants collapse to es when enabled; Brazilian and European Portuguese remain distinct; Simplified and Traditional Chinese are selected using script/region information; Serbian Cyrillic and Latin remain distinct. Rust tests exercise these future mappings before those translations are enabled.
+The matcher is designed for an extensible enabled-locale registry. Regional Spanish variants collapse to es when enabled; Brazilian and European Portuguese remain distinct; Simplified and Traditional Chinese and Serbian script variants retain separate identities if and when enabled. Rust tests may cover registered future mappings without making inactive variants release requirements.
 
 The active locale updates document lang and dir immediately. The normal application chrome, persistent status text and Risk Acknowledgement refresh without discarding mining/settings state.
 
@@ -58,13 +83,13 @@ The UI language and regional formatting locale remain separate concerns. Changin
 
 ## Adding another locale later
 
-1. Add or update locale metadata in src/i18n/locales.json.
-2. Add a matching catalogue under src/i18n/catalogues.
-3. Register the catalogue in src/i18n/index.ts.
-4. Keep the complete key set aligned with en-AU.
-5. Preserve the same named placeholders used by the canonical English value.
-6. Run npm run i18n:check and npm run build.
-7. Enable a locale only when its catalogue is complete.
+1. Add or update locale metadata in src/i18n/locales.json without imposing a fixed total.
+2. Add a matching catalogue under src/i18n/catalogues and register it in src/i18n/index.ts.
+3. Keep the complete UI, accessibility, validation and status keys aligned with en-AU; preserve named placeholders.
+4. Add a complete, structurally validated, version-consistent Mining Risk Acknowledgement for the locale.
+5. Record translation provenance/review status and verify native-name, fallback and script metadata.
+6. Check visual rendering and Windows/manual language selection as appropriate to the actual script; run npm run i18n:check, npm run build and relevant tests.
+7. Enable the locale only following explicit release-scope approval and completion of all required content and checks. Partial, proposed and deferred locales remain disabled.
 
 Technical names and identifiers such as The Safex Mine, Safex Cash, SFX, XMRig, WinRing, MSR, UAC, RPC, SHA-256 and GPL-3.0 should not be translated casually.
 
@@ -133,6 +158,6 @@ Translating Mining Risk Acknowledgement v1.0 into another language does **not** 
 
 The Windows API feature is enabled through the existing windows crate rather than introducing a new localisation dependency. The Rust command returns both the ordered Windows preferred-language list and the best match from the enabled locale IDs supplied by the frontend.
 
-At L5, en-AU remains the only enabled catalogue. The selector therefore offers “Use Windows language” and English (Australia). Unsupported Windows languages safely resolve to en-AU. L6 will enable the first translated catalogues without changing the L5 selection priority.
+At the completed L5 baseline, en-AU is the only enabled catalogue. The selector therefore offers “Use Windows language” and English (Australia). Unsupported Windows languages safely resolve to en-AU. Subsequent approved translation slices can enable more complete catalogues without changing the L5 selection priority.
 
 Language names come from locale metadata and are displayed in their own language. Country flags are not used. The language selector does not alter the saved Safex address, daemon, mining mode or sound preference, and selecting a UI language does not modify regional number/date conventions.
