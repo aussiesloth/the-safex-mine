@@ -1,6 +1,6 @@
 [package]
 name = "the-safex-mine"
-version = "1.0.0"
+version = "1.1.0"
 description = "A Windows desktop solo-mining application for Safex Cash (SFX)"
 authors = ["aussiesloth"]
 license = "GPL-3.0-only"
