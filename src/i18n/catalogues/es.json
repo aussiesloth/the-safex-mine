@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "No se pudo completar el intercambio inicial con el auxiliar con privilegios elevados.",
   "error.helper.handshakeInvalid": "El token del intercambio inicial del auxiliar con privilegios elevados no era válido.",
   "error.helper.handshakeTimedOut": "Se agotó el tiempo de espera del intercambio inicial con el auxiliar con privilegios elevados.",
-  "error.helper.invalidPath": "La ruta del auxiliar contiene Unicode no válido.",
+  "error.helper.invalidPath": "La ruta del auxiliar contiene caracteres Unicode no válidos.",
   "error.helper.launchFailed": "No se pudo iniciar el auxiliar con privilegios elevados. Es posible que se haya cancelado la solicitud de UAC.",
   "error.helper.notConnected": "El auxiliar con privilegios elevados no está conectado.",
   "error.helper.notFound": "No se encontró el auxiliar de The Safex Mine.",
