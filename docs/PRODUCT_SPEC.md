@@ -4,7 +4,7 @@
 
 **The Safex Mine** is a Windows graphical solo miner for Safex Cash (SFX). It wraps a Safex-compatible XMRig backend with configuration, privilege handling, telemetry, recovery and a themed state-driven user interface.
 
-Current public release: `1.0.0` (18 September 2026). Current `main` contains unreleased v1.1.0 localisation work while application/package versions intentionally remain `1.0.0` until the L9 release-hardening stage.
+Current public release: `1.0.0` (18 September 2026). The L9 release-hardening branch carries the unreleased v1.1.0 candidate version across application/package/helper metadata. v1.1.0 is not yet published.
 
 ## 2. Published baseline and current development scope
 
@@ -145,7 +145,7 @@ The published v1.0.0 installer is the historical English-only baseline. Current 
 
 Canonical `en-AU` is the source/fallback locale. The current v1.1.0 development set contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
 
-L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. Windows packaged acceptance remains the L8 merge gate. L9 release hardening and the version change to 1.1.0 still remain before publication.
+L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. L8 packaged acceptance is complete. L9 now supplies consistent v1.1.0 candidate versioning and final release hardening; only final candidate validation and the separate publication gate remain.
 
 ## 13. Current scope exclusions
 
