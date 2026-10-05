@@ -1237,6 +1237,7 @@ mod tests {
             ("id-ID", "id"),
             ("vi-VN", "vi"),
             ("fil-PH", "fil"),
+            ("fil-Latn-PH", "fil"),
             ("id", "id"),
             ("vi", "vi"),
             ("fil", "fil"),
