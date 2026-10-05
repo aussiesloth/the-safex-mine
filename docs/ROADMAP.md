@@ -48,7 +48,7 @@ This roadmap reflects the **current implementation state**, not the earlier desi
 - block-found cash-register sound;
 - persistent mute/unmute control.
 
-## Current phase: v1.0.0 release
+## Published baseline: v1.0.0 (18 September 2026)
 
 ### Packaging
 
@@ -69,12 +69,13 @@ Validated:
 - Defender Full scan with the narrow install-folder exclusion;
 - uninstall behaviour.
 
-Remaining release-preparation work:
+Publication completed:
 
-- perform the final source/documentation consistency check;
-- merge the release-preparation branch;
-- build the final v1.0.0 installer from the merged release commit/tag;
-- publish the SHA-256 for that exact installer.
+- final source/documentation consistency and release preparation were completed;
+- the public Windows x64 NSIS installer `The-Safex-Mine_1.0.0_x64-setup.exe` was published under the [v1.0.0 GitHub release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0);
+- `SHA256SUMS.txt` and the final installer checksum were published alongside it.
+
+The published v1.0.0 release is a historical baseline; future localisation changes do not retrospectively change its installer.
 
 ### Build reproducibility
 
@@ -82,14 +83,14 @@ Remaining release-preparation work:
 - verify `npm ci` works on a clean contributor machine;
 - document the exact reproducible XMRig MSVC/dependency build process used for release binaries.
 
-### Product polish
+### Product polish (optional future work)
 
 - tidy source formatting where iterative development left uneven indentation;
 - review UI wording and remaining backend messages.
 
 ### Documentation and licensing
 
-Completed for v1.0.0 preparation:
+Completed for the published v1.0.0 release:
 
 - third-party dependency licence audit;
 - generated dependency licence bundle;
@@ -106,17 +107,35 @@ Completed release-gate validation includes clean-machine installation/uninstall,
 
 A naturally occurring rejected-result capture and an additional custom/LAN daemon regression run remain optional evidence, not v1.0.0 release blockers.
 
-The final SHA-256 is generated only after the exact v1.0.0 public installer is built.
+The final v1.0.0 SHA-256 was generated from the released installer and is available in the published release notes and `SHA256SUMS.txt`.
 
 ## Public release
 
-Planned release characteristics:
+Published v1.0.0 characteristics:
 
 - unsigned Windows distribution;
 - public source repository for inspection;
 - clear community-project wording;
 - checksum and source/version information;
 - known-issues section if required.
+
+## Current development phase: v1.1.0 localisation
+
+The existing v1.0.0 Windows miner is public. The next proposed update is localisation-focused; do not change app/package versions to 1.1.0 until the L9 release-hardening slice.
+
+The revised localisation programme (5 October 2026) establishes **extensible language coverage without a permanent maximum**. The current planning snapshot is canonical `en-AU` plus **23 LTR translations**, subject to complete content, actual release approval and validation. This snapshot must not become a hard-coded ceiling. Only explicitly approved, complete locales may be release-enabled.
+
+- L6: reconcile the pilot PR with the current release scope, retain Serbian Latin as release-intended and keep completed Serbian Cyrillic pilot work inactive/deferred; preserve developer-only `en-XA`.
+- L7a: European and related Latin-script languages — `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`.
+- L7b: Cyrillic and Greek — `ru`, `uk`, `el`.
+- L7c: Southeast Asian Latin scripts — `id`, `vi`, `fil`.
+- L7d: remaining Asian LTR scripts — `ko`, `hi`, `bn`.
+- L8: use supported multilingual NSIS installer capabilities and translate essential public documentation, documenting installer-language fallbacks where these differ from app languages.
+- L9: test all *actually enabled and approved* locales, script-family layouts, settings persistence and Mining Risk Acknowledgement continuity; prepare the v1.1.0 release, without publishing until explicitly approved.
+
+The v1.1.0 release-intended pilots carried forward are `de`, `es`, `sr-Latn`, `zh-Hans`, `ja`. Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are deferred; RTL implementation is optional future investigation and **not** a required milestone or release gate for this or later versions. New locale proposals can be added in separately approved slices without a universal maximum.
+
+The proposed *distributed under GPL-3.0* Risk Acknowledgement wording clarification requires separate canonical-source/version-policy reconciliation, not an undocumented change to published v1.0.0 assets.
 
 ## Deferred / optional future work
 
