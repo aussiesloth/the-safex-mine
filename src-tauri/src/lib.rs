@@ -1225,6 +1225,46 @@ mod tests {
     }
 
     #[test]
+    fn locale_matcher_covers_l7c_southeast_asian_latin_languages() {
+        let supported = vec![
+            "en-AU".to_string(),
+            "id".to_string(),
+            "vi".to_string(),
+            "fil".to_string(),
+        ];
+
+        for (preferred, expected) in [
+            ("id-ID", "id"),
+            ("vi-VN", "vi"),
+            ("fil-PH", "fil"),
+            ("fil-Latn-PH", "fil"),
+            ("id", "id"),
+            ("vi", "vi"),
+            ("fil", "fil"),
+        ] {
+            assert_eq!(
+                match_preferred_locale(&[preferred.to_string()], &supported).as_deref(),
+                Some(expected),
+                "unexpected match for {preferred}"
+            );
+        }
+
+        assert_eq!(
+            match_preferred_locale(
+                &[
+                    "xx-YY".to_string(),
+                    "fil-PH".to_string(),
+                    "vi-VN".to_string(),
+                    "id-ID".to_string(),
+                ],
+                &supported,
+            )
+            .as_deref(),
+            Some("fil")
+        );
+    }
+
+    #[test]
     fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
         let supported = vec!["en-AU".to_string()];
 

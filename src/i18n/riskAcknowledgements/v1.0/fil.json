@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "fil",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "Ang The Safex Mine ay application na binuo ng komunidad para sa solo mining ng ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Bago gamitin ang mining functions, pakibasa at kilalanin ang sumusunod na impormasyon.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Mga reward at halaga ng pagmimina",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ang cryptocurrency mining ay speculative. Hindi ginagarantiya ng The Safex Mine na makakahanap ang iyong computer ng block, makakatanggap ng anumang mining reward, kikita, o mababawi ang gastos sa kuryente o equipment.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Maaaring tumaas o bumaba ang halaga ng Safex Cash at maaari itong magkaroon ng kaunti o walang tunay na market value sa anumang partikular na oras. Ang mga nakaraang resulta ng pagmimina ay hindi indikasyon o garantiya ng mga resulta sa hinaharap.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hindi nagbibigay ang The Safex Mine ng payong pinansyal, investment, buwis, o legal.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Load ng hardware, init at konsumo ng kuryente",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Maaaring maglagay ang cryptocurrency mining ng tuloy-tuloy na load sa iyong CPU at iba pang bahagi ng computer. Maaari nitong pataasin ang:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "temperatura ng processor at init ng system;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "bilis ng fan at paggamit ng cooling system;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "konsumo ng kuryente;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "load sa power-delivery components ng motherboard; at",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "pangkalahatang pagkasira ng hardware sa matagal na paggamit.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Responsibilidad mong magpasya kung ang iyong computer, cooling system at power supply ay angkop para sa tuloy-tuloy na pagmimina, at subaybayan ang iyong system kung kinakailangan.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ang paggamit ng cryptocurrency-mining software ay maaaring makaapekto sa coverage ng boluntaryong warranty ng manufacturer depende sa mga tuntunin ng warranty nito at sa mga pangyayari ng anumang pagkasira. Hindi naaapektuhan ng acknowledgement na ito ang anumang karapatan o remedyo na itinatakda ng batas at hindi maaaring legal na alisin.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Seguridad ng Windows at elevated access",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kasama sa The Safex Mine ang Safex-compatible XMRig mining backend, isang helper na may elevated privileges, at ang WinRing driver na ginagamit upang subukan ang Windows MSR performance optimisation.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Maaaring ma-detect, ma-block o ma-quarantine ang mga component na ito ng Microsoft Defender, Windows SmartScreen o iba pang security software.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hindi awtomatikong idi-disable ng The Safex Mine ang antivirus protection, ibabalik ang mga naka-quarantine na file, o gagawa ng antivirus exclusions. Ikaw pa rin ang magpapasya kung ibabalik ang isang na-detect na file, gagawa ng exclusion, o pansamantalang babaguhin ang settings ng security software.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kailangan ang pag-apruba sa Windows UAC prompt para sa mining helper na may elevated privileges bago magsimula ang pagmimina. Ang graphical application mismo ay nilalayong patuloy na tumakbo nang walang Administrator privileges.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Maaaring pigilan ng Windows security features ang MSR optimisation. Kapag nangyari ito, maaaring magpatuloy ang pagmimina nang may mas mababang performance. Hindi mo kailangang i-disable ang Windows security features para lamang makakuha ng mas mataas na mining performance.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Stability ng system at data",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ang tuloy-tuloy na mataas na CPU load ay maaaring magdulot ng system instability sa mga system na kulang ang cooling, may unstable na hardware, overclocking, problema sa power, o iba pang dati nang problema.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bago magmina nang matagal o nang walang nagbabantay, dapat mong tiyakin na naka-backup ang mahalagang data at maaasahan ang pagpapatakbo ng iyong computer.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Walang software na makakagarantiya na hindi kailanman magkakaroon ng crash, pagkawala ng data, hardware fault, o iba pang problema sa system.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Configuration ng pagmimina",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Responsibilidad mo ang Safex Cash address at daemon configuration na inilalagay sa application.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Dapat mong tiyakin na tama ang mining address bago magsimula. Hindi mababawi ng developer ang cryptocurrency na naipadala o na-credit sa maling address.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Responsibilidad mo pa ring sumunod sa anumang batas, tax requirements, electricity agreements, o iba pang obligasyong naaangkop sa paggamit mo ng cryptocurrency mining.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Walang garantiya sa performance",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Nag-iiba ang hashrate at mining performance sa bawat computer at maaari itong maapektuhan ng CPU architecture, memory configuration, cooling, power limits, Windows security features, at iba pang software na tumatakbo sa system.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kinokontrol ng Banayad, Balansyado at Todo profiles ang dami ng CPU resources na ibinibigay sa miner. Hindi ginagarantiya ng mga ito ang anumang partikular na hashrate, reward rate, o profitability.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Warranty ng software at pananagutan",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ang The Safex Mine ay ipinamamahagi sa ilalim ng ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " at ibinibigay nang walang warranty bukod sa mga warranty na hindi maaaring legal na alisin.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, walang garantiya na ang software ay magiging walang error, tuloy-tuloy, compatible sa bawat computer, o walang masasamang interaction sa ibang software o hardware.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, hindi responsable ang developer para sa pagkawala o pinsalang dulot ng desisyon ng user na magpatakbo ng cryptocurrency-mining software, kabilang ang mga pagkawala na may kaugnayan sa pagpapatakbo ng hardware, init, konsumo ng kuryente, system instability, pagkawala ng data, pagkaantala sa paggamit ng computer, hindi nakuhang mining rewards, o pagbabago sa halaga ng cryptocurrency.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Walang anumang bahagi ng acknowledgement na ito ang nag-aalis, naglilimita, o nagbabago sa anumang karapatan, garantiya, o remedyo na hindi maaaring legal na alisin, limitahan, o baguhin.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hindi pinapalitan o binabago ng acknowledgement na ito ang GPL-3.0 licence o ang mga licence na naaangkop sa third-party components na kasama sa The Safex Mine, at hindi ito nagpapataw ng karagdagang restriction sa mga iyon.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -310,3 +310,23 @@ On the L7b branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo t
 | Targeted mining | In one L7b locale: Start → UAC → live telemetry → language switch → Stop; settings and mining state remain intact |
 
 The existing Serbian Cyrillic developer-only locale remains useful as a comparison but is not a release acceptance target. Do not repeat the exhaustive unchanged L6 mining/MSR/daemon-loss suite unless implementation review identifies a mining-related change.
+
+### L7c acceptance matrix — Southeast Asian Latin-script locales
+
+On the L7c branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manifest-path .\\src-tauri\\Cargo.toml`, and `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`. Run `npm run tauri dev` on the Windows MSVC development system.
+
+| Focus | Manual check |
+| --- | --- |
+| Indonesian | Main dashboard, translated mode/status/error labels, normal modern Indonesian software terminology and whole-word wrapping |
+| Vietnamese | Main dashboard plus the full set of Vietnamese diacritics actually used by the catalogue/acknowledgement, including stacked letter/tone marks and upper-/lower-case forms present; check font fallback, line height, clipping and accidental mark loss |
+| Filipino | Main dashboard plus natural contemporary Filipino/Taglish terminology; retained technical English should read naturally rather than appearing as untranslated omissions |
+| Main UI states | Inspect ready/stopped, active mining and transient block/reject/offline/status presentation as proportionate to the available test controls; translated labels must not clip or disturb technical fields |
+| Mining modes | Confirm content-aware horizontal/vertical orientation responds to translated labels rather than locale-specific CSS or a fixed width |
+| Risk Acknowledgement | For all three locales: title/selector layout, all seven sections, five hardware list items, final liability/GPL section, highlighted statutory-rights paragraph, scrolling and footer controls |
+| First run | Switch among all three L7c languages before acceptance; checkbox remains unticked and Continue enables only after explicit selection |
+| Persistence | Explicit locale survives restart; existing acknowledgement `1.0` remains accepted |
+| Windows matching | Representative `id-ID → id`, `vi-VN → vi`, and `fil-PH → fil`; manual selection remains available |
+| Technical fields | Safex address, RPC/daemon endpoint, UAC/MSR/XMRig, version, block height and telemetry remain legible and unchanged |
+| Targeted mining | In one L7c locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
+
+The existing L6/L7a/L7b responsive layout is the baseline. Prefer a general responsive fix if L7c reveals a real wrapping or line-height defect; do not add locale-specific CSS merely to force a preferred presentation. Do not repeat the exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite unless implementation review identifies a mining-related change.

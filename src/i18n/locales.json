@@ -104,14 +104,21 @@
       "nativeName": "Bahasa Indonesia",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "vi",
       "nativeName": "Tiếng Việt",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
+    },
+    {
+      "id": "fil",
+      "nativeName": "Filipino",
+      "direction": "ltr",
+      "fallback": "en-AU",
+      "enabled": true
     },
     {
       "id": "zh-Hans",

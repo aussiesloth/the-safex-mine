@@ -7,8 +7,10 @@ import jaCatalogue from "./catalogues/ja.json";
 import srCyrlCatalogue from "./catalogues/sr-Cyrl.json";
 import srLatnCatalogue from "./catalogues/sr-Latn.json";
 import zhHansCatalogue from "./catalogues/zh-Hans.json";
+import filCatalogue from "./catalogues/fil.json";
 import frCatalogue from "./catalogues/fr.json";
 import huCatalogue from "./catalogues/hu.json";
+import idCatalogue from "./catalogues/id.json";
 import itCatalogue from "./catalogues/it.json";
 import nlCatalogue from "./catalogues/nl.json";
 import plCatalogue from "./catalogues/pl.json";
@@ -18,6 +20,7 @@ import ruCatalogue from "./catalogues/ru.json";
 import slCatalogue from "./catalogues/sl.json";
 import trCatalogue from "./catalogues/tr.json";
 import ukCatalogue from "./catalogues/uk.json";
+import viCatalogue from "./catalogues/vi.json";
 import localeRegistryData from "./locales.json";
 import type {
   InterpolationValues,
@@ -50,8 +53,10 @@ const catalogues: Readonly<Record<string, Readonly<Record<string, string>>>> = {
   "sr-Cyrl": srCyrlCatalogue,
   "sr-Latn": srLatnCatalogue,
   "zh-Hans": zhHansCatalogue,
+  fil: filCatalogue,
   fr: frCatalogue,
   hu: huCatalogue,
+  id: idCatalogue,
   it: itCatalogue,
   nl: nlCatalogue,
   pl: plCatalogue,
@@ -61,6 +66,7 @@ const catalogues: Readonly<Record<string, Readonly<Record<string, string>>>> = {
   sl: slCatalogue,
   tr: trCatalogue,
   uk: ukCatalogue,
+  vi: viCatalogue,
 };
 
 export const supportedLocales: readonly LocaleMetadata[] =
