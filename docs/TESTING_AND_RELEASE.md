@@ -255,9 +255,70 @@ Keep current project/package versions at 1.0.0 during localisation development. 
 
 ## 9. v1.1.0 localisation validation and release gate — current status
 
-As of 5 October 2026, localisation implementation through L7d and the subsequent translation-quality audit are complete on `main`. The current development set is canonical `en-AU` plus **23 release-enabled translated LTR locales**; the complete developer-only Serbian Cyrillic locale was also included in the linguistic audit. L8 multilingual installer/public-document localisation and L9 release hardening remain. Application/package versions are still 1.0.0, and no v1.1.0 tag/release exists yet.
+Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 adds the multilingual NSIS configuration and essential translated public installation/first-use documentation for the same canonical `en-AU` plus **23 release-enabled translated LTR locales**. Application/package versions remain 1.0.0 and Mining Risk Acknowledgement remains version 1.0. L8 Windows packaged acceptance was completed on 6 October 2026; L9 release hardening is therefore the next planned slice after L8 merge. No v1.1.0 tag/release exists yet.
 
 The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. Test and enable only locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
+
+### L8 installer/public-document implementation and acceptance
+
+The L8 source configuration targets one NSIS installer with **22 installer languages total**: English plus 21 translated installer languages. Filipino and Bengali intentionally use English installer fallback because the NSIS 3.11 language set used by Tauri CLI 2.11.4 does not contain Filipino/Tagalog or Bengali. The application itself continues to provide both languages after launch.
+
+Seven NSIS languages require project-maintained Tauri-specific message files: Serbian Latin, Polish, Hungarian, Slovenian, Greek, Indonesian and Hindi. The remaining translated installer languages use Tauri's bundled custom-message translations. `displayLanguageSelector` remains false so Windows chooses the installer language automatically.
+
+The public-document layer contains 23 translated essential installation/first-use guides under `docs/localised/`, while English remains canonical. GPL-3.0 and third-party licence texts remain untranslated by design.
+
+Automated L8 conformance is part of `npm run i18n:check` and separately available as `npm run l8:check`. It checks the enabled locale registry against the installer manifest, the configured NSIS language set, all seven custom Tauri message files and required placeholders, all 23 translated installation guides, the two documented English fallbacks, application/package versions remaining 1.0.0 and Mining Risk Acknowledgement remaining 1.0.
+
+Windows packaged acceptance completed on **6 October 2026** against the L8 branch. The final production-configuration validation build generated exactly one NSIS installer:
+
+```text
+The Safex Mine_1.0.0_x64-setup.exe
+```
+
+Validation-build SHA-256:
+
+```text
+64F6C037808227B7C5C910898E83331AF2A2DD04834BE96A456DEBB9A2980513
+```
+
+This hash identifies the local L8 validation artefact only. It is **not** a published v1.1.0 release checksum and must not be substituted for the later L9 release-candidate checksum.
+
+Automated/build results on the Windows development machine:
+
+- `npm ci`: passed; 0 reported npm vulnerabilities;
+- `npm run i18n:check`: passed, including L8 validation of 22 NSIS languages, 23 translated installation guides and 2 documented English installer fallbacks;
+- `npm run build`: passed;
+- `cargo test --manifest-path .\\src-tauri\\Cargo.toml`: 12/12 tests passed;
+- `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`: passed;
+- required XMRig and WinRing runtime files were present;
+- `npm run tauri:build`: passed and produced one Windows x64 NSIS bundle;
+- regenerated `THIRD_PARTY_LICENSES/DEPENDENCY_LICENSES.txt` had no substantive Git diff and was restored to the committed form after the build.
+
+Physical Windows acceptance:
+
+- normal production configuration (`displayLanguageSelector: false`) opened directly in English on the English Windows test machine with no language picker;
+- GPL page remained authoritative English while installer chrome followed the selected installer language;
+- default per-user install path remained `%LOCALAPPDATA%\\The Safex Mine`;
+- Microsoft Defender quarantined the installed XMRig backend as `Trojan:Win64/HashvaultMiner.A`; the specific expected XMRig file was restored and the narrow install-folder exclusion was used without disabling Defender or creating a broad exclusion;
+- installer quarantine itself was not re-induced during L8 because the local repository/build path was already excluded from Defender; the earlier v1.0.0 clean-machine test remains the installer-quarantine evidence;
+- first-run Mining Risk Acknowledgement appeared before the mining UI, remained version 1.0, and allowed language selection before acceptance;
+- packaged German Risk Acknowledgement live-switch rendered correctly before acceptance;
+- with the public RPC temporarily unavailable for external/node-maintenance reasons, packaged mining acceptance used the user's live local daemon instead;
+- valid Safex address and local daemon validation succeeded; Calm mining produced live telemetry (approximately 8.01 kH/s and 13 threads on the test machine);
+- first mining start produced UAC for `safex-mine-helper.exe`; same-session Stop -> Start reused the elevated helper with no second UAC;
+- Safex address and RPC fields were locked while mining;
+- language switching while mining did not disturb mining state;
+- MSR-unavailable mode degraded correctly rather than preventing mining;
+- uninstall completed without UAC, removed the application folder when **Delete the application data** was selected, and left the manually-created Defender exclusion intact for manual cleanup;
+- a temporary, uncommitted `displayLanguageSelector: true` build exposed all 22 configured installer languages for visual acceptance;
+- Filipino and Bengali were correctly absent from the NSIS picker, matching their documented English-installer fallback;
+- European Portuguese and Brazilian Portuguese showed visibly distinct installer wording;
+- Simplified Chinese and Greek welcome pages rendered cleanly;
+- Hindi fresh install rendered cleanly through welcome, GPL chrome, install path, progress and finish pages;
+- a second Hindi installer run exercised the project-custom Tauri maintenance strings (already installed, add/reinstall, uninstall), and the Hindi uninstaller exercised the custom **Delete application data** string;
+- after those tests the picker flag was restored to `false` and the final production-configuration installer was rebuilt.
+
+This acceptance is proportionate to L8's installer/document scope. It does not repeat the full L6/L7 mining, daemon-loss or translation regression suites because L8 changes no mining implementation source.
 
 Before approving v1.1.0, verify:
 

@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** **v1.0.0 was publicly released on 18 September 2026.** The Windows x64 release remains available from the [v1.0.0 GitHub Release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0), with the NSIS installer and published SHA-256 checksum. The current `main` branch is ahead of that published release: localisation implementation through L7 and the subsequent translation-quality audit are complete, with canonical `en-AU` plus **23 release-enabled translated LTR locales**, matching Mining Risk Acknowledgement v1.0 content, Windows language matching/manual selection and completed script/layout/live-switch acceptance. Those changes are **not** part of the published v1.0.0 installer. L8 multilingual installer/public-documentation work and L9 release hardening still remain before v1.1.0 can be published, and application/package versions intentionally remain at 1.0.0 until L9. Native-speaker language and terminology corrections remain welcome and can be incorporated in later patch releases.
+> **Project status:** **v1.0.0 was publicly released on 18 September 2026.** The Windows x64 release remains available from the [v1.0.0 GitHub Release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0), with the NSIS installer and published SHA-256 checksum. Current development is ahead of that published release: localisation through L7, the translation-quality audit, and L8 multilingual installer/public-document implementation are present for canonical `en-AU` plus **23 release-enabled translated LTR locales**. L8 keeps a single Windows x64 NSIS installer, adds 21 translated installer languages alongside English, documents English installer fallback for Filipino and Bengali, and provides translated essential installation/first-use guidance for all 23 translated app locales. None of this changes the already-published v1.0.0 assets. L9 release hardening still remains before v1.1.0 can be published, and application/package versions intentionally remain at 1.0.0 until L9. Native-speaker language and terminology corrections remain welcome.
 
 ## What it does
 
@@ -76,13 +76,15 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 **Published download:** [The Safex Mine v1.0.0 for Windows x64](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0). Download `The-Safex-Mine_1.0.0_x64-setup.exe` and verify its hash using the accompanying `SHA256SUMS.txt` before executing it, following the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
 
+The published v1.0.0 installer is the historical English-only baseline. The unreleased v1.1.0 development configuration now keeps the same **single-installer** model while adding multilingual NSIS support. Essential translated installation/first-use guidance is available from the [localised Windows installation guide index](docs/localised/README.md).
+
 The Windows release is **unsigned**. Users can inspect the public source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project provides verification and narrowly scoped exclusion/restoration guidance, but never disables security software or adds antivirus exclusions automatically.
 
 The packaged build bundles the elevated helper, XMRig backend, WinRing driver and licence notices into Tauri resources. The NSIS installer has completed clean-machine download, installation, mining, Defender full-scan and uninstall validation.
 
 ### Before installing
 
-For the tested step-by-step Windows path, including SmartScreen and Microsoft Defender recovery/exclusion guidance, see the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
+For the tested step-by-step Windows path, including SmartScreen and Microsoft Defender recovery/exclusion guidance, see the canonical [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md). Essential community translations are indexed in [Localised Windows installation guides](docs/localised/README.md).
 
 The Safex Mine is an unsigned mining application. The normal installation path is therefore likely to encounter one or more Windows/browser security warnings.
 
@@ -127,6 +129,7 @@ See [Branding](docs/BRANDING.md).
 ## Repository documentation
 
 - [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md)
+- [Localised Windows Installation Guides](docs/localised/README.md)
 - [Building from Source](BUILDING.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Security and Privilege Model](docs/SECURITY_AND_PRIVILEGE_MODEL.md)

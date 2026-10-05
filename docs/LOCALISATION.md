@@ -4,7 +4,7 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slices L1-L5 established the framework, extracted the frontend UI, localised the backend/frontend message boundary, structured Mining Risk Acknowledgement v1.0 for translation, and added Windows preferred-language detection plus a persistent manual selector. L6 implemented and validated the pilot translations and layout-stress tooling. L7a, L7b, L7c and L7d completed the remaining approved LTR translation groups through PRs #12-#15. PR #16 then completed a locale-by-locale translation-quality audit against canonical `en-AU`. The current `main` branch therefore contains the complete v1.1.0 localisation content set planned to date; L8 installer/public-document localisation and L9 release hardening remain.
+Localisation Slices L1-L5 established the framework, extracted the frontend UI, localised the backend/frontend message boundary, structured Mining Risk Acknowledgement v1.0 for translation, and added Windows preferred-language detection plus a persistent manual selector. L6 implemented and validated the pilot translations and layout-stress tooling. L7a, L7b, L7c and L7d completed the remaining approved LTR translation groups through PRs #12-#15. PR #16 then completed a locale-by-locale translation-quality audit against canonical `en-AU`. L8 adds the multilingual NSIS installer configuration and essential translated public installation/first-use documentation; its automated, package-build and representative physical Windows acceptance completed on 6 October 2026. L9 release hardening is next after L8 merge.
 
 English (Australia), `en-AU`, remains the canonical source locale and fallback. Current `main` has **23 release-enabled translated LTR locales** in addition to English: `de`, `es`, `sr-Latn`, `zh-Hans`, `ja`, `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`, `ru`, `uk`, `el`, `id`, `vi`, `fil`, `ko`, `hi` and `bn`. Serbian Cyrillic (`sr-Cyrl`) remains complete but developer-only/deferred, and `en-XA` remains a developer-only pseudo-locale. Traditional Chinese (`zh-Hant`) and the registered RTL locales remain disabled. The published v1.0.0 installer predates this multilingual implementation.
 
@@ -13,7 +13,7 @@ English (Australia), `en-AU`, remains the canonical source locale and fallback. 
 
 The revised governing programme (5 October 2026) **does not impose a locked language total, a permanent maximum, or an obligation to deliver every locale named in an earlier plan**. Scope is an approved per-release planning snapshot. Adding further languages or script variants is possible in any future separately governed slice; no new numerical ceiling should be introduced by a registry, validation script, installer, test plan or documentation.
 
-The current v1.1.0 development set on `main` is **en-AU plus 23 release-enabled LTR translations**. Translation implementation and the project translation-quality audit are complete for that set, while final release approval still depends on L8 and L9. The set is not the published v1.0.0 feature set and is not a future limit:
+The current v1.1.0 development set is **en-AU plus 23 release-enabled LTR translations**. Translation implementation, the project translation-quality audit, L8 installer/public-document implementation and L8 Windows packaged acceptance are complete for that set. Final release approval still depends on the later L9 release-hardening gate. The set is not the published v1.0.0 feature set and is not a future limit:
 
 | Delivery group | Current release-enabled translated locales |
 | --- | --- |
@@ -46,6 +46,10 @@ L6 applies the accepted clause 7.1 clarification, replacing “is provided under
 - src/i18n/riskAcknowledgements/ — versioned structured Mining Risk Acknowledgement translations.
 - src/i18n/riskAcknowledgements/types.ts — acknowledgement content structure (sections, paragraphs, lists and inline emphasis).
 - scripts/i18n-check.mjs — catalogue, metadata and Risk Acknowledgement validation.
+- src-tauri/nsis/installer-locales.json — source-controlled app-locale to NSIS-language mapping, support type and documented fallback.
+- src-tauri/nsis/languages/ — project-maintained Tauri-specific NSIS messages for installer languages not built into Tauri CLI 2.11.4.
+- docs/localised/ — essential translated Windows installation/security/first-use guidance; English documentation remains canonical.
+- scripts/l8-installer-docs-check.mjs — L8 installer mapping, custom NSIS message, translated-document and version-gate validation.
 
 Each locale registry entry contains:
 
@@ -100,7 +104,19 @@ Run:
 
     npm run i18n:check
 
-The validator checks locale metadata, release/developer locale completeness and translation provenance, missing keys, unexpected keys, blank values and placeholder mismatches. It scans the normal frontend source, including the Risk Acknowledgement dialog chrome, for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue. It also validates each versioned Risk Acknowledgement document and compares its section/paragraph/list/emphasis structure with the canonical en-AU source.
+The validator checks locale metadata, release/developer locale completeness and translation provenance, missing keys, unexpected keys, blank values and placeholder mismatches. It scans the normal frontend source, including the Risk Acknowledgement dialog chrome, for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue. It also validates each versioned Risk Acknowledgement document and compares its section/paragraph/list/emphasis structure with the canonical en-AU source. L8 extends `npm run i18n:check` with installer/document conformance checks covering the enabled locale registry, NSIS language mapping, custom Tauri installer strings, all translated public guides, unchanged application/package version `1.0.0` and unchanged Mining Risk Acknowledgement version `1.0`.
+
+## L8 multilingual NSIS installer and public documentation
+
+L8 was designed against the repository's exact packaging toolchain: `@tauri-apps/cli 2.11.4`, which uses NSIS 3.11 for this Windows installer path. The release configuration continues to produce one Windows x64 NSIS installer. Normal Windows-language automatic selection is retained and `displayLanguageSelector` remains `false`.
+
+The installer set is English plus 21 translated NSIS languages. Tauri 2.11.4 already supplies its additional installer messages for German, Spanish International, Simplified Chinese, Japanese, French, Italian, Dutch, Portuguese, Brazilian Portuguese, Turkish, Russian, Ukrainian, Vietnamese and Korean. Seven NSIS-supported languages use small project-maintained Tauri-message files: Serbian Latin, Polish, Hungarian, Slovenian, Greek, Indonesian and Hindi. NSIS 3.11 has no Filipino/Tagalog or Bengali language file, so application locales `fil` and `bn` deliberately use the English installer while remaining fully available inside the application.
+
+The exact mapping is recorded in `src-tauri/nsis/installer-locales.json`. English is first in the NSIS language list so unsupported Windows languages fall back deterministically. European Portuguese is listed before Brazilian Portuguese so non-Brazilian Portuguese primary-language fallback favours `pt-PT`; exact Brazilian Windows locales still select `PortugueseBR`.
+
+L8 does not duplicate the entire repository documentation into every language. Instead, `docs/localised/<locale>/WINDOWS_INSTALLATION.md` provides essential installation, SmartScreen/Defender, SHA-256, quarantine restoration, narrow exclusion, first-run Risk Acknowledgement, helper UAC, MSR/degraded-performance and uninstall guidance for every one of the 23 translated release-enabled app locales. The translated guides explicitly preserve the rule that an installer quarantined immediately after download must first be restored/allowed as that **specific file**, then checksum-verified **before execution**. They also warn against broad antivirus disabling or excluding Downloads, an entire user profile or a whole drive.
+
+English remains canonical. GPL-3.0, third-party licences, generated dependency licence material and XMRig/WinRing licence texts are not translated or presented through translated summaries as authoritative replacements.
 
 ## L2 extraction notes
 

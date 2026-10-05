@@ -4,6 +4,14 @@ The Safex Mine is an unsigned Windows application that includes a CPU-mining bac
 
 This guide describes the installation path observed during clean-machine testing with Microsoft Defender. Other Windows versions or antivirus products may present different wording or detection names.
 
+## Language and translated guidance
+
+The already-published v1.0.0 installer is the historical English-only release. The unreleased v1.1.0 development configuration keeps a **single Windows x64 NSIS installer** and adds English plus 21 translated installer languages.
+
+The installer normally follows the Windows display language automatically; L8 does not add a separate language-selection dialog. Filipino and Bengali remain fully supported application languages, but NSIS 3.11 does not provide corresponding installer language files, so those two Windows installer flows fall back to English. After the application starts, users can still select Filipino or Bengali before accepting Mining Risk Acknowledgement v1.0.
+
+Essential translated installation/security/first-use guidance for all 23 translated application locales is available from [Localised Windows installation guides](localised/README.md). English remains the canonical project reference. GPL-3.0 and third-party licence texts remain in their authoritative original form and are not replaced by translated summaries.
+
 ## 1. Download the official release
 
 Download the Windows installer only from the official **The Safex Mine** GitHub release.

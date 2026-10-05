@@ -4,6 +4,44 @@
       "nsis"
     ],
     "licenseFile": "../LICENSE",
+    "windows": {
+      "nsis": {
+        "languages": [
+          "English",
+          "German",
+          "SpanishInternational",
+          "SerbianLatin",
+          "SimpChinese",
+          "Japanese",
+          "French",
+          "Italian",
+          "Dutch",
+          "Polish",
+          "Portuguese",
+          "PortugueseBR",
+          "Turkish",
+          "Hungarian",
+          "Slovenian",
+          "Russian",
+          "Ukrainian",
+          "Greek",
+          "Indonesian",
+          "Vietnamese",
+          "Korean",
+          "Hindi"
+        ],
+        "displayLanguageSelector": false,
+        "customLanguageFiles": {
+          "SerbianLatin": "nsis/languages/SerbianLatin.nsh",
+          "Polish": "nsis/languages/Polish.nsh",
+          "Hungarian": "nsis/languages/Hungarian.nsh",
+          "Slovenian": "nsis/languages/Slovenian.nsh",
+          "Greek": "nsis/languages/Greek.nsh",
+          "Indonesian": "nsis/languages/Indonesian.nsh",
+          "Hindi": "nsis/languages/Hindi.nsh"
+        }
+      }
+    },
     "resources": {
       "helper/target/release/safex-mine-helper.exe": "runtime/safex-mine-helper.exe",
       "binaries/safex-xmrig-x86_64-pc-windows-msvc.exe": "runtime/safex-xmrig-x86_64-pc-windows-msvc.exe",
