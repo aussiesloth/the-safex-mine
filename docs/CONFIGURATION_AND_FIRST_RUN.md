@@ -43,13 +43,13 @@ After acceptance, the full notice remains available from the **Risk notice** con
 
 The repository copy of the published English v1.0 notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
 
-## Planned v1.1.0 multilingual first-run behaviour (not part of the published v1.0.0 installer)
+## Current multilingual first-run implementation on main (unreleased v1.1.0 development)
 
-For each explicitly approved, complete release locale, a language selector is accessible on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority remains: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
+The current `main` branch implements a language selector on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority is: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
 
 The selected enabled language controls both the dialog chrome and its complete version-consistent acknowledgement text. English remains an available reference/fallback. Switching language must not implicitly record acceptance, reset the checkbox/acceptance version improperly, modify the mining address, daemon, CPU mode, sound preference or ongoing mining session, or force a different regional number/date convention.
 
-Only approved languages with complete UI/accessibility/status and acknowledgement content may be release selectable. The current v1.1.0 planning snapshot is canonical English plus 23 LTR translations, not a permanent language limit or an obligation to enable incomplete entries. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) must not be ordinary release choices. RTL is optional future work and is not a v1.1.0 prerequisite.
+Current `main` has canonical English plus **23 release-enabled translated LTR locales**, all with complete UI/accessibility/status and acknowledgement content and completed translation-quality review. This is the current v1.1.0 release set, not a permanent language limit. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are not ordinary release choices. RTL is optional future work and is not a v1.1.0 prerequisite. The published v1.0.0 installer remains unchanged and does not contain this multilingual implementation.
 
 The published v1.0.0 Risk Acknowledgement acceptance marker remains version `1.0`. Merely adding translations or correcting translation phrasing does not create a new acknowledgement version; assess any canonical English wording clarification separately under the substantive-change rule. Existing acceptance is preserved unless that rule actually requires a new version. The original published v1.0.0 release assets are not retroactively altered.
 
@@ -154,7 +154,7 @@ Persisted:
 - mining mode;
 - sound-muted preference.
 
-The planned v1.1.0 localisation update additionally persists an explicit UI-language override (or its removal when using Windows language); this was not part of the original published v1.0.0 behaviour.
+Current `main` additionally persists an explicit UI-language override (or its removal when using Windows language); this behaviour is part of the unreleased v1.1.0 development line and was not part of the published v1.0.0 installer.
 
 Not persisted:
 
@@ -171,7 +171,7 @@ The current implementation allows the address to be changed only while mining is
 
 When a newly validated address differs from the previously saved address, it begins a fresh in-memory mining session. **Blocks Found resets to 0, Rejected resets to 0, and accumulated mining time resets to 00:00:00.**
 
-If that product rule changes before release, both the code and this document should be updated together.
+If that product rule changes in a future release, both the code and this document should be updated together.
 
 ## 12. Invalid/unavailable configuration
 
@@ -200,4 +200,8 @@ L7c added selectable app UI and first-run acknowledgement languages Indonesian (
 
 ### L7d completed coverage
 
-L7d extends selectable app UI and first-run acknowledgement languages with Korean (`ko`), Hindi (`hi`) and Bengali (`bn`). Acceptance version and storage remain unchanged. Windows Hangul/Devanagari/Bengali font fallback and shaping, line height, wrapping/text measurement, first-run language switching, persistence, acknowledgement continuity and a targeted live-mining language switch were confirmed before PR #15 merge.
+L7d added selectable app UI and first-run acknowledgement languages Korean (`ko`), Hindi (`hi`) and Bengali (`bn`). Acceptance version and storage remain unchanged. Windows Hangul/Devanagari/Bengali font fallback and shaping, line height, wrapping/text measurement, first-run language switching, persistence, acknowledgement continuity and a targeted live-mining language switch were confirmed before PR #15 was merged.
+
+### Translation-quality audit
+
+After L7d, all 23 release-enabled translated locales plus the complete developer-only Serbian Cyrillic translation were reviewed directly against canonical `en-AU` for UI/accessibility/status wording and Mining Risk Acknowledgement v1.0 semantics. PR #16 recorded the completed audit and conservative corrections. These remain AI-assisted community-project translations rather than native-speaker, professional or legal certification; language and terminology corrections remain welcome. Translation-only corrections that preserve canonical meaning do not by themselves change acknowledgement version `1.0` or invalidate previous acceptance.
