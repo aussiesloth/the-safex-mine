@@ -582,12 +582,10 @@ input {
   background: #49341f;
 }
 
-/* Preserve whole mode names; stack whenever the section is too narrow
-   for three evenly sized buttons, irrespective of overall window width. */
-@container control-section (max-width: 400px) {
-  .mode-buttons {
-    grid-template-columns: 1fr;
-  }
+/* Keep translated mode labels intact. Runtime measurement adds this class
+   only when the current three labels cannot fit comfortably side-by-side. */
+.mode-buttons.mode-buttons-stacked {
+  grid-template-columns: 1fr;
 }
 
 
