@@ -41,7 +41,17 @@ If a later release materially changes the acknowledgement, incrementing the ackn
 
 After acceptance, the full notice remains available from the **Risk notice** control in the application header.
 
-The repository copy of the notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
+The repository copy of the published English v1.0 notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
+
+## Planned v1.1.0 multilingual first-run behaviour (not part of the published v1.0.0 installer)
+
+For each explicitly approved, complete release locale, a language selector will be accessible on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority remains: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
+
+The selected enabled language controls both the dialog chrome and its complete version-consistent acknowledgement text. English remains an available reference/fallback. Switching language must not implicitly record acceptance, reset the checkbox/acceptance version improperly, modify the mining address, daemon, CPU mode, sound preference or ongoing mining session, or force a different regional number/date convention.
+
+Only approved languages with complete UI/accessibility/status and acknowledgement content may be release selectable. The current v1.1.0 planning snapshot is canonical English plus 23 LTR translations, not a permanent language limit or an obligation to enable incomplete entries. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) must not be ordinary release choices. RTL is optional future work and is not a v1.1.0 prerequisite.
+
+The published v1.0.0 Risk Acknowledgement acceptance marker remains version `1.0`. Merely adding translations or correcting translation phrasing does not create a new acknowledgement version; assess any canonical English wording clarification separately under the substantive-change rule. Existing acceptance is preserved unless that rule actually requires a new version. The original published v1.0.0 release assets are not retroactively altered.
 
 ## 2. Current first-run configuration model
 
@@ -143,6 +153,8 @@ Persisted:
 - daemon endpoint;
 - mining mode;
 - sound-muted preference.
+
+The planned v1.1.0 localisation update additionally persists an explicit UI-language override (or its removal when using Windows language); this was not part of the original published v1.0.0 behaviour.
 
 Not persisted:
 
