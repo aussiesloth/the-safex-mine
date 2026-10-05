@@ -1,6 +1,6 @@
 # Troubleshooting
 
-This guide covers **The Safex Mine v1.0.0** and its current Windows release model.
+This guide covers the current Windows release model used by **The Safex Mine v1.0.0** and the release-ready **v1.1.0** code on `main`.
 
 ## Start Mining is unavailable
 
