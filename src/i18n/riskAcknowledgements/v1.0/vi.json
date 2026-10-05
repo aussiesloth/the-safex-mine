@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine bao gồm backend đào XMRig tương thích với Safex, một trình trợ giúp chạy với quyền nâng cao và driver WinRing dùng để thử tối ưu hiệu năng MSR trên Windows.",
+              "text": "The Safex Mine bao gồm backend đào XMRig tương thích với Safex, một trình trợ giúp chạy với quyền nâng cao và trình điều khiển WinRing dùng để thử tối ưu hiệu năng MSR trên Windows.",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Để bắt đầu đào, bạn phải chấp thuận lời nhắc UAC của Windows dành cho trình trợ giúp đào chạy với quyền nâng cao. Bản thân ứng dụng đồ họa được thiết kế để tiếp tục chạy mà không cần quyền Administrator.",
+              "text": "Để bắt đầu đào, bạn phải chấp thuận lời nhắc UAC của Windows dành cho trình trợ giúp đào chạy với quyền nâng cao. Bản thân ứng dụng đồ họa được thiết kế để tiếp tục chạy mà không cần quyền quản trị viên.",
               "strong": false
             }
           ]
