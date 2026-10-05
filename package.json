@@ -13,7 +13,8 @@
     "tauri:build": "npm run build:helper && npm run licenses:bundle && tauri build --config src-tauri/tauri.release.conf.json",
     "licenses:audit": "powershell -ExecutionPolicy Bypass -File .\\scripts\\audit-dependency-licenses.ps1",
     "licenses:bundle": "powershell -ExecutionPolicy Bypass -File .\\scripts\\generate-third-party-licenses.ps1",
-    "i18n:check": "node scripts/i18n-check.mjs"
+    "l8:check": "node scripts/l8-installer-docs-check.mjs",
+    "i18n:check": "node scripts/i18n-check.mjs && node scripts/l8-installer-docs-check.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
