@@ -350,3 +350,31 @@ L7d passed `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manife
 | Targeted mining | In one L7d locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
 
 The L7d physical pass confirmed the existing responsive layout handles the three new scripts without locale-specific styling. The documented first-run, persistence, complete Risk Acknowledgement and targeted live-mining checks passed. The exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite was not repeated because L7d did not alter mining implementation.
+
+
+### Translation-quality audit acceptance — existing localisations
+
+This audit is content-only. It does not alter mining logic, the helper/XMRig/MSR implementation, locale enablement, acknowledgement acceptance semantics or application/package versioning.
+
+Run the normal validation gate:
+
+```powershell
+npm ci
+npm run i18n:check
+npm run build
+cargo test --manifest-path .\src-tauri\Cargo.toml
+cargo fmt --manifest-path .\src-tauri\Cargo.toml --check
+```
+
+Physical Windows review should be proportional to the changed source text rather than repeating every L6/L7 mining regression:
+
+| Focus | Manual check |
+| --- | --- |
+| Changed UI strings | Inspect each changed language in the dashboard/settings/status surfaces and confirm revised wording is rendered completely with no clipping or unintended wrapping |
+| Risk Acknowledgement | Open the revised acknowledgement languages and verify headings, paragraphs, five-item hardware list, highlighted statutory-rights paragraph, scrolling and footer controls |
+| Script rendering | Recheck representative corrected strings in Latin, Cyrillic, CJK, Devanagari and Bengali scripts for glyph shaping, line height and word-boundary behaviour |
+| Mining modes | Confirm revised prose uses the same translated Calm/Balanced/Full Bore labels shown by the UI and remains grammatically natural |
+| First run | Confirm the language selector and Risk notice presentation still work before acceptance and that acknowledgement version remains `1.0` |
+| Targeted mining | In one changed locale: Start → UAC → live telemetry → change language while mining → Stop; confirm mining/settings state is preserved |
+
+The unchanged exhaustive mining/MSR/degraded/daemon-loss suites do not need to be repeated unless the final diff unexpectedly touches implementation code.
