@@ -320,7 +320,7 @@ function buildAcknowledgementUi() {
       aria-labelledby="risk-acknowledgement-title"
     >
       <header class="risk-acknowledgement-header">
-        <div>
+        <div class="risk-acknowledgement-heading">
           <div class="risk-acknowledgement-kicker"></div>
           <h2 id="risk-acknowledgement-title"></h2>
           <div class="risk-acknowledgement-version"></div>
