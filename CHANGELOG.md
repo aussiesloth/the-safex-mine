@@ -26,7 +26,7 @@ The first public release is version **1.0.0**.
 ### Current release status
 
 - The published release remains **v1.0.0**. The localisation work above exists on the development branch history/current `main` and is not contained in the v1.0.0 installer.
-- L8 multilingual NSIS/public-documentation implementation is now present in the v1.1.0 development line. Windows packaged acceptance remains part of the L8 merge gate; L9 release hardening follows after L8 is approved.
+- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete in the v1.1.0 development line; L9 release hardening follows after L8 is merged.
 - Application/package versions remain `1.0.0` until the approved L9 version-bump stage.
 
 ## [1.0.0] - 2026-09-18
