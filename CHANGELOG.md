@@ -13,7 +13,7 @@ The first public release is version **1.0.0**.
 - Developer-only expanded pseudo-locale `en-XA` and retained Serbian Cyrillic (`sr-Cyrl`) script-test material; these are not ordinary release choices.
 - L8 single-binary multilingual NSIS configuration: English plus 21 translated installer languages, with documented English installer fallback for Filipino and Bengali.
 - Essential Windows installation/security/first-use community translations for all 23 release-enabled translated application locales, with English retained as the canonical project reference.
-- Source-controlled installer-locale manifest and automated L8 installer/document conformance checks.
+- Source-controlled installer-locale manifest and automated release-conformance checks, with the historical `l8:check` command retained as a compatibility alias.
 
 ### Changed
 
@@ -26,8 +26,9 @@ The first public release is version **1.0.0**.
 ### Current release status
 
 - The published release remains **v1.0.0**. The localisation work above exists on the development branch history/current `main` and is not contained in the v1.0.0 installer.
-- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete in the v1.1.0 development line; L9 release hardening follows after L8 is merged.
-- Application/package versions remain `1.0.0` until the approved L9 version-bump stage.
+- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete in the v1.1.0 development line.
+- L9 release hardening has advanced application, Tauri, Rust and helper package versions consistently to `1.1.0`; Mining Risk Acknowledgement remains version `1.0`.
+- Final v1.1.0 candidate automation/package checks and one installation/uninstall validation remain before the separate publication gate.
 
 ## [1.0.0] - 2026-09-18
 
