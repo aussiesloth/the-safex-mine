@@ -356,6 +356,8 @@ The L7d physical pass confirmed the existing responsive layout handles the three
 
 This audit is content-only. It does not alter mining logic, the helper/XMRig/MSR implementation, locale enablement, acknowledgement acceptance semantics or application/package versioning.
 
+**Automated validation completed 5 October 2026:** all required commands passed on the Windows development system.
+
 Run the normal validation gate:
 
 ```powershell
@@ -365,6 +367,8 @@ npm run build
 cargo test --manifest-path .\src-tauri\Cargo.toml
 cargo fmt --manifest-path .\src-tauri\Cargo.toml --check
 ```
+
+**PASS (5 October 2026):** `npm ci` completed with 0 vulnerabilities; `npm run i18n:check` passed for 26 locales / 104 keys / 83 frontend references / 1 Risk Acknowledgement version; `npm run build` completed successfully (Vite emitted only the existing chunk-size warning); Rust tests passed 12/12; `cargo fmt --check` passed with no output. `npm run tauri dev` also launched successfully for physical review.
 
 Physical Windows review should be proportional to the changed source text rather than repeating every L6/L7 mining regression.
 
