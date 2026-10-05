@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "id",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine adalah aplikasi yang dikembangkan oleh komunitas untuk penambangan solo ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Sebelum menggunakan fungsi penambangan, harap baca dan pahami informasi berikut.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Imbalan dan nilai penambangan",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Penambangan mata uang kripto bersifat spekulatif. The Safex Mine tidak menjamin bahwa komputer Anda akan menemukan blok, menerima imbalan penambangan, menghasilkan keuntungan, atau menutup biaya listrik maupun peralatan.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Nilai Safex Cash dapat naik atau turun dan pada waktu tertentu mungkin hanya memiliki sedikit nilai pasar dunia nyata atau tidak memiliki nilai sama sekali. Hasil penambangan di masa lalu tidak menunjukkan atau menjamin hasil di masa depan.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine tidak memberikan nasihat keuangan, investasi, perpajakan, atau hukum.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Beban perangkat keras, panas, dan konsumsi daya",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Penambangan mata uang kripto dapat memberikan beban berkelanjutan pada CPU dan komponen komputer lainnya. Hal ini dapat meningkatkan:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "suhu prosesor dan panas sistem;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "kecepatan kipas dan penggunaan sistem pendingin;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "konsumsi listrik;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "beban pada komponen penyaluran daya motherboard; dan",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "keausan perangkat keras secara umum selama pengoperasian berkepanjangan.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Anda bertanggung jawab untuk menentukan apakah komputer, sistem pendingin, dan catu daya Anda sesuai untuk penambangan berkelanjutan serta untuk memantau sistem Anda sebagaimana diperlukan.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Penggunaan perangkat lunak penambangan mata uang kripto dapat memengaruhi cakupan garansi sukarela produsen, tergantung pada ketentuan garansi produsen tersebut dan keadaan terjadinya kerusakan. Pernyataan ini tidak memengaruhi hak atau upaya hukum berdasarkan undang-undang yang secara sah tidak dapat dikecualikan.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Keamanan Windows dan akses berhak tinggi",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine menyertakan backend penambangan XMRig yang kompatibel dengan Safex, helper dengan hak akses tinggi, serta driver WinRing yang digunakan untuk mencoba optimisasi kinerja MSR pada Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Komponen-komponen ini dapat terdeteksi, diblokir, atau dikarantina oleh Microsoft Defender, Windows SmartScreen, atau perangkat lunak keamanan lainnya.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine tidak akan secara otomatis menonaktifkan perlindungan antivirus, memulihkan file yang dikarantina, atau membuat pengecualian antivirus. Keputusan untuk memulihkan file yang terdeteksi, membuat pengecualian, atau mengubah sementara pengaturan perangkat lunak keamanan tetap menjadi keputusan Anda.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Memulai penambangan memerlukan persetujuan pada prompt UAC Windows untuk helper penambangan dengan hak akses tinggi. Aplikasi grafis itu sendiri dimaksudkan untuk tetap berjalan tanpa hak istimewa Administrator.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Fitur keamanan Windows dapat mencegah optimisasi MSR. Jika hal ini terjadi, penambangan dapat tetap berjalan dengan kinerja yang lebih rendah. Anda tidak diwajibkan menonaktifkan fitur keamanan Windows hanya untuk memperoleh kinerja penambangan yang lebih tinggi.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Stabilitas sistem dan data",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Beban CPU tinggi yang berkelanjutan dapat menyebabkan ketidakstabilan sistem pada komputer dengan pendinginan yang tidak memadai, perangkat keras yang tidak stabil, overclocking, masalah daya, atau masalah lain yang sudah ada.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Sebelum melakukan penambangan dalam waktu lama atau tanpa pengawasan, Anda sebaiknya memastikan data penting telah dicadangkan dan komputer Anda beroperasi dengan andal.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Tidak ada perangkat lunak yang dapat menjamin bahwa crash, kehilangan data, kerusakan perangkat keras, atau masalah sistem lainnya tidak akan pernah terjadi.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Konfigurasi penambangan",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Anda bertanggung jawab atas alamat Safex Cash dan konfigurasi daemon yang dimasukkan ke dalam aplikasi.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Anda sebaiknya memastikan alamat penambangan sudah benar sebelum memulai. Pengembang tidak dapat memulihkan mata uang kripto yang dikirim atau dikreditkan ke alamat yang salah.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Anda tetap bertanggung jawab untuk mematuhi hukum, kewajiban perpajakan, perjanjian listrik, atau kewajiban lain yang berlaku atas penggunaan penambangan mata uang kripto oleh Anda.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Tidak ada jaminan kinerja",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hashrate dan kinerja penambangan berbeda antar komputer dan dapat dipengaruhi oleh arsitektur CPU, konfigurasi memori, pendinginan, batas daya, fitur keamanan Windows, serta perangkat lunak lain yang berjalan pada sistem.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Profil Tenang, Seimbang, dan Maksimal mengendalikan jumlah sumber daya CPU yang disediakan untuk penambang. Profil tersebut tidak menjamin hashrate, tingkat imbalan, atau profitabilitas tertentu.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Jaminan perangkat lunak dan tanggung jawab",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine didistribusikan berdasarkan ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " dan disediakan tanpa jaminan selain jaminan yang menurut hukum tidak dapat dikecualikan.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Sejauh diizinkan secara maksimal oleh hukum yang berlaku, tidak ada jaminan bahwa perangkat lunak akan bebas dari kesalahan, berjalan tanpa gangguan, kompatibel dengan setiap komputer, atau bebas dari interaksi yang merugikan dengan perangkat lunak atau perangkat keras lainnya.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Sejauh diizinkan secara maksimal oleh hukum yang berlaku, pengembang tidak bertanggung jawab atas kerugian atau kerusakan yang timbul dari keputusan pengguna untuk menjalankan perangkat lunak penambangan mata uang kripto, termasuk kerugian yang berkaitan dengan pengoperasian perangkat keras, panas, konsumsi listrik, ketidakstabilan sistem, kehilangan data, terganggunya penggunaan komputer, imbalan penambangan yang tidak diperoleh, atau perubahan nilai mata uang kripto.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Tidak ada bagian dalam pernyataan ini yang mengecualikan, membatasi, atau mengubah hak, jaminan, atau upaya hukum apa pun yang menurut hukum tidak dapat dikecualikan, dibatasi, atau diubah.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Pernyataan ini tidak menggantikan, mengubah, atau memberlakukan pembatasan tambahan terhadap lisensi GPL-3.0 maupun lisensi yang berlaku untuk komponen pihak ketiga yang disertakan bersama The Safex Mine.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
