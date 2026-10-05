@@ -146,21 +146,21 @@
       "nativeName": "한국어",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "hi",
       "nativeName": "हिन्दी",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "bn",
       "nativeName": "বাংলা",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "ar",

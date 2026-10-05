@@ -1265,6 +1265,46 @@ mod tests {
     }
 
     #[test]
+    fn locale_matcher_covers_l7d_korean_hindi_and_bengali_languages() {
+        let supported = vec![
+            "en-AU".to_string(),
+            "ko".to_string(),
+            "hi".to_string(),
+            "bn".to_string(),
+        ];
+
+        for (preferred, expected) in [
+            ("ko-KR", "ko"),
+            ("ko", "ko"),
+            ("hi-IN", "hi"),
+            ("hi", "hi"),
+            ("bn-BD", "bn"),
+            ("bn-IN", "bn"),
+            ("bn", "bn"),
+        ] {
+            assert_eq!(
+                match_preferred_locale(&[preferred.to_string()], &supported).as_deref(),
+                Some(expected),
+                "unexpected match for {preferred}"
+            );
+        }
+
+        assert_eq!(
+            match_preferred_locale(
+                &[
+                    "xx-YY".to_string(),
+                    "bn-BD".to_string(),
+                    "hi-IN".to_string(),
+                    "ko-KR".to_string(),
+                ],
+                &supported,
+            )
+            .as_deref(),
+            Some("bn")
+        );
+    }
+
+    #[test]
     fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
         let supported = vec!["en-AU".to_string()];
 

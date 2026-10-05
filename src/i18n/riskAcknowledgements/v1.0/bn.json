@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "bn",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine হলো ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": " একক মাইনিংয়ের জন্য একটি কমিউনিটি-উন্নত অ্যাপ্লিকেশন। মাইনিং সুবিধা ব্যবহার করার আগে অনুগ্রহ করে নিচের তথ্য পড়ুন এবং স্বীকার করুন।",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "মাইনিং পুরস্কার ও মূল্য",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "ক্রিপ্টোকারেন্সি মাইনিং অনুমাননির্ভর। The Safex Mine এই নিশ্চয়তা দেয় না যে আপনার কম্পিউটার কোনো ব্লক খুঁজে পাবে, কোনো মাইনিং পুরস্কার পাবে, লাভজনকভাবে চলবে, অথবা বিদ্যুৎ বা যন্ত্রপাতির খরচ ফেরত তুলতে পারবে।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Safex Cash-এর মূল্য বাড়তে বা কমতে পারে এবং কোনো নির্দিষ্ট সময়ে এর বাস্তব বাজারমূল্য খুব কম বা একেবারেই নাও থাকতে পারে। অতীতের মাইনিং ফলাফল ভবিষ্যতের ফলাফলের ইঙ্গিত বা নিশ্চয়তা দেয় না।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine আর্থিক, বিনিয়োগ, কর বা আইনি পরামর্শ দেয় না।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "হার্ডওয়্যার লোড, তাপ ও বিদ্যুৎ ব্যবহার",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "ক্রিপ্টোকারেন্সি মাইনিং আপনার CPU এবং অন্যান্য কম্পিউটার উপাদানের ওপর দীর্ঘস্থায়ী লোড দিতে পারে। এতে নিচের বিষয়গুলো বাড়তে পারে:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "প্রসেসরের তাপমাত্রা ও সিস্টেমের তাপ;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "ফ্যানের গতি ও কুলিং সিস্টেমের ব্যবহার;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "বিদ্যুৎ খরচ;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "মাদারবোর্ডের বিদ্যুৎ-সরবরাহ উপাদানের ওপর লোড; এবং",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "দীর্ঘ সময় চালানোর ফলে সাধারণ হার্ডওয়্যার ক্ষয়।",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "আপনার কম্পিউটার, কুলিং সিস্টেম ও পাওয়ার সাপ্লাই দীর্ঘস্থায়ী মাইনিংয়ের জন্য উপযুক্ত কি না তা নির্ধারণ করা এবং প্রয়োজনমতো সিস্টেম পর্যবেক্ষণ করা আপনার দায়িত্ব।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "ক্রিপ্টোকারেন্সি মাইনিং সফ্টওয়্যার ব্যবহার করলে নির্মাতার স্বেচ্ছামূলক ওয়ারেন্টির আওতা প্রভাবিত হতে পারে, যা সংশ্লিষ্ট নির্মাতার ওয়ারেন্টির শর্ত এবং কোনো ত্রুটির পরিস্থিতির ওপর নির্ভর করে। এই স্বীকৃতি-পত্র এমন কোনো আইনগত অধিকার বা প্রতিকারকে প্রভাবিত করে না যা আইনত বাদ দেওয়া যায় না।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows নিরাপত্তা ও উচ্চতর অনুমতির প্রবেশাধিকার",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine-এ Safex-সামঞ্জস্যপূর্ণ XMRig মাইনিং ব্যাকএন্ড, একটি উচ্চতর অনুমতিসম্পন্ন সহায়ক এবং Windows MSR কর্মক্ষমতা অপ্টিমাইজেশন চেষ্টা করতে ব্যবহৃত WinRing ড্রাইভার অন্তর্ভুক্ত রয়েছে।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "এই উপাদানগুলো Microsoft Defender, Windows SmartScreen বা অন্যান্য নিরাপত্তা সফ্টওয়্যার দ্বারা শনাক্ত, ব্লক বা কোয়ারেন্টাইন করা হতে পারে।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine স্বয়ংক্রিয়ভাবে অ্যান্টিভাইরাস সুরক্ষা বন্ধ করবে না, কোয়ারেন্টাইন করা ফাইল পুনরুদ্ধার করবে না বা অ্যান্টিভাইরাস ব্যতিক্রম তৈরি করবে না। শনাক্ত ফাইল পুনরুদ্ধার করা, ব্যতিক্রম তৈরি করা বা নিরাপত্তা-সফ্টওয়্যারের সেটিংস সাময়িকভাবে পরিবর্তন করা হবে কি না, সে সিদ্ধান্ত আপনার।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "মাইনিং শুরু করতে উচ্চতর অনুমতিসম্পন্ন মাইনিং সহায়কের জন্য Windows UAC প্রম্পট অনুমোদন করতে হবে। গ্রাফিক্যাল অ্যাপ্লিকেশনটি নিজে প্রশাসক অধিকার ছাড়াই চালু থাকার উদ্দেশ্যে তৈরি।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Windows-এর নিরাপত্তা বৈশিষ্ট্য MSR অপ্টিমাইজেশন প্রতিরোধ করতে পারে। এমন হলে কম কর্মক্ষমতায় মাইনিং চলতে পারে। কেবল বেশি মাইনিং কর্মক্ষমতা পাওয়ার জন্য Windows নিরাপত্তা বৈশিষ্ট্য বন্ধ করা আপনার জন্য বাধ্যতামূলক নয়।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "সিস্টেম স্থিতিশীলতা ও ডেটা",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "দীর্ঘ সময় উচ্চ CPU লোড, অপর্যাপ্ত কুলিং, অস্থিতিশীল হার্ডওয়্যার, ওভারক্লকিং, বিদ্যুৎ সমস্যা বা অন্য কোনো বিদ্যমান সমস্যাযুক্ত সিস্টেমে অস্থিতিশীলতার একটি কারণ হতে পারে।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "দীর্ঘ সময় বা নজরদারিহীন মাইনিংয়ের আগে গুরুত্বপূর্ণ ডেটার ব্যাকআপ আছে এবং আপনার কম্পিউটার নির্ভরযোগ্যভাবে চলছে—এটি নিশ্চিত করা উচিত।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "কোনো সফ্টওয়্যারই ক্র্যাশ, ডেটা ক্ষতি, হার্ডওয়্যার ত্রুটি বা অন্যান্য সিস্টেম সমস্যা কখনোই ঘটবে না—এমন নিশ্চয়তা দিতে পারে না।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "মাইনিং কনফিগারেশন",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "অ্যাপ্লিকেশনে দেওয়া Safex Cash ঠিকানা ও ডেমন কনফিগারেশনের জন্য আপনি দায়ী।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "শুরু করার আগে মাইনিং ঠিকানা সঠিক কি না নিশ্চিত করা উচিত। ভুল ঠিকানায় পাঠানো বা জমা হওয়া ক্রিপ্টোকারেন্সি ডেভেলপার ফিরিয়ে আনতে পারবেন না।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "আপনার ক্রিপ্টোকারেন্সি মাইনিং ব্যবহারের ক্ষেত্রে প্রযোজ্য কোনো আইন, করের বাধ্যবাধকতা, বিদ্যুৎ-চুক্তি বা অন্যান্য দায়িত্ব মেনে চলা আপনার দায়িত্ব।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "কর্মক্ষমতার কোনো নিশ্চয়তা নেই",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "হ্যাশরেট এবং মাইনিং কর্মক্ষমতা কম্পিউটারভেদে আলাদা হয় এবং CPU আর্কিটেকচার, মেমরি কনফিগারেশন, কুলিং, পাওয়ার সীমা, Windows নিরাপত্তা বৈশিষ্ট্য এবং সিস্টেমে চলা অন্যান্য সফ্টওয়্যারের প্রভাবে পরিবর্তিত হতে পারে।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "শান্ত, সামঞ্জস্যপূর্ণ এবং পূর্ণ ক্ষমতা প্রোফাইলগুলো মাইনারকে দেওয়া CPU সম্পদের পরিমাণ নিয়ন্ত্রণ করে। এগুলো কোনো নির্দিষ্ট হ্যাশরেট, পুরস্কারের হার বা লাভজনকতা নিশ্চিত করে না।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "সফ্টওয়্যার ওয়ারেন্টি ও দায়",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": "-এর অধীনে বিতরণ করা হয় এবং আইনত বাদ দেওয়া যায় না এমন ওয়ারেন্টিগুলো ব্যতীত, অন্য কোনো ওয়ারেন্টি ছাড়াই সরবরাহ করা হয়।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "প্রযোজ্য আইন যতদূর অনুমতি দেয়, সফ্টওয়্যারটি ত্রুটিমুক্ত, নিরবচ্ছিন্ন, প্রতিটি কম্পিউটারের সঙ্গে সামঞ্জস্যপূর্ণ বা অন্য সফ্টওয়্যার কিংবা হার্ডওয়্যারের সঙ্গে বিরূপ পারস্পরিক ক্রিয়া-মুক্ত হবে—এমন কোনো নিশ্চয়তা দেওয়া হয় না।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "প্রযোজ্য আইন যতদূর অনুমতি দেয়, ক্রিপ্টোকারেন্সি-মাইনিং সফ্টওয়্যার চালানোর ব্যবহারকারীর সিদ্ধান্ত থেকে উদ্ভূত ক্ষতি বা লোকসানের জন্য ডেভেলপার দায়ী নন; এর মধ্যে হার্ডওয়্যার পরিচালনা, তাপ, বিদ্যুৎ খরচ, সিস্টেম অস্থিতিশীলতা, ডেটা ক্ষতি, কম্পিউটার ব্যবহারে বিঘ্ন, হারানো মাইনিং পুরস্কার বা ক্রিপ্টোকারেন্সির মূল্য পরিবর্তনের সঙ্গে সম্পর্কিত ক্ষতি অন্তর্ভুক্ত।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "এই স্বীকৃতি-পত্রের কোনো কিছুই এমন কোনো অধিকার, নিশ্চয়তা বা প্রতিকার বাদ, সীমিত বা পরিবর্তন করে না যা আইনত বাদ, সীমিত বা পরিবর্তন করা যায় না।",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "এই স্বীকৃতি-পত্রটি GPL-3.0 লাইসেন্স বা The Safex Mine-এর সঙ্গে অন্তর্ভুক্ত তৃতীয়-পক্ষের উপাদানের ক্ষেত্রে প্রযোজ্য লাইসেন্স প্রতিস্থাপন বা পরিবর্তন করে না এবং অতিরিক্ত সীমাবদ্ধতাও আরোপ করে না।",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

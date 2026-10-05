@@ -1,14 +1,17 @@
+import bnCatalogue from "./catalogues/bn.json";
 import deCatalogue from "./catalogues/de.json";
 import enAuCatalogue from "./catalogues/en-AU.json";
 import enXaCatalogue from "./catalogues/en-XA.json";
 import esCatalogue from "./catalogues/es.json";
 import elCatalogue from "./catalogues/el.json";
 import jaCatalogue from "./catalogues/ja.json";
+import koCatalogue from "./catalogues/ko.json";
 import srCyrlCatalogue from "./catalogues/sr-Cyrl.json";
 import srLatnCatalogue from "./catalogues/sr-Latn.json";
 import zhHansCatalogue from "./catalogues/zh-Hans.json";
 import filCatalogue from "./catalogues/fil.json";
 import frCatalogue from "./catalogues/fr.json";
+import hiCatalogue from "./catalogues/hi.json";
 import huCatalogue from "./catalogues/hu.json";
 import idCatalogue from "./catalogues/id.json";
 import itCatalogue from "./catalogues/it.json";
@@ -44,17 +47,20 @@ export const CANONICAL_LOCALE = localeRegistryData.canonicalLocale;
 export const LANGUAGE_OVERRIDE_STORAGE_KEY = "safexMine.uiLanguage";
 
 const catalogues: Readonly<Record<string, Readonly<Record<string, string>>>> = {
+  bn: bnCatalogue,
   de: deCatalogue,
   "en-AU": enAuCatalogue,
   "en-XA": enXaCatalogue,
   es: esCatalogue,
   el: elCatalogue,
   ja: jaCatalogue,
+  ko: koCatalogue,
   "sr-Cyrl": srCyrlCatalogue,
   "sr-Latn": srLatnCatalogue,
   "zh-Hans": zhHansCatalogue,
   fil: filCatalogue,
   fr: frCatalogue,
+  hi: hiCatalogue,
   hu: huCatalogue,
   id: idCatalogue,
   it: itCatalogue,
