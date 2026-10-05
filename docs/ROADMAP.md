@@ -121,7 +121,7 @@ Published v1.0.0 characteristics:
 
 ## Current development phase: v1.1.0 localisation
 
-The published v1.0.0 Windows miner remains the current public release. The current `main` branch now contains the completed localisation implementation through L7d **and** the subsequent translation-quality audit. Application/package versions intentionally remain at 1.0.0 until the L9 release-hardening slice.
+The published v1.0.0 Windows miner remains the current public release. The L9 release-hardening branch contains the completed localisation implementation through L7d, the subsequent translation-quality audit and L8 installer/public-document work. Application, Tauri, Rust and helper package versions are now aligned at 1.1.0 for candidate preparation; publication remains separate.
 
 The revised localisation programme (5 October 2026) establishes extensible language coverage without a permanent maximum. The current v1.1.0 development set is canonical `en-AU` plus **23 release-enabled translated LTR locales**. All 23 have complete UI/accessibility/status catalogues, complete Mining Risk Acknowledgement v1.0 content, recorded provenance/review state and completed proportional Windows acceptance. The complete developer-only Serbian Cyrillic locale was also included in the translation-quality audit.
 
@@ -137,8 +137,8 @@ Completed development stages:
 
 Next release stages:
 
-- **L8 — complete pending merge:** one Windows x64 NSIS installer carries English plus 21 translated installer languages, with seven project-maintained Tauri-message files, English installer fallback for Filipino/Bengali, and essential translated installation/security/first-use guides for all 23 translated app locales. Automated, package-build and representative physical Windows acceptance completed on 6 October 2026;
-- **L9 — next after L8 merge:** perform release hardening against the actual enabled locale registry, repeat final packaging/Windows validation, update versions consistently from 1.0.0 to 1.1.0, and prepare—but do not yet publish—the release candidate;
+- **L8 — complete and merged:** one Windows x64 NSIS installer carries English plus 21 translated installer languages, with seven project-maintained Tauri-message files, English installer fallback for Filipino/Bengali, and essential translated installation/security/first-use guides for all 23 translated app locales. Automated, package-build and representative physical Windows acceptance completed on 6 October 2026;
+- **L9 — in progress:** harden against the actual enabled locale registry, keep all release version sources aligned at 1.1.0, run final automated/package checks, perform one final candidate installation/uninstall validation, and prepare—but do not publish—the release candidate;
 - **Final release gate:** publish v1.1.0 only after explicit approval of the verified commit, release notes, installer and checksum materials.
 
 Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) remain deferred from ordinary release selection. RTL implementation is optional future investigation and is not a v1.1.0 or later mandatory gate under the current programme. New languages can be added through separately approved work without creating a universal maximum.
