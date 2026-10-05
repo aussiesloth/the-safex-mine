@@ -129,7 +129,7 @@ The revised localisation programme (5 October 2026) establishes **extensible lan
 - L7a: European and related Latin-script languages — `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`. Completed and merged through PR #12; v1.0.0 assets unchanged.
 - L7b: Cyrillic and Greek — `ru`, `uk`, `el`. Completed and merged through PR #13; v1.0.0 assets unchanged.
 - L7c: Southeast Asian Latin scripts — `id`, `vi`, `fil`. Completed and merged through PR #14; v1.0.0 assets unchanged.
-- L7d: remaining Asian LTR scripts — `ko`, `hi`, `bn`. Implemented on a dedicated branch, pending Windows CJK/Indic shaping and layout acceptance.
+- L7d: remaining Asian LTR scripts — `ko`, `hi`, `bn`. Implemented and validated through PR #15; Windows Hangul/Devanagari/Bengali shaping, layout, persistence and targeted live-mining acceptance passed.
 - L8: use supported multilingual NSIS installer capabilities and translate essential public documentation, documenting installer-language fallbacks where these differ from app languages.
 - L9: test all *actually enabled and approved* locales, script-family layouts, settings persistence and Mining Risk Acknowledgement continuity; prepare the v1.1.0 release, without publishing until explicitly approved.
 
