@@ -14,7 +14,7 @@ The Safex Mine is not presented as an official Safex desktop distribution and sh
 
 Permission has been given for Safex/Safex Cash branding to be used in this application.
 
-That branding permission is separate from software-distribution responsibility. The published v1.0.0 Windows release is unsigned, and the current v1.1.0 development path remains expected to be unsigned unless a future signing arrangement changes. The public repository/source provides transparency for users who want to inspect how the miner works.
+That branding permission is separate from software-distribution responsibility. The published v1.0.0 Windows release is unsigned, and the release-ready v1.1.0 build remains expected to be unsigned unless a future signing arrangement changes. The public repository/source provides transparency for users who want to inspect how the miner works.
 
 ## 3. Branding assets
 
