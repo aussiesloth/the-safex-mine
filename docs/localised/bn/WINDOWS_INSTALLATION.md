@@ -26,7 +26,7 @@ Antivirus ব্যাপকভাবে বন্ধ করবেন না। 
 
 ## 4. ইনস্টলেশন, ভাষা ও ঝুঁকি-সংক্রান্ত নোটিশ
 
-**বাংলার জন্য installer UI ইংরেজিতে থাকবে**, কারণ NSIS 3.11-এ Bengali installer language নেই। অ্যাপ চালু হওয়ার পরে application language হিসেবে বাংলা বেছে নেওয়া যাবে।
+**বাংলার জন্য installer UI ইংরেজিতে (English) থাকবে**, কারণ NSIS 3.11-এ Bengali installer language নেই। অ্যাপ চালু হওয়ার পরে application language হিসেবে বাংলা বেছে নেওয়া যাবে।
 
 প্রথমবার চালানোর সময় নির্বাচিত সমর্থিত application language-এ **Mining Risk Acknowledgement — Version 1.0** দেখানো হয়। এগোনোর আগে পড়ুন। **Exit** acceptance সংরক্ষণ না করেই অ্যাপ বন্ধ করে। ইংরেজি canonical রেফারেন্স: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
