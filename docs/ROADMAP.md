@@ -121,21 +121,31 @@ Published v1.0.0 characteristics:
 
 ## Current development phase: v1.1.0 localisation
 
-The existing v1.0.0 Windows miner is public. The next proposed update is localisation-focused; do not change app/package versions to 1.1.0 until the L9 release-hardening slice.
+The published v1.0.0 Windows miner remains the current public release. The current `main` branch now contains the completed localisation implementation through L7d **and** the subsequent translation-quality audit. Application/package versions intentionally remain at 1.0.0 until the L9 release-hardening slice.
 
-The revised localisation programme (5 October 2026) establishes **extensible language coverage without a permanent maximum**. The current planning snapshot is canonical `en-AU` plus **23 LTR translations**, subject to complete content, actual release approval and validation. This snapshot must not become a hard-coded ceiling. Only explicitly approved, complete locales may be release-enabled.
+The revised localisation programme (5 October 2026) establishes extensible language coverage without a permanent maximum. The current v1.1.0 development set is canonical `en-AU` plus **23 release-enabled translated LTR locales**. All 23 have complete UI/accessibility/status catalogues, complete Mining Risk Acknowledgement v1.0 content, recorded provenance/review state and completed proportional Windows acceptance. The complete developer-only Serbian Cyrillic locale was also included in the translation-quality audit.
 
-- L6: reconcile the pilot PR with the current release scope, retain Serbian Latin as release-intended and keep completed Serbian Cyrillic pilot work inactive/deferred; preserve developer-only `en-XA`.
-- L7a: European and related Latin-script languages — `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`. Completed and merged through PR #12; v1.0.0 assets unchanged.
-- L7b: Cyrillic and Greek — `ru`, `uk`, `el`. Completed and merged through PR #13; v1.0.0 assets unchanged.
-- L7c: Southeast Asian Latin scripts — `id`, `vi`, `fil`. Completed and merged through PR #14; v1.0.0 assets unchanged.
-- L7d: remaining Asian LTR scripts — `ko`, `hi`, `bn`. Implemented and validated through PR #15; Windows Hangul/Devanagari/Bengali shaping, layout, persistence and targeted live-mining acceptance passed.
-- L8: use supported multilingual NSIS installer capabilities and translate essential public documentation, documenting installer-language fallbacks where these differ from app languages.
-- L9: test all *actually enabled and approved* locales, script-family layouts, settings persistence and Mining Risk Acknowledgement continuity; prepare the v1.1.0 release, without publishing until explicitly approved.
+Completed development stages:
 
-The v1.1.0 release-intended pilots carried forward are `de`, `es`, `sr-Latn`, `zh-Hans`, `ja`. Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are deferred; RTL implementation is optional future investigation and **not** a required milestone or release gate for this or later versions. New locale proposals can be added in separately approved slices without a universal maximum.
+- L1-L5: localisation framework, UI extraction, structured backend/frontend message boundary, structured Risk Acknowledgement v1.0, Windows locale matching and persistent language selector;
+- L6: pilot translations, developer-only `en-XA`, responsive layout hardening and pilot Windows acceptance;
+- L7a: `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl` — merged through PR #12;
+- L7b: `ru`, `uk`, `el` — merged through PR #13;
+- L7c: `id`, `vi`, `fil` — merged through PR #14;
+- L7d: `ko`, `hi`, `bn` — merged through PR #15;
+- translation-quality audit: all existing genuine translated localisations reviewed directly against canonical `en-AU`, with conservative corrections and full structural/Windows acceptance recorded in PR #16.
 
-The proposed *distributed under GPL-3.0* Risk Acknowledgement wording clarification requires separate canonical-source/version-policy reconciliation, not an undocumented change to published v1.0.0 assets.
+Next release stages:
+
+- **L8 — next:** configure the multilingual NSIS installer using the languages Tauri/NSIS reliably supports and localise the essential public installation/security/troubleshooting material, documenting any installer-language fallback where installer coverage differs from the app;
+- **L9:** perform release hardening against the actual enabled locale registry, repeat final packaging/Windows validation, update versions consistently from 1.0.0 to 1.1.0, and prepare—but do not yet publish—the release candidate;
+- **Final release gate:** publish v1.1.0 only after explicit approval of the verified commit, release notes, installer and checksum materials.
+
+Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) remain deferred from ordinary release selection. RTL implementation is optional future investigation and is not a v1.1.0 or later mandatory gate under the current programme. New languages can be added through separately approved work without creating a universal maximum.
+
+The clause 7.1 wording clarification from “provided under GPL-3.0” to “distributed under GPL-3.0” has already been assessed and implemented as a non-substantive terminology clarification. Mining Risk Acknowledgement remains version `1.0`; published v1.0.0 assets and existing acceptance records are not retroactively changed.
+
+Translation perfection is not treated as an open-ended release blocker once the defined review/validation gates are satisfied. English remains the canonical reference, native-speaker corrections are explicitly welcome, and translation-only refinements that preserve canonical meaning may be incorporated into later patch releases through normal review.
 
 ## Deferred / optional future work
 
