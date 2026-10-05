@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "tauriCliVersion": "2.11.4",
+  "nsisVersion": "3.11",
+  "canonicalInstallerLanguage": "English",
+  "displayLanguageSelector": false,
+  "applicationLocales": {
+    "en-AU": { "installerLanguage": "English", "support": "tauri-built-in" },
+    "de": { "installerLanguage": "German", "support": "tauri-built-in" },
+    "es": { "installerLanguage": "SpanishInternational", "support": "tauri-built-in", "note": "Generic Spanish application locale maps to NSIS Spanish International." },
+    "sr-Latn": { "installerLanguage": "SerbianLatin", "support": "project-custom-tauri-messages" },
+    "zh-Hans": { "installerLanguage": "SimpChinese", "support": "tauri-built-in" },
+    "ja": { "installerLanguage": "Japanese", "support": "tauri-built-in" },
+    "fr": { "installerLanguage": "French", "support": "tauri-built-in" },
+    "it": { "installerLanguage": "Italian", "support": "tauri-built-in" },
+    "nl": { "installerLanguage": "Dutch", "support": "tauri-built-in" },
+    "pl": { "installerLanguage": "Polish", "support": "project-custom-tauri-messages" },
+    "pt-BR": { "installerLanguage": "PortugueseBR", "support": "tauri-built-in" },
+    "pt-PT": { "installerLanguage": "Portuguese", "support": "tauri-built-in" },
+    "tr": { "installerLanguage": "Turkish", "support": "tauri-built-in" },
+    "hu": { "installerLanguage": "Hungarian", "support": "project-custom-tauri-messages" },
+    "sl": { "installerLanguage": "Slovenian", "support": "project-custom-tauri-messages" },
+    "ru": { "installerLanguage": "Russian", "support": "tauri-built-in" },
+    "uk": { "installerLanguage": "Ukrainian", "support": "tauri-built-in" },
+    "el": { "installerLanguage": "Greek", "support": "project-custom-tauri-messages" },
+    "id": { "installerLanguage": "Indonesian", "support": "project-custom-tauri-messages" },
+    "vi": { "installerLanguage": "Vietnamese", "support": "tauri-built-in" },
+    "fil": { "installerLanguage": "English", "support": "english-fallback", "note": "NSIS 3.11 has no Filipino/Tagalog language file." },
+    "ko": { "installerLanguage": "Korean", "support": "tauri-built-in" },
+    "hi": { "installerLanguage": "Hindi", "support": "project-custom-tauri-messages" },
+    "bn": { "installerLanguage": "English", "support": "english-fallback", "note": "NSIS 3.11 has no Bengali language file." }
+  }
+}
