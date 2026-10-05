@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "acknowledgementVersion": "1.0",
-  "locale": "en-AU",
+  "locale": "de",
   "blocks": [
     {
       "id": "introduction",
@@ -9,7 +9,7 @@
       "emphasis": false,
       "segments": [
         {
-          "text": "The Safex Mine is a community-developed application for solo mining ",
+          "text": "The Safex Mine ist eine von der Community entwickelte Anwendung für das Solo-Mining ",
           "strong": false
         },
         {
@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Before using the mining functions, please read and acknowledge the following information.",
+          "text": ". Bevor Sie die Mining-Funktionen verwenden, lesen und bestätigen Sie bitte die folgenden Informationen.",
           "strong": false
         }
       ]
@@ -25,7 +25,7 @@
     {
       "id": "mining-rewards-and-value",
       "type": "section",
-      "heading": "Mining rewards and value",
+      "heading": "Mining-Erträge und Wert",
       "blocks": [
         {
           "id": "mining-rewards-and-value-paragraph-1",
@@ -33,7 +33,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining is speculative. The Safex Mine does not guarantee that your computer will find a block, receive any mining reward, operate profitably, or recover the cost of electricity or equipment.",
+              "text": "Das Mining von Kryptowährungen ist spekulativ. The Safex Mine garantiert nicht, dass Ihr Computer einen Block findet, eine Mining-Belohnung erhält, profitabel arbeitet oder die Kosten für Strom oder Ausrüstung wieder einspielt.",
               "strong": false
             }
           ]
@@ -44,7 +44,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Safex Cash may increase or decrease in value and may have little or no real-world market value at any particular time. Past mining results do not indicate or guarantee future results.",
+              "text": "Der Wert von Safex Cash kann steigen oder fallen und zu einem bestimmten Zeitpunkt nur einen geringen oder gar keinen realen Marktwert haben. Frühere Mining-Ergebnisse sind kein Hinweis auf zukünftige Ergebnisse und garantieren diese nicht.",
               "strong": false
             }
           ]
@@ -55,7 +55,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine does not provide financial, investment, taxation or legal advice.",
+              "text": "The Safex Mine bietet keine Finanz-, Anlage-, Steuer- oder Rechtsberatung.",
               "strong": false
             }
           ]
@@ -65,7 +65,7 @@
     {
       "id": "hardware-load-heat-and-power-consumption",
       "type": "section",
-      "heading": "Hardware load, heat and power consumption",
+      "heading": "Hardwarebelastung, Wärme und Stromverbrauch",
       "blocks": [
         {
           "id": "hardware-load-heat-and-power-consumption-paragraph-1",
@@ -73,7 +73,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining can place a sustained load on your CPU and other computer components. This can increase:",
+              "text": "Das Mining von Kryptowährungen kann Ihre CPU und andere Computerkomponenten dauerhaft belasten. Dadurch können sich erhöhen:",
               "strong": false
             }
           ]
@@ -86,7 +86,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
               "segments": [
                 {
-                  "text": "processor temperature and system heat;",
+                  "text": "Prozessortemperatur und Systemwärme;",
                   "strong": false
                 }
               ]
@@ -95,7 +95,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
               "segments": [
                 {
-                  "text": "fan speed and cooling-system use;",
+                  "text": "Lüfterdrehzahl und Nutzung des Kühlsystems;",
                   "strong": false
                 }
               ]
@@ -104,7 +104,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
               "segments": [
                 {
-                  "text": "electricity consumption;",
+                  "text": "Stromverbrauch;",
                   "strong": false
                 }
               ]
@@ -113,7 +113,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
               "segments": [
                 {
-                  "text": "load on motherboard power-delivery components; and",
+                  "text": "Belastung der Stromversorgungskomponenten auf dem Mainboard; und",
                   "strong": false
                 }
               ]
@@ -122,7 +122,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
               "segments": [
                 {
-                  "text": "general hardware wear during prolonged operation.",
+                  "text": "allgemeiner Hardwareverschleiß bei längerem Betrieb.",
                   "strong": false
                 }
               ]
@@ -135,7 +135,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for deciding whether your computer, cooling system and power supply are suitable for sustained mining and for monitoring your system as appropriate.",
+              "text": "Sie sind dafür verantwortlich zu entscheiden, ob Ihr Computer, Ihr Kühlsystem und Ihr Netzteil für dauerhaftes Mining geeignet sind, und Ihr System angemessen zu überwachen.",
               "strong": false
             }
           ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Use of cryptocurrency-mining software may affect coverage under a manufacturer's voluntary warranty depending on that manufacturer's warranty terms and the circumstances of any failure. This acknowledgement does not affect any statutory rights or remedies that cannot lawfully be excluded.",
+              "text": "Die Nutzung von Kryptowährungs-Mining-Software kann je nach Garantiebedingungen des Herstellers und den Umständen eines Defekts den Schutz durch eine freiwillige Herstellergarantie beeinflussen. Diese Bestätigung berührt keine gesetzlichen Rechte oder Rechtsbehelfe, die rechtlich nicht ausgeschlossen werden können.",
               "strong": false
             }
           ]
@@ -156,7 +156,7 @@
     {
       "id": "windows-security-and-elevated-access",
       "type": "section",
-      "heading": "Windows security and elevated access",
+      "heading": "Windows-Sicherheit und erhöhte Zugriffsrechte",
       "blocks": [
         {
           "id": "windows-security-and-elevated-access-paragraph-1",
@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine includes a Safex-compatible XMRig mining backend, an elevated helper and the WinRing driver used to attempt Windows MSR performance optimisation.",
+              "text": "The Safex Mine enthält ein mit Safex kompatibles XMRig-Mining-Backend, ein Hilfsprogramm mit erhöhten Rechten und den WinRing-Treiber, mit denen eine Windows-MSR-Leistungsoptimierung versucht wird.",
               "strong": false
             }
           ]
@@ -175,7 +175,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "These components may be detected, blocked or quarantined by Microsoft Defender, Windows SmartScreen or other security software.",
+              "text": "Diese Komponenten können von Microsoft Defender, Windows SmartScreen oder anderer Sicherheitssoftware erkannt, blockiert oder unter Quarantäne gestellt werden.",
               "strong": false
             }
           ]
@@ -186,7 +186,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine will not automatically disable antivirus protection, restore quarantined files or create antivirus exclusions. Any decision to restore a detected file, create an exclusion or temporarily alter security-software settings remains yours.",
+              "text": "The Safex Mine deaktiviert den Virenschutz nicht automatisch, stellt keine Dateien automatisch aus der Quarantäne wieder her und erstellt keine Virenschutzausnahmen. Die Entscheidung, eine erkannte Datei wiederherzustellen, eine Ausnahme zu erstellen oder Einstellungen der Sicherheitssoftware vorübergehend zu ändern, bleibt Ihnen überlassen.",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Starting mining requires approval of a Windows UAC prompt for the elevated mining helper. The graphical application itself is intended to continue running without Administrator privileges.",
+              "text": "Zum Starten des Minings muss eine Windows-UAC-Abfrage für das Mining-Hilfsprogramm mit erhöhten Rechten bestätigt werden. Die grafische Anwendung selbst soll weiterhin ohne Administratorrechte ausgeführt werden.",
               "strong": false
             }
           ]
@@ -208,7 +208,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Windows security features may prevent MSR optimisation. Mining may continue with reduced performance when this occurs. You are not required to disable Windows security features simply to obtain higher mining performance.",
+              "text": "Windows-Sicherheitsfunktionen können die MSR-Optimierung verhindern. In diesem Fall kann das Mining mit geringerer Leistung fortgesetzt werden. Sie müssen Windows-Sicherheitsfunktionen nicht deaktivieren, nur um eine höhere Mining-Leistung zu erzielen.",
               "strong": false
             }
           ]
@@ -218,7 +218,7 @@
     {
       "id": "system-stability-and-data",
       "type": "section",
-      "heading": "System stability and data",
+      "heading": "Systemstabilität und Daten",
       "blocks": [
         {
           "id": "system-stability-and-data-paragraph-1",
@@ -226,7 +226,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Sustained high CPU load can contribute to system instability on systems with inadequate cooling, unstable hardware, overclocking, power problems or other existing issues.",
+              "text": "Eine dauerhaft hohe CPU-Last kann auf Systemen mit unzureichender Kühlung, instabiler Hardware, Übertaktung, Stromversorgungsproblemen oder anderen bestehenden Problemen zur Systeminstabilität beitragen.",
               "strong": false
             }
           ]
@@ -237,7 +237,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Before prolonged or unattended mining, you should ensure that important data is backed up and that your computer is operating reliably.",
+              "text": "Vor längerem oder unbeaufsichtigtem Mining sollten Sie sicherstellen, dass wichtige Daten gesichert sind und Ihr Computer zuverlässig arbeitet.",
               "strong": false
             }
           ]
@@ -248,7 +248,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "No software can guarantee that crashes, data loss, hardware faults or other system problems will never occur.",
+              "text": "Keine Software kann garantieren, dass Abstürze, Datenverluste, Hardwarefehler oder andere Systemprobleme niemals auftreten.",
               "strong": false
             }
           ]
@@ -258,7 +258,7 @@
     {
       "id": "mining-configuration",
       "type": "section",
-      "heading": "Mining configuration",
+      "heading": "Mining-Konfiguration",
       "blocks": [
         {
           "id": "mining-configuration-paragraph-1",
@@ -266,7 +266,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for the Safex Cash address and daemon configuration entered into the application.",
+              "text": "Sie sind für die in der Anwendung eingegebene Safex-Cash-Adresse und Daemon-Konfiguration verantwortlich.",
               "strong": false
             }
           ]
@@ -277,7 +277,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You should confirm that the mining address is correct before starting. The developer cannot recover cryptocurrency sent or credited to an incorrect address.",
+              "text": "Sie sollten vor dem Start prüfen, ob die Mining-Adresse korrekt ist. Der Entwickler kann Kryptowährung, die an eine falsche Adresse gesendet oder dieser gutgeschrieben wurde, nicht wiederherstellen.",
               "strong": false
             }
           ]
@@ -288,7 +288,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You remain responsible for complying with any laws, taxation requirements, electricity agreements or other obligations that apply to your use of cryptocurrency mining.",
+              "text": "Sie bleiben dafür verantwortlich, alle Gesetze, steuerlichen Anforderungen, Stromverträge oder sonstigen Verpflichtungen einzuhalten, die für Ihre Nutzung des Kryptowährungs-Minings gelten.",
               "strong": false
             }
           ]
@@ -298,7 +298,7 @@
     {
       "id": "no-guarantee-of-performance",
       "type": "section",
-      "heading": "No guarantee of performance",
+      "heading": "Keine Leistungsgarantie",
       "blocks": [
         {
           "id": "no-guarantee-of-performance-paragraph-1",
@@ -306,7 +306,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hashrate and mining performance vary between computers and can be affected by CPU architecture, memory configuration, cooling, power limits, Windows security features and other software running on the system.",
+              "text": "Hashrate und Mining-Leistung unterscheiden sich je nach Computer und können durch CPU-Architektur, Speicherkonfiguration, Kühlung, Leistungsgrenzen, Windows-Sicherheitsfunktionen und andere auf dem System ausgeführte Software beeinflusst werden.",
               "strong": false
             }
           ]
@@ -317,7 +317,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Calm, Balanced and Full Bore profiles control the amount of CPU resource made available to the miner. They do not guarantee any particular hashrate, reward rate or profitability.",
+              "text": "Die Profile Ruhig, Ausgewogen und Volle Leistung steuern, wie viele CPU-Ressourcen dem Miner zur Verfügung stehen. Sie garantieren keine bestimmte Hashrate, Belohnungsrate oder Rentabilität.",
               "strong": false
             }
           ]
@@ -327,7 +327,7 @@
     {
       "id": "software-warranty-and-liability",
       "type": "section",
-      "heading": "Software warranty and liability",
+      "heading": "Softwaregewährleistung und Haftung",
       "blocks": [
         {
           "id": "software-warranty-and-liability-paragraph-1",
@@ -335,7 +335,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine is distributed under the ",
+              "text": "The Safex Mine wird unter der ",
               "strong": false
             },
             {
@@ -343,7 +343,7 @@
               "strong": true
             },
             {
-              "text": " and is provided without warranties beyond those that cannot lawfully be excluded.",
+              "text": " vertrieben und ohne Gewährleistungen bereitgestellt, soweit diese nicht gesetzlich zwingend bestehen.",
               "strong": false
             }
           ]
@@ -354,7 +354,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, no guarantee is made that the software will be error-free, uninterrupted, compatible with every computer, or free from adverse interactions with other software or hardware.",
+              "text": "Soweit nach geltendem Recht maximal zulässig, wird nicht garantiert, dass die Software fehlerfrei, unterbrechungsfrei, mit jedem Computer kompatibel oder frei von nachteiligen Wechselwirkungen mit anderer Software oder Hardware ist.",
               "strong": false
             }
           ]
@@ -365,7 +365,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, the developer is not responsible for loss or damage arising from a user's decision to operate cryptocurrency-mining software, including losses associated with hardware operation, heat, electricity consumption, system instability, data loss, interrupted computer use, missed mining rewards or changes in cryptocurrency value.",
+              "text": "Soweit nach geltendem Recht maximal zulässig, ist der Entwickler nicht für Verluste oder Schäden verantwortlich, die aus der Entscheidung eines Nutzers entstehen, Kryptowährungs-Mining-Software zu betreiben. Dazu gehören Verluste im Zusammenhang mit Hardwarebetrieb, Wärme, Stromverbrauch, Systeminstabilität, Datenverlust, unterbrochener Computernutzung, entgangenen Mining-Belohnungen oder Änderungen des Kryptowährungswerts.",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Nothing in this acknowledgement excludes, restricts or modifies any right, guarantee or remedy that cannot lawfully be excluded, restricted or modified.",
+              "text": "Nichts in dieser Bestätigung schließt Rechte, Garantien oder Rechtsbehelfe aus, beschränkt oder verändert sie, soweit sie rechtlich nicht ausgeschlossen, beschränkt oder verändert werden können.",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "This acknowledgement does not replace, alter or impose additional restrictions on the GPL-3.0 licence or the licences applicable to third-party components included with The Safex Mine.",
+              "text": "Diese Bestätigung ersetzt oder ändert die GPL-3.0-Lizenz oder die für Drittanbieterkomponenten von The Safex Mine geltenden Lizenzen nicht und legt dafür keine zusätzlichen Beschränkungen fest.",
               "strong": false
             }
           ]

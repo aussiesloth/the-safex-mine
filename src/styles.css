@@ -67,7 +67,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 14px 20px;
 
   border-bottom:
     1px solid rgba(255, 255, 255, 0.08);
@@ -77,12 +78,15 @@ input {
 }
 
 .topbar-right {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-width: 0;
 
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 
-  gap: clamp(18px, 2vw, 28px);
+  gap: 10px clamp(14px, 2vw, 28px);
 }
 
 #language-selector-host {
@@ -123,7 +127,7 @@ input {
 
 .language-selector-select {
   min-width: 132px;
-  max-width: 190px;
+  max-width: min(240px, 45vw);
 
   padding: 6px 28px 6px 9px;
 
@@ -176,7 +180,8 @@ input {
 }
 
 .connection-status {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  min-width: 0;
 
   display: flex;
   align-items: center;
@@ -294,7 +299,7 @@ input {
   */
   grid-template-columns:
     minmax(0, 1fr)
-    clamp(290px, 27vw, 380px);
+    clamp(320px, 31vw, 460px);
 }
 
 
@@ -443,6 +448,9 @@ input {
 .panel-section {
   margin-bottom:
     clamp(20px, 2.2vh, 30px);
+
+  /* Query the section's available width in both desktop layouts. */
+  container: control-section / inline-size;
 }
 
 .panel-section h2 {
@@ -503,7 +511,8 @@ input {
 
   color: #86898a;
 
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .stat strong {
@@ -551,7 +560,9 @@ input {
 
   cursor: pointer;
 
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: normal;
+  word-break: normal;
 
   transition:
     background 120ms ease,
@@ -569,6 +580,14 @@ input {
   border-color: #a66e30;
 
   background: #49341f;
+}
+
+/* Preserve whole mode names; stack whenever the section is too narrow
+   for three evenly sized buttons, irrespective of overall window width. */
+@container control-section (max-width: 400px) {
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -658,8 +677,9 @@ input {
   cursor: pointer;
 
   font-weight: 650;
-
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .primary-button {

@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "en-XA",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "⟦ The Safex Mine ïš å çöṁṁüñïţÿ-ðëṽëŀöþëð åþþŀïçåţïöñ ƒöŕ šöŀö ṁïñïñĝ  ··················· ⟧",
+          "strong": false
+        },
+        {
+          "text": "⟦ Safex Cash (SFX) ··· ⟧",
+          "strong": true
+        },
+        {
+          "text": "⟦ . Ɓëƒöŕë üšïñĝ ţħë ṁïñïñĝ ƒüñçţïöñš, þŀëåšë ŕëåð åñð åçķñöŵŀëðĝë ţħë ƒöŀŀöŵïñĝ ïñƒöŕṁåţïöñ. ································ ⟧",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "⟦ Ṁïñïñĝ ŕëŵåŕðš åñð ṽåŀüë ········· ⟧",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Çŕÿþţöçüŕŕëñçÿ ṁïñïñĝ ïš šþëçüŀåţïṽë. The Safex Mine ðöëš ñöţ ĝüåŕåñţëë ţħåţ ÿöüŕ çöṁþüţëŕ ŵïŀŀ ƒïñð å ƀŀöçķ, ŕëçëïṽë åñÿ ṁïñïñĝ ŕëŵåŕð, öþëŕåţë þŕöƒïţåƀŀÿ, öŕ ŕëçöṽëŕ ţħë çöšţ öƒ ëŀëçţŕïçïţÿ öŕ ëǫüïþṁëñţ. ··································································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Safex Cash ṁåÿ ïñçŕëåšë öŕ ðëçŕëåšë ïñ ṽåŀüë åñð ṁåÿ ħåṽë ŀïţţŀë öŕ ñö ŕëåŀ-ŵöŕŀð ṁåŕķëţ ṽåŀüë åţ åñÿ þåŕţïçüŀåŕ ţïṁë. Þåšţ ṁïñïñĝ ŕëšüŀţš ðö ñöţ ïñðïçåţë öŕ ĝüåŕåñţëë ƒüţüŕë ŕëšüŀţš. ····························································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ The Safex Mine ðöëš ñöţ þŕöṽïðë ƒïñåñçïåŀ, ïñṽëšţṁëñţ, ţåẍåţïöñ öŕ ŀëĝåŀ åðṽïçë. ························ ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "⟦ Ħåŕðŵåŕë ŀöåð, ħëåţ åñð þöŵëŕ çöñšüṁþţïöñ ··············· ⟧",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Çŕÿþţöçüŕŕëñçÿ ṁïñïñĝ çåñ þŀåçë å šüšţåïñëð ŀöåð öñ ÿöüŕ CPU åñð öţħëŕ çöṁþüţëŕ çöṁþöñëñţš. Ţħïš çåñ ïñçŕëåšë: ······································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "⟦ þŕöçëššöŕ ţëṁþëŕåţüŕë åñð šÿšţëṁ ħëåţ; ·············· ⟧",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "⟦ ƒåñ šþëëð åñð çööŀïñĝ-šÿšţëṁ üšë; ············ ⟧",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "⟦ ëŀëçţŕïçïţÿ çöñšüṁþţïöñ; ········· ⟧",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "⟦ ŀöåð öñ ṁöţħëŕƀöåŕð þöŵëŕ-ðëŀïṽëŕÿ çöṁþöñëñţš; åñð ·················· ⟧",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "⟦ ĝëñëŕåŀ ħåŕðŵåŕë ŵëåŕ ðüŕïñĝ þŕöŀöñĝëð öþëŕåţïöñ. ·················· ⟧",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ÿöü åŕë ŕëšþöñšïƀŀë ƒöŕ ðëçïðïñĝ ŵħëţħëŕ ÿöüŕ çöṁþüţëŕ, çööŀïñĝ šÿšţëṁ åñð þöŵëŕ šüþþŀÿ åŕë šüïţåƀŀë ƒöŕ šüšţåïñëð ṁïñïñĝ åñð ƒöŕ ṁöñïţöŕïñĝ ÿöüŕ šÿšţëṁ åš åþþŕöþŕïåţë. ··························································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Üšë öƒ çŕÿþţöçüŕŕëñçÿ-ṁïñïñĝ šöƒţŵåŕë ṁåÿ åƒƒëçţ çöṽëŕåĝë üñðëŕ å ṁåñüƒåçţüŕëŕ'š ṽöŀüñţåŕÿ ŵåŕŕåñţÿ ðëþëñðïñĝ öñ ţħåţ ṁåñüƒåçţüŕëŕ'š ŵåŕŕåñţÿ ţëŕṁš åñð ţħë çïŕçüṁšţåñçëš öƒ åñÿ ƒåïŀüŕë. Ţħïš åçķñöŵŀëðĝëṁëñţ ðöëš ñöţ åƒƒëçţ åñÿ šţåţüţöŕÿ ŕïĝħţš öŕ ŕëṁëðïëš ţħåţ çåññöţ ŀåŵƒüŀŀÿ ƀë ëẍçŀüðëð. ······································································································ ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "⟦ Windows šëçüŕïţÿ åñð ëŀëṽåţëð åççëšš ··········· ⟧",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ The Safex Mine ïñçŀüðëš å Safex-çöṁþåţïƀŀë XMRig ṁïñïñĝ ƀåçķëñð, åñ ëŀëṽåţëð ħëŀþëŕ åñð ţħë WinRing ðŕïṽëŕ üšëð ţö åţţëṁþţ Windows MSR þëŕƒöŕṁåñçë öþţïṁïšåţïöñ. ·········································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ţħëšë çöṁþöñëñţš ṁåÿ ƀë ðëţëçţëð, ƀŀöçķëð öŕ ǫüåŕåñţïñëð ƀÿ Microsoft Defender, Windows SmartScreen öŕ öţħëŕ šëçüŕïţÿ šöƒţŵåŕë. ································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ The Safex Mine ŵïŀŀ ñöţ åüţöṁåţïçåŀŀÿ ðïšåƀŀë åñţïṽïŕüš þŕöţëçţïöñ, ŕëšţöŕë ǫüåŕåñţïñëð ƒïŀëš öŕ çŕëåţë åñţïṽïŕüš ëẍçŀüšïöñš. Åñÿ ðëçïšïöñ ţö ŕëšţöŕë å ðëţëçţëð ƒïŀë, çŕëåţë åñ ëẍçŀüšïöñ öŕ ţëṁþöŕåŕïŀÿ åŀţëŕ šëçüŕïţÿ-šöƒţŵåŕë šëţţïñĝš ŕëṁåïñš ÿöüŕš. ··················································································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Šţåŕţïñĝ ṁïñïñĝ ŕëǫüïŕëš åþþŕöṽåŀ öƒ å Windows UAC þŕöṁþţ ƒöŕ ţħë ëŀëṽåţëð ṁïñïñĝ ħëŀþëŕ. Ţħë ĝŕåþħïçåŀ åþþŀïçåţïöñ ïţšëŀƒ ïš ïñţëñðëð ţö çöñţïñüë ŕüññïñĝ ŵïţħöüţ Åðṁïñïšţŕåţöŕ þŕïṽïŀëĝëš. ······························································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Windows šëçüŕïţÿ ƒëåţüŕëš ṁåÿ þŕëṽëñţ MSR öþţïṁïšåţïöñ. Ṁïñïñĝ ṁåÿ çöñţïñüë ŵïţħ ŕëðüçëð þëŕƒöŕṁåñçë ŵħëñ ţħïš öççüŕš. Ÿöü åŕë ñöţ ŕëǫüïŕëð ţö ðïšåƀŀë Windows šëçüŕïţÿ ƒëåţüŕëš šïṁþŀÿ ţö öƀţåïñ ħïĝħëŕ ṁïñïñĝ þëŕƒöŕṁåñçë. ········································································ ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "⟦ Šÿšţëṁ šţåƀïŀïţÿ åñð ðåţå ········· ⟧",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Šüšţåïñëð ħïĝħ CPU ŀöåð çåñ çöñţŕïƀüţë ţö šÿšţëṁ ïñšţåƀïŀïţÿ öñ šÿšţëṁš ŵïţħ ïñåðëǫüåţë çööŀïñĝ, üñšţåƀŀë ħåŕðŵåŕë, öṽëŕçŀöçķïñĝ, þöŵëŕ þŕöƀŀëṁš öŕ öţħëŕ ëẍïšţïñĝ ïššüëš. ··························································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ɓëƒöŕë þŕöŀöñĝëð öŕ üñåţţëñðëð ṁïñïñĝ, ÿöü šħöüŀð ëñšüŕë ţħåţ ïṁþöŕţåñţ ðåţå ïš ƀåçķëð üþ åñð ţħåţ ÿöüŕ çöṁþüţëŕ ïš öþëŕåţïñĝ ŕëŀïåƀŀÿ. ················································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ñö šöƒţŵåŕë çåñ ĝüåŕåñţëë ţħåţ çŕåšħëš, ðåţå ŀöšš, ħåŕðŵåŕë ƒåüŀţš öŕ öţħëŕ šÿšţëṁ þŕöƀŀëṁš ŵïŀŀ ñëṽëŕ öççüŕ. ······································· ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "⟦ Ṁïñïñĝ çöñƒïĝüŕåţïöñ ······· ⟧",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ÿöü åŕë ŕëšþöñšïƀŀë ƒöŕ ţħë Safex Cash åððŕëšš åñð ðåëṁöñ çöñƒïĝüŕåţïöñ ëñţëŕëð ïñţö ţħë åþþŀïçåţïöñ. ································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ÿöü šħöüŀð çöñƒïŕṁ ţħåţ ţħë ṁïñïñĝ åððŕëšš ïš çöŕŕëçţ ƀëƒöŕë šţåŕţïñĝ. Ţħë ðëṽëŀöþëŕ çåññöţ ŕëçöṽëŕ çŕÿþţöçüŕŕëñçÿ šëñţ öŕ çŕëðïţëð ţö åñ ïñçöŕŕëçţ åððŕëšš. ······················································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ÿöü ŕëṁåïñ ŕëšþöñšïƀŀë ƒöŕ çöṁþŀÿïñĝ ŵïţħ åñÿ ŀåŵš, ţåẍåţïöñ ŕëǫüïŕëṁëñţš, ëŀëçţŕïçïţÿ åĝŕëëṁëñţš öŕ öţħëŕ öƀŀïĝåţïöñš ţħåţ åþþŀÿ ţö ÿöüŕ üšë öƒ çŕÿþţöçüŕŕëñçÿ ṁïñïñĝ. ··························································· ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "⟦ Ñö ĝüåŕåñţëë öƒ þëŕƒöŕṁåñçë ·········· ⟧",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ħåšħŕåţë åñð ṁïñïñĝ þëŕƒöŕṁåñçë ṽåŕÿ ƀëţŵëëñ çöṁþüţëŕš åñð çåñ ƀë åƒƒëçţëð ƀÿ CPU åŕçħïţëçţüŕë, ṁëṁöŕÿ çöñƒïĝüŕåţïöñ, çööŀïñĝ, þöŵëŕ ŀïṁïţš, Windows šëçüŕïţÿ ƒëåţüŕëš åñð öţħëŕ šöƒţŵåŕë ŕüññïñĝ öñ ţħë šÿšţëṁ. ······································································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ţħë Çåŀṁ, Ɓåŀåñçëð åñð Ƒüŀŀ Ɓöŕë þŕöƒïŀëš çöñţŕöŀ ţħë åṁöüñţ öƒ CPU ŕëšöüŕçë ṁåðë åṽåïŀåƀŀë ţö ţħë ṁïñëŕ. Ţħëÿ ðö ñöţ ĝüåŕåñţëë åñÿ þåŕţïçüŀåŕ ħåšħŕåţë, ŕëŵåŕð ŕåţë öŕ þŕöƒïţåƀïŀïţÿ. ······························································· ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "⟦ Šöƒţŵåŕë ŵåŕŕåñţÿ åñð ŀïåƀïŀïţÿ ··········· ⟧",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ The Safex Mine ïš ðïšţŕïƀüţëð üñðëŕ ţħë  ············· ⟧",
+              "strong": false
+            },
+            {
+              "text": "⟦ GNU General Public License v3.0 (GPL-3.0) ··· ⟧",
+              "strong": true
+            },
+            {
+              "text": "⟦  åñð ïš þŕöṽïðëð ŵïţħöüţ ŵåŕŕåñţïëš ƀëÿöñð ţħöšë ţħåţ çåññöţ ŀåŵƒüŀŀÿ ƀë ëẍçŀüðëð. ····························· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ţö ţħë ṁåẍïṁüṁ ëẍţëñţ þëŕṁïţţëð ƀÿ åþþŀïçåƀŀë ŀåŵ, ñö ĝüåŕåñţëë ïš ṁåðë ţħåţ ţħë šöƒţŵåŕë ŵïŀŀ ƀë ëŕŕöŕ-ƒŕëë, üñïñţëŕŕüþţëð, çöṁþåţïƀŀë ŵïţħ ëṽëŕÿ çöṁþüţëŕ, öŕ ƒŕëë ƒŕöṁ åðṽëŕšë ïñţëŕåçţïöñš ŵïţħ öţħëŕ šöƒţŵåŕë öŕ ħåŕðŵåŕë. ··············································································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ţö ţħë ṁåẍïṁüṁ ëẍţëñţ þëŕṁïţţëð ƀÿ åþþŀïçåƀŀë ŀåŵ, ţħë ðëṽëŀöþëŕ ïš ñöţ ŕëšþöñšïƀŀë ƒöŕ ŀöšš öŕ ðåṁåĝë åŕïšïñĝ ƒŕöṁ å üšëŕ'š ðëçïšïöñ ţö öþëŕåţë çŕÿþţöçüŕŕëñçÿ-ṁïñïñĝ šöƒţŵåŕë, ïñçŀüðïñĝ ŀöššëš åššöçïåţëð ŵïţħ ħåŕðŵåŕë öþëŕåţïöñ, ħëåţ, ëŀëçţŕïçïţÿ çöñšüṁþţïöñ, šÿšţëṁ ïñšţåƀïŀïţÿ, ðåţå ŀöšš, ïñţëŕŕüþţëð çöṁþüţëŕ üšë, ṁïššëð ṁïñïñĝ ŕëŵåŕðš öŕ çħåñĝëš ïñ çŕÿþţöçüŕŕëñçÿ ṽåŀüë. ···································································································································· ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "⟦ Ñöţħïñĝ ïñ ţħïš åçķñöŵŀëðĝëṁëñţ ëẍçŀüðëš, ŕëšţŕïçţš öŕ ṁöðïƒïëš åñÿ ŕïĝħţ, ĝüåŕåñţëë öŕ ŕëṁëðÿ ţħåţ çåññöţ ŀåŵƒüŀŀÿ ƀë ëẍçŀüðëð, ŕëšţŕïçţëð öŕ ṁöðïƒïëð. ······················································ ⟧",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "⟦ Ţħïš åçķñöŵŀëðĝëṁëñţ ðöëš ñöţ ŕëþŀåçë, åŀţëŕ öŕ ïṁþöšë åððïţïöñåŀ ŕëšţŕïçţïöñš öñ ţħë GPL-3.0 ŀïçëñçë öŕ ţħë ŀïçëñçëš åþþŀïçåƀŀë ţö ţħïŕð-þåŕţÿ çöṁþöñëñţš ïñçŀüðëð ŵïţħ The Safex Mine. ·························································· ⟧",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

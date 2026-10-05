@@ -1,4 +1,11 @@
+import deCatalogue from "./catalogues/de.json";
 import enAuCatalogue from "./catalogues/en-AU.json";
+import enXaCatalogue from "./catalogues/en-XA.json";
+import esCatalogue from "./catalogues/es.json";
+import jaCatalogue from "./catalogues/ja.json";
+import srCyrlCatalogue from "./catalogues/sr-Cyrl.json";
+import srLatnCatalogue from "./catalogues/sr-Latn.json";
+import zhHansCatalogue from "./catalogues/zh-Hans.json";
 import localeRegistryData from "./locales.json";
 import type {
   InterpolationValues,
@@ -22,7 +29,14 @@ export const CANONICAL_LOCALE = localeRegistryData.canonicalLocale;
 export const LANGUAGE_OVERRIDE_STORAGE_KEY = "safexMine.uiLanguage";
 
 const catalogues: Readonly<Record<string, Readonly<Record<string, string>>>> = {
+  de: deCatalogue,
   "en-AU": enAuCatalogue,
+  "en-XA": enXaCatalogue,
+  es: esCatalogue,
+  ja: jaCatalogue,
+  "sr-Cyrl": srCyrlCatalogue,
+  "sr-Latn": srLatnCatalogue,
+  "zh-Hans": zhHansCatalogue,
 };
 
 export const supportedLocales: readonly LocaleMetadata[] =
@@ -32,6 +46,9 @@ export const supportedLocales: readonly LocaleMetadata[] =
     direction: locale.direction as TextDirection,
     fallback: locale.fallback,
     enabled: locale.enabled,
+    developerOnly: "developerOnly" in locale
+      ? locale.developerOnly
+      : false,
   }));
 
 const localeById = new Map(
@@ -43,7 +60,12 @@ let uiLocale = CANONICAL_LOCALE;
 const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
 
 export function isSupportedLocale(localeId: string): boolean {
-  return localeById.get(localeId)?.enabled === true;
+  const locale = localeById.get(localeId);
+
+  return (
+    locale?.enabled === true ||
+    (import.meta.env.DEV && locale?.developerOnly === true)
+  );
 }
 
 export function resolveLocale(localeId?: string | null): string {

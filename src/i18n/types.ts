@@ -6,6 +6,7 @@ export interface LocaleMetadata {
   direction: TextDirection;
   fallback: string | null;
   enabled: boolean;
+  developerOnly?: boolean;
 }
 
 export type InterpolationValue = string | number;

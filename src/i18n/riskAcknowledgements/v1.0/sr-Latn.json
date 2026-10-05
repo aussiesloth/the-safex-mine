@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "acknowledgementVersion": "1.0",
-  "locale": "en-AU",
+  "locale": "sr-Latn",
   "blocks": [
     {
       "id": "introduction",
@@ -9,7 +9,7 @@
       "emphasis": false,
       "segments": [
         {
-          "text": "The Safex Mine is a community-developed application for solo mining ",
+          "text": "The Safex Mine je aplikacija koju razvija zajednica za solo rudarenje ",
           "strong": false
         },
         {
@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Before using the mining functions, please read and acknowledge the following information.",
+          "text": ". Pre korišćenja funkcija rudarenja, pročitajte i potvrdite sledeće informacije.",
           "strong": false
         }
       ]
@@ -25,7 +25,7 @@
     {
       "id": "mining-rewards-and-value",
       "type": "section",
-      "heading": "Mining rewards and value",
+      "heading": "Nagrade od rudarenja i vrednost",
       "blocks": [
         {
           "id": "mining-rewards-and-value-paragraph-1",
@@ -33,7 +33,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining is speculative. The Safex Mine does not guarantee that your computer will find a block, receive any mining reward, operate profitably, or recover the cost of electricity or equipment.",
+              "text": "Rudarenje kriptovaluta je spekulativno. The Safex Mine ne garantuje da će vaš računar pronaći blok, dobiti bilo kakvu nagradu za rudarenje, raditi profitabilno ili nadoknaditi trošak električne energije ili opreme.",
               "strong": false
             }
           ]
@@ -44,7 +44,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Safex Cash may increase or decrease in value and may have little or no real-world market value at any particular time. Past mining results do not indicate or guarantee future results.",
+              "text": "Vrednost Safex Cash može porasti ili pasti i u bilo kom trenutku može imati malu ili nikakvu stvarnu tržišnu vrednost. Prethodni rezultati rudarenja ne ukazuju na buduće rezultate niti ih garantuju.",
               "strong": false
             }
           ]
@@ -55,7 +55,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine does not provide financial, investment, taxation or legal advice.",
+              "text": "The Safex Mine ne pruža finansijske, investicione, poreske niti pravne savete.",
               "strong": false
             }
           ]
@@ -65,7 +65,7 @@
     {
       "id": "hardware-load-heat-and-power-consumption",
       "type": "section",
-      "heading": "Hardware load, heat and power consumption",
+      "heading": "Opterećenje hardvera, toplota i potrošnja električne energije",
       "blocks": [
         {
           "id": "hardware-load-heat-and-power-consumption-paragraph-1",
@@ -73,7 +73,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining can place a sustained load on your CPU and other computer components. This can increase:",
+              "text": "Rudarenje kriptovaluta može trajno opteretiti vaš CPU i druge komponente računara. To može povećati:",
               "strong": false
             }
           ]
@@ -86,7 +86,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
               "segments": [
                 {
-                  "text": "processor temperature and system heat;",
+                  "text": "temperaturu procesora i zagrevanje sistema;",
                   "strong": false
                 }
               ]
@@ -95,7 +95,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
               "segments": [
                 {
-                  "text": "fan speed and cooling-system use;",
+                  "text": "brzinu ventilatora i korišćenje sistema za hlađenje;",
                   "strong": false
                 }
               ]
@@ -104,7 +104,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
               "segments": [
                 {
-                  "text": "electricity consumption;",
+                  "text": "potrošnju električne energije;",
                   "strong": false
                 }
               ]
@@ -113,7 +113,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
               "segments": [
                 {
-                  "text": "load on motherboard power-delivery components; and",
+                  "text": "opterećenje komponenti za napajanje na matičnoj ploči; i",
                   "strong": false
                 }
               ]
@@ -122,7 +122,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
               "segments": [
                 {
-                  "text": "general hardware wear during prolonged operation.",
+                  "text": "opšte habanje hardvera tokom dugotrajnog rada.",
                   "strong": false
                 }
               ]
@@ -135,7 +135,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for deciding whether your computer, cooling system and power supply are suitable for sustained mining and for monitoring your system as appropriate.",
+              "text": "Vi ste odgovorni za odluku da li su vaš računar, sistem za hlađenje i napajanje pogodni za dugotrajno rudarenje, kao i za odgovarajući nadzor sistema.",
               "strong": false
             }
           ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Use of cryptocurrency-mining software may affect coverage under a manufacturer's voluntary warranty depending on that manufacturer's warranty terms and the circumstances of any failure. This acknowledgement does not affect any statutory rights or remedies that cannot lawfully be excluded.",
+              "text": "Korišćenje softvera za rudarenje kriptovaluta može uticati na pokriće dobrovoljne garancije proizvođača, u zavisnosti od uslova te garancije i okolnosti bilo kog kvara. Ova potvrda ne utiče na zakonska prava ili pravne lekove koji se po zakonu ne mogu isključiti.",
               "strong": false
             }
           ]
@@ -156,7 +156,7 @@
     {
       "id": "windows-security-and-elevated-access",
       "type": "section",
-      "heading": "Windows security and elevated access",
+      "heading": "Windows bezbednost i pristup sa povišenim privilegijama",
       "blocks": [
         {
           "id": "windows-security-and-elevated-access-paragraph-1",
@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine includes a Safex-compatible XMRig mining backend, an elevated helper and the WinRing driver used to attempt Windows MSR performance optimisation.",
+              "text": "The Safex Mine sadrži XMRig backend za rudarenje kompatibilan sa Safex, pomoćni proces sa povišenim privilegijama i WinRing drajver koji se koriste za pokušaj Windows MSR optimizacije performansi.",
               "strong": false
             }
           ]
@@ -175,7 +175,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "These components may be detected, blocked or quarantined by Microsoft Defender, Windows SmartScreen or other security software.",
+              "text": "Microsoft Defender, Windows SmartScreen ili drugi bezbednosni softver mogu otkriti, blokirati ili staviti ove komponente u karantin.",
               "strong": false
             }
           ]
@@ -186,7 +186,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine will not automatically disable antivirus protection, restore quarantined files or create antivirus exclusions. Any decision to restore a detected file, create an exclusion or temporarily alter security-software settings remains yours.",
+              "text": "The Safex Mine neće automatski isključivati antivirusnu zaštitu, vraćati datoteke iz karantina niti praviti antivirusne izuzetke. Odluka da vratite otkrivenu datoteku, napravite izuzetak ili privremeno promenite podešavanja bezbednosnog softvera ostaje na vama.",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Starting mining requires approval of a Windows UAC prompt for the elevated mining helper. The graphical application itself is intended to continue running without Administrator privileges.",
+              "text": "Pokretanje rudarenja zahteva odobrenje Windows UAC upita za pomoćni proces rudarenja sa povišenim privilegijama. Sama grafička aplikacija je namenjena da nastavi da radi bez administratorskih privilegija.",
               "strong": false
             }
           ]
@@ -208,7 +208,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Windows security features may prevent MSR optimisation. Mining may continue with reduced performance when this occurs. You are not required to disable Windows security features simply to obtain higher mining performance.",
+              "text": "Windows bezbednosne funkcije mogu sprečiti MSR optimizaciju. Kada se to dogodi, rudarenje može da se nastavi sa smanjenim performansama. Nije potrebno da isključite Windows bezbednosne funkcije samo radi većih performansi rudarenja.",
               "strong": false
             }
           ]
@@ -218,7 +218,7 @@
     {
       "id": "system-stability-and-data",
       "type": "section",
-      "heading": "System stability and data",
+      "heading": "Stabilnost sistema i podaci",
       "blocks": [
         {
           "id": "system-stability-and-data-paragraph-1",
@@ -226,7 +226,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Sustained high CPU load can contribute to system instability on systems with inadequate cooling, unstable hardware, overclocking, power problems or other existing issues.",
+              "text": "Trajno visoko opterećenje CPU-a može doprineti nestabilnosti sistema na računarima sa nedovoljnim hlađenjem, nestabilnim hardverom, overklokovanjem, problemima sa napajanjem ili drugim postojećim problemima.",
               "strong": false
             }
           ]
@@ -237,7 +237,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Before prolonged or unattended mining, you should ensure that important data is backed up and that your computer is operating reliably.",
+              "text": "Pre dugotrajnog ili nenadziranog rudarenja treba da obezbedite rezervnu kopiju važnih podataka i da proverite da računar pouzdano radi.",
               "strong": false
             }
           ]
@@ -248,7 +248,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "No software can guarantee that crashes, data loss, hardware faults or other system problems will never occur.",
+              "text": "Nijedan softver ne može garantovati da se padovi sistema, gubitak podataka, kvarovi hardvera ili drugi sistemski problemi nikada neće dogoditi.",
               "strong": false
             }
           ]
@@ -258,7 +258,7 @@
     {
       "id": "mining-configuration",
       "type": "section",
-      "heading": "Mining configuration",
+      "heading": "Konfiguracija rudarenja",
       "blocks": [
         {
           "id": "mining-configuration-paragraph-1",
@@ -266,7 +266,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for the Safex Cash address and daemon configuration entered into the application.",
+              "text": "Vi ste odgovorni za Safex Cash adresu i konfiguraciju daemona unete u aplikaciju.",
               "strong": false
             }
           ]
@@ -277,7 +277,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You should confirm that the mining address is correct before starting. The developer cannot recover cryptocurrency sent or credited to an incorrect address.",
+              "text": "Pre pokretanja treba da potvrdite da je adresa za rudarenje tačna. Programer ne može povratiti kriptovalutu poslatu ili pripisanu pogrešnoj adresi.",
               "strong": false
             }
           ]
@@ -288,7 +288,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You remain responsible for complying with any laws, taxation requirements, electricity agreements or other obligations that apply to your use of cryptocurrency mining.",
+              "text": "I dalje ste odgovorni za poštovanje svih zakona, poreskih zahteva, ugovora o električnoj energiji ili drugih obaveza koje se odnose na vaše korišćenje rudarenja kriptovaluta.",
               "strong": false
             }
           ]
@@ -298,7 +298,7 @@
     {
       "id": "no-guarantee-of-performance",
       "type": "section",
-      "heading": "No guarantee of performance",
+      "heading": "Bez garancije performansi",
       "blocks": [
         {
           "id": "no-guarantee-of-performance-paragraph-1",
@@ -306,7 +306,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hashrate and mining performance vary between computers and can be affected by CPU architecture, memory configuration, cooling, power limits, Windows security features and other software running on the system.",
+              "text": "Hashrate i performanse rudarenja razlikuju se između računara i na njih mogu uticati arhitektura CPU-a, konfiguracija memorije, hlađenje, ograničenja snage, Windows bezbednosne funkcije i drugi softver koji radi na sistemu.",
               "strong": false
             }
           ]
@@ -317,7 +317,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Calm, Balanced and Full Bore profiles control the amount of CPU resource made available to the miner. They do not guarantee any particular hashrate, reward rate or profitability.",
+              "text": "Profili Mirno, Uravnoteženo i Puna snaga određuju količinu CPU resursa dostupnih rudaru. Oni ne garantuju određeni hashrate, stopu nagrade niti profitabilnost.",
               "strong": false
             }
           ]
@@ -327,7 +327,7 @@
     {
       "id": "software-warranty-and-liability",
       "type": "section",
-      "heading": "Software warranty and liability",
+      "heading": "Garancija softvera i odgovornost",
       "blocks": [
         {
           "id": "software-warranty-and-liability-paragraph-1",
@@ -335,7 +335,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine is distributed under the ",
+              "text": "The Safex Mine se distribuira pod ",
               "strong": false
             },
             {
@@ -343,7 +343,7 @@
               "strong": true
             },
             {
-              "text": " and is provided without warranties beyond those that cannot lawfully be excluded.",
+              "text": " i pruža se bez garancija, osim onih koje se zakonom ne mogu isključiti.",
               "strong": false
             }
           ]
@@ -354,7 +354,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, no guarantee is made that the software will be error-free, uninterrupted, compatible with every computer, or free from adverse interactions with other software or hardware.",
+              "text": "U najvećoj meri dozvoljenoj važećim zakonom, ne garantuje se da će softver biti bez grešaka, neprekidno dostupan, kompatibilan sa svakim računarom niti bez štetnih međudejstava sa drugim softverom ili hardverom.",
               "strong": false
             }
           ]
@@ -365,7 +365,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, the developer is not responsible for loss or damage arising from a user's decision to operate cryptocurrency-mining software, including losses associated with hardware operation, heat, electricity consumption, system instability, data loss, interrupted computer use, missed mining rewards or changes in cryptocurrency value.",
+              "text": "U najvećoj meri dozvoljenoj važećim zakonom, programer nije odgovoran za gubitak ili štetu koja nastane zbog odluke korisnika da koristi softver za rudarenje kriptovaluta, uključujući gubitke povezane sa radom hardvera, toplotom, potrošnjom električne energije, nestabilnošću sistema, gubitkom podataka, prekidom korišćenja računara, propuštenim nagradama za rudarenje ili promenama vrednosti kriptovalute.",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Nothing in this acknowledgement excludes, restricts or modifies any right, guarantee or remedy that cannot lawfully be excluded, restricted or modified.",
+              "text": "Ništa u ovoj potvrdi ne isključuje, ograničava niti menja bilo koje pravo, garanciju ili pravni lek koji se po zakonu ne može isključiti, ograničiti ili izmeniti.",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "This acknowledgement does not replace, alter or impose additional restrictions on the GPL-3.0 licence or the licences applicable to third-party components included with The Safex Mine.",
+              "text": "Ova potvrda ne zamenjuje, ne menja niti nameće dodatna ograničenja na GPL-3.0 licencu ili licence koje se primenjuju na komponente trećih strana uključene u The Safex Mine.",
               "strong": false
             }
           ]

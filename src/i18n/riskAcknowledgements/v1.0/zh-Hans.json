@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "acknowledgementVersion": "1.0",
-  "locale": "en-AU",
+  "locale": "zh-Hans",
   "blocks": [
     {
       "id": "introduction",
@@ -9,7 +9,7 @@
       "emphasis": false,
       "segments": [
         {
-          "text": "The Safex Mine is a community-developed application for solo mining ",
+          "text": "The Safex Mine 是一款由社区开发、用于单独挖矿的应用程序，挖掘 ",
           "strong": false
         },
         {
@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Before using the mining functions, please read and acknowledge the following information.",
+          "text": "。在使用挖矿功能之前，请阅读并确认以下信息。",
           "strong": false
         }
       ]
@@ -25,7 +25,7 @@
     {
       "id": "mining-rewards-and-value",
       "type": "section",
-      "heading": "Mining rewards and value",
+      "heading": "挖矿奖励与价值",
       "blocks": [
         {
           "id": "mining-rewards-and-value-paragraph-1",
@@ -33,7 +33,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining is speculative. The Safex Mine does not guarantee that your computer will find a block, receive any mining reward, operate profitably, or recover the cost of electricity or equipment.",
+              "text": "加密货币挖矿具有投机性。The Safex Mine 不保证您的计算机会找到区块、获得任何挖矿奖励、实现盈利，也不保证能够收回电费或设备成本。",
               "strong": false
             }
           ]
@@ -44,7 +44,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Safex Cash may increase or decrease in value and may have little or no real-world market value at any particular time. Past mining results do not indicate or guarantee future results.",
+              "text": "Safex Cash 的价值可能上涨或下跌，并且在任何特定时间都可能只有很低的现实市场价值，甚至没有市场价值。过去的挖矿结果不能表明或保证未来的结果。",
               "strong": false
             }
           ]
@@ -55,7 +55,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine does not provide financial, investment, taxation or legal advice.",
+              "text": "The Safex Mine 不提供财务、投资、税务或法律建议。",
               "strong": false
             }
           ]
@@ -65,7 +65,7 @@
     {
       "id": "hardware-load-heat-and-power-consumption",
       "type": "section",
-      "heading": "Hardware load, heat and power consumption",
+      "heading": "硬件负载、热量与耗电",
       "blocks": [
         {
           "id": "hardware-load-heat-and-power-consumption-paragraph-1",
@@ -73,7 +73,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cryptocurrency mining can place a sustained load on your CPU and other computer components. This can increase:",
+              "text": "加密货币挖矿可能使您的 CPU 和其他计算机组件长期处于负载状态。这可能会增加：",
               "strong": false
             }
           ]
@@ -86,7 +86,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
               "segments": [
                 {
-                  "text": "processor temperature and system heat;",
+                  "text": "处理器温度和系统热量；",
                   "strong": false
                 }
               ]
@@ -95,7 +95,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
               "segments": [
                 {
-                  "text": "fan speed and cooling-system use;",
+                  "text": "风扇转速和冷却系统的使用；",
                   "strong": false
                 }
               ]
@@ -104,7 +104,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
               "segments": [
                 {
-                  "text": "electricity consumption;",
+                  "text": "电力消耗；",
                   "strong": false
                 }
               ]
@@ -113,7 +113,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
               "segments": [
                 {
-                  "text": "load on motherboard power-delivery components; and",
+                  "text": "主板供电组件的负载；以及",
                   "strong": false
                 }
               ]
@@ -122,7 +122,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
               "segments": [
                 {
-                  "text": "general hardware wear during prolonged operation.",
+                  "text": "长时间运行造成的一般硬件磨损。",
                   "strong": false
                 }
               ]
@@ -135,7 +135,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for deciding whether your computer, cooling system and power supply are suitable for sustained mining and for monitoring your system as appropriate.",
+              "text": "您有责任判断您的计算机、冷却系统和电源是否适合持续挖矿，并在适当情况下监控系统。",
               "strong": false
             }
           ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Use of cryptocurrency-mining software may affect coverage under a manufacturer's voluntary warranty depending on that manufacturer's warranty terms and the circumstances of any failure. This acknowledgement does not affect any statutory rights or remedies that cannot lawfully be excluded.",
+              "text": "使用加密货币挖矿软件可能会影响制造商自愿提供的保修范围，具体取决于该制造商的保修条款以及故障发生的具体情况。本确认不会影响任何依法不能排除的法定权利或救济。",
               "strong": false
             }
           ]
@@ -156,7 +156,7 @@
     {
       "id": "windows-security-and-elevated-access",
       "type": "section",
-      "heading": "Windows security and elevated access",
+      "heading": "Windows 安全与提权访问",
       "blocks": [
         {
           "id": "windows-security-and-elevated-access-paragraph-1",
@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine includes a Safex-compatible XMRig mining backend, an elevated helper and the WinRing driver used to attempt Windows MSR performance optimisation.",
+              "text": "The Safex Mine 包含与 Safex 兼容的 XMRig 挖矿后端、提权辅助程序，以及用于尝试进行 Windows MSR 性能优化的 WinRing 驱动程序。",
               "strong": false
             }
           ]
@@ -175,7 +175,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "These components may be detected, blocked or quarantined by Microsoft Defender, Windows SmartScreen or other security software.",
+              "text": "这些组件可能会被 Microsoft Defender、Windows SmartScreen 或其他安全软件检测、阻止或隔离。",
               "strong": false
             }
           ]
@@ -186,7 +186,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine will not automatically disable antivirus protection, restore quarantined files or create antivirus exclusions. Any decision to restore a detected file, create an exclusion or temporarily alter security-software settings remains yours.",
+              "text": "The Safex Mine 不会自动关闭防病毒保护、恢复被隔离的文件或创建防病毒排除项。是否恢复被检测的文件、创建排除项或临时更改安全软件设置，均由您自行决定。",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Starting mining requires approval of a Windows UAC prompt for the elevated mining helper. The graphical application itself is intended to continue running without Administrator privileges.",
+              "text": "开始挖矿需要批准 Windows UAC 提示，以运行提权挖矿辅助程序。图形应用程序本身的设计是在没有管理员权限的情况下继续运行。",
               "strong": false
             }
           ]
@@ -208,7 +208,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Windows security features may prevent MSR optimisation. Mining may continue with reduced performance when this occurs. You are not required to disable Windows security features simply to obtain higher mining performance.",
+              "text": "Windows 安全功能可能会阻止 MSR 优化。在这种情况下，挖矿仍可继续，但性能可能降低。您无需仅为了获得更高的挖矿性能而禁用 Windows 安全功能。",
               "strong": false
             }
           ]
@@ -218,7 +218,7 @@
     {
       "id": "system-stability-and-data",
       "type": "section",
-      "heading": "System stability and data",
+      "heading": "系统稳定性与数据",
       "blocks": [
         {
           "id": "system-stability-and-data-paragraph-1",
@@ -226,7 +226,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Sustained high CPU load can contribute to system instability on systems with inadequate cooling, unstable hardware, overclocking, power problems or other existing issues.",
+              "text": "持续的高 CPU 负载可能会使冷却不足、硬件不稳定、超频、电源存在问题或存在其他既有问题的系统更加不稳定。",
               "strong": false
             }
           ]
@@ -237,7 +237,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Before prolonged or unattended mining, you should ensure that important data is backed up and that your computer is operating reliably.",
+              "text": "在长时间或无人值守挖矿之前，您应确保重要数据已备份，并确保计算机运行可靠。",
               "strong": false
             }
           ]
@@ -248,7 +248,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "No software can guarantee that crashes, data loss, hardware faults or other system problems will never occur.",
+              "text": "任何软件都无法保证崩溃、数据丢失、硬件故障或其他系统问题永远不会发生。",
               "strong": false
             }
           ]
@@ -258,7 +258,7 @@
     {
       "id": "mining-configuration",
       "type": "section",
-      "heading": "Mining configuration",
+      "heading": "挖矿配置",
       "blocks": [
         {
           "id": "mining-configuration-paragraph-1",
@@ -266,7 +266,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You are responsible for the Safex Cash address and daemon configuration entered into the application.",
+              "text": "您对在应用程序中输入的 Safex Cash 地址和守护进程配置负责。",
               "strong": false
             }
           ]
@@ -277,7 +277,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You should confirm that the mining address is correct before starting. The developer cannot recover cryptocurrency sent or credited to an incorrect address.",
+              "text": "开始之前，您应确认挖矿地址正确。开发者无法追回发送到错误地址或记入错误地址的加密货币。",
               "strong": false
             }
           ]
@@ -288,7 +288,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "You remain responsible for complying with any laws, taxation requirements, electricity agreements or other obligations that apply to your use of cryptocurrency mining.",
+              "text": "您仍有责任遵守适用于您使用加密货币挖矿的任何法律、税务要求、电力协议或其他义务。",
               "strong": false
             }
           ]
@@ -298,7 +298,7 @@
     {
       "id": "no-guarantee-of-performance",
       "type": "section",
-      "heading": "No guarantee of performance",
+      "heading": "不保证性能",
       "blocks": [
         {
           "id": "no-guarantee-of-performance-paragraph-1",
@@ -306,7 +306,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hashrate and mining performance vary between computers and can be affected by CPU architecture, memory configuration, cooling, power limits, Windows security features and other software running on the system.",
+              "text": "不同计算机的算力和挖矿性能会有所不同，并可能受到 CPU 架构、内存配置、冷却、功率限制、Windows 安全功能以及系统中运行的其他软件影响。",
               "strong": false
             }
           ]
@@ -317,7 +317,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Calm, Balanced and Full Bore profiles control the amount of CPU resource made available to the miner. They do not guarantee any particular hashrate, reward rate or profitability.",
+              "text": "低负载、均衡和全速配置控制可供挖矿程序使用的 CPU 资源量。它们不保证任何特定算力、奖励率或盈利能力。",
               "strong": false
             }
           ]
@@ -327,7 +327,7 @@
     {
       "id": "software-warranty-and-liability",
       "type": "section",
-      "heading": "Software warranty and liability",
+      "heading": "软件保修与责任",
       "blocks": [
         {
           "id": "software-warranty-and-liability-paragraph-1",
@@ -335,7 +335,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine is distributed under the ",
+              "text": "The Safex Mine 根据 ",
               "strong": false
             },
             {
@@ -343,7 +343,7 @@
               "strong": true
             },
             {
-              "text": " and is provided without warranties beyond those that cannot lawfully be excluded.",
+              "text": " 发行，除法律不允许排除的保修外，不提供其他保修。",
               "strong": false
             }
           ]
@@ -354,7 +354,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, no guarantee is made that the software will be error-free, uninterrupted, compatible with every computer, or free from adverse interactions with other software or hardware.",
+              "text": "在适用法律允许的最大范围内，不保证本软件无错误、不中断运行、与每台计算机兼容，或不会与其他软件或硬件发生不利相互作用。",
               "strong": false
             }
           ]
@@ -365,7 +365,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "To the maximum extent permitted by applicable law, the developer is not responsible for loss or damage arising from a user's decision to operate cryptocurrency-mining software, including losses associated with hardware operation, heat, electricity consumption, system instability, data loss, interrupted computer use, missed mining rewards or changes in cryptocurrency value.",
+              "text": "在适用法律允许的最大范围内，开发者不对因用户决定运行加密货币挖矿软件而产生的损失或损害负责，包括与硬件运行、热量、电力消耗、系统不稳定、数据丢失、计算机使用中断、错失挖矿奖励或加密货币价值变化相关的损失。",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Nothing in this acknowledgement excludes, restricts or modifies any right, guarantee or remedy that cannot lawfully be excluded, restricted or modified.",
+              "text": "本确认中的任何内容均不排除、限制或修改任何依法不能排除、限制或修改的权利、保证或救济。",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "This acknowledgement does not replace, alter or impose additional restrictions on the GPL-3.0 licence or the licences applicable to third-party components included with The Safex Mine.",
+              "text": "本确认不会取代、修改 GPL-3.0 许可证或 The Safex Mine 所含第三方组件适用的许可证，也不会对这些许可证施加额外限制。",
               "strong": false
             }
           ]

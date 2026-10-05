@@ -62,7 +62,7 @@ The Calm, Balanced and Full Bore profiles control the amount of CPU resource mad
 
 ## Software warranty and liability
 
-The Safex Mine is provided under the **GNU General Public License v3.0 (GPL-3.0)** and is provided without warranties beyond those that cannot lawfully be excluded.
+The Safex Mine is distributed under the **GNU General Public License v3.0 (GPL-3.0)** and is provided without warranties beyond those that cannot lawfully be excluded.
 
 To the maximum extent permitted by applicable law, no guarantee is made that the software will be error-free, uninterrupted, compatible with every computer, or free from adverse interactions with other software or hardware.
 
