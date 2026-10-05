@@ -4,7 +4,7 @@
 
 The Safex Mine should be released only after the installed application, mining backend, privilege model and recovery paths work together on clean Windows systems.
 
-This file records completed development/release validation and the remaining mechanical steps for publishing v1.0.0.
+This file retains historical v1.0.0 development/release validation and documents the distinct planned v1.1.0 localisation release gate. The public v1.0.0 Windows installer was published on 18 September 2026.
 
 ## 2. Development validation completed
 
@@ -75,17 +75,17 @@ src-tauri\target\release\bundle\nsis\The Safex Mine_0.1.0_x64-setup.exe
 
 The public release model is deliberately **NSIS-only**. `src-tauri/tauri.release.conf.json` targets `nsis`; MSI is not part of the public release model.
 
-The SHA-256 recorded for the current clean-machine test artefact is:
+The SHA-256 recorded for that historical clean-machine pre-release test artefact is:
 
 ```text
 584DF8E7E83BEA4FF40B3DF24B5A565ACA6AED2D7651522DB9D24D27AF6A44D4
 ```
 
-This checksum identifies the exact pre-release installer selected for clean-machine validation. Final public-release checksums must still be generated from the exact artefact ultimately published.
+This checksum identifies only the historical pre-release installer selected for clean-machine validation; it must not be used to verify the published v1.0.0 installer. The public installer `The-Safex-Mine_1.0.0_x64-setup.exe` and `SHA256SUMS.txt` were published at the [v1.0.0 release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0). Its published installer SHA-256 is `87CC3E39639CCA4C34E3C552187FF80A5274708E517A07761DE142CEBF891B8E`.
 
-Successful NSIS-only bundle generation and clean-machine installation/security behaviour are confirmed. The remaining release work is final source/document consistency, merge/tag preparation, the final v1.0.0 build, and checksum publication.
+Successful NSIS-only bundle generation and clean-machine installation/security behaviour were confirmed before the public v1.0.0 release. The release was subsequently tagged and published; those are no longer outstanding tasks.
 
-## 3. Remaining release preparation and optional evidence
+## 3. Historical v1.0.0 release preparation and optional evidence
 
 ### Real rejection case
 
@@ -151,7 +151,9 @@ Release documentation requirements:
 
 User guidance must distinguish between an installer quarantined immediately after download and runtime files quarantined after installation. If the installer cannot be hashed while in quarantine, the user may need to restore/allow that specific installer first and then verify its SHA-256 **before executing it**. For runtime files, guidance should require confirmation that the detected filename/path matches an expected component, followed by checksum verification after restoration where a published component checksum is available. It should warn against broad exclusions such as Downloads, a user profile or an entire drive, and against leaving real-time protection disabled.
 
-## 4. Functional release checklist
+## 4. Functional release checklist (historical v1.0.0 snapshot)
+
+The entries below record the earlier development/packaging evidence. Any unchecked optional or visual tests are historical context, not evidence that v1.0.0 is still awaiting publication. The v1.1.0 localisation gate is defined separately in section 9.
 
 - [x] fresh development profile is blocked by Mining Risk Acknowledgement until accepted;
 - [x] acknowledgement Exit action closes the development app without persisting acceptance;
@@ -181,7 +183,7 @@ User guidance must distinguish between an installer quarantined immediately afte
 - [x] rejected-result parser/UI path increments and returns to mining in development/simulation; a naturally occurring live rejection remains optional evidence;
 - [x] full app restart resets session counters.
 
-## 5. Visual release checklist
+## 5. Visual release checklist (historical v1.0.0 snapshot)
 
 - [ ] all five scene images load;
 - [ ] scene crossfade does not move the fixed UI;
@@ -232,7 +234,7 @@ Mechanical checks confirm that the project GPL-3.0 file, GPL-3.0-only package me
 
 ## 7. Release artefacts
 
-Planned release set:
+The v1.0.0 public-release model (now published):
 
 - one unsigned Windows NSIS `-setup.exe` installer;
 - versioned release notes;
@@ -247,6 +249,27 @@ MSI is not part of the public release set.
 
 ## 8. Versioning
 
-The first public release is **v1.0.0**.
+The first public release is **v1.0.0**, published on **18 September 2026**. The `0.1.0` installer and SHA-256 recorded earlier in this document are historical clean-machine validation artefacts only and are **not** the public v1.0.0 release checksum. Verify the published version using its release-page checksum / `SHA256SUMS.txt`.
 
-The `0.1.0` installer and SHA-256 recorded earlier in this document are historical clean-machine validation artefacts only. The public v1.0.0 checksum must be generated from the exact final v1.0.0 installer after the release commit/tag is prepared.
+Keep current project/package versions at 1.0.0 during localisation development. Update them consistently to 1.1.0 only in the approved L9 release-hardening slice.
+
+## 9. Planned v1.1.0 localisation validation and release gate
+
+The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. The current planning snapshot is canonical `en-AU` plus 23 LTR translations. Test and enable only those locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
+
+Before approving v1.1.0, verify:
+
+- the complete UI, accessibility/status, metadata, named placeholders and version-consistent Mining Risk Acknowledgement for every approved/enabled locale;
+- fallback to canonical English; Windows preferred-language matching, stored manual override, and manual selection *before* first-run acknowledgement;
+- unchanged address, daemon, CPU-profile, sound and mining start/stop behaviour across language changes;
+- existing users who accepted acknowledgement v1.0 are not unnecessarily asked to re-accept, and new users can read it in their chosen enabled language;
+- correct `lang`, appropriate direction for release-approved scripts, and readable Safex addresses, RPC endpoints, hashes, version strings and technical/numeric telemetry;
+- proportionate script-family QA for the actual enabled Latin (including diacritics), Greek, Cyrillic, CJK, Devanagari and Bengali locales;
+- valid NSIS multilingual configuration, with documented installer-language fallbacks where app and installer coverage differ;
+- intact packaged helper, XMRig, WinRing and project/third-party licence resources;
+- `npm run i18n:check`, frontend build, relevant automated tests and a Windows manual test matrix.
+
+RTL delivery or testing is **not required** for v1.1.0 or a later release under this programme. Retain direction metadata for any separately approved future feasibility work; an unsupported RTL locale must not block an otherwise ready LTR release. The developer-only pseudo-locale `en-XA`, deferred `sr-Cyrl` and `zh-Hant`, and incomplete/review-only languages must not be exposed as release choices merely to meet a planned total.
+
+Do not create a tag, publish a GitHub release, or modify existing v1.0.0 assets during the development slices. After the L9 PR is merged and final tests are approved, present the release title, notes, exact tagged commit, expected NSIS installer, checksum filename and publication checklist for explicit authorisation before publishing.
+
