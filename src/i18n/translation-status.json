@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "canonicalSourceLocale": "en-AU",
   "riskAcknowledgementVersion": "1.0",
-  "reviewedOn": "2026-09-30",
-  "reviewMethod": "AI-assisted translation followed by a separate clause-by-clause semantic/back-translation review against the canonical en-AU source.",
-  "certification": "Translations are project-maintained community translations. No native-speaker, solicitor, or legal certification is claimed.",
+  "reviewedOn": "2026-10-05",
+  "reviewMethod": "AI-assisted drafting from canonical en-AU, followed by a separate project semantic comparison of source clauses, technical tokens, risk qualifications and the GPL distribution distinction. Independent native-language and professional legal review have not been performed.",
+  "certification": "Project-maintained translations; no independent native-speaker, solicitor, professional translation or legal certification is claimed.",
   "locales": {
     "de": {
       "releaseEnabled": true,
@@ -59,6 +59,87 @@
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
       "review": "generated-layout-stress-locale"
+    },
+    "fr": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "it": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "nl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "pl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "pt-BR": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "pt-PT": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "tr": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "hu": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+    },
+    "sl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
     }
   },
   "lastReconciledOn": "2026-10-05",
