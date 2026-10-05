@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "Yükseltilmiş yetkili yardımcıyla el sıkışma tamamlanamadı.",
   "error.helper.handshakeInvalid": "Yükseltilmiş yetkili yardımcının el sıkışma belirteci geçersizdi.",
   "error.helper.handshakeTimedOut": "Yardımcıyla el sıkışma beklenirken zaman aşımına uğrandı.",
-  "error.helper.invalidPath": "Yardımcı yolu geçersiz Unicode içeriyor.",
+  "error.helper.invalidPath": "Yardımcı yolu geçersiz Unicode karakterleri içeriyor.",
   "error.helper.launchFailed": "Yükseltilmiş yetkili yardımcı başlatılamadı. UAC isteği iptal edilmiş olabilir.",
   "error.helper.notConnected": "Yükseltilmiş yetkili yardımcı bağlı değil.",
   "error.helper.notFound": "The Safex Mine yardımcısı bulunamadı.",
