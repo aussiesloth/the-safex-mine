@@ -300,7 +300,7 @@ On the L7b branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo t
 | Focus | Manual check |
 | --- | --- |
 | Russian | Main dashboard, translated mode/status/error labels, Cyrillic line-height and whole-word wrapping |
-| Ukrainian | Main dashboard plus correct rendering of `І/і`, `Ї/ї`, `Є/є`, `Ґ/ґ`; no accidental substitution or clipping |
+| Ukrainian | Main dashboard plus correct rendering of Ukrainian-specific Cyrillic characters present in the catalogue, including `І/і`, `Ї/ї` and `Є/є`; no accidental substitution or clipping |
 | Greek | Main dashboard plus accented Greek vowels, uppercase scene labels, line-height and font fallback |
 | Mining modes | Confirm content-aware horizontal/vertical orientation responds to translated labels rather than script or fixed width |
 | Risk Acknowledgement | For all three locales: title/selector layout, all seven sections, final liability/GPL section, highlighted statutory-rights paragraph, scrolling and footer controls |
