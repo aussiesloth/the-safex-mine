@@ -199,7 +199,7 @@ The original clause IDs, paragraph/list ordering, emphases, version `1.0`, accep
 
 **Provenance and limitations:** Project-maintained AI-assisted draft translations were prepared directly from canonical `en-AU` with a separate project semantic/source comparison, including the non-excludable rights qualification, mining reward uncertainty, warranty limits, technical identifiers and GPL distribution/provision distinction. The Safex Mine translations are AI-assisted **community-project translations**, and language/terminology corrections—including native-speaker feedback—remain welcome, with particular attention to both Portuguese variants, Polish inflection, Turkish case handling and Hungarian/Slovenian diacritics. Review status is recorded per locale in `translation-status.json`.
 
-The nine locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #12 was merged. They are **not part of the published v1.0.0 installer**. L7b, L7c, L7d, installer languages and release hardening remain separate.
+The nine locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #12 was merged. They are **not part of the published v1.0.0 installer**. Subsequent L7 groups, installer/document localisation, translation audit and L9 release hardening have since completed for the release-ready v1.1.0 set.
 
 
 ## L7b Cyrillic and Greek expansion (completed 5 October 2026)
@@ -212,7 +212,7 @@ The Safex Mine translations are AI-assisted **community-project translations**, 
 
 Windows matching is covered for representative Russian, Ukrainian and Greek locale tags. Physical Windows acceptance confirmed Cyrillic and Greek glyph rendering, line height, title/status wrapping, content-aware mining-mode orientation and the complete Risk Acknowledgement without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d and the translation-quality audit have since also completed; L8 NSIS/public-document localisation and L9 release hardening/version changes remain.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening have since completed for the release-ready v1.1.0 set.
 
 ## L7c Southeast Asian Latin-script expansion (completed 5 October 2026)
 
@@ -224,7 +224,7 @@ Indonesian uses current Indonesian software terminology; Filipino deliberately p
 
 Physical Windows acceptance confirmed all three main UI states and all three Risk Acknowledgements, including Vietnamese diacritic/font/line-height rendering, natural Filipino terminology, content-aware mining-mode orientation, first-run switching, persistence/acknowledgement continuity and a targeted live-mining language switch without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d and the translation-quality audit have since also completed; L8 NSIS/public-document localisation and L9 release hardening/version changes remain.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening have since completed for the release-ready v1.1.0 set.
 
 ## L7d Korean, Hindi and Bengali expansion (5 October 2026; PR #15)
 
@@ -236,7 +236,7 @@ Korean, Hindi and Bengali use natural contemporary software terminology while pr
 
 Physical Windows acceptance confirmed Hangul glyph fallback and line height plus Devanagari and Bengali conjunct formation, matra/vowel-sign placement, reordering, clipping, wrapping and text measurement in both the dashboard and the complete Risk Acknowledgement. First-run switching, persistence/acknowledgement continuity and one targeted live-mining language switch also passed without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance for PR #15. They are **not part of the published v1.0.0 installer**. L8 installer/document localisation, L9 release hardening and version changes remain separate.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance for PR #15. They are **not part of the published v1.0.0 installer**. L8 installer/document localisation, the translation-quality audit and L9 release hardening have since completed for the release-ready v1.1.0 set.
 
 
 ## Translation quality audit — existing human-language localisations (5 October 2026)
