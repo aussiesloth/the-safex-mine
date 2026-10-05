@@ -320,9 +320,9 @@ Physical Windows acceptance:
 
 This acceptance is proportionate to L8's installer/document scope. It does not repeat the full L6/L7 mining, daemon-loss or translation regression suites because L8 changes no mining implementation source.
 
-Before approving v1.1.0, L9 reuses the completed L8 physical functional/localisation acceptance rather than repeating it. L9 must verify by automation/source review that the enabled locale registry, catalogues, placeholders, Risk Acknowledgement v1.0 structure, fallback/matching configuration, installer-language mapping, packaged helper/XMRig/WinRing resources and project/third-party licence materials remain intact. It must also complete `npm ci`, `npm run i18n:check`, `npm run release:check`, the frontend build, relevant Rust tests/formatting, licence audit and a production NSIS package build.
+L9 reused the completed L8 physical functional/localisation acceptance rather than repeating it. Automation/source review verified that the enabled locale registry, catalogues, placeholders, Risk Acknowledgement v1.0 structure, fallback/matching configuration, installer-language mapping, packaged helper/XMRig/WinRing resources and project/third-party licence materials remained intact. `npm ci`, `npm run i18n:check`, `npm run release:check`, the frontend build, relevant Rust tests/formatting, licence audit and a production NSIS package build all completed successfully.
 
-The only additional L9 physical Windows gate is one final candidate **installation and uninstall validation**. Confirm that the generated v1.1.0 NSIS installer completes normally, the installed application launches, the expected application version is presented by the packaged build, and uninstall completes normally. The broader language-switching, mining, helper-UAC, MSR/degraded-mode, first-run and multilingual-installer behaviour remains supported by the completed L8 acceptance record because L9 does not change those functional paths.
+The only additional L9 physical Windows gate was one final candidate **installation and uninstall validation**. The generated v1.1.0 NSIS installer completed normally, the installed application launched normally, and uninstall completed normally. The broader language-switching, mining, helper-UAC, MSR/degraded-mode, first-run and multilingual-installer behaviour remains supported by the completed L8 acceptance record because L9 did not change those functional paths.
 
 ### L9 release-hardening evidence — 6 October 2026
 
@@ -336,7 +336,7 @@ Automated/source/build results:
 - `npm run build`: passed; Vite emitted only its non-failing >500 kB chunk-size advisory;
 - `cargo test --manifest-path .\\src-tauri\\Cargo.toml`: passed 12/12 tests;
 - `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`: passed;
-- `npm run licenses:audit`: passed with 322 Rust target packages, 2 npm runtime packages and 0 packages missing licence metadata; 43 entries remained flagged for review by the audit report rather than reported as missing metadata;
+- `npm run licenses:audit`: passed with 322 Rust target packages, 2 npm runtime packages and 0 packages missing licence metadata; the 43 conservative review candidates were subsequently reviewed manually and no unresolved dependency-licensing blocker was identified;
 - `npm run tauri:build`: passed, compiling both `safex-mine-helper v1.1.0` and `the-safex-mine v1.1.0` and producing exactly one NSIS bundle:
   `The Safex Mine_1.1.0_x64-setup.exe` (15,979,246 bytes);
 - generated dependency-licence material produced no substantive tracked-content diff and the working tree was restored clean after the validation build.
