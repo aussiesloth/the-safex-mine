@@ -331,9 +331,9 @@ On the L7c branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo t
 
 The existing L6/L7a/L7b responsive layout is the baseline. Prefer a general responsive fix if L7c reveals a real wrapping or line-height defect; do not add locale-specific CSS merely to force a preferred presentation. Do not repeat the exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite unless implementation review identifies a mining-related change.
 
-### L7d acceptance matrix — Korean, Hindi and Bengali
+### L7d acceptance matrix — Korean, Hindi and Bengali (completed 5 October 2026)
 
-On the L7d branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manifest-path .\\src-tauri\\Cargo.toml`, and `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`. Run `npm run tauri dev` on the Windows MSVC development system.
+L7d passed `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manifest-path .\\src-tauri\\Cargo.toml`, and `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`, followed by physical `npm run tauri dev` acceptance on the Windows MSVC development system.
 
 | Focus | Manual check |
 | --- | --- |
@@ -349,4 +349,4 @@ On the L7d branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo t
 | Technical fields | Safex address, RPC/daemon endpoint, UAC/MSR/XMRig, version, block height and telemetry remain legible and unchanged |
 | Targeted mining | In one L7d locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
 
-The existing responsive layout is the baseline. If L7d exposes a real shaping, line-height or wrapping defect, prefer a general Unicode/script-capable fix rather than locale-specific styling. Do not repeat the exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite unless implementation review identifies a mining-related change.
+The L7d physical pass confirmed the existing responsive layout handles the three new scripts without locale-specific styling. The documented first-run, persistence, complete Risk Acknowledgement and targeted live-mining checks passed. The exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite was not repeated because L7d did not alter mining implementation.
