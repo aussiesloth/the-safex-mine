@@ -3,8 +3,8 @@
   "canonicalSourceLocale": "en-AU",
   "riskAcknowledgementVersion": "1.0",
   "reviewedOn": "2026-10-05",
-  "reviewMethod": "AI-assisted drafting from canonical en-AU, followed by a separate project semantic comparison of source clauses, technical tokens, risk qualifications and the GPL distribution distinction. Independent native-language and professional legal review have not been performed.",
-  "certification": "Project-maintained translations; no independent native-speaker, solicitor, professional translation or legal certification is claimed.",
+  "reviewMethod": "AI-assisted drafting from canonical en-AU, followed by a separate project semantic comparison of source clauses, technical tokens, risk qualifications and the GPL distribution distinction. Community language and terminology corrections remain welcome.",
+  "certification": "Project-maintained community translations. No professional translation certification, solicitor review or legal certification is claimed or planned.",
   "locales": {
     "de": {
       "releaseEnabled": true,
@@ -65,81 +65,81 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "it": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "nl": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "pl": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "pt-BR": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "pt-PT": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "tr": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "hu": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     },
     "sl": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete; independent-native-review-outstanding",
+      "review": "project-semantic-review-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
-      "reviewLimitations": "Native-speaker terminology and professional legal review not obtained; community corrections welcome."
+      "reviewLimitations": "Community language and terminology corrections remain welcome. Professional legal review or certification is outside the scope of this community project and is not planned."
     }
   },
   "lastReconciledOn": "2026-10-05",
