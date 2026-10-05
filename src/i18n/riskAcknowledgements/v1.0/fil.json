@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hindi pinapalitan, binabago, o dinaragdagan ng acknowledgement na ito ang mga restriction sa GPL-3.0 licence o sa mga licence na naaangkop sa third-party components na kasama sa The Safex Mine.",
+              "text": "Hindi pinapalitan o binabago ng acknowledgement na ito ang GPL-3.0 licence o ang mga licence na naaangkop sa third-party components na kasama sa The Safex Mine, at hindi ito nagpapataw ng karagdagang restriction sa mga iyon.",
               "strong": false
             }
           ]
