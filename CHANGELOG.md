@@ -4,6 +4,27 @@ All notable public-facing changes to The Safex Mine will be recorded here.
 
 The first public release is version **1.0.0**.
 
+## [Unreleased] — v1.1.0 development
+
+### Added
+
+- In-repository localisation framework with canonical `en-AU`, Windows preferred-UI-language matching, persistent manual language override and language selection before first-run acknowledgement.
+- Complete UI/accessibility/status catalogues and Mining Risk Acknowledgement v1.0 content for **23 release-enabled translated LTR locales** in addition to canonical English.
+- Developer-only expanded pseudo-locale `en-XA` and retained Serbian Cyrillic (`sr-Cyrl`) script-test material; these are not ordinary release choices.
+
+### Changed
+
+- Ordinary backend status/error presentation now crosses a structured machine-readable boundary so human-readable wording is localised in the frontend.
+- Mining Risk Acknowledgement v1.0 is stored as versioned structured localisation data while preserving acknowledgement version `1.0` and existing acceptance records.
+- Responsive layout behaviour was hardened across Latin, Greek, Cyrillic, CJK, Hangul, Devanagari and Bengali content without locale-specific CSS.
+- A complete translation-quality audit was merged after L7d, comparing every existing human-language localisation directly with canonical `en-AU`. These remain AI-assisted community-project translations; native-speaker corrections are welcome.
+
+### Current release status
+
+- The published release remains **v1.0.0**. The localisation work above exists on the development branch history/current `main` and is not contained in the v1.0.0 installer.
+- L8 multilingual NSIS/public-documentation work and L9 release hardening remain before v1.1.0 publication.
+- Application/package versions remain `1.0.0` until the approved L9 version-bump stage.
+
 ## [1.0.0] - 2026-09-18
 
 ### Added
