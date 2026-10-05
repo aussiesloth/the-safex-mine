@@ -1174,19 +1174,13 @@ mod tests {
         // Regionally distinct Portuguese catalogues must not become interchangeable
         // merely because both share the same base language.
         assert_eq!(
-            match_preferred_locale(
-                &["pt-BR".to_string(), "pt-PT".to_string()],
-                &supported,
-            )
-            .as_deref(),
+            match_preferred_locale(&["pt-BR".to_string(), "pt-PT".to_string()], &supported,)
+                .as_deref(),
             Some("pt-BR")
         );
         assert_eq!(
-            match_preferred_locale(
-                &["xx-YY".to_string(), "sl-SI".to_string()],
-                &supported,
-            )
-            .as_deref(),
+            match_preferred_locale(&["xx-YY".to_string(), "sl-SI".to_string()], &supported,)
+                .as_deref(),
             Some("sl")
         );
     }
