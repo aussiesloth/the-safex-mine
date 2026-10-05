@@ -324,6 +324,27 @@ Before approving v1.1.0, L9 reuses the completed L8 physical functional/localisa
 
 The only additional L9 physical Windows gate is one final candidate **installation and uninstall validation**. Confirm that the generated v1.1.0 NSIS installer completes normally, the installed application launches, the expected application version is presented by the packaged build, and uninstall completes normally. The broader language-switching, mining, helper-UAC, MSR/degraded-mode, first-run and multilingual-installer behaviour remains supported by the completed L8 acceptance record because L9 does not change those functional paths.
 
+### L9 release-hardening evidence — 6 October 2026
+
+L9 validation completed on the Windows development machine from the dedicated `localisation/l9-release-hardening` branch. The branch was created from merged L8 commit `7daed5e192ffb6cd1a7614228606b52dcb52906b`.
+
+Automated/source/build results:
+
+- `npm ci`: passed; 21 packages audited and 0 vulnerabilities reported;
+- `npm run i18n:check`: passed — 26 locales, 104 canonical keys, 83 frontend translation references and one Risk Acknowledgement version; the invoked release check also passed;
+- `npm run release:check`: passed independently for v1.1.0 — 22 NSIS languages, 23 translated installation guides and 2 documented English installer fallbacks;
+- `npm run build`: passed; Vite emitted only its non-failing >500 kB chunk-size advisory;
+- `cargo test --manifest-path .\\src-tauri\\Cargo.toml`: passed 12/12 tests;
+- `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`: passed;
+- `npm run licenses:audit`: passed with 322 Rust target packages, 2 npm runtime packages and 0 packages missing licence metadata; 43 entries remained flagged for review by the audit report rather than reported as missing metadata;
+- `npm run tauri:build`: passed, compiling both `safex-mine-helper v1.1.0` and `the-safex-mine v1.1.0` and producing exactly one NSIS bundle:
+  `The Safex Mine_1.1.0_x64-setup.exe` (15,979,246 bytes);
+- generated dependency-licence material produced no substantive tracked-content diff and the working tree was restored clean after the validation build.
+
+The agreed L9 physical gate was deliberately limited because L8 had just completed the broader multilingual, mining, UAC, MSR/degraded-mode, Risk Acknowledgement and installer acceptance matrix and L9 changed none of those functional paths. The single v1.1.0 validation cycle passed: the installer completed normally, the installed application launched normally, and uninstall completed normally.
+
+The validation installer above is evidence only. It was built before this evidence was committed to the branch, so it is **not** the frozen final candidate and no SHA-256 from it should be published. The final candidate must be rebuilt once from the exact final L9 commit, then its actual filename and SHA-256 must be recorded for the release gate.
+
 RTL delivery or testing is **not required** for v1.1.0 or a later release under this programme. Retain direction metadata for any separately approved future feasibility work; an unsupported RTL locale must not block an otherwise ready LTR release. The developer-only pseudo-locale `en-XA`, deferred `sr-Cyrl` and `zh-Hant`, and incomplete/review-only languages must not be exposed as release choices merely to meet a planned total.
 
 Do not create a tag, publish a GitHub release, or modify existing v1.0.0 assets during the development slices. After the L9 PR is merged and final tests are approved, present the release title, notes, exact tagged commit, expected NSIS installer, checksum filename and publication checklist for explicit authorisation before publishing.
