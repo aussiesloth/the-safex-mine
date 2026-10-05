@@ -1212,7 +1212,11 @@ mod tests {
 
         assert_eq!(
             match_preferred_locale(
-                &["xx-YY".to_string(), "uk-UA".to_string(), "ru-RU".to_string()],
+                &[
+                    "xx-YY".to_string(),
+                    "uk-UA".to_string(),
+                    "ru-RU".to_string(),
+                ],
                 &supported,
             )
             .as_deref(),
