@@ -198,6 +198,6 @@ L7b added selectable app UI and first-run acknowledgement languages Russian (`ru
 
 L7c added selectable app UI and first-run acknowledgement languages Indonesian (`id`), Vietnamese (`vi`) and Filipino (`fil`). Windows Latin-script wrapping, Vietnamese diacritic/font/line-height rendering, natural Filipino terminology, first-run switching, persistence, acknowledgement continuity and a targeted live-mining language switch were confirmed before PR #14 was merged. Acceptance version and storage remain unchanged.
 
-### L7d pending-development coverage
+### L7d completed coverage
 
-The dedicated L7d branch extends selectable app UI and first-run acknowledgement languages with Korean (`ko`), Hindi (`hi`) and Bengali (`bn`). Acceptance version and storage remain unchanged. Windows Hangul/Devanagari/Bengali font fallback and shaping, line height, wrapping/text measurement, first-run language switching, persistence and a targeted live-mining language-switch check require local pre-merge confirmation.
+L7d extends selectable app UI and first-run acknowledgement languages with Korean (`ko`), Hindi (`hi`) and Bengali (`bn`). Acceptance version and storage remain unchanged. Windows Hangul/Devanagari/Bengali font fallback and shaping, line height, wrapping/text measurement, first-run language switching, persistence, acknowledgement continuity and a targeted live-mining language switch were confirmed before PR #15 merge.
