@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "无法完成与提权辅助程序的握手。",
   "error.helper.handshakeInvalid": "提权辅助程序的握手令牌无效。",
   "error.helper.handshakeTimedOut": "等待提权辅助程序握手超时。",
-  "error.helper.invalidPath": "辅助程序路径包含无效的 Unicode。",
+  "error.helper.invalidPath": "辅助程序路径包含无效的 Unicode 字符。",
   "error.helper.launchFailed": "无法启动提权辅助程序。UAC 请求可能已被取消。",
   "error.helper.notConnected": "提权辅助程序未连接。",
   "error.helper.notFound": "未找到 The Safex Mine 辅助程序。",
