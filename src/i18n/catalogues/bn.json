@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "উচ্চতর অনুমতিসম্পন্ন সহায়কের হ্যান্ডশেক সম্পন্ন করা যায়নি।",
   "error.helper.handshakeInvalid": "উচ্চতর অনুমতিসম্পন্ন সহায়কের হ্যান্ডশেক টোকেন অবৈধ ছিল।",
   "error.helper.handshakeTimedOut": "উচ্চতর অনুমতিসম্পন্ন সহায়কের হ্যান্ডশেকের অপেক্ষার সময় শেষ হয়েছে।",
-  "error.helper.invalidPath": "সহায়কের পথে অবৈধ Unicode রয়েছে।",
+  "error.helper.invalidPath": "সহায়কের পথে অবৈধ Unicode অক্ষর রয়েছে।",
   "error.helper.launchFailed": "উচ্চতর অনুমতিসম্পন্ন সহায়ক চালু করা যায়নি। UAC অনুরোধ বাতিল হয়ে থাকতে পারে।",
   "error.helper.notConnected": "উচ্চতর অনুমতিসম্পন্ন সহায়ক সংযুক্ত নয়।",
   "error.helper.notFound": "Safex Mine সহায়ক পাওয়া যায়নি।",
