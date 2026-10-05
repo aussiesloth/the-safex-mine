@@ -255,9 +255,21 @@ Keep current project/package versions at 1.0.0 during localisation development. 
 
 ## 9. v1.1.0 localisation validation and release gate — current status
 
-As of 5 October 2026, localisation implementation through L7d and the subsequent translation-quality audit are complete on `main`. The current development set is canonical `en-AU` plus **23 release-enabled translated LTR locales**; the complete developer-only Serbian Cyrillic locale was also included in the linguistic audit. L8 multilingual installer/public-document localisation and L9 release hardening remain. Application/package versions are still 1.0.0, and no v1.1.0 tag/release exists yet.
+Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 now adds the multilingual NSIS configuration and essential translated public installation/first-use documentation for the same canonical `en-AU` plus **23 release-enabled translated LTR locales**. Application/package versions remain 1.0.0 and Mining Risk Acknowledgement remains version 1.0. L8 still requires the packaged Windows acceptance below before merge; L9 release hardening follows afterward. No v1.1.0 tag/release exists yet.
 
 The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. Test and enable only locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
+
+### L8 installer/public-document implementation and acceptance
+
+The L8 source configuration targets one NSIS installer with **22 installer languages total**: English plus 21 translated installer languages. Filipino and Bengali intentionally use English installer fallback because the NSIS 3.11 language set used by Tauri CLI 2.11.4 does not contain Filipino/Tagalog or Bengali. The application itself continues to provide both languages after launch.
+
+Seven NSIS languages require project-maintained Tauri-specific message files: Serbian Latin, Polish, Hungarian, Slovenian, Greek, Indonesian and Hindi. The remaining translated installer languages use Tauri's bundled custom-message translations. `displayLanguageSelector` remains false so Windows chooses the installer language automatically.
+
+The public-document layer contains 23 translated essential installation/first-use guides under `docs/localised/`, while English remains canonical. GPL-3.0 and third-party licence texts remain untranslated by design.
+
+Automated L8 conformance is part of `npm run i18n:check` and separately available as `npm run l8:check`. It checks the enabled locale registry against the installer manifest, the configured NSIS language set, all seven custom Tauri message files and required placeholders, all 23 translated installation guides, the two documented English fallbacks, application/package versions remaining 1.0.0 and Mining Risk Acknowledgement remaining 1.0.
+
+Before merging L8, perform one real Windows NSIS package build and record the exact outcome. Inspect the generated installer for representative cases covering English, a normal built-in Latin translation, regional Portuguese, a project-custom installer language, CJK, Devanagari and an English-fallback application language. The physical test does not need to repeat full Defender recovery for every language.
 
 Before approving v1.1.0, verify:
 

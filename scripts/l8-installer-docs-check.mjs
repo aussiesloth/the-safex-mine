@@ -253,8 +253,9 @@ for (const localeId of translatedLocales) {
     }
   }
 
-  if (!/community|komunit|comun|commun|общ|спіль|κοιν|Komunit|コミュニティ|社区|커뮤니티|समुद|কমিউন/i.test(content)) {
-    addError(`${relativePath}: translation/community status should be stated near the top of the guide.`);
+  const opening = content.slice(0, 1400);
+  if (!/^>\s+\*\*/m.test(opening)) {
+    addError(`${relativePath}: translation/community status blockquote should be stated near the top of the guide.`);
   }
 }
 
