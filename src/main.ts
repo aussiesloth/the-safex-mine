@@ -759,6 +759,86 @@ function clearTranslatedTextBinding(
   translatedTextBindings.delete(target);
 }
 
+const modeLabelMeasurementCanvas =
+  document.createElement("canvas");
+
+function measureModeButtonRequiredWidth(
+  button: HTMLButtonElement,
+): number {
+  const style = getComputedStyle(button);
+  const context =
+    modeLabelMeasurementCanvas.getContext("2d");
+
+  if (!context) {
+    return button.scrollWidth;
+  }
+
+  context.font = style.font;
+
+  const label =
+    button.textContent?.trim() ?? "";
+  const letterSpacing =
+    Number.parseFloat(style.letterSpacing) || 0;
+  const textWidth =
+    context.measureText(label).width +
+    Math.max(0, Array.from(label).length - 1) *
+      letterSpacing;
+
+  return (
+    textWidth +
+    (Number.parseFloat(style.paddingLeft) || 0) +
+    (Number.parseFloat(style.paddingRight) || 0) +
+    (Number.parseFloat(style.borderLeftWidth) || 0) +
+    (Number.parseFloat(style.borderRightWidth) || 0)
+  );
+}
+
+function refreshModeButtonLayout() {
+  const container =
+    document.querySelector<HTMLDivElement>(
+      ".mode-buttons",
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const buttons = [
+    ...container.querySelectorAll<HTMLButtonElement>(
+      ".mode-button",
+    ),
+  ];
+
+  if (buttons.length === 0) {
+    return;
+  }
+
+  const containerStyle =
+    getComputedStyle(container);
+  const gap =
+    Number.parseFloat(
+      containerStyle.columnGap,
+    ) || 0;
+  const widestButton =
+    Math.max(
+      ...buttons.map(
+        measureModeButtonRequiredWidth,
+      ),
+    );
+
+  const requiredWidth =
+    widestButton * buttons.length +
+    gap * (buttons.length - 1);
+
+  // A small allowance avoids flipping layout because of subpixel
+  // measurement differences between CSS and canvas text metrics.
+  container.classList.toggle(
+    "mode-buttons-stacked",
+    requiredWidth >
+      container.clientWidth - 2,
+  );
+}
+
 function refreshMainUiText() {
   document.title =
     translate("app.name");
@@ -804,6 +884,7 @@ function refreshMainUiText() {
   }
 
   refreshTranslatedTextBindings();
+  refreshModeButtonLayout();
 
   sceneState.textContent =
     translate(
@@ -829,6 +910,13 @@ languageSelectorHost.append(
 onUiLanguageChanged(
   refreshMainUiText,
 );
+
+window.addEventListener(
+  "resize",
+  refreshModeButtonLayout,
+);
+
+refreshModeButtonLayout();
 
 /* ---------------------------------------------------------
    PERSISTENT SETTINGS

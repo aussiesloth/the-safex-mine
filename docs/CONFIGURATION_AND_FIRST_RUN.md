@@ -45,7 +45,7 @@ The repository copy of the published English v1.0 notice is maintained in `docs/
 
 ## Planned v1.1.0 multilingual first-run behaviour (not part of the published v1.0.0 installer)
 
-For each explicitly approved, complete release locale, a language selector will be accessible on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority remains: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
+For each explicitly approved, complete release locale, a language selector is accessible on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority remains: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
 
 The selected enabled language controls both the dialog chrome and its complete version-consistent acknowledgement text. English remains an available reference/fallback. Switching language must not implicitly record acceptance, reset the checkbox/acceptance version improperly, modify the mining address, daemon, CPU mode, sound preference or ongoing mining session, or force a different regional number/date convention.
 
@@ -185,3 +185,7 @@ Mining is prevented or reported clearly when, for example:
 - the backend fails during startup.
 
 MSR failure is treated differently: mining may continue in degraded-performance mode.
+
+### L7a pending-development coverage
+
+The dedicated L7a PR extends selectable app UI and first-run acknowledgement languages with `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, and `sl`. These are not contained in the published v1.0.0 installer. Acceptance version and storage remain unchanged; real Windows first-run language switching and persistence require local pre-merge confirmation.

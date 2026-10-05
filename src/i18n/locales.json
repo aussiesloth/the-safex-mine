@@ -20,7 +20,7 @@
       "nativeName": "Français",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "de",
@@ -34,35 +34,35 @@
       "nativeName": "Italiano",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "nl",
       "nativeName": "Nederlands",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "pl",
       "nativeName": "Polski",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "pt-BR",
       "nativeName": "Português (Brasil)",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "pt-PT",
       "nativeName": "Português (Portugal)",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "ru",
@@ -83,7 +83,14 @@
       "nativeName": "Türkçe",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
+    },
+    {
+      "id": "hu",
+      "nativeName": "Magyar",
+      "direction": "ltr",
+      "fallback": "en-AU",
+      "enabled": true
     },
     {
       "id": "id",
@@ -161,6 +168,13 @@
       "direction": "rtl",
       "fallback": "en-AU",
       "enabled": false
+    },
+    {
+      "id": "sl",
+      "nativeName": "Slovenščina",
+      "direction": "ltr",
+      "fallback": "en-AU",
+      "enabled": true
     },
     {
       "id": "sr-Cyrl",

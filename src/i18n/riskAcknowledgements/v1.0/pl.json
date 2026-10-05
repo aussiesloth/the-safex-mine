@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "pl",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine jest aplikacją opracowaną przez społeczność do samodzielnego kopania ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Przed skorzystaniem z funkcji kopania należy przeczytać i przyjąć do wiadomości poniższe informacje.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Nagrody z kopania i wartość",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kopanie kryptowalut ma charakter spekulacyjny. The Safex Mine nie gwarantuje, że komputer znajdzie blok, otrzyma jakąkolwiek nagrodę za kopanie, będzie działał z zyskiem ani że zwrócą się koszty energii elektrycznej lub sprzętu.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Wartość Safex Cash może wzrosnąć lub spaść, a w danej chwili rzeczywista wartość rynkowa może być niewielka lub zerowa. Dotychczasowe wyniki kopania nie wskazują ani nie gwarantują przyszłych wyników.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine nie udziela porad finansowych, inwestycyjnych, podatkowych ani prawnych.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Obciążenie sprzętu, ciepło i zużycie energii",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kopanie kryptowalut może powodować długotrwałe obciążenie procesora (CPU) i innych podzespołów komputera. Może to zwiększyć:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "temperaturę procesora i ilość ciepła wytwarzanego przez system;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "prędkość wentylatorów i wykorzystanie układu chłodzenia;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "zużycie energii elektrycznej;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "obciążenie podzespołów zasilania płyty głównej; oraz",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "ogólne zużycie sprzętu podczas długotrwałej pracy.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Użytkownik odpowiada za ocenę, czy komputer, układ chłodzenia i zasilacz nadają się do ciągłego kopania, oraz za odpowiednie monitorowanie systemu.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Korzystanie z oprogramowania do kopania kryptowalut może mieć wpływ na ochronę w ramach dobrowolnej gwarancji producenta, zależnie od jej warunków i okoliczności ewentualnej awarii. Niniejsze oświadczenie nie narusza żadnych ustawowych praw ani środków ochrony prawnej, których nie można zgodnie z prawem wyłączyć.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Zabezpieczenia Windows i podwyższone uprawnienia",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine zawiera zgodny z Safex silnik kopania XMRig, proces pomocniczy o podwyższonych uprawnieniach i sterownik WinRing wykorzystywany do prób optymalizacji wydajności MSR w systemie Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Te elementy mogą zostać wykryte, zablokowane lub umieszczone w kwarantannie przez Microsoft Defender, Windows SmartScreen lub inne oprogramowanie zabezpieczające.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine nie wyłącza automatycznie ochrony antywirusowej, nie przywraca plików z kwarantanny ani nie tworzy wyjątków antywirusowych. Decyzja o przywróceniu wykrytego pliku, dodaniu wyjątku lub czasowej zmianie ustawień zabezpieczeń należy wyłącznie do użytkownika.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Rozpoczęcie kopania wymaga zatwierdzenia monitu Windows UAC dla procesu pomocniczego kopania o podwyższonych uprawnieniach. Sama aplikacja graficzna powinna nadal działać bez uprawnień administratora.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Zabezpieczenia Windows mogą uniemożliwić optymalizację MSR. W takim przypadku kopanie może być kontynuowane z obniżoną wydajnością. Nie trzeba wyłączać zabezpieczeń Windows tylko po to, by uzyskać wyższą wydajność kopania.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Stabilność systemu i dane",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Długotrwałe wysokie obciążenie CPU może przyczyniać się do niestabilności systemów o niewystarczającym chłodzeniu, niestabilnym sprzęcie, podkręconych parametrach, problemach z zasilaniem lub innych istniejących usterkach.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Przed długotrwałym kopaniem lub pozostawieniem kopania bez nadzoru należy upewnić się, że ważne dane mają kopie zapasowe, a komputer działa niezawodnie.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Żadne oprogramowanie nie może zagwarantować, że nigdy nie wystąpi awaria, utrata danych, uszkodzenie sprzętu lub inny problem z systemem.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Konfiguracja kopania",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Użytkownik odpowiada za adres Safex Cash i konfigurację demona wprowadzone w aplikacji.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Przed rozpoczęciem należy sprawdzić poprawność adresu do kopania. Deweloper nie może odzyskać kryptowaluty wysłanej lub przypisanej do nieprawidłowego adresu.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Użytkownik pozostaje odpowiedzialny za przestrzeganie przepisów prawa, wymogów podatkowych, umów dotyczących energii elektrycznej i innych zobowiązań mających zastosowanie do kopania kryptowalut.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Brak gwarancji wydajności",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Szybkość haszowania i wydajność kopania różnią się między komputerami i mogą zależeć od architektury CPU, konfiguracji pamięci, chłodzenia, limitów mocy, zabezpieczeń Windows i innego działającego oprogramowania.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Profile Spokojny, Zrównoważony i Pełna moc określają ilość zasobów CPU udostępnianych koparce. Nie gwarantują określonej szybkości haszowania, częstotliwości otrzymywania nagród ani rentowności.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Gwarancja na oprogramowanie i odpowiedzialność",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine jest rozpowszechniany na warunkach ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " i udostępniany bez gwarancji poza tymi, których zgodnie z prawem nie można wyłączyć.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "W maksymalnym zakresie dozwolonym przez obowiązujące prawo nie gwarantuje się, że oprogramowanie będzie wolne od błędów, będzie działać bez przerw, będzie zgodne z każdym komputerem ani że nie będzie powodować niekorzystnych interakcji z innym oprogramowaniem lub sprzętem.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "W maksymalnym zakresie dozwolonym przez obowiązujące prawo deweloper nie ponosi odpowiedzialności za straty lub szkody wynikające z decyzji użytkownika o korzystaniu z oprogramowania do kopania kryptowalut, w tym straty związane z działaniem sprzętu, wydzielaniem ciepła, zużyciem energii elektrycznej, niestabilnością systemu, utratą danych, przerwami w korzystaniu z komputera, utraconymi nagrodami za kopanie lub zmianami wartości kryptowalut.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Żadne postanowienie niniejszego oświadczenia nie wyłącza, nie ogranicza ani nie zmienia praw, gwarancji lub środków ochrony prawnej, których nie można zgodnie z prawem wyłączyć, ograniczyć ani zmienić.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Niniejsze oświadczenie nie zastępuje ani nie zmienia licencji GPL-3.0 ani licencji dotyczących komponentów stron trzecich zawartych w The Safex Mine i nie nakłada na nie dodatkowych ograniczeń.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

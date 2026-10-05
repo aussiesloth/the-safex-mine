@@ -1136,6 +1136,56 @@ mod tests {
     }
 
     #[test]
+    fn locale_matcher_covers_l7a_windows_languages_and_portuguese_regions() {
+        let supported = vec![
+            "en-AU".to_string(),
+            "fr".to_string(),
+            "it".to_string(),
+            "nl".to_string(),
+            "pl".to_string(),
+            "pt-BR".to_string(),
+            "pt-PT".to_string(),
+            "tr".to_string(),
+            "hu".to_string(),
+            "sl".to_string(),
+        ];
+
+        for (preferred, expected) in [
+            ("fr-FR", "fr"),
+            ("fr-CA", "fr"),
+            ("it-IT", "it"),
+            ("nl-BE", "nl"),
+            ("pl-PL", "pl"),
+            ("tr-TR", "tr"),
+            ("hu-HU", "hu"),
+            ("sl-SI", "sl"),
+            ("pt-BR", "pt-BR"),
+            ("pt-PT", "pt-PT"),
+            ("pt-AO", "pt-PT"),
+            ("pt", "pt-PT"),
+        ] {
+            assert_eq!(
+                match_preferred_locale(&[preferred.to_string()], &supported).as_deref(),
+                Some(expected),
+                "unexpected match for {preferred}"
+            );
+        }
+
+        // Regionally distinct Portuguese catalogues must not become interchangeable
+        // merely because both share the same base language.
+        assert_eq!(
+            match_preferred_locale(&["pt-BR".to_string(), "pt-PT".to_string()], &supported,)
+                .as_deref(),
+            Some("pt-BR")
+        );
+        assert_eq!(
+            match_preferred_locale(&["xx-YY".to_string(), "sl-SI".to_string()], &supported,)
+                .as_deref(),
+            Some("sl")
+        );
+    }
+
+    #[test]
     fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
         let supported = vec!["en-AU".to_string()];
 

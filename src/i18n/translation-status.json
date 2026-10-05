@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "canonicalSourceLocale": "en-AU",
   "riskAcknowledgementVersion": "1.0",
-  "reviewedOn": "2026-09-30",
-  "reviewMethod": "AI-assisted translation followed by a separate clause-by-clause semantic/back-translation review against the canonical en-AU source.",
-  "certification": "Translations are project-maintained community translations. No native-speaker, solicitor, or legal certification is claimed.",
+  "reviewedOn": "2026-10-05",
+  "reviewMethod": "AI-assisted drafting from canonical en-AU, followed by a separate project semantic comparison of source clauses, technical tokens, risk qualifications and the GPL distribution distinction.",
+  "certification": "The Safex Mine translations are AI-assisted community-project translations, and language/terminology corrections—including native-speaker feedback—remain welcome.",
   "locales": {
     "de": {
       "releaseEnabled": true,
@@ -59,6 +59,87 @@
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
       "review": "generated-layout-stress-locale"
+    },
+    "fr": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "it": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "nl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "pl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "pt-BR": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "pt-PT": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "tr": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "hu": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
+    },
+    "sl": {
+      "releaseEnabled": true,
+      "ui": "complete",
+      "accessibilityAndStatus": "complete",
+      "riskAcknowledgement": "complete",
+      "review": "project-semantic-review-complete",
+      "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
+      "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     }
   },
   "lastReconciledOn": "2026-10-05",

@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "tr",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "The Safex Mine, ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": " için solo madencilik amacıyla topluluk tarafından geliştirilmiş bir uygulamadır. Madencilik işlevlerini kullanmadan önce lütfen aşağıdaki bilgileri okuyup anladığınızı onaylayın.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Madencilik ödülleri ve değer",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kripto para madenciliği spekülatiftir. The Safex Mine, bilgisayarınızın bir blok bulacağını, herhangi bir madencilik ödülü alacağını, kârlı çalışacağını veya elektrik ya da ekipman maliyetlerini karşılayacağını garanti etmez.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Safex Cash'in değeri artabilir veya azalabilir; herhangi bir zamanda gerçek piyasa değeri çok düşük ya da sıfır olabilir. Önceki madencilik sonuçları gelecekteki sonuçların göstergesi veya garantisi değildir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine finansal, yatırım, vergi veya hukuk danışmanlığı sağlamaz.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Donanım yükü, ısı ve güç tüketimi",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kripto para madenciliği CPU'nuz ve diğer bilgisayar bileşenleriniz üzerinde sürekli bir yük oluşturabilir. Bu durum aşağıdakileri artırabilir:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "işlemci sıcaklığı ve sistemin ürettiği ısıyı;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "fan hızını ve soğutma sistemi kullanımını;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "elektrik tüketimini;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "anakartın güç dağıtım bileşenlerindeki yükü; ve",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "uzun süreli çalışmadan kaynaklanan genel donanım aşınmasını.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bilgisayarınızın, soğutma sisteminizin ve güç kaynağınızın sürekli madenciliğe uygun olup olmadığına karar vermek ve sisteminizi gerektiği şekilde izlemek sizin sorumluluğunuzdadır.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kripto para madenciliği yazılımının kullanılması, üreticinin gönüllü garanti şartlarına ve olası arızanın koşullarına bağlı olarak bu garanti kapsamını etkileyebilir. Bu bildirim, hukuken hariç tutulamayan hiçbir yasal hakkı veya başvuru yolunu etkilemez.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows güvenliği ve yükseltilmiş erişim",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine, Safex uyumlu bir XMRig madencilik arka ucu, yükseltilmiş yetkili bir yardımcı ve Windows MSR performans optimizasyonunu denemek için kullanılan WinRing sürücüsünü içerir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bu bileşenler Microsoft Defender, Windows SmartScreen veya başka güvenlik yazılımları tarafından tespit edilebilir, engellenebilir ya da karantinaya alınabilir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine virüs korumasını otomatik olarak devre dışı bırakmaz, karantinadaki dosyaları geri yüklemez veya virüs koruma dışlamaları oluşturmaz. Tespit edilen bir dosyayı geri yükleme, dışlama oluşturma veya güvenlik yazılımı ayarlarını geçici olarak değiştirme kararı size aittir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Madenciliği başlatmak için yükseltilmiş yetkili madencilik yardımcısına yönelik Windows UAC istemini onaylamanız gerekir. Grafik arayüzlü uygulamanın kendisinin yönetici yetkileri olmadan çalışmaya devam etmesi amaçlanmıştır.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Windows güvenlik özellikleri MSR optimizasyonunu engelleyebilir. Bu durumda madencilik düşük performansla devam edebilir. Sırf daha yüksek madencilik performansı elde etmek için Windows güvenlik özelliklerini devre dışı bırakmanız gerekmez.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Sistem kararlılığı ve veriler",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Sürekli yüksek CPU yükü; yetersiz soğutma, kararsız donanım, hız aşırtma, güç sorunları veya önceden mevcut başka sorunları olan sistemlerde kararsızlığa katkıda bulunabilir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Uzun süreli veya gözetimsiz madencilikten önce önemli verilerinizin yedeklendiğinden ve bilgisayarınızın güvenilir biçimde çalıştığından emin olmalısınız.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hiçbir yazılım çökmelerin, veri kaybının, donanım arızalarının veya diğer sistem sorunlarının hiçbir zaman meydana gelmeyeceğini garanti edemez.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Madencilik yapılandırması",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Uygulamaya girdiğiniz Safex Cash adresinden ve daemon yapılandırmasından siz sorumlusunuz.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Başlamadan önce madencilik adresinin doğruluğunu teyit etmelisiniz. Geliştirici, yanlış bir adrese gönderilen veya yatırılan kripto parayı geri alamaz.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Kripto para madenciliği kullanımınıza uygulanan yasalara, vergi yükümlülüklerine, elektrik sözleşmelerine ve diğer yükümlülüklere uymak sizin sorumluluğunuzdadır.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Performans garantisi yoktur",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hash hızı ve madencilik performansı bilgisayardan bilgisayara değişir; CPU mimarisi, bellek yapılandırması, soğutma, güç sınırları, Windows güvenlik özellikleri ve sistemde çalışan diğer yazılımlardan etkilenebilir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Sakin, Dengeli ve Tam Güç profilleri madenciye ayrılan CPU kaynağı miktarını kontrol eder. Belirli bir hash hızını, ödül oranını veya kârlılığı garanti etmez.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Yazılım garantisi ve sorumluluk",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "The Safex Mine, ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " kapsamında dağıtılır ve hukuken hariç tutulamayan garantiler dışında herhangi bir garanti verilmeden sunulur.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Yürürlükteki hukukun izin verdiği azami ölçüde, yazılımın hatasız, kesintisiz, her bilgisayarla uyumlu veya diğer yazılım ya da donanımlarla olumsuz etkileşimlerden arınmış olduğu garanti edilmez.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Yürürlükteki hukukun izin verdiği azami ölçüde geliştirici, bir kullanıcının kripto para madenciliği yazılımını çalıştırma kararından kaynaklanan kayıp veya hasarlardan sorumlu değildir. Bunlara donanımın çalışması, ısı, elektrik tüketimi, sistem kararsızlığı, veri kaybı, bilgisayar kullanımının kesintiye uğraması, kaçırılan madencilik ödülleri veya kripto para değerindeki değişikliklerle ilgili kayıplar dahildir.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Bu bildirimdeki hiçbir hüküm, hukuken hariç tutulamayan, kısıtlanamayan veya değiştirilemeyen herhangi bir hakkı, garantiyi ya da başvuru yolunu hariç tutmaz, kısıtlamaz veya değiştirmez.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Bu bildirim, GPL-3.0 lisansının veya The Safex Mine ile birlikte sunulan üçüncü taraf bileşenlerin lisanslarının yerini almaz, bunları değiştirmez veya bunlara ek kısıtlamalar getirmez.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

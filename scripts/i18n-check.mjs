@@ -448,6 +448,50 @@ if (
   }
 }
 
+// Cross-check that enabled/developer catalogues are actually imported by the
+// frontend, rather than merely existing as complete but unreachable JSON files.
+const frontendCatalogueRegistry = await readFile(
+  path.join(i18nDirectory, "index.ts"),
+  "utf8",
+);
+const riskDocumentRegistry = await readFile(
+  path.join(riskAcknowledgementsDirectory, "index.ts"),
+  "utf8",
+);
+if (Array.isArray(registry?.locales)) {
+  for (const locale of registry.locales) {
+    if (!locale || (locale.enabled !== true && locale.developerOnly !== true)) {
+      continue;
+    }
+
+    if (!frontendCatalogueRegistry.includes(`from "./catalogues/${locale.id}.json";`)) {
+      addError(`Available locale ${locale.id} is not imported by src/i18n/index.ts.`);
+    }
+    if (!riskDocumentRegistry.includes(`from "./v1.0/${locale.id}.json";`)) {
+      addError(`Available locale ${locale.id} has no registered Risk Acknowledgement v1.0 import.`);
+    }
+
+    if (locale.id !== registry.canonicalLocale) {
+      const status = translationStatus?.locales?.[locale.id];
+      if (status && status.releaseEnabled !== (locale.enabled === true)) {
+        addError(
+          `translation-status.json: ${locale.id}.releaseEnabled disagrees with locales.json.`,
+        );
+      }
+    }
+  }
+
+  // An inactive locale must not be recorded as release-enabled in provenance.
+  for (const locale of registry.locales) {
+    const status = translationStatus?.locales?.[locale.id];
+    if (status?.releaseEnabled === true && locale.enabled !== true) {
+      addError(
+        `translation-status.json: ${locale.id} claims release enablement while disabled.`,
+      );
+    }
+  }
+}
+
 const canonicalLocale = registry?.canonicalLocale ?? "en-AU";
 const canonicalCatalogue = catalogues.get(canonicalLocale);
 

@@ -126,7 +126,7 @@ The existing v1.0.0 Windows miner is public. The next proposed update is localis
 The revised localisation programme (5 October 2026) establishes **extensible language coverage without a permanent maximum**. The current planning snapshot is canonical `en-AU` plus **23 LTR translations**, subject to complete content, actual release approval and validation. This snapshot must not become a hard-coded ceiling. Only explicitly approved, complete locales may be release-enabled.
 
 - L6: reconcile the pilot PR with the current release scope, retain Serbian Latin as release-intended and keep completed Serbian Cyrillic pilot work inactive/deferred; preserve developer-only `en-XA`.
-- L7a: European and related Latin-script languages — `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`.
+- L7a: European and related Latin-script languages — `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`. Implemented in a separate PR, pending local Windows acceptance and merge; v1.0.0 assets unchanged.
 - L7b: Cyrillic and Greek — `ru`, `uk`, `el`.
 - L7c: Southeast Asian Latin scripts — `id`, `vi`, `fil`.
 - L7d: remaining Asian LTR scripts — `ko`, `hi`, `bn`.
