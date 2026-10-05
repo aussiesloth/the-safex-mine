@@ -10,7 +10,7 @@ The application launches a CPU mining backend and uses a narrowly scoped elevate
 
 Do **not** publish exploit details, privilege-escalation steps or other sensitive security findings in a public issue.
 
-When the repository is public, use GitHub's private security-reporting / security-advisory mechanism for this repository if it is enabled. If private reporting is not available, contact the repository owner through GitHub and request a private channel before sending sensitive details.
+Use GitHub's private security-reporting / security-advisory mechanism for this public repository if it is enabled. If private reporting is not available, contact the repository owner through GitHub and request a private channel before sending sensitive details.
 
 Ordinary bugs that do not expose a security vulnerability can be reported through the normal issue tracker.
 
@@ -50,10 +50,10 @@ Public releases should provide checksums and source references so users can veri
 
 ## Unsigned releases
 
-The planned public Windows release is unsigned. Users should expect Windows SmartScreen or other trust warnings until/unless a future signing arrangement changes that.
+The current public Windows release, v1.0.0, is unsigned. The unreleased v1.1.0 development line is also expected to remain unsigned unless a future signing arrangement changes that. Users should therefore expect Windows SmartScreen or other trust warnings.
 
 Unsigned distribution is not an invitation to bypass security warnings blindly. Users should verify the release source and published checksum before running it.
 
 ## Supported versions
 
-The first public release is **v1.0.0**. Security fixes are provided against the current public release unless a later support policy explicitly states otherwise.
+The current public release is **v1.0.0**. The `main` branch contains unreleased v1.1.0 localisation work while application/package versions remain at 1.0.0 pending release hardening. Security fixes should be assessed against both the currently distributed release and current development code as appropriate; a later support policy may define narrower supported-version windows.
