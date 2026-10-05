@@ -199,4 +199,4 @@ The standard-user backend resolves the elevated helper in this order:
 
 The release-only Tauri configuration maps the helper, XMRig and WinRing driver into one packaged `runtime/` directory. This keeps the installed privilege/process model the same as development while removing source-tree path assumptions from the packaged application.
 
-The v1.0.0 packaged runtime and installer path completed clean-machine validation before publication. Future releases must repeat release-specific packaging and clean-machine checks against the exact release candidate; for v1.1.0 that validation belongs to the L9 release-hardening gate after L8 installer/document localisation.
+The v1.0.0 packaged runtime and installer path completed clean-machine validation before publication. Future releases must repeat release-specific packaging checks against the exact release state. For v1.1.0, L8/L9 validation is complete; the remaining release-specific step is to build and checksum the exact release-ready `main` commit before publication.
