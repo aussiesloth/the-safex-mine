@@ -7,8 +7,10 @@ import jaV1 from "./v1.0/ja.json";
 import srCyrlV1 from "./v1.0/sr-Cyrl.json";
 import srLatnV1 from "./v1.0/sr-Latn.json";
 import zhHansV1 from "./v1.0/zh-Hans.json";
+import filV1 from "./v1.0/fil.json";
 import frV1 from "./v1.0/fr.json";
 import huV1 from "./v1.0/hu.json";
+import idV1 from "./v1.0/id.json";
 import itV1 from "./v1.0/it.json";
 import nlV1 from "./v1.0/nl.json";
 import plV1 from "./v1.0/pl.json";
@@ -18,6 +20,7 @@ import ruV1 from "./v1.0/ru.json";
 import slV1 from "./v1.0/sl.json";
 import trV1 from "./v1.0/tr.json";
 import ukV1 from "./v1.0/uk.json";
+import viV1 from "./v1.0/vi.json";
 import type { RiskAcknowledgementDocument } from "./types";
 
 export type {
@@ -43,8 +46,10 @@ const riskAcknowledgements: Readonly<
     "sr-Cyrl": srCyrlV1 as RiskAcknowledgementDocument,
     "sr-Latn": srLatnV1 as RiskAcknowledgementDocument,
     "zh-Hans": zhHansV1 as RiskAcknowledgementDocument,
+    fil: filV1 as RiskAcknowledgementDocument,
     fr: frV1 as RiskAcknowledgementDocument,
     hu: huV1 as RiskAcknowledgementDocument,
+    id: idV1 as RiskAcknowledgementDocument,
     it: itV1 as RiskAcknowledgementDocument,
     nl: nlV1 as RiskAcknowledgementDocument,
     pl: plV1 as RiskAcknowledgementDocument,
@@ -54,6 +59,7 @@ const riskAcknowledgements: Readonly<
     sl: slV1 as RiskAcknowledgementDocument,
     tr: trV1 as RiskAcknowledgementDocument,
     uk: ukV1 as RiskAcknowledgementDocument,
+    vi: viV1 as RiskAcknowledgementDocument,
   },
 };
 
