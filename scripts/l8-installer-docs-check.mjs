@@ -41,17 +41,37 @@ const packageJson = await readJson("package.json");
 const tauriConfig = await readJson("src-tauri/tauri.conf.json");
 const translationStatus = await readJson("src/i18n/translation-status.json");
 
+const packageLock = await readJson("package-lock.json");
 const cargoToml = await readText("src-tauri/Cargo.toml");
+const cargoLock = await readText("src-tauri/Cargo.lock");
+const helperCargoToml = await readText("src-tauri/helper/Cargo.toml");
+const helperCargoLock = await readText("src-tauri/helper/Cargo.lock");
 const riskSource = await readText("src/riskAcknowledgement.ts");
 
-assertEqual(packageJson?.version, "1.0.0", "L8 must not change package.json version.");
-assertEqual(tauriConfig?.version, "1.0.0", "L8 must not change tauri.conf.json version.");
+const releaseVersion = packageJson?.version;
+if (!/^\d+\.\d+\.\d+$/.test(releaseVersion ?? "")) {
+  addError(`package.json: release version must be a semantic x.y.z version, got ${JSON.stringify(releaseVersion)}.`);
+}
+assertEqual(packageLock?.version, releaseVersion, "package-lock.json root version must match package.json.");
+assertEqual(packageLock?.packages?.[""]?.version, releaseVersion, "package-lock.json root package version must match package.json.");
+assertEqual(tauriConfig?.version, releaseVersion, "tauri.conf.json version must match package.json.");
+
 const cargoPackageVersion = cargoToml.match(/\[package\][\s\S]*?^version\s*=\s*"([^"]+)"/m)?.[1];
-assertEqual(cargoPackageVersion, "1.0.0", "L8 must not change the Rust package version.");
+assertEqual(cargoPackageVersion, releaseVersion, "Rust application package version must match package.json.");
+
+const cargoLockPackageVersion = cargoLock.match(/\[\[package\]\]\s*\nname\s*=\s*"the-safex-mine"\s*\nversion\s*=\s*"([^"]+)"/m)?.[1];
+assertEqual(cargoLockPackageVersion, releaseVersion, "Rust application lockfile version must match package.json.");
+
+const helperPackageVersion = helperCargoToml.match(/\[package\][\s\S]*?^version\s*=\s*"([^"]+)"/m)?.[1];
+assertEqual(helperPackageVersion, releaseVersion, "Helper package version must match package.json.");
+
+const helperLockPackageVersion = helperCargoLock.match(/\[\[package\]\]\s*\nname\s*=\s*"safex-mine-helper"\s*\nversion\s*=\s*"([^"]+)"/m)?.[1];
+assertEqual(helperLockPackageVersion, releaseVersion, "Helper lockfile version must match package.json.");
+
 assertEqual(
   translationStatus?.riskAcknowledgementVersion,
   "1.0",
-  "L8 must keep Mining Risk Acknowledgement version 1.0.",
+  "Mining Risk Acknowledgement version must remain 1.0 unless canonical acknowledgement content changes substantively.",
 );
 if (!/ACKNOWLEDGEMENT_VERSION\s*=\s*"1\.0"/.test(riskSource)) {
   addError('src/riskAcknowledgement.ts: ACKNOWLEDGEMENT_VERSION must remain "1.0".');
@@ -73,7 +93,7 @@ if (JSON.stringify(sorted(enabledLocales)) !== JSON.stringify(sorted(manifestLoc
 assertEqual(installerManifest?.tauriCliVersion, "2.11.4", "Installer manifest Tauri CLI version drifted.");
 assertEqual(installerManifest?.nsisVersion, "3.11", "Installer manifest NSIS version drifted.");
 assertEqual(installerManifest?.canonicalInstallerLanguage, "English", "English must remain the canonical installer fallback.");
-assertEqual(installerManifest?.displayLanguageSelector, false, "The approved L8 installer uses automatic Windows-language selection.");
+assertEqual(installerManifest?.displayLanguageSelector, false, "The release installer uses automatic Windows-language selection.");
 
 const nsis = releaseConfig?.bundle?.windows?.nsis;
 if (!nsis) {
@@ -84,7 +104,7 @@ const configuredLanguages = Array.isArray(nsis?.languages) ? nsis.languages : []
 if (configuredLanguages[0] !== "English") {
   addError("NSIS languages must list English first so unsupported Windows languages fall back deterministically.");
 }
-assertEqual(nsis?.displayLanguageSelector, false, "NSIS displayLanguageSelector must remain false for L8.");
+assertEqual(nsis?.displayLanguageSelector, false, "NSIS displayLanguageSelector must remain false for the release installer.");
 
 const mappedInstallerLanguages = [];
 for (const localeId of manifestLocales) {
@@ -274,7 +294,7 @@ for (const localeId of expectedFallbacks) {
 }
 
 if (errors.length > 0) {
-  console.error("L8 installer/document validation failed:");
+  console.error("Release conformance validation failed:");
   for (const error of errors) {
     console.error(`- ${error}`);
   }
@@ -282,5 +302,5 @@ if (errors.length > 0) {
 }
 
 console.log(
-  `L8 installer/document validation passed: ${configuredLanguages.length} NSIS languages, ${translatedLocales.length} translated installation guides, 2 documented English installer fallbacks.`,
+  `Release conformance validation passed for v${releaseVersion}: ${configuredLanguages.length} NSIS languages, ${translatedLocales.length} translated installation guides, 2 documented English installer fallbacks.`,
 );
