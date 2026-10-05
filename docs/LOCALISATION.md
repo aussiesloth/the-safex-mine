@@ -4,18 +4,18 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactored Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics. Localisation Slice L5 added Windows preferred-UI-language detection, locale matching and the persistent user language selector. L6 implemented the first translated pilot catalogues, Risk Acknowledgements and developer layout-stress tools. L7a added and validated the nine European and related Latin-script catalogues and was merged through PR #12. L7b added and validated Russian, Ukrainian and Greek and was merged through PR #13. L7c added and validated Indonesian, Vietnamese and Filipino and was merged through PR #14. L7d adds and validates Korean, Hindi and Bengali through PR #15.
+Localisation Slices L1-L5 established the framework, extracted the frontend UI, localised the backend/frontend message boundary, structured Mining Risk Acknowledgement v1.0 for translation, and added Windows preferred-language detection plus a persistent manual selector. L6 implemented and validated the pilot translations and layout-stress tooling. L7a, L7b, L7c and L7d completed the remaining approved LTR translation groups through PRs #12-#15. PR #16 then completed a locale-by-locale translation-quality audit against canonical `en-AU`. The current `main` branch therefore contains the complete v1.1.0 localisation content set planned to date; L8 installer/public-document localisation and L9 release hardening remain.
 
-English (Australia), en-AU, remains the canonical source locale. L6 makes German (`de`), Spanish (`es`), Serbian Latin (`sr-Latn`), Simplified Chinese (`zh-Hans`) and Japanese (`ja`) available as release-intended pilots. Serbian Cyrillic (`sr-Cyrl`) retains its complete pilot content as development-only script-test material but is disabled for release. `en-XA` is a development-only pseudo-locale. L7a additionally makes French, Italian, Dutch, Polish, Brazilian Portuguese, European Portuguese, Turkish, Hungarian and Slovenian release-intended/selectable following completed catalogue, structural and Windows acceptance checks. L7b likewise makes Russian, Ukrainian and Greek release-intended/selectable following completed Cyrillic/Greek acceptance. L7c likewise makes Indonesian, Vietnamese and Filipino release-intended/selectable following completed Latin-script/diacritic acceptance. L7d makes Korean, Hindi and Bengali release-intended/selectable following completed catalogue, Risk Acknowledgement, Hangul/Devanagari/Bengali shaping and Windows acceptance checks. Other proposed locales stay disabled until content, validation and release approval are complete.
+English (Australia), `en-AU`, remains the canonical source locale and fallback. Current `main` has **23 release-enabled translated LTR locales** in addition to English: `de`, `es`, `sr-Latn`, `zh-Hans`, `ja`, `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`, `ru`, `uk`, `el`, `id`, `vi`, `fil`, `ko`, `hi` and `bn`. Serbian Cyrillic (`sr-Cyrl`) remains complete but developer-only/deferred, and `en-XA` remains a developer-only pseudo-locale. Traditional Chinese (`zh-Hant`) and the registered RTL locales remain disabled. The published v1.0.0 installer predates this multilingual implementation.
 
 
 ## Governing coverage policy for v1.1.0 and later
 
 The revised governing programme (5 October 2026) **does not impose a locked language total, a permanent maximum, or an obligation to deliver every locale named in an earlier plan**. Scope is an approved per-release planning snapshot. Adding further languages or script variants is possible in any future separately governed slice; no new numerical ceiling should be introduced by a registry, validation script, installer, test plan or documentation.
 
-The present proposed v1.1.0 target is **en-AU plus 23 LTR translations**, subject to completion and normal release approval. It is not the current published v1.0.0 feature set and is not a future limit:
+The current v1.1.0 development set on `main` is **en-AU plus 23 release-enabled LTR translations**. Translation implementation and the project translation-quality audit are complete for that set, while final release approval still depends on L8 and L9. The set is not the published v1.0.0 feature set and is not a future limit:
 
-| Delivery group | Planned release-intended locales |
+| Delivery group | Current release-enabled translated locales |
 | --- | --- |
 | L6 pilots retained for release | `de`, `es`, `sr-Latn`, `zh-Hans`, `ja` |
 | L7a — European and related Latin scripts | `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl` |
@@ -108,14 +108,14 @@ The normal user-facing wording owned by src/main.ts now comes from src/i18n/cata
 
 The following English text is intentionally not treated as an L2 frontend translation:
 
-- src/riskAcknowledgement.ts remains unchanged because the Mining Risk Acknowledgement is reserved for L4.
-- Rust/helper-originating message payloads that are currently passed through to the UI remain source text from the backend. L3 will replace ordinary expected backend UI messages with stable machine-readable codes plus frontend translation. L2 localises the frontend-owned explanation or prefix around those details where one already exists.
+- During L2, `src/riskAcknowledgement.ts` was intentionally left outside the extraction because the Mining Risk Acknowledgement was reserved for L4. L4 subsequently refactored it to the current structured, versioned localisation model.
+- During L2, ordinary Rust/helper-originating UI messages were deferred. L3 subsequently replaced expected user-facing backend outcomes with stable machine-readable codes/structured data plus frontend translation, while preserving useful low-level diagnostic detail where appropriate.
 - Internal protocol markers such as STATUS EXITED, STATUS IDLE, DAEMON=CONNECTED, STARTED_DEGRADED and MSR=UNAVAILABLE remain stable machine values and are not displayed as translated labels.
 - Developer-only console diagnostics remain in English.
 - Technical units and identifiers such as H/s, kH/s, MH/s, RPC, MSR and XMRig remain technical content rather than translated prose.
 - The bootstrap title in index.html remains the product name The Safex Mine. main.ts sets document.title from app.name when the frontend starts.
 
-The L2 source audit should therefore treat any future ordinary user-facing English added directly to main.ts as localisation debt, while leaving the deferred/backend/technical categories above for their designated slices.
+These L2 notes are historical context. The current rule is that new ordinary user-facing English added directly to `main.ts` or equivalent frontend paths is localisation debt; internal protocol markers, developer diagnostics, technical units and protected identifiers remain intentional exceptions.
 
 
 ## L3 backend-boundary notes
@@ -133,7 +133,7 @@ The Tauri command boundary now follows these rules:
 
 The frontend maps backend error/status codes to keys in the canonical en-AU catalogue. Unknown or low-level failures fall back to a translated explanation while preserving useful original diagnostic detail.
 
-Rust unit tests cover the start/stop helper-response mapping that feeds the structured frontend results. Run the localisation validator, frontend build and Rust tests before merging L3.
+Rust unit tests cover the start/stop helper-response mapping that feeds the structured frontend results. Those checks formed the L3 merge gate and remain part of relevant regression validation.
 
 
 ## L4 Mining Risk Acknowledgement structure
@@ -159,7 +159,7 @@ Translating Mining Risk Acknowledgement v1.0 into another language does **not** 
 
 The Windows API feature is enabled through the existing windows crate rather than introducing a new localisation dependency. The Rust command returns both the ordered Windows preferred-language list and the best match from the enabled locale IDs supplied by the frontend.
 
-At the completed L5 baseline, en-AU is the only enabled catalogue. The selector therefore offers “Use Windows language” and English (Australia). Unsupported Windows languages safely resolve to en-AU. Subsequent approved translation slices can enable more complete catalogues without changing the L5 selection priority.
+At the historical L5 baseline, `en-AU` was the only enabled catalogue. Subsequent L6/L7 slices enabled the current 23 translated LTR locales without changing the L5 selection priority. Unsupported or disabled Windows languages still resolve safely through the matcher/fallback rules to an enabled language and ultimately `en-AU`.
 
 Language names come from locale metadata and are displayed in their own language. Country flags are not used. The language selector does not alter the saved Safex address, daemon, mining mode or sound preference, and selecting a UI language does not modify regional number/date conventions.
 
@@ -177,7 +177,7 @@ L6 also removes several fixed-width assumptions exposed by German and en-XA. Das
 
 ## L7a Latin-script expansion (completed 5 October 2026)
 
-Nine full 104-key UI/accessibility/status catalogues and nine complete structured Mining Risk Acknowledgement v1.0 documents are added: `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu` and `sl`. The pre-existing metadata entries are enabled, with new `hu` and `sl` metadata. Brazilian and European Portuguese have independently worded catalogues and risk documents, not aliases. Windows locale matching retains the existing regional preference: Brazilian tags map to `pt-BR`; other Portuguese tags without a Brazilian region map to `pt-PT` when both are enabled. A focused Rust regression test also covers L7a languages and preference order.
+Nine full 104-key UI/accessibility/status catalogues and nine complete structured Mining Risk Acknowledgement v1.0 documents were added: `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu` and `sl`. The pre-existing metadata entries are enabled, with new `hu` and `sl` metadata. Brazilian and European Portuguese have independently worded catalogues and risk documents, not aliases. Windows locale matching retains the existing regional preference: Brazilian tags map to `pt-BR`; other Portuguese tags without a Brazilian region map to `pt-PT` when both are enabled. A focused Rust regression test also covers L7a languages and preference order.
 
 The original clause IDs, paragraph/list ordering, emphases, version `1.0`, acceptance storage key and canonical `en-AU` content are unchanged. The pre-existing clause 7.1 *distributed under GPL-3.0* clarification is carried into all new versions. Catalogue imports and provenance/enablement agreement are checked by the updated `i18n:check` script, as well as key, placeholder and acknowledgement-structure parity.
 
@@ -196,7 +196,7 @@ The Safex Mine translations are AI-assisted **community-project translations**, 
 
 Windows matching is covered for representative Russian, Ukrainian and Greek locale tags. Physical Windows acceptance confirmed Cyrillic and Greek glyph rendering, line height, title/status wrapping, content-aware mining-mode orientation and the complete Risk Acknowledgement without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d, NSIS localisation, release hardening and version changes remain separate.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d and the translation-quality audit have since also completed; L8 NSIS/public-document localisation and L9 release hardening/version changes remain.
 
 ## L7c Southeast Asian Latin-script expansion (completed 5 October 2026)
 
@@ -208,11 +208,11 @@ Indonesian uses current Indonesian software terminology; Filipino deliberately p
 
 Physical Windows acceptance confirmed all three main UI states and all three Risk Acknowledgements, including Vietnamese diacritic/font/line-height rendering, natural Filipino terminology, content-aware mining-mode orientation, first-run switching, persistence/acknowledgement continuity and a targeted live-mining language switch without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d, NSIS localisation, release hardening and version changes remain separate.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d and the translation-quality audit have since also completed; L8 NSIS/public-document localisation and L9 release hardening/version changes remain.
 
 ## L7d Korean, Hindi and Bengali expansion (5 October 2026; PR #15)
 
-L7d adds three complete 104-key UI/accessibility/status catalogues and complete structured Mining Risk Acknowledgement v1.0 documents for Korean (`ko` / 한국어), Hindi (`hi` / हिन्दी) and Bengali (`bn` / বাংলা). Their pre-existing LTR metadata records are enabled with canonical `en-AU` fallback. All three translations are prepared directly from canonical `en-AU`, not from another translated locale.
+L7d added three complete 104-key UI/accessibility/status catalogues and complete structured Mining Risk Acknowledgement v1.0 documents for Korean (`ko` / 한국어), Hindi (`hi` / हिन्दी) and Bengali (`bn` / বাংলা). Their pre-existing LTR metadata records are enabled with canonical `en-AU` fallback. All three translations are prepared directly from canonical `en-AU`, not from another translated locale.
 
 The original acknowledgement structural IDs, paragraph/list ordering, emphasis, version `1.0`, acceptance storage key and canonical English wording remain unchanged. The accepted clause 7.1 *distributed under GPL-3.0* meaning remains separate from the *provided without warranties* qualification. The Safex Mine translations remain AI-assisted **community-project translations**, and language/terminology corrections—including native-speaker feedback—remain welcome.
 
@@ -234,3 +234,10 @@ Corrections were deliberately conservative. They include naturalising repeated h
 The audit found no defect in canonical `en-AU` requiring a source change and no translated Risk Acknowledgement clause requiring a substantive change to meaning. `schemaVersion`, acknowledgement version `1.0`, block IDs, ordering, emphasis, the five hardware-list items, statutory-rights qualification, liability scope, and the distinction between software being distributed under GPL-3.0 and being provided without excludable warranties remain unchanged.
 
 These remain AI-assisted **community-project translations**. The audit is not native-speaker certification, professional translation certification or legal review; native-speaker corrections and terminology feedback remain welcome.
+
+
+## Post-release correction path
+
+English (`en-AU`) remains the canonical reference and fallback. The current translated set has completed the project's structural, semantic and Windows acceptance work, but the translations are intentionally described as AI-assisted **community-project translations**, not native-speaker, professional or legal certification.
+
+v1.1.0 does not require every translated sentence to be treated as permanently immutable before release. Once the L8/L9 release gates are satisfied, specific native-speaker language or terminology corrections can be accepted through normal review and shipped in later patch releases. A translation-only correction that preserves the canonical source meaning does not by itself create a new Mining Risk Acknowledgement version or require existing users to re-accept acknowledgement v1.0. Substantive changes to canonical English remain subject to the acknowledgement-version policy.
