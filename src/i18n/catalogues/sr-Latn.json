@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "Nije moguće dovršiti početnu razmenu sa pomoćnim procesom sa povišenim privilegijama.",
   "error.helper.handshakeInvalid": "Token početne razmene pomoćnog procesa sa povišenim privilegijama nije važeći.",
   "error.helper.handshakeTimedOut": "Isteklo je vreme čekanja na početnu razmenu sa pomoćnim procesom sa povišenim privilegijama.",
-  "error.helper.invalidPath": "Putanja pomoćnog procesa sadrži nevažeći Unicode.",
+  "error.helper.invalidPath": "Putanja pomoćnog procesa sadrži nevažeće Unicode znakove.",
   "error.helper.launchFailed": "Nije moguće pokrenuti pomoćni proces sa povišenim privilegijama. UAC zahtev je možda otkazan.",
   "error.helper.notConnected": "Pomoćni proces sa povišenim privilegijama nije povezan.",
   "error.helper.notFound": "Pomoćni proces aplikacije The Safex Mine nije pronađen.",
