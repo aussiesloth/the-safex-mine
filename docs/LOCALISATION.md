@@ -4,15 +4,40 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactored Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics. Localisation Slice L5 added Windows preferred-UI-language detection, locale matching and the persistent user language selector. Localisation Slice L6 adds the first deliberately varied translated language wave and a developer-only pseudo-locale for layout stress testing.
+Localisation Slice L1 established the framework. Localisation Slice L2 extracted the normal frontend UI into the canonical English catalogue. Localisation Slice L3 moved ordinary Rust/backend-originating status and error presentation across a structured machine-readable boundary so the frontend localisation layer owns the human-readable wording. Localisation Slice L4 refactored Mining Risk Acknowledgement v1.0 into versioned structured localisation data without changing its wording or acceptance semantics. Localisation Slice L5 added Windows preferred-UI-language detection, locale matching and the persistent user language selector. L6 implements the first translated pilot catalogues, Risk Acknowledgements and developer layout-stress tools.
 
-English (Australia), en-AU, remains the canonical source locale. L6 enables German (de), Spanish (es), Serbian Cyrillic (sr-Cyrl), Serbian Latin (sr-Latn), Simplified Chinese (zh-Hans) and Japanese (ja). The remaining locked release locales stay registered but disabled until their complete catalogues and Mining Risk Acknowledgement translations are added in L7. The en-XA pseudo-locale is complete for UI and acknowledgement stress testing, but is developer-only and is never an enabled release locale.
+English (Australia), en-AU, remains the canonical source locale. L6 makes German (`de`), Spanish (`es`), Serbian Latin (`sr-Latn`), Simplified Chinese (`zh-Hans`) and Japanese (`ja`) available as release-intended pilots. Serbian Cyrillic (`sr-Cyrl`) retains its complete pilot content as development-only script-test material but is disabled for release. `en-XA` is a development-only pseudo-locale. Other proposed locales stay disabled until content, validation and release approval are complete.
+
+
+## Governing coverage policy for v1.1.0 and later
+
+The revised governing programme (5 October 2026) **does not impose a locked language total, a permanent maximum, or an obligation to deliver every locale named in an earlier plan**. Scope is an approved per-release planning snapshot. Adding further languages or script variants is possible in any future separately governed slice; no new numerical ceiling should be introduced by a registry, validation script, installer, test plan or documentation.
+
+The present proposed v1.1.0 target is **en-AU plus 23 LTR translations**, subject to completion and normal release approval. It is not the current published v1.0.0 feature set and is not a future limit:
+
+| Delivery group | Planned release-intended locales |
+| --- | --- |
+| L6 pilots retained for release | `de`, `es`, `sr-Latn`, `zh-Hans`, `ja` |
+| L7a — European and related Latin scripts | `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl` |
+| L7b — Cyrillic and Greek | `ru`, `uk`, `el` |
+| L7c — Southeast Asian Latin scripts | `id`, `vi`, `fil` |
+| L7d — remaining Asian LTR scripts | `ko`, `hi`, `bn` |
+
+Serbian Cyrillic (`sr-Cyrl`) was included in L6 as a pilot and its completed material should be retained for future development, but it is **not** proposed as a selectable v1.1.0 release locale. Traditional Chinese (`zh-Hant`) is likewise deferred. L6 reconciles registry and translation-status flags: Serbian Cyrillic is retained for development testing, but the v1.1.0 release-intended Serbian variant is Latin. Neither deferred script variant is a release requirement.
+
+The `en-XA` pseudo-locale remains a developer-only layout tool, not a release language. An additional release language can be proposed and added by an approved new or adjusted slice without changing any programme-wide total.
+
+**RTL is optional, not a gate.** Retain useful direction metadata, but there is no mandatory RTL implementation, deadline, release deliverable or release-blocking RTL test for v1.1.0 or any later release. A future RTL experiment requires its own explicit feasibility, accessibility, bidirectional technical-field and UI approval. Inactive RTL records do not imply an obligation to publish them.
+
+For each release, the actual release-approved and enabled locale registry is the test scope. UI, accessibility/status strings, the complete matching version of the Risk Acknowledgement, placeholders, recorded translation review/provenance, Windows/manual selection and proportionate script-family visual QA must be complete before enabling a locale. Installer-language support may be a documented subset of app UI languages, with clear fallback.
+
+L6 applies the accepted clause 7.1 clarification, replacing “is provided under the GNU General Public License” with “is **distributed under** the GNU General Public License” while retaining “is provided without warranties”. This identifies software distribution more precisely but does not change the warning, liability limitation, statutory rights or acceptance obligation. It is therefore assessed as non-substantive: Mining Risk Acknowledgement stays at version `1.0` and existing acceptance records remain valid. The structured canonical English source, pilot translations and Markdown reference are synchronised; already published v1.0.0 assets are not retrospectively modified.
 
 ## Structure
 
-- src/i18n/locales.json — locale registry and metadata, including developer-only locale marking.
-- src/i18n/catalogues/en-AU.json — canonical English translation catalogue; pilot and pseudo catalogues sit alongside it.
-- src/i18n/translation-status.json — pilot translation completeness, review method and provenance.
+- src/i18n/locales.json — locale registry and metadata.
+- src/i18n/catalogues/en-AU.json — canonical English translation catalogue; pilot and development-only catalogues sit beside it.
+- src/i18n/translation-status.json — translation completeness, community feedback and enablement/provenance records.
 - src/i18n/index.ts — locale resolution, translation lookup, interpolation, English fallback and persistent UI-language override hooks.
 - src/i18n/formatting.ts — number/date formatting helpers that use regional formatting independently of the UI language.
 - src/i18n/runtime.ts — Windows locale detection startup, override priority, document lang/dir updates and live language-change notifications.
@@ -28,10 +53,9 @@ Each locale registry entry contains:
 - native language name;
 - text direction (ltr or rtl);
 - fallback locale information;
-- whether the locale is release-enabled;
-- an optional developer-only marker for test locales such as en-XA.
+- whether the locale is release-enabled; an optional developer-only marker allows inactive test locales.
 
-The metadata is deliberately suitable for later right-to-left languages and for Windows preferred-UI-language matching. Arabic, Persian and Urdu are marked RTL in the registry now, although they remain disabled. Country flags are not used as language identifiers.
+Direction metadata is retained for extensibility and Windows preferred-UI-language matching. RTL implementation (including Arabic, Persian and Urdu) is optional future work requiring separate approval; neither v1.1.0 nor a later release is obliged by this programme to implement RTL. Such deferred entries remain disabled. Country flags are not used as language identifiers.
 
 ## Translation lookup and fallback
 
@@ -52,7 +76,7 @@ Selecting “Use Windows language” removes the explicit override and returns t
 
 Windows preference detection is performed in Rust with GetUserPreferredUILanguages using language-name format. The frontend passes only currently enabled application locales to the matcher, so disabled future catalogues cannot become active prematurely.
 
-The matcher is designed for the locked locale set. Regional Spanish variants collapse to es when enabled; Brazilian and European Portuguese remain distinct; Simplified and Traditional Chinese are selected using script/region information; Serbian Cyrillic and Latin remain distinct. Rust tests exercise these future mappings before those translations are enabled.
+The matcher is designed for an extensible enabled-locale registry. Regional Spanish variants collapse to es when enabled; Brazilian and European Portuguese remain distinct; Simplified and Traditional Chinese and Serbian script variants retain separate identities if and when enabled. Rust tests may cover registered future mappings without making inactive variants release requirements.
 
 The active locale updates document lang and dir immediately. The normal application chrome, persistent status text and Risk Acknowledgement refresh without discarding mining/settings state.
 
@@ -60,13 +84,13 @@ The UI language and regional formatting locale remain separate concerns. Changin
 
 ## Adding another locale later
 
-1. Add or update locale metadata in src/i18n/locales.json.
-2. Add a matching catalogue under src/i18n/catalogues.
-3. Register the catalogue in src/i18n/index.ts.
-4. Keep the complete key set aligned with en-AU.
-5. Preserve the same named placeholders used by the canonical English value.
-6. Run npm run i18n:check and npm run build.
-7. Enable a locale only when its catalogue is complete.
+1. Add or update locale metadata in src/i18n/locales.json without imposing a fixed total.
+2. Add a matching catalogue under src/i18n/catalogues and register it in src/i18n/index.ts.
+3. Keep the complete UI, accessibility, validation and status keys aligned with en-AU; preserve named placeholders.
+4. Add a complete, structurally validated, version-consistent Mining Risk Acknowledgement for the locale.
+5. Record translation provenance/review status and verify native-name, fallback and script metadata.
+6. Check visual rendering and Windows/manual language selection as appropriate to the actual script; run npm run i18n:check, npm run build and relevant tests.
+7. Enable the locale only following explicit release-scope approval and completion of all required content and checks. Partial, proposed and deferred locales remain disabled.
 
 Technical names and identifiers such as The Safex Mine, Safex Cash, SFX, XMRig, WinRing, MSR, UAC, RPC, SHA-256 and GPL-3.0 should not be translated casually.
 
@@ -76,7 +100,7 @@ Run:
 
     npm run i18n:check
 
-The validator checks locale metadata, enabled-locale catalogue presence, missing keys, unexpected keys, blank values and placeholder mismatches. It scans the normal frontend source, including the Risk Acknowledgement dialog chrome, for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue. It also validates each versioned Risk Acknowledgement document and compares its section/paragraph/list/emphasis structure with the canonical en-AU source.
+The validator checks locale metadata, release/developer locale completeness and translation provenance, missing keys, unexpected keys, blank values and placeholder mismatches. It scans the normal frontend source, including the Risk Acknowledgement dialog chrome, for translation-key references and verifies that every referenced key exists in the canonical en-AU catalogue. It also validates each versioned Risk Acknowledgement document and compares its section/paragraph/list/emphasis structure with the canonical en-AU source.
 
 ## L2 extraction notes
 
@@ -135,19 +159,18 @@ Translating Mining Risk Acknowledgement v1.0 into another language does **not** 
 
 The Windows API feature is enabled through the existing windows crate rather than introducing a new localisation dependency. The Rust command returns both the ordered Windows preferred-language list and the best match from the enabled locale IDs supplied by the frontend.
 
-L6 enables the first six translated release catalogues without changing the L5 selection priority. Windows locale matching receives release-enabled locale IDs only; the developer-only en-XA pseudo-locale is never selected from Windows preferences. In development builds, en-XA is available from the language selector for deliberate layout stress testing. Unsupported Windows languages continue to resolve safely to en-AU.
+At the completed L5 baseline, en-AU is the only enabled catalogue. The selector therefore offers “Use Windows language” and English (Australia). Unsupported Windows languages safely resolve to en-AU. Subsequent approved translation slices can enable more complete catalogues without changing the L5 selection priority.
 
 Language names come from locale metadata and are displayed in their own language. Country flags are not used. The language selector does not alter the saved Safex address, daemon, mining mode or sound preference, and selecting a UI language does not modify regional number/date conventions.
 
 ## L6 pilot-language and review notes
 
-The L6 pilot set is intentionally varied: German exercises text expansion, Serbian exercises both Cyrillic and Latin scripts, and Simplified Chinese and Japanese exercise CJK rendering. Spanish provides another widely used Latin-script language. Each enabled pilot locale contains the complete 104-key normal UI catalogue, including accessibility labels/tooltips, validation wording and backend/status explanations.
+The L6 pilot set is intentionally varied: German exercises text expansion, Serbian exercises both Cyrillic and Latin scripts, and Simplified Chinese and Japanese exercise CJK rendering. Spanish provides another widely used Latin-script language. All six language pilots retain the complete 104-key normal UI catalogue, including accessibility labels/tooltips, validation wording and backend/status explanations. Five are release-intended; Serbian Cyrillic is available only in development builds for script/layout tests.
 
 The en-XA pseudo-locale is generated from the canonical English strings with conspicuous delimiters, diacritics and deliberate expansion. It has a complete UI catalogue and Mining Risk Acknowledgement so both the main dashboard and first-run/review acknowledgement layouts can be stressed. It is marked `developerOnly`, remains `enabled: false`, is excluded from Windows automatic matching and is only selectable when Vite reports a development build.
 
 Mining Risk Acknowledgement v1.0 was translated clause-by-clause from the canonical en-AU structured source. The pilot translations preserve the same structural IDs, paragraph/list shape, emphasis pattern and acknowledgement version. A separate semantic/back-translation review checked the meaning of the risk warnings, warranty wording, statutory-rights qualification, responsibility clauses and limitation wording against the English source. Technical names and identifiers are preserved where appropriate.
 
-Translation status and provenance are recorded in `src/i18n/translation-status.json`. These are project-maintained community translations. No native-speaker, solicitor or legal certification is claimed. Translation corrections that preserve the canonical v1.0 meaning do not change `ACKNOWLEDGEMENT_VERSION`.
+Translation status and provenance are recorded in `src/i18n/translation-status.json`. These are project-maintained community translations. Serbian Latin clause 7.1 received a targeted native-speaker correction; that does not constitute review of every paragraph, and no solicitor or legal certification is claimed. Translation corrections and the non-substantive GPL distribution clarification preserve canonical v1.0 meaning and do not change `ACKNOWLEDGEMENT_VERSION` or previous acceptance.
 
 L6 also removes several fixed-width assumptions exposed by German and en-XA. Dashboard headers, stat labels, mode/action buttons and the Risk Acknowledgement header/actions can wrap or reflow without locale-specific CSS.
-
