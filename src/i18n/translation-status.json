@@ -21,19 +21,22 @@
       "review": "semantic-back-translation-complete"
     },
     "sr-Cyrl": {
-      "releaseEnabled": true,
+      "releaseEnabled": false,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
       "review": "semantic-back-translation-complete",
-      "derivedFrom": "sr-Latn with script transliteration and terminology review"
+      "derivedFrom": "sr-Latn with script transliteration and terminology review",
+      "developerOnly": true,
+      "deferredFromRelease": "Retained for pilot script/layout testing; Serbian Latin is the release-intended variant."
     },
     "sr-Latn": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete"
+      "review": "semantic-back-translation-complete",
+      "communityFeedback": "Targeted native-speaker clause 7.1 wording correction accepted; does not imply review or certification of the entire translation."
     },
     "zh-Hans": {
       "releaseEnabled": true,
@@ -57,5 +60,7 @@
       "riskAcknowledgement": "complete",
       "review": "generated-layout-stress-locale"
     }
-  }
+  },
+  "lastReconciledOn": "2026-10-05",
+  "canonicalClarification": "Clause 7.1: 'provided under' to 'distributed under'; non-substantive clarification of GPL distribution terminology; acknowledgement remains version 1.0."
 }
