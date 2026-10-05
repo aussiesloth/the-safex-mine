@@ -4,7 +4,7 @@ All notable public-facing changes to The Safex Mine will be recorded here.
 
 The first public release is version **1.0.0**.
 
-## [Unreleased] — v1.1.0 development
+## [Unreleased] — v1.1.0 release-ready
 
 ### Added
 
@@ -25,10 +25,10 @@ The first public release is version **1.0.0**.
 
 ### Current release status
 
-- The published release remains **v1.0.0**. The localisation work above exists on the development branch history/current `main` and is not contained in the v1.0.0 installer.
-- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete in the v1.1.0 development line.
-- L9 release hardening has advanced application, Tauri, Rust and helper package versions consistently to `1.1.0`; Mining Risk Acknowledgement remains version `1.0`.
-- L9 automated checks, production NSIS packaging and the final installation/launch/uninstall validation completed successfully on 6 October 2026. The exact-final-commit candidate rebuild and SHA-256 remain before the separate publication gate.
+- The published release remains **v1.0.0** until the v1.1.0 GitHub release is actually published.
+- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete.
+- L9 release hardening is merged to `main`; application, Tauri, Rust and helper package versions are consistently `1.1.0`, while Mining Risk Acknowledgement remains version `1.0`.
+- L9 automated checks, production NSIS packaging, final installation/launch/uninstall validation and dependency-licence review completed successfully on 6 October 2026. `main` is release-ready; only the final post-documentation build/checksum, explicit release approval and publication remain.
 
 ## [1.0.0] - 2026-09-18
 

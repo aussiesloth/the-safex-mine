@@ -43,13 +43,13 @@ After acceptance, the full notice remains available from the **Risk notice** con
 
 The repository copy of the published English v1.0 notice is maintained in `docs/MINING_RISK_ACKNOWLEDGEMENT.md`.
 
-## Current multilingual first-run implementation on main (unreleased v1.1.0 development)
+## Current multilingual first-run implementation on main (release-ready v1.1.0)
 
 The current `main` branch implements a language selector on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority is: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
 
 The selected enabled language controls both the dialog chrome and its complete version-consistent acknowledgement text. English remains an available reference/fallback. Switching language must not implicitly record acceptance, reset the checkbox/acceptance version improperly, modify the mining address, daemon, CPU mode, sound preference or ongoing mining session, or force a different regional number/date convention.
 
-Current `main` has canonical English plus **23 release-enabled translated LTR locales**, all with complete UI/accessibility/status and acknowledgement content and completed translation-quality review. This is the current v1.1.0 release set, not a permanent language limit. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are not ordinary release choices. RTL is optional future work and is not a v1.1.0 prerequisite. The published v1.0.0 installer remains unchanged and does not contain this multilingual implementation.
+Current `main` has canonical English plus **23 release-enabled translated LTR locales**, all with complete UI/accessibility/status and acknowledgement content and completed translation-quality review. This is the release-ready v1.1.0 set, not a permanent language limit. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are not ordinary release choices. RTL is optional future work and is not a v1.1.0 prerequisite. The published v1.0.0 installer remains unchanged and does not contain this multilingual implementation.
 
 The published v1.0.0 Risk Acknowledgement acceptance marker remains version `1.0`. Merely adding translations or correcting translation phrasing does not create a new acknowledgement version; assess any canonical English wording clarification separately under the substantive-change rule. Existing acceptance is preserved unless that rule actually requires a new version. The original published v1.0.0 release assets are not retroactively altered.
 
@@ -154,7 +154,7 @@ Persisted:
 - mining mode;
 - sound-muted preference.
 
-Current `main` additionally persists an explicit UI-language override (or its removal when using Windows language); this behaviour is part of the unreleased v1.1.0 development line and was not part of the published v1.0.0 installer.
+Current `main` additionally persists an explicit UI-language override (or its removal when using Windows language); this behaviour is part of the release-ready v1.1.0 implementation and was not part of the published v1.0.0 installer.
 
 Not persisted:
 
