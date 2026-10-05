@@ -138,7 +138,7 @@ Completed development stages:
 Next release stages:
 
 - **L8 — complete and merged:** one Windows x64 NSIS installer carries English plus 21 translated installer languages, with seven project-maintained Tauri-message files, English installer fallback for Filipino/Bengali, and essential translated installation/security/first-use guides for all 23 translated app locales. Automated, package-build and representative physical Windows acceptance completed on 6 October 2026;
-- **L9 — in progress:** harden against the actual enabled locale registry, keep all release version sources aligned at 1.1.0, run final automated/package checks, perform one final candidate installation/uninstall validation, and prepare—but do not publish—the release candidate;
+- **L9 — validation complete, candidate freeze pending:** all release version sources are aligned at 1.1.0; final automated checks, production NSIS packaging and one installation/launch/uninstall validation passed on 6 October 2026. Rebuild once from the exact final L9 commit, record the SHA-256, and prepare—but do not publish—the release candidate;
 - **Final release gate:** publish v1.1.0 only after explicit approval of the verified commit, release notes, installer and checksum materials.
 
 Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) remain deferred from ordinary release selection. RTL implementation is optional future investigation and is not a v1.1.0 or later mandatory gate under the current programme. New languages can be added through separately approved work without creating a universal maximum.
