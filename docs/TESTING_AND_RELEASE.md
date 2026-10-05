@@ -273,3 +273,21 @@ RTL delivery or testing is **not required** for v1.1.0 or a later release under 
 
 Do not create a tag, publish a GitHub release, or modify existing v1.0.0 assets during the development slices. After the L9 PR is merged and final tests are approved, present the release title, notes, exact tagged commit, expected NSIS installer, checksum filename and publication checklist for explicit authorisation before publishing.
 
+
+### L7a acceptance matrix — nine Latin-script locales
+
+On the L7a branch, run `npm ci`, `npm run i18n:check`, `npm run build`, and `cargo test --manifest-path .\\src-tauri\\Cargo.toml`. Run the Tauri development application using `npm run tauri dev` on the Windows MSVC development system with the existing helper/XMRig resources. Record actual local command outcomes in the PR before merge; connector-side structural review is not a substitute for a Windows build.
+
+| Focus | Manual check |
+| --- | --- |
+| Every L7a locale | Main dashboard, all mode names, Start/Stop, tooltips, translated statuses, Risk Notice and first-run acknowledgement |
+| Narrow window | Minimum configured 900 × 650, including long French, Polish, Hungarian and Slovenian labels; no clipping or unintentional mid-word breaks |
+| Portuguese | Switch between `pt-BR` and `pt-PT`; check genuinely regional vocabulary; confirm both persist independently |
+| Diacritics | French punctuation; Polish ł/ą/ę/ś/ź/ż; Turkish İ/ı/ğ/ş/ç/ö/ü; Hungarian ő/ű; Slovenian č/š/ž |
+| Risk Acknowledgement | All seven section headings, five hardware list items, highlighted statutory-rights paragraph, complete scrolling, footer buttons, no checkbox reset merely from switching language |
+| Language selection | First-run language switch before acceptance, Windows/default override, explicit override after restart and document `lang`; no change to regional telemetry formatting |
+| Existing acceptance | A profile with stored acknowledgement `1.0` must not be prompted again after the UI changes language |
+| Technical fields | Addresses, RPC/daemon endpoints, version strings, block heights, rates, UAC/MSR/XMRig references remain readable and unchanged in meaning |
+| Targeted mining | In one selected L7a locale: valid address and daemon, Start → helper UAC → actual hashrate/threads → Stop; switch language during mining and check telemetry and settings remain intact |
+
+L6's exhaustive MSR/degraded-recovery/daemon-disconnect regression is not required again unless source review detects a mining-related change. Do not change the v1.0.0 release artefacts, generate a new installer or bump versions during L7a.
