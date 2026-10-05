@@ -291,3 +291,22 @@ On the L7a branch, run `npm ci`, `npm run i18n:check`, `npm run build`, and `car
 | Targeted mining | In one selected L7a locale: valid address and daemon, Start → helper UAC → actual hashrate/threads → Stop; switch language during mining and check telemetry and settings remain intact |
 
 L6's exhaustive MSR/degraded-recovery/daemon-disconnect regression is not required again unless source review detects a mining-related change. Do not change the v1.0.0 release artefacts, generate a new installer or bump versions during L7a.
+
+
+### L7b acceptance matrix — Cyrillic and Greek
+
+On the L7b branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manifest-path .\\src-tauri\\Cargo.toml`, and `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`. Run `npm run tauri dev` on the Windows MSVC development system.
+
+| Focus | Manual check |
+| --- | --- |
+| Russian | Main dashboard, translated mode/status/error labels, Cyrillic line-height and whole-word wrapping |
+| Ukrainian | Main dashboard plus correct rendering of `І/і`, `Ї/ї`, `Є/є`, `Ґ/ґ`; no accidental substitution or clipping |
+| Greek | Main dashboard plus accented Greek vowels, uppercase scene labels, line-height and font fallback |
+| Mining modes | Confirm content-aware horizontal/vertical orientation responds to translated labels rather than script or fixed width |
+| Risk Acknowledgement | For all three locales: title/selector layout, all seven sections, final liability/GPL section, highlighted statutory-rights paragraph, scrolling and footer controls |
+| First run | In the longest/stress locale: language switching before acceptance, checkbox remains unticked, Continue enables only after selection |
+| Persistence | Explicit locale survives restart; existing acknowledgement `1.0` remains accepted |
+| Technical fields | Safex address, RPC/daemon endpoint, UAC/MSR/XMRig, version and telemetry remain legible and unchanged |
+| Targeted mining | In one L7b locale: Start → UAC → live telemetry → language switch → Stop; settings and mining state remain intact |
+
+The existing Serbian Cyrillic developer-only locale remains useful as a comparison but is not a release acceptance target. Do not repeat the exhaustive unchanged L6 mining/MSR/daemon-loss suite unless implementation review identifies a mining-related change.
