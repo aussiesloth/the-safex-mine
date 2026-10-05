@@ -299,7 +299,7 @@ input {
   */
   grid-template-columns:
     minmax(0, 1fr)
-    clamp(290px, 27vw, 380px);
+    clamp(320px, 31vw, 460px);
 }
 
 
@@ -448,6 +448,9 @@ input {
 .panel-section {
   margin-bottom:
     clamp(20px, 2.2vh, 30px);
+
+  /* Query the section's available width in both desktop layouts. */
+  container: control-section / inline-size;
 }
 
 .panel-section h2 {
@@ -558,7 +561,8 @@ input {
   cursor: pointer;
 
   line-height: 1.25;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
 
   transition:
     background 120ms ease,
@@ -576,6 +580,14 @@ input {
   border-color: #a66e30;
 
   background: #49341f;
+}
+
+/* Preserve whole mode names; stack whenever the section is too narrow
+   for three evenly sized buttons, irrespective of overall window width. */
+@container control-section (max-width: 400px) {
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -666,7 +678,8 @@ input {
 
   font-weight: 650;
   line-height: 1.25;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .primary-button {
