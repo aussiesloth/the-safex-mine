@@ -190,6 +190,10 @@ MSR failure is treated differently: mining may continue in degraded-performance 
 
 L7a added selectable app UI and first-run acknowledgement languages `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, and `sl`. Windows first-run language switching, persistence and acknowledgement continuity were confirmed before PR #12 was merged. These languages are not contained in the published v1.0.0 installer.
 
-### L7b pending-development coverage
+### L7b coverage
 
-The dedicated L7b PR extends selectable app UI and first-run acknowledgement languages with Russian (`ru`), Ukrainian (`uk`) and Greek (`el`). Acceptance version and storage remain unchanged. Windows Cyrillic/Greek rendering, first-run language switching, persistence and a targeted live-mining language-switch check require local pre-merge confirmation.
+L7b added selectable app UI and first-run acknowledgement languages Russian (`ru`), Ukrainian (`uk`) and Greek (`el`). Windows Cyrillic/Greek rendering, first-run switching, persistence, acknowledgement continuity and a targeted live-mining language switch were confirmed before PR #13 was merged. Acceptance version and storage remain unchanged.
+
+### L7c pending-development coverage
+
+The dedicated L7c branch extends selectable app UI and first-run acknowledgement languages with Indonesian (`id`), Vietnamese (`vi`) and Filipino (`fil`). Acceptance version and storage remain unchanged. Windows Latin-script wrapping, Vietnamese diacritic/font/line-height rendering, natural Filipino terminology, first-run language switching, persistence and a targeted live-mining language-switch check require local pre-merge confirmation.
