@@ -186,6 +186,10 @@ Mining is prevented or reported clearly when, for example:
 
 MSR failure is treated differently: mining may continue in degraded-performance mode.
 
-### L7a pending-development coverage
+### L7a coverage
 
-The dedicated L7a PR extends selectable app UI and first-run acknowledgement languages with `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, and `sl`. These are not contained in the published v1.0.0 installer. Acceptance version and storage remain unchanged; real Windows first-run language switching and persistence require local pre-merge confirmation.
+L7a added selectable app UI and first-run acknowledgement languages `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, and `sl`. Windows first-run language switching, persistence and acknowledgement continuity were confirmed before PR #12 was merged. These languages are not contained in the published v1.0.0 installer.
+
+### L7b pending-development coverage
+
+The dedicated L7b PR extends selectable app UI and first-run acknowledgement languages with Russian (`ru`), Ukrainian (`uk`) and Greek (`el`). Acceptance version and storage remain unchanged. Windows Cyrillic/Greek rendering, first-run language switching, persistence and a targeted live-mining language-switch check require local pre-merge confirmation.

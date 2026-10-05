@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "el",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "Το The Safex Mine είναι μια εφαρμογή που αναπτύχθηκε από την κοινότητα για αυτόνομη εξόρυξη ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": ". Πριν χρησιμοποιήσετε τις λειτουργίες εξόρυξης, διαβάστε και επιβεβαιώστε ότι κατανοείτε τις ακόλουθες πληροφορίες.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Ανταμοιβές και αξία εξόρυξης",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η εξόρυξη κρυπτονομισμάτων είναι κερδοσκοπική δραστηριότητα. Το The Safex Mine δεν εγγυάται ότι ο υπολογιστής σας θα βρει μπλοκ, θα λάβει οποιαδήποτε ανταμοιβή εξόρυξης, θα λειτουργήσει κερδοφόρα ή θα ανακτήσει το κόστος ηλεκτρικής ενέργειας ή εξοπλισμού.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η αξία του Safex Cash μπορεί να αυξηθεί ή να μειωθεί και σε οποιαδήποτε χρονική στιγμή μπορεί να έχει μικρή ή μηδενική πραγματική αγοραία αξία. Τα προηγούμενα αποτελέσματα εξόρυξης δεν αποτελούν ένδειξη ούτε εγγύηση μελλοντικών αποτελεσμάτων.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το The Safex Mine δεν παρέχει χρηματοοικονομικές, επενδυτικές, φορολογικές ή νομικές συμβουλές.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Φορτίο υλικού, θερμότητα και κατανάλωση ενέργειας",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η εξόρυξη κρυπτονομισμάτων μπορεί να επιβάλλει παρατεταμένο φορτίο στη CPU και σε άλλα εξαρτήματα του υπολογιστή. Αυτό μπορεί να αυξήσει:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "τη θερμοκρασία του επεξεργαστή και τη θερμότητα του συστήματος,",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "την ταχύτητα των ανεμιστήρων και τη χρήση του συστήματος ψύξης,",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "την κατανάλωση ηλεκτρικής ενέργειας,",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "το φορτίο στα εξαρτήματα τροφοδοσίας της μητρικής πλακέτας, και",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "τη γενική φθορά του υλικού κατά την παρατεταμένη λειτουργία.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Είστε υπεύθυνοι να αποφασίσετε αν ο υπολογιστής, το σύστημα ψύξης και το τροφοδοτικό σας είναι κατάλληλα για παρατεταμένη εξόρυξη και να παρακολουθείτε το σύστημά σας όπως απαιτείται.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η χρήση λογισμικού εξόρυξης κρυπτονομισμάτων μπορεί να επηρεάσει την κάλυψη μιας εθελοντικής εγγύησης του κατασκευαστή, ανάλογα με τους όρους της και τις περιστάσεις οποιασδήποτε βλάβης. Η παρούσα δήλωση δεν επηρεάζει κανένα νόμιμο δικαίωμα ή μέσο αποκατάστασης που δεν μπορεί νόμιμα να αποκλειστεί.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Ασφάλεια Windows και πρόσβαση αυξημένων δικαιωμάτων",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το The Safex Mine περιλαμβάνει ένα συμβατό με Safex υποσύστημα εξόρυξης XMRig, μια βοηθητική διεργασία αυξημένων δικαιωμάτων και το πρόγραμμα οδήγησης WinRing, που χρησιμοποιείται για την απόπειρα βελτιστοποίησης της απόδοσης MSR στα Windows.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Αυτά τα στοιχεία ενδέχεται να εντοπιστούν, να αποκλειστούν ή να τεθούν σε καραντίνα από το Microsoft Defender, το Windows SmartScreen ή άλλο λογισμικό ασφαλείας.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το The Safex Mine δεν απενεργοποιεί αυτόματα την προστασία από ιούς, δεν επαναφέρει αρχεία από την καραντίνα και δεν δημιουργεί εξαιρέσεις προστασίας από ιούς. Οποιαδήποτε απόφαση για επαναφορά εντοπισμένου αρχείου, δημιουργία εξαίρεσης ή προσωρινή αλλαγή των ρυθμίσεων του λογισμικού ασφαλείας παραμένει δική σας.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η έναρξη εξόρυξης απαιτεί την έγκριση ενός αιτήματος Windows UAC για τη βοηθητική διεργασία εξόρυξης αυξημένων δικαιωμάτων. Η ίδια η γραφική εφαρμογή προορίζεται να συνεχίσει να λειτουργεί χωρίς δικαιώματα διαχειριστή.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Οι λειτουργίες ασφαλείας των Windows ενδέχεται να εμποδίσουν τη βελτιστοποίηση MSR. Σε αυτή την περίπτωση η εξόρυξη μπορεί να συνεχιστεί με μειωμένη απόδοση. Δεν απαιτείται να απενεργοποιήσετε λειτουργίες ασφαλείας των Windows μόνο και μόνο για να πετύχετε υψηλότερη απόδοση εξόρυξης.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Σταθερότητα συστήματος και δεδομένα",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το παρατεταμένο υψηλό φορτίο CPU μπορεί να συμβάλει σε αστάθεια του συστήματος όταν υπάρχει ανεπαρκής ψύξη, ασταθές υλικό, υπερχρονισμός, προβλήματα τροφοδοσίας ή άλλα προϋπάρχοντα προβλήματα.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Πριν από παρατεταμένη ή χωρίς επίβλεψη εξόρυξη, βεβαιωθείτε ότι υπάρχουν αντίγραφα ασφαλείας των σημαντικών δεδομένων και ότι ο υπολογιστής σας λειτουργεί αξιόπιστα.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Κανένα λογισμικό δεν μπορεί να εγγυηθεί ότι δεν θα συμβούν ποτέ καταρρεύσεις, απώλεια δεδομένων, βλάβες υλικού ή άλλα προβλήματα συστήματος.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Ρύθμιση εξόρυξης",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Είστε υπεύθυνοι για τη διεύθυνση Safex Cash και τη ρύθμιση του daemon που εισάγετε στην εφαρμογή.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Πριν ξεκινήσετε, επιβεβαιώστε ότι η διεύθυνση εξόρυξης είναι σωστή. Ο προγραμματιστής δεν μπορεί να ανακτήσει κρυπτονόμισμα που στάλθηκε ή πιστώθηκε σε λανθασμένη διεύθυνση.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Παραμένετε υπεύθυνοι για τη συμμόρφωση με νόμους, φορολογικές απαιτήσεις, συμβάσεις ηλεκτρικής ενέργειας ή άλλες υποχρεώσεις που ισχύουν για τη χρήση εξόρυξης κρυπτονομισμάτων.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Καμία εγγύηση απόδοσης",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το hashrate και η απόδοση εξόρυξης διαφέρουν μεταξύ υπολογιστών και μπορεί να επηρεάζονται από την αρχιτεκτονική CPU, τη ρύθμιση μνήμης, την ψύξη, τα όρια ισχύος, τις λειτουργίες ασφαλείας των Windows και άλλο λογισμικό που εκτελείται στο σύστημα.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Τα προφίλ Ήπιο, Ισορροπημένο και Πλήρης ισχύς ελέγχουν την ποσότητα πόρων CPU που διατίθεται στον εξορύκτη. Δεν εγγυώνται συγκεκριμένο hashrate, συχνότητα ανταμοιβών ή κερδοφορία.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Εγγύηση λογισμικού και ευθύνη",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Το The Safex Mine διανέμεται σύμφωνα με την ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " και παρέχεται χωρίς εγγυήσεις πέρα από εκείνες που δεν μπορούν νόμιμα να αποκλειστούν.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Στον μέγιστο βαθμό που επιτρέπεται από την εφαρμοστέα νομοθεσία, δεν παρέχεται εγγύηση ότι το λογισμικό θα είναι χωρίς σφάλματα, θα λειτουργεί χωρίς διακοπές, θα είναι συμβατό με κάθε υπολογιστή ή δεν θα έχει δυσμενείς αλληλεπιδράσεις με άλλο λογισμικό ή υλικό.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Στον μέγιστο βαθμό που επιτρέπεται από την εφαρμοστέα νομοθεσία, ο προγραμματιστής δεν ευθύνεται για απώλεια ή ζημία που προκύπτει από την απόφαση ενός χρήστη να χρησιμοποιήσει λογισμικό εξόρυξης κρυπτονομισμάτων, συμπεριλαμβανομένων απωλειών που σχετίζονται με τη λειτουργία του υλικού, τη θερμότητα, την κατανάλωση ηλεκτρικής ενέργειας, την αστάθεια του συστήματος, την απώλεια δεδομένων, τη διακοπή χρήσης του υπολογιστή, χαμένες ανταμοιβές εξόρυξης ή μεταβολές στην αξία των κρυπτονομισμάτων.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Τίποτα στην παρούσα δήλωση δεν αποκλείει, περιορίζει ή τροποποιεί οποιοδήποτε δικαίωμα, εγγύηση ή μέσο αποκατάστασης που δεν μπορεί νόμιμα να αποκλειστεί, να περιοριστεί ή να τροποποιηθεί.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Η παρούσα δήλωση δεν αντικαθιστά, δεν τροποποιεί και δεν επιβάλλει πρόσθετους περιορισμούς στην άδεια GPL-3.0 ή στις άδειες που ισχύουν για στοιχεία τρίτων που περιλαμβάνονται στο The Safex Mine.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

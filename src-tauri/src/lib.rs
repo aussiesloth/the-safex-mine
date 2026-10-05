@@ -1186,6 +1186,45 @@ mod tests {
     }
 
     #[test]
+    fn locale_matcher_covers_l7b_cyrillic_and_greek_languages() {
+        let supported = vec![
+            "en-AU".to_string(),
+            "ru".to_string(),
+            "uk".to_string(),
+            "el".to_string(),
+        ];
+
+        for (preferred, expected) in [
+            ("ru-RU", "ru"),
+            ("ru-KZ", "ru"),
+            ("uk-UA", "uk"),
+            ("el-GR", "el"),
+            ("ru", "ru"),
+            ("uk", "uk"),
+            ("el", "el"),
+        ] {
+            assert_eq!(
+                match_preferred_locale(&[preferred.to_string()], &supported).as_deref(),
+                Some(expected),
+                "unexpected match for {preferred}"
+            );
+        }
+
+        assert_eq!(
+            match_preferred_locale(
+                &[
+                    "xx-YY".to_string(),
+                    "uk-UA".to_string(),
+                    "ru-RU".to_string(),
+                ],
+                &supported,
+            )
+            .as_deref(),
+            Some("uk")
+        );
+    }
+
+    #[test]
     fn unsupported_windows_language_leaves_frontend_to_use_canonical_fallback() {
         let supported = vec!["en-AU".to_string()];
 
