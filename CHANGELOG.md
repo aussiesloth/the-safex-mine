@@ -28,7 +28,7 @@ The first public release is version **1.0.0**.
 - The published release remains **v1.0.0**. The localisation work above exists on the development branch history/current `main` and is not contained in the v1.0.0 installer.
 - L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete in the v1.1.0 development line.
 - L9 release hardening has advanced application, Tauri, Rust and helper package versions consistently to `1.1.0`; Mining Risk Acknowledgement remains version `1.0`.
-- Final v1.1.0 candidate automation/package checks and one installation/uninstall validation remain before the separate publication gate.
+- L9 automated checks, production NSIS packaging and the final installation/launch/uninstall validation completed successfully on 6 October 2026. The exact-final-commit candidate rebuild and SHA-256 remain before the separate publication gate.
 
 ## [1.0.0] - 2026-09-18
 
