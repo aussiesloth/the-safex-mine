@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "acknowledgementVersion": "1.0",
+  "locale": "hu",
+  "blocks": [
+    {
+      "id": "introduction",
+      "type": "paragraph",
+      "emphasis": false,
+      "segments": [
+        {
+          "text": "A The Safex Mine egy közösségi fejlesztésű alkalmazás a ",
+          "strong": false
+        },
+        {
+          "text": "Safex Cash (SFX)",
+          "strong": true
+        },
+        {
+          "text": " önálló bányászatához. A bányászati funkciók használata előtt kérjük, olvassa el és vegye tudomásul az alábbi információkat.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "id": "mining-rewards-and-value",
+      "type": "section",
+      "heading": "Bányászati jutalmak és érték",
+      "blocks": [
+        {
+          "id": "mining-rewards-and-value-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A kriptovaluta-bányászat spekulatív tevékenység. A The Safex Mine nem garantálja, hogy a számítógépe blokkot talál, bányászati jutalmat kap, nyereségesen működik, vagy megtérül az áram és a berendezések költsége.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A Safex Cash értéke nőhet vagy csökkenhet, és egy adott időpontban csekély vagy semmilyen valós piaci értékkel nem rendelkezhet. A korábbi bányászati eredmények nem jelzik és nem garantálják a jövőbeni eredményeket.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-rewards-and-value-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A The Safex Mine nem nyújt pénzügyi, befektetési, adózási vagy jogi tanácsadást.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-load-heat-and-power-consumption",
+      "type": "section",
+      "heading": "Hardverterhelés, hő és áramfogyasztás",
+      "blocks": [
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A kriptovaluta-bányászat tartós terhelést jelenthet a CPU és a számítógép egyéb alkatrészei számára. Ez növelheti:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-list-1",
+          "type": "list",
+          "items": [
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
+              "segments": [
+                {
+                  "text": "a processzor hőmérsékletét és a rendszer hőtermelését;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
+              "segments": [
+                {
+                  "text": "a ventilátorok fordulatszámát és a hűtőrendszer használatát;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
+              "segments": [
+                {
+                  "text": "az áramfogyasztást;",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
+              "segments": [
+                {
+                  "text": "az alaplap tápellátó alkatrészeinek terhelését; valamint",
+                  "strong": false
+                }
+              ]
+            },
+            {
+              "id": "hardware-load-heat-and-power-consumption-list-1-item-5",
+              "segments": [
+                {
+                  "text": "a hardver általános elhasználódását hosszabb működés során.",
+                  "strong": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ön felel annak eldöntéséért, hogy a számítógépe, hűtőrendszere és tápegysége alkalmas-e folyamatos bányászatra, valamint a rendszer megfelelő felügyeletéért.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "hardware-load-heat-and-power-consumption-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A kriptovaluta-bányászati szoftver használata a gyártó önként vállalt jótállásának feltételeitől és az esetleges meghibásodás körülményeitől függően befolyásolhatja a jótállási fedezetet. Ez a nyilatkozat nem érinti azokat a törvényes jogokat vagy jogorvoslatokat, amelyek jogszerűen nem zárhatók ki.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows-security-and-elevated-access",
+      "type": "section",
+      "heading": "Windows-biztonság és emelt jogosultságú hozzáférés",
+      "blocks": [
+        {
+          "id": "windows-security-and-elevated-access-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A The Safex Mine tartalmaz egy Safex-kompatibilis XMRig bányászati háttérrendszert, egy emelt jogosultságú segédfolyamatot, valamint a WinRing illesztőprogramot, amellyel a Windows MSR-teljesítményoptimalizálást próbálja megvalósítani.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ezeket az összetevőket a Microsoft Defender, a Windows SmartScreen vagy más biztonsági szoftver észlelheti, blokkolhatja vagy karanténba helyezheti.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A The Safex Mine nem kapcsolja ki automatikusan a vírusvédelmet, nem állítja vissza a karanténba helyezett fájlokat és nem hoz létre vírusvédelmi kivételeket. Az észlelt fájl visszaállításáról, kivétel létrehozásáról vagy a biztonsági szoftver beállításainak ideiglenes módosításáról kizárólag Ön dönt.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-4",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A bányászat indításához jóvá kell hagyni az emelt jogosultságú bányászati segédfolyamat Windows UAC-kérését. Maga a grafikus alkalmazás a tervek szerint rendszergazdai jogosultság nélkül fut tovább.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "windows-security-and-elevated-access-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A Windows biztonsági funkciói megakadályozhatják az MSR-optimalizálást. Ilyenkor a bányászat csökkentett teljesítménnyel folytatódhat. Nem szükséges kikapcsolnia a Windows biztonsági funkcióit pusztán a nagyobb bányászati teljesítmény érdekében.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-stability-and-data",
+      "type": "section",
+      "heading": "Rendszerstabilitás és adatok",
+      "blocks": [
+        {
+          "id": "system-stability-and-data-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A tartósan magas CPU-terhelés hozzájárulhat a rendszer instabilitásához, ha a hűtés elégtelen, a hardver instabil, túlhajtott, tápellátási problémák állnak fenn vagy más meglévő gondok jelentkeznek.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Hosszabb ideig tartó vagy felügyelet nélküli bányászat előtt gondoskodjon fontos adatainak biztonsági mentéséről, és győződjön meg arról, hogy számítógépe megbízhatóan működik.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "system-stability-and-data-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Semmilyen szoftver nem garantálhatja, hogy soha nem történik összeomlás, adatvesztés, hardverhiba vagy más rendszerprobléma.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mining-configuration",
+      "type": "section",
+      "heading": "Bányászati beállítások",
+      "blocks": [
+        {
+          "id": "mining-configuration-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ön felel az alkalmazásban megadott Safex Cash-cím és démonbeállítások helyességéért.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Indítás előtt ellenőrizze a bányászati cím helyességét. A fejlesztő nem tudja visszaszerezni a hibás címre küldött vagy ott jóváírt kriptovalutát.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "mining-configuration-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ön továbbra is felel a kriptovaluta-bányászatra vonatkozó jogszabályok, adókötelezettségek, áramszolgáltatási szerződések és egyéb kötelezettségek betartásáért.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-guarantee-of-performance",
+      "type": "section",
+      "heading": "Nincs teljesítménygarancia",
+      "blocks": [
+        {
+          "id": "no-guarantee-of-performance-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A hashráta és a bányászati teljesítmény számítógépenként változik, és függhet a CPU architektúrájától, a memóriabeállításoktól, a hűtéstől, a teljesítménykorlátoktól, a Windows biztonsági funkcióitól és a futó egyéb szoftverektől.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "no-guarantee-of-performance-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A Kímélő, Kiegyensúlyozott és Teljes teljesítmény profilok szabályozzák, mennyi CPU-erőforrás áll a bányász rendelkezésére. Nem garantálnak meghatározott hashrátát, jutalomszerzési gyakoriságot vagy nyereségességet.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-warranty-and-liability",
+      "type": "section",
+      "heading": "Szoftverjótállás és felelősség",
+      "blocks": [
+        {
+          "id": "software-warranty-and-liability-paragraph-1",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "A The Safex Mine terjesztése a ",
+              "strong": false
+            },
+            {
+              "text": "GNU General Public License v3.0 (GPL-3.0)",
+              "strong": true
+            },
+            {
+              "text": " feltételei szerint történik, és a jogszerűen ki nem zárható garanciákon túl garanciavállalás nélkül kerül rendelkezésre bocsátásra.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-2",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Az alkalmazandó jog által megengedett legteljesebb mértékben nincs garancia arra, hogy a szoftver hibamentes, megszakítás nélkül működik, minden számítógéppel kompatibilis, vagy nem lép hátrányos kölcsönhatásba más szoftverrel vagy hardverrel.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-3",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Az alkalmazandó jog által megengedett legteljesebb mértékben a fejlesztő nem felel a felhasználó kriptovaluta-bányászati szoftver használatára vonatkozó döntéséből eredő veszteségért vagy kárért, beleértve a hardver működésével, a hővel, az áramfogyasztással, a rendszer instabilitásával, az adatvesztéssel, a számítógép használatának megszakadásával, az elmaradt bányászati jutalmakkal vagy a kriptovaluta értékének változásával összefüggő veszteségeket.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-4",
+          "type": "paragraph",
+          "emphasis": true,
+          "segments": [
+            {
+              "text": "Ebben a nyilatkozatban semmi nem zár ki, nem korlátoz és nem módosít olyan jogot, garanciát vagy jogorvoslatot, amely jogszerűen nem zárható ki, nem korlátozható vagy nem módosítható.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "id": "software-warranty-and-liability-paragraph-5",
+          "type": "paragraph",
+          "emphasis": false,
+          "segments": [
+            {
+              "text": "Ez a nyilatkozat nem helyettesíti és nem módosítja a GPL-3.0 licencet, illetve a The Safex Mine részét képező harmadik féltől származó összetevők licenceit, és nem ró rájuk további korlátozásokat.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
