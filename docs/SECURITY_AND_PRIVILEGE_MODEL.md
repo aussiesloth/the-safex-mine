@@ -108,9 +108,9 @@ Safex mining addresses and public node endpoints are not passwords, but release 
 
 ## 12. Unsigned release model
 
-The planned public Windows release is unsigned.
+The published v1.0.0 Windows release is unsigned. The current v1.1.0 development path is also expected to remain unsigned unless a future signing arrangement changes.
 
-This means users may encounter SmartScreen/trust warnings. Public releases should compensate with transparency:
+Users may therefore encounter SmartScreen/trust warnings. Public releases compensate with transparency:
 
 - public source;
 - exact version/source references;
@@ -132,14 +132,8 @@ The Safex Mine must never:
 
 Documentation may explain how a user who has independently verified the release can restore an expected quarantined runtime file or add a narrowly scoped exclusion for the dedicated installation/runtime folder. It must not recommend broad exclusions or disabling real-time protection.
 
-## 14. Remaining release-security work
+## 14. Release-security validation status
 
-Before public release:
+The v1.0.0 release completed the release-security work that had previously been listed as pending. Clean-machine testing covered the unsigned NSIS installer, installed runtime layout, helper-only UAC behaviour, Microsoft Defender quarantine/recovery, a narrow install-folder exclusion, full-scan behaviour and uninstall. The published release includes a SHA-256 checksum and the required project/third-party licence material. Earlier development-only probe commands are not registered in the production invoke handler.
 
-- remove any remaining dead/unregistered development probe code after compile validation;
-- test installed-file permissions for the packaged `runtime/` resources;
-- test the unsigned installer on a clean Windows system;
-- verify the installed helper is the only component requesting UAC;
-- document observed SmartScreen/AV behaviour;
-- publish release checksums;
-- verify all bundled licence/notices are present in the installed artefact.
+For future releases, these are release-specific checks rather than one-time assumptions. L8 may change installer/document localisation but must not change the split-privilege model. L9 must revalidate the exact v1.1.0 release candidate, bundled runtime resources, checksum procedure, UAC behaviour and relevant SmartScreen/antivirus behaviour before publication.

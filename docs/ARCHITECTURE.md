@@ -38,7 +38,9 @@ It owns:
 - block/reject counters;
 - session-time display;
 - the block-found sound and mute preference;
-- local persistence of user-facing settings.
+- local persistence of user-facing settings;
+- localisation runtime, Windows-language/manual-locale selection and live UI-language changes;
+- the versioned Mining Risk Acknowledgement presentation layer.
 
 The main frontend entry point is `src/main.ts`, with application styling in `src/styles.css`.
 
@@ -183,7 +185,8 @@ The frontend stores ordinary user preferences in browser local storage:
 - mining address;
 - daemon endpoint;
 - selected mining mode;
-- sound-muted state.
+- sound-muted state;
+- explicit UI-language override (or absence of an override when following Windows language).
 
 Mining-session counters and elapsed mining time are in-memory session state and reset when the application is fully restarted.
 
@@ -196,4 +199,4 @@ The standard-user backend resolves the elevated helper in this order:
 
 The release-only Tauri configuration maps the helper, XMRig and WinRing driver into one packaged `runtime/` directory. This keeps the installed privilege/process model the same as development while removing source-tree path assumptions from the packaged application.
 
-The remaining packaging work is validation of the generated installer on a clean Windows system.
+The v1.0.0 packaged runtime and installer path completed clean-machine validation before publication. Future releases must repeat release-specific packaging and clean-machine checks against the exact release candidate; for v1.1.0 that validation belongs to the L9 release-hardening gate after L8 installer/document localisation.

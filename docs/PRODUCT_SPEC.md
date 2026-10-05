@@ -4,11 +4,11 @@
 
 **The Safex Mine** is a Windows graphical solo miner for Safex Cash (SFX). It wraps a Safex-compatible XMRig backend with configuration, privilege handling, telemetry, recovery and a themed state-driven user interface.
 
-Current release version: `1.0.0`.
+Current public release: `1.0.0` (18 September 2026). Current `main` contains unreleased v1.1.0 localisation work while application/package versions intentionally remain `1.0.0` until the L9 release-hardening stage.
 
-## 2. Current release target
+## 2. Published baseline and current development scope
 
-The initial public target is a Windows x64 desktop application with:
+The published v1.0.0 baseline is a Windows x64 desktop application with:
 
 - simple Safex Cash address entry;
 - default/custom daemon support;
@@ -30,6 +30,7 @@ The main window contains:
 - product/Safex branding header;
 - connection/mining status;
 - persistent sound toggle;
+- language selector on current `main` (unreleased v1.1.0 development);
 - main mine scene;
 - Safex Cash address;
 - daemon endpoint/status;
@@ -138,9 +139,17 @@ The app should not imply that a higher CPU allocation always produces a higher h
 
 Full Bore means maximum configured CPU allocation, not guaranteed maximum efficiency.
 
-## 12. Current release exclusions
+## 12. Localisation and first-run language behaviour
 
-Not required for the first public release:
+The published v1.0.0 installer is the historical English-only baseline. Current `main` adds Windows preferred-UI-language matching, a persistent manual language override, live language switching, and language selection on the first-run Mining Risk Acknowledgement before acceptance.
+
+Canonical `en-AU` is the source/fallback locale. The current v1.1.0 development set contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
+
+L8 installer/public-document localisation and L9 release hardening remain before v1.1.0 publication.
+
+## 13. Current scope exclusions
+
+Not part of the current product scope unless separately approved:
 
 - continuous miner animation;
 - GPU mining;

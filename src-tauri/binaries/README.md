@@ -62,4 +62,4 @@ runtime/WinRing0x64.sys
 
 alongside the packaged elevated helper. Use `npm run tauri:build` for the packaged build path.
 
-The generated installer still requires clean-machine validation before public release.
+The v1.0.0 installer completed clean-machine validation before public release. Each later release must repeat release-specific validation against its exact packaged artefact; for v1.1.0 that check belongs to the L9 release-hardening gate.
