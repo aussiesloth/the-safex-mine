@@ -284,7 +284,7 @@ On the L7a branch, run `npm ci`, `npm run i18n:check`, `npm run build`, and `car
 | Narrow window | Minimum configured 900 × 650, including long French, Polish, Hungarian and Slovenian labels; no clipping or unintentional mid-word breaks |
 | Portuguese | Switch between `pt-BR` and `pt-PT`; check genuinely regional vocabulary; confirm both persist independently |
 | Diacritics | French punctuation; Polish ł/ą/ę/ś/ź/ż; Turkish İ/ı/ğ/ş/ç/ö/ü; Hungarian ő/ű; Slovenian č/š/ž |
-| Risk Acknowledgement | All seven section headings, five hardware list items, highlighted statutory-rights paragraph, complete scrolling, footer buttons, no checkbox reset merely from switching language |
+| Risk Acknowledgement | All seven section headings, five hardware list items, highlighted statutory-rights paragraph, complete scrolling, footer buttons, stable title/language-selector layout at normal desktop sizes, no checkbox reset merely from switching language |
 | Language selection | First-run language switch before acceptance, Windows/default override, explicit override after restart and document `lang`; no change to regional telemetry formatting |
 | Existing acceptance | A profile with stored acknowledgement `1.0` must not be prompted again after the UI changes language |
 | Technical fields | Addresses, RPC/daemon endpoints, version strings, block heights, rates, UAC/MSR/XMRig references remain readable and unchanged in meaning |
