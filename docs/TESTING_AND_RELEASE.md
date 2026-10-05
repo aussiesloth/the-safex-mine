@@ -330,3 +330,23 @@ On the L7c branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo t
 | Targeted mining | In one L7c locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
 
 The existing L6/L7a/L7b responsive layout is the baseline. Prefer a general responsive fix if L7c reveals a real wrapping or line-height defect; do not add locale-specific CSS merely to force a preferred presentation. Do not repeat the exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite unless implementation review identifies a mining-related change.
+
+### L7d acceptance matrix — Korean, Hindi and Bengali
+
+On the L7d branch, run `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manifest-path .\\src-tauri\\Cargo.toml`, and `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`. Run `npm run tauri dev` on the Windows MSVC development system.
+
+| Focus | Manual check |
+| --- | --- |
+| Korean | Main dashboard and full Risk Acknowledgement; Hangul glyph fallback, line height, punctuation, wrapping and text measurement must remain clean |
+| Hindi | Devanagari conjuncts and vowel signs/matras render in the correct visual order with no clipping, broken shaping or detached marks; inspect long status/error strings and acknowledgement paragraphs |
+| Bengali | Bengali conjuncts, vowel signs and reordering render correctly with no clipping or mark loss; inspect both compact controls and long acknowledgement text |
+| Main UI states | Inspect ready/stopped, active mining and transient block/reject/offline/status presentation; translated labels must not disturb technical fields |
+| Mining modes | Confirm content-aware horizontal/vertical orientation responds to translated labels and measured text rather than locale-specific CSS |
+| Risk Acknowledgement | For all three locales: title/selector layout, all seven sections, five hardware list items, final liability/GPL section, highlighted statutory-rights paragraph, scrolling and footer controls |
+| First run | Switch among all three L7d languages before acceptance; checkbox remains unticked and Continue enables only after explicit selection |
+| Persistence | Explicit locale survives restart; existing acknowledgement `1.0` remains accepted |
+| Windows matching | Representative `ko-KR → ko`, `hi-IN → hi`, `bn-BD → bn` and `bn-IN → bn`; manual selection remains available |
+| Technical fields | Safex address, RPC/daemon endpoint, UAC/MSR/XMRig, version, block height and telemetry remain legible and unchanged |
+| Targeted mining | In one L7d locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
+
+The existing responsive layout is the baseline. If L7d exposes a real shaping, line-height or wrapping defect, prefer a general Unicode/script-capable fix rather than locale-specific styling. Do not repeat the exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite unless implementation review identifies a mining-related change.
