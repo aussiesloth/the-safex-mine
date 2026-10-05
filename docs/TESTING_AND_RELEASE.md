@@ -251,11 +251,11 @@ MSI is not part of the public release set.
 
 The first public release is **v1.0.0**, published on **18 September 2026**. The `0.1.0` installer and SHA-256 recorded earlier in this document are historical clean-machine validation artefacts only and are **not** the public v1.0.0 release checksum. Verify the published version using its release-page checksum / `SHA256SUMS.txt`.
 
-Keep current project/package versions at 1.0.0 during localisation development. Update them consistently to 1.1.0 only in the approved L9 release-hardening slice.
+L1-L8 intentionally retained project/package version 1.0.0 during localisation development. The approved L9 release-hardening slice advances the application, Tauri, Rust application, helper and corresponding lockfile versions consistently to 1.1.0. Mining Risk Acknowledgement remains independently versioned at 1.0.
 
 ## 9. v1.1.0 localisation validation and release gate — current status
 
-Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 adds the multilingual NSIS configuration and essential translated public installation/first-use documentation for the same canonical `en-AU` plus **23 release-enabled translated LTR locales**. Application/package versions remain 1.0.0 and Mining Risk Acknowledgement remains version 1.0. L8 Windows packaged acceptance was completed on 6 October 2026; L9 release hardening is therefore the next planned slice after L8 merge. No v1.1.0 tag/release exists yet.
+Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 adds the multilingual NSIS configuration and essential translated public installation/first-use documentation for the same canonical `en-AU` plus **23 release-enabled translated LTR locales**. L8 Windows packaged acceptance was completed on 6 October 2026. L9 release hardening is now in progress with application/package/helper versions aligned at 1.1.0 while Mining Risk Acknowledgement remains version 1.0. No v1.1.0 tag/release exists yet.
 
 The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. Test and enable only locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
 
@@ -267,7 +267,7 @@ Seven NSIS languages require project-maintained Tauri-specific message files: Se
 
 The public-document layer contains 23 translated essential installation/first-use guides under `docs/localised/`, while English remains canonical. GPL-3.0 and third-party licence texts remain untranslated by design.
 
-Automated L8 conformance is part of `npm run i18n:check` and separately available as `npm run l8:check`. It checks the enabled locale registry against the installer manifest, the configured NSIS language set, all seven custom Tauri message files and required placeholders, all 23 translated installation guides, the two documented English fallbacks, application/package versions remaining 1.0.0 and Mining Risk Acknowledgement remaining 1.0.
+The L8 conformance logic is now release-generic. `npm run i18n:check` invokes it automatically; it is also available as `npm run release:check`, while `npm run l8:check` remains a compatibility alias. It checks the enabled locale registry against the installer manifest, the configured NSIS language set, all seven custom Tauri message files and required placeholders, all 23 translated installation guides, the two documented English fallbacks, consistent application/Tauri/Rust/helper versioning and Mining Risk Acknowledgement remaining 1.0.
 
 Windows packaged acceptance completed on **6 October 2026** against the L8 branch. The final production-configuration validation build generated exactly one NSIS installer:
 
@@ -320,17 +320,30 @@ Physical Windows acceptance:
 
 This acceptance is proportionate to L8's installer/document scope. It does not repeat the full L6/L7 mining, daemon-loss or translation regression suites because L8 changes no mining implementation source.
 
-Before approving v1.1.0, verify:
+Before approving v1.1.0, L9 reuses the completed L8 physical functional/localisation acceptance rather than repeating it. L9 must verify by automation/source review that the enabled locale registry, catalogues, placeholders, Risk Acknowledgement v1.0 structure, fallback/matching configuration, installer-language mapping, packaged helper/XMRig/WinRing resources and project/third-party licence materials remain intact. It must also complete `npm ci`, `npm run i18n:check`, `npm run release:check`, the frontend build, relevant Rust tests/formatting, licence audit and a production NSIS package build.
 
-- the complete UI, accessibility/status, metadata, named placeholders and version-consistent Mining Risk Acknowledgement for every approved/enabled locale;
-- fallback to canonical English; Windows preferred-language matching, stored manual override, and manual selection *before* first-run acknowledgement;
-- unchanged address, daemon, CPU-profile, sound and mining start/stop behaviour across language changes;
-- existing users who accepted acknowledgement v1.0 are not unnecessarily asked to re-accept, and new users can read it in their chosen enabled language;
-- correct `lang`, appropriate direction for release-approved scripts, and readable Safex addresses, RPC endpoints, hashes, version strings and technical/numeric telemetry;
-- proportionate script-family QA for the actual enabled Latin (including diacritics), Greek, Cyrillic, CJK, Devanagari and Bengali locales;
-- valid NSIS multilingual configuration, with documented installer-language fallbacks where app and installer coverage differ;
-- intact packaged helper, XMRig, WinRing and project/third-party licence resources;
-- `npm run i18n:check`, frontend build, relevant automated tests and a Windows manual test matrix.
+The only additional L9 physical Windows gate is one final candidate **installation and uninstall validation**. Confirm that the generated v1.1.0 NSIS installer completes normally, the installed application launches, the expected application version is presented by the packaged build, and uninstall completes normally. The broader language-switching, mining, helper-UAC, MSR/degraded-mode, first-run and multilingual-installer behaviour remains supported by the completed L8 acceptance record because L9 does not change those functional paths.
+
+### L9 release-hardening evidence — 6 October 2026
+
+L9 validation completed on the Windows development machine from the dedicated `localisation/l9-release-hardening` branch. The branch was created from merged L8 commit `7daed5e192ffb6cd1a7614228606b52dcb52906b`.
+
+Automated/source/build results:
+
+- `npm ci`: passed; 21 packages audited and 0 vulnerabilities reported;
+- `npm run i18n:check`: passed — 26 locales, 104 canonical keys, 83 frontend translation references and one Risk Acknowledgement version; the invoked release check also passed;
+- `npm run release:check`: passed independently for v1.1.0 — 22 NSIS languages, 23 translated installation guides and 2 documented English installer fallbacks;
+- `npm run build`: passed; Vite emitted only its non-failing >500 kB chunk-size advisory;
+- `cargo test --manifest-path .\\src-tauri\\Cargo.toml`: passed 12/12 tests;
+- `cargo fmt --manifest-path .\\src-tauri\\Cargo.toml --check`: passed;
+- `npm run licenses:audit`: passed with 322 Rust target packages, 2 npm runtime packages and 0 packages missing licence metadata; 43 entries remained flagged for review by the audit report rather than reported as missing metadata;
+- `npm run tauri:build`: passed, compiling both `safex-mine-helper v1.1.0` and `the-safex-mine v1.1.0` and producing exactly one NSIS bundle:
+  `The Safex Mine_1.1.0_x64-setup.exe` (15,979,246 bytes);
+- generated dependency-licence material produced no substantive tracked-content diff and the working tree was restored clean after the validation build.
+
+The agreed L9 physical gate was deliberately limited because L8 had just completed the broader multilingual, mining, UAC, MSR/degraded-mode, Risk Acknowledgement and installer acceptance matrix and L9 changed none of those functional paths. The single v1.1.0 validation cycle passed: the installer completed normally, the installed application launched normally, and uninstall completed normally.
+
+The validation installer above is evidence only. It was built before this evidence was committed to the branch, so it is **not** the frozen final candidate and no SHA-256 from it should be published. The final candidate must be rebuilt once from the exact final L9 commit, then its actual filename and SHA-256 must be recorded for the release gate.
 
 RTL delivery or testing is **not required** for v1.1.0 or a later release under this programme. Retain direction metadata for any separately approved future feasibility work; an unsupported RTL locale must not block an otherwise ready LTR release. The developer-only pseudo-locale `en-XA`, deferred `sr-Cyrl` and `zh-Hant`, and incomplete/review-only languages must not be exposed as release choices merely to meet a planned total.
 
