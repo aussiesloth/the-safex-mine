@@ -1,0 +1,45 @@
+# The Safex Mine — Windows 설치 및 첫 사용
+
+> **커뮤니티 번역.** 이 페이지는 필수 설치 및 보안 안내를 AI의 도움으로 번역한 프로젝트 문서입니다. [영문 설치 안내서](../../WINDOWS_INSTALLATION.md)가 프로젝트의 기준 문서로 유지됩니다. 언어와 용어 수정 제안을 환영합니다.
+
+## 1. 공식 릴리스에서만 다운로드
+
+The Safex Mine은 CPU 마이너, 관리자 권한으로 실행되는 helper, WinRing 드라이버를 포함하는 **서명되지 않은** Windows x64 애플리케이션입니다. 설치 프로그램은 프로젝트의 공식 GitHub Release에서만 다운로드하세요.
+
+## 2. **실행하기 전에** SHA-256 확인
+
+PowerShell에서 다음을 실행합니다.
+
+    Get-FileHash .\The-Safex-Mine_<version>_x64-setup.exe -Algorithm SHA256
+
+결과를 릴리스에 게시된 SHA-256 값과 정확히 비교하세요.
+
+**Microsoft Defender가 다운로드 직후 설치 프로그램을 격리한 경우:** 먼저 **그 특정 다운로드 설치 파일만** 복원/허용하고, 그 다음 SHA-256을 계산하세요. 공식 값과 일치하기 전에는 **실행하지 마세요**.
+
+## 3. SmartScreen 및 바이러스 백신
+
+릴리스가 서명되지 않았고 마이닝 구성요소를 포함하므로 SmartScreen 또는 다른 보안 제품이 경고를 표시하거나 파일을 격리할 수 있습니다. 출처와 해시를 확인한 뒤에만 계속하세요.
+
+바이러스 백신을 광범위하게 끄지 마세요. Downloads, 전체 사용자 프로필 또는 전체 드라이브를 예외 처리하지 마세요. 릴리스를 확인한 뒤 실제로 예외가 필요하다면 다음 폴더로만 제한하세요.
+
+    %LOCALAPPDATA%\The Safex Mine
+
+## 4. 설치, 언어 및 위험 안내
+
+NSIS 설치 프로그램은 일반적으로 Windows 표시 언어에 따라 한국어를 자동 선택합니다. 앱 언어는 실행 후에도 변경할 수 있습니다.
+
+처음 실행할 때 선택한 지원 앱 언어로 **Mining Risk Acknowledgement — Version 1.0**이 표시됩니다. 계속하기 전에 읽으세요. **Exit**는 동의를 저장하지 않고 앱을 종료합니다. 영어가 기준 문서입니다: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+
+## 5. UAC helper 및 MSR
+
+그래픽 앱 자체는 일반 사용자 권한으로 실행됩니다. 한 세션에서 처음 **Start Mining**을 누르면 Windows가 다음 파일에 대한 UAC 승인을 요청합니다.
+
+    safex-mine-helper.exe
+
+이 helper만 권한이 상승됩니다. XMRig를 시작하고 감독하며 MSR 최적화를 시도할 수 있게 합니다. Windows 보안이 MSR을 차단해도 더 낮은 성능으로 마이닝을 계속할 수 있습니다. 해시레이트를 높이기 위해서만 보안 기능을 끄지 마세요.
+
+## 6. 제거
+
+앱을 제거해도 사용자가 수동으로 추가한 Defender 예외는 남을 수 있습니다. 더 이상 필요 없다면 제거 후 직접 삭제하세요.
+
+추가 도움말: [영문 문제 해결](../../../TROUBLESHOOTING.md).
