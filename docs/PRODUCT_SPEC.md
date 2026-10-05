@@ -145,7 +145,7 @@ The published v1.0.0 installer is the historical English-only baseline. Current 
 
 Canonical `en-AU` is the source/fallback locale. The current v1.1.0 development set contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
 
-L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. L8 packaged acceptance is complete. L9 now supplies consistent v1.1.0 candidate versioning and final release hardening; only final candidate validation and the separate publication gate remain.
+L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. L8 packaged acceptance is complete. L9 supplies consistent v1.1.0 candidate versioning; its automated/package checks and final installation/launch/uninstall validation passed on 6 October 2026. Exact-final-commit candidate freezing/checksumming and the separate publication gate remain.
 
 ## 13. Current scope exclusions
 
