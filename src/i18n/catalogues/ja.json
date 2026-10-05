@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "管理者権限ヘルパーとのハンドシェイクを完了できませんでした。",
   "error.helper.handshakeInvalid": "管理者権限ヘルパーのハンドシェイクトークンが無効でした。",
   "error.helper.handshakeTimedOut": "管理者権限ヘルパーとのハンドシェイク待ちがタイムアウトしました。",
-  "error.helper.invalidPath": "ヘルパーのパスに無効な Unicode が含まれています。",
+  "error.helper.invalidPath": "ヘルパーのパスに無効な Unicode 文字が含まれています。",
   "error.helper.launchFailed": "管理者権限ヘルパーを起動できませんでした。UAC 要求がキャンセルされた可能性があります。",
   "error.helper.notConnected": "管理者権限ヘルパーが接続されていません。",
   "error.helper.notFound": "The Safex Mine のヘルパーが見つかりません。",

@@ -221,3 +221,16 @@ Korean, Hindi and Bengali use natural contemporary software terminology while pr
 Physical Windows acceptance confirmed Hangul glyph fallback and line height plus Devanagari and Bengali conjunct formation, matra/vowel-sign placement, reordering, clipping, wrapping and text measurement in both the dashboard and the complete Risk Acknowledgement. First-run switching, persistence/acknowledgement continuity and one targeted live-mining language switch also passed without requiring locale-specific CSS.
 
 These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance for PR #15. They are **not part of the published v1.0.0 installer**. L8 installer/document localisation, L9 release hardening and version changes remain separate.
+
+
+## Translation quality audit — existing human-language localisations (5 October 2026)
+
+Following L7d, the complete existing human-language set was reviewed directly against canonical `en-AU`: the 23 release-enabled translations plus the complete developer-only Serbian Cyrillic (`sr-Cyrl`) translation. The generated `en-XA` pseudo-locale was excluded from linguistic review. No new locale was added or enabled, and locale direction, formatting behaviour, localisation architecture and application/package versioning were outside this audit.
+
+For every audited locale, all 104 normal UI/accessibility/status strings were compared directly with the corresponding `en-AU` source, and Mining Risk Acknowledgement v1.0 was reviewed clause-by-clause against the canonical structured document. The review covered semantic fidelity, omitted or added meaning, natural contemporary wording, grammar, punctuation, repeated terminology, mining-mode consistency, ordinary-language English retained unnecessarily, appropriate technical loanwords and protected product/protocol identifiers.
+
+Corrections were deliberately conservative. They include naturalising repeated helper/elevated-rights wording, making invalid-Unicode path errors refer to invalid Unicode characters, reconciling Spanish and French acknowledgement terminology, correcting Italian grammatical agreement around translated mining-mode labels, and refining Indonesian, Vietnamese and Filipino ordinary-language terminology while retaining established technical usage where it reads naturally.
+
+The audit found no defect in canonical `en-AU` requiring a source change and no translated Risk Acknowledgement clause requiring a substantive change to meaning. `schemaVersion`, acknowledgement version `1.0`, block IDs, ordering, emphasis, the five hardware-list items, statutory-rights qualification, liability scope, and the distinction between software being distributed under GPL-3.0 and being provided without excludable warranties remain unchanged.
+
+These remain AI-assisted **community-project translations**. The audit is not native-speaker certification, professional translation certification or legal review; native-speaker corrections and terminology feedback remain welcome.

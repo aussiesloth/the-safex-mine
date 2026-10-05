@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "Začetnega preverjanja s pomožnim procesom s povišanimi pravicami ni bilo mogoče dokončati.",
   "error.helper.handshakeInvalid": "Žeton začetnega preverjanja pomožnega procesa ni veljaven.",
   "error.helper.handshakeTimedOut": "Čas za začetno preverjanje pomožnega procesa je potekel.",
-  "error.helper.invalidPath": "Pot do pomožnega procesa vsebuje neveljaven Unicode.",
+  "error.helper.invalidPath": "Pot do pomožnega procesa vsebuje neveljavne znake Unicode.",
   "error.helper.launchFailed": "Pomožnega procesa s povišanimi pravicami ni bilo mogoče zagnati. Zahteva UAC je bila morda preklicana.",
   "error.helper.notConnected": "Pomožni proces s povišanimi pravicami ni povezan.",
   "error.helper.notFound": "Pomožnega procesa The Safex Mine ni bilo mogoče najti.",

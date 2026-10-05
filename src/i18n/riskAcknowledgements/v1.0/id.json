@@ -156,7 +156,7 @@
     {
       "id": "windows-security-and-elevated-access",
       "type": "section",
-      "heading": "Keamanan Windows dan akses berhak tinggi",
+      "heading": "Keamanan Windows dan akses dengan hak istimewa tinggi",
       "blocks": [
         {
           "id": "windows-security-and-elevated-access-paragraph-1",
@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "The Safex Mine menyertakan backend penambangan XMRig yang kompatibel dengan Safex, helper dengan hak akses tinggi, serta driver WinRing yang digunakan untuk mencoba optimisasi kinerja MSR pada Windows.",
+              "text": "The Safex Mine menyertakan backend penambangan XMRig yang kompatibel dengan Safex, program bantu dengan hak istimewa tinggi, serta driver WinRing yang digunakan untuk mencoba optimisasi kinerja MSR pada Windows.",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Memulai penambangan memerlukan persetujuan pada prompt UAC Windows untuk helper penambangan dengan hak akses tinggi. Aplikasi grafis itu sendiri dimaksudkan untuk tetap berjalan tanpa hak istimewa Administrator.",
+              "text": "Memulai penambangan memerlukan persetujuan atas permintaan UAC Windows untuk program bantu penambangan dengan hak istimewa tinggi. Aplikasi grafis itu sendiri dimaksudkan untuk tetap berjalan tanpa hak administrator.",
               "strong": false
             }
           ]

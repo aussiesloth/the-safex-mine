@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Antes de utilizar las funciones de minería, lea y reconozca la siguiente información.",
+          "text": ". Antes de utilizar las funciones de minería, lea la siguiente información y confirme que la comprende.",
           "strong": false
         }
       ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "El uso de software de minería de criptomonedas puede afectar a la cobertura de una garantía voluntaria del fabricante, según las condiciones de dicha garantía y las circunstancias de cualquier fallo. Este reconocimiento no afecta a ningún derecho o recurso legal que no pueda excluirse legalmente.",
+              "text": "El uso de software de minería de criptomonedas puede afectar a la cobertura de una garantía voluntaria del fabricante, según las condiciones de dicha garantía y las circunstancias de cualquier fallo. Esta declaración no afecta a ningún derecho o recurso legal que no pueda excluirse lícitamente.",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Nada de este reconocimiento excluye, restringe ni modifica ningún derecho, garantía o recurso que legalmente no pueda excluirse, restringirse o modificarse.",
+              "text": "Nada en esta declaración excluye, restringe ni modifica ningún derecho, garantía o recurso que no pueda ser legalmente excluido, restringido o modificado.",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Este reconocimiento no sustituye ni modifica la licencia GPL-3.0 ni las licencias aplicables a los componentes de terceros incluidos con The Safex Mine, ni les impone restricciones adicionales.",
+              "text": "Esta declaración no sustituye, modifica ni impone restricciones adicionales a la licencia GPL-3.0 ni a las licencias aplicables a los componentes de terceros incluidos con The Safex Mine.",
               "strong": false
             }
           ]

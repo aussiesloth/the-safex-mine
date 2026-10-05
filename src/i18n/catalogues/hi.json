@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "उन्नत-अधिकार सहायक का हैंडशेक पूरा नहीं किया जा सका।",
   "error.helper.handshakeInvalid": "उन्नत-अधिकार सहायक का हैंडशेक टोकन अमान्य था।",
   "error.helper.handshakeTimedOut": "उन्नत-अधिकार सहायक के हैंडशेक की प्रतीक्षा का समय समाप्त हो गया।",
-  "error.helper.invalidPath": "सहायक के पथ में अमान्य Unicode है।",
+  "error.helper.invalidPath": "सहायक के पथ में अमान्य Unicode वर्ण हैं।",
   "error.helper.launchFailed": "उन्नत-अधिकार सहायक शुरू नहीं किया जा सका। UAC अनुरोध रद्द किया गया हो सकता है।",
   "error.helper.notConnected": "उन्नत-अधिकार सहायक कनेक्ट नहीं है।",
   "error.helper.notFound": "Safex Mine सहायक नहीं मिला।",

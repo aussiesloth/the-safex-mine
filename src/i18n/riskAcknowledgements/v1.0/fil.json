@@ -9,7 +9,7 @@
       "emphasis": false,
       "segments": [
         {
-          "text": "Ang The Safex Mine ay application na binuo ng komunidad para sa solo mining ng ",
+          "text": "Ang The Safex Mine ay isang application na binuo ng komunidad para sa solo mining ng ",
           "strong": false
         },
         {
@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Bago gamitin ang mining functions, pakibasa at kilalanin ang sumusunod na impormasyon.",
+          "text": ". Bago gamitin ang mga function sa pagmimina, pakibasa at kilalanin ang sumusunod na impormasyon.",
           "strong": false
         }
       ]
@@ -25,7 +25,7 @@
     {
       "id": "mining-rewards-and-value",
       "type": "section",
-      "heading": "Mga reward at halaga ng pagmimina",
+      "heading": "Mga gantimpala at halaga ng pagmimina",
       "blocks": [
         {
           "id": "mining-rewards-and-value-paragraph-1",
@@ -33,7 +33,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Ang cryptocurrency mining ay speculative. Hindi ginagarantiya ng The Safex Mine na makakahanap ang iyong computer ng block, makakatanggap ng anumang mining reward, kikita, o mababawi ang gastos sa kuryente o equipment.",
+              "text": "Ang pagmimina ng cryptocurrency ay spekulatibo. Hindi ginagarantiya ng The Safex Mine na makakahanap ang iyong computer ng block, makakatanggap ng anumang gantimpala sa pagmimina, kikita, o mababawi ang gastos sa kuryente o kagamitan.",
               "strong": false
             }
           ]
@@ -44,7 +44,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Maaaring tumaas o bumaba ang halaga ng Safex Cash at maaari itong magkaroon ng kaunti o walang tunay na market value sa anumang partikular na oras. Ang mga nakaraang resulta ng pagmimina ay hindi indikasyon o garantiya ng mga resulta sa hinaharap.",
+              "text": "Maaaring tumaas o bumaba ang halaga ng Safex Cash at maaari itong magkaroon ng kaunti o walang tunay na halaga sa merkado sa anumang partikular na oras. Ang mga nakaraang resulta ng pagmimina ay hindi indikasyon o garantiya ng mga resulta sa hinaharap.",
               "strong": false
             }
           ]
@@ -55,7 +55,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hindi nagbibigay ang The Safex Mine ng payong pinansyal, investment, buwis, o legal.",
+              "text": "Hindi nagbibigay ang The Safex Mine ng payong pinansyal, tungkol sa pamumuhunan, buwis, o batas.",
               "strong": false
             }
           ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Ang paggamit ng cryptocurrency-mining software ay maaaring makaapekto sa coverage ng boluntaryong warranty ng manufacturer depende sa mga tuntunin ng warranty nito at sa mga pangyayari ng anumang pagkasira. Hindi naaapektuhan ng acknowledgement na ito ang anumang karapatan o remedyo na itinatakda ng batas at hindi maaaring legal na alisin.",
+              "text": "Ang paggamit ng software sa pagmimina ng cryptocurrency ay maaaring makaapekto sa saklaw ng boluntaryong garantiya ng tagagawa depende sa mga tuntunin ng garantiya at sa mga pangyayari ng anumang pagkasira. Hindi naaapektuhan ng pagkilalang ito ang anumang karapatan o remedyo na itinatakda ng batas at hindi maaaring legal na alisin.",
               "strong": false
             }
           ]
@@ -156,7 +156,7 @@
     {
       "id": "windows-security-and-elevated-access",
       "type": "section",
-      "heading": "Seguridad ng Windows at elevated access",
+      "heading": "Seguridad ng Windows at access na may mataas na pribilehiyo",
       "blocks": [
         {
           "id": "windows-security-and-elevated-access-paragraph-1",
@@ -164,7 +164,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Kasama sa The Safex Mine ang Safex-compatible XMRig mining backend, isang helper na may elevated privileges, at ang WinRing driver na ginagamit upang subukan ang Windows MSR performance optimisation.",
+              "text": "Kasama sa The Safex Mine ang backend ng pagmimina ng XMRig na tugma sa Safex, isang pantulong na proseso na may mataas na pribilehiyo, at ang WinRing driver na ginagamit upang subukan ang pag-optimize ng pagganap ng Windows MSR.",
               "strong": false
             }
           ]
@@ -197,7 +197,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Kailangan ang pag-apruba sa Windows UAC prompt para sa mining helper na may elevated privileges bago magsimula ang pagmimina. Ang graphical application mismo ay nilalayong patuloy na tumakbo nang walang Administrator privileges.",
+              "text": "Kailangan ang pag-apruba sa Windows UAC prompt para sa pantulong na proseso ng pagmimina na may mataas na pribilehiyo bago magsimula ang pagmimina. Ang graphical application mismo ay nilalayong patuloy na tumakbo nang walang pribilehiyo ng administrator.",
               "strong": false
             }
           ]
@@ -208,7 +208,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Maaaring pigilan ng Windows security features ang MSR optimisation. Kapag nangyari ito, maaaring magpatuloy ang pagmimina nang may mas mababang performance. Hindi mo kailangang i-disable ang Windows security features para lamang makakuha ng mas mataas na mining performance.",
+              "text": "Maaaring pigilan ng Windows security features ang MSR optimisation. Kapag nangyari ito, maaaring magpatuloy ang pagmimina nang may mas mababang pagganap. Hindi mo kailangang i-disable ang Windows security features para lamang makakuha ng mas mataas na pagganap sa pagmimina.",
               "strong": false
             }
           ]
@@ -218,7 +218,7 @@
     {
       "id": "system-stability-and-data",
       "type": "section",
-      "heading": "Stability ng system at data",
+      "heading": "Katatagan ng system at data",
       "blocks": [
         {
           "id": "system-stability-and-data-paragraph-1",
@@ -226,7 +226,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Ang tuloy-tuloy na mataas na CPU load ay maaaring magdulot ng system instability sa mga system na kulang ang cooling, may unstable na hardware, overclocking, problema sa power, o iba pang dati nang problema.",
+              "text": "Ang tuloy-tuloy na mataas na CPU load ay maaaring magdulot ng kawalang-katatagan ng system sa mga system na kulang ang cooling, may hindi matatag na hardware, overclocking, problema sa kuryente, o iba pang dati nang problema.",
               "strong": false
             }
           ]
@@ -248,7 +248,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Walang software na makakagarantiya na hindi kailanman magkakaroon ng crash, pagkawala ng data, hardware fault, o iba pang problema sa system.",
+              "text": "Walang software na makakagarantiya na hindi kailanman magkakaroon ng pag-crash, pagkawala ng data, sira sa hardware, o iba pang problema sa system.",
               "strong": false
             }
           ]
@@ -258,7 +258,7 @@
     {
       "id": "mining-configuration",
       "type": "section",
-      "heading": "Configuration ng pagmimina",
+      "heading": "Konfigurasyon ng pagmimina",
       "blocks": [
         {
           "id": "mining-configuration-paragraph-1",
@@ -288,7 +288,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Responsibilidad mo pa ring sumunod sa anumang batas, tax requirements, electricity agreements, o iba pang obligasyong naaangkop sa paggamit mo ng cryptocurrency mining.",
+              "text": "Responsibilidad mo pa ring sumunod sa anumang batas, mga kinakailangan sa buwis, kasunduan sa kuryente, o iba pang obligasyong naaangkop sa paggamit mo ng pagmimina ng cryptocurrency.",
               "strong": false
             }
           ]
@@ -298,7 +298,7 @@
     {
       "id": "no-guarantee-of-performance",
       "type": "section",
-      "heading": "Walang garantiya sa performance",
+      "heading": "Walang garantiya sa pagganap",
       "blocks": [
         {
           "id": "no-guarantee-of-performance-paragraph-1",
@@ -317,7 +317,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Kinokontrol ng Banayad, Balansyado at Todo profiles ang dami ng CPU resources na ibinibigay sa miner. Hindi ginagarantiya ng mga ito ang anumang partikular na hashrate, reward rate, o profitability.",
+              "text": "Kinokontrol ng mga profile na Banayad, Balansyado at Todo ang dami ng CPU resources na ibinibigay sa miner. Hindi ginagarantiya ng mga ito ang anumang partikular na hashrate, rate ng gantimpala, o kakayahang kumita.",
               "strong": false
             }
           ]
@@ -327,7 +327,7 @@
     {
       "id": "software-warranty-and-liability",
       "type": "section",
-      "heading": "Warranty ng software at pananagutan",
+      "heading": "Garantiya ng software at pananagutan",
       "blocks": [
         {
           "id": "software-warranty-and-liability-paragraph-1",
@@ -343,7 +343,7 @@
               "strong": true
             },
             {
-              "text": " at ibinibigay nang walang warranty bukod sa mga warranty na hindi maaaring legal na alisin.",
+              "text": " at ibinibigay nang walang garantiya bukod sa mga garantiyang hindi maaaring legal na alisin.",
               "strong": false
             }
           ]
@@ -354,7 +354,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, walang garantiya na ang software ay magiging walang error, tuloy-tuloy, compatible sa bawat computer, o walang masasamang interaction sa ibang software o hardware.",
+              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, walang garantiya na ang software ay magiging walang error, tuloy-tuloy, compatible sa bawat computer, o walang salungat na interaksiyon sa ibang software o hardware.",
               "strong": false
             }
           ]
@@ -365,7 +365,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, hindi responsable ang developer para sa pagkawala o pinsalang dulot ng desisyon ng user na magpatakbo ng cryptocurrency-mining software, kabilang ang mga pagkawala na may kaugnayan sa pagpapatakbo ng hardware, init, konsumo ng kuryente, system instability, pagkawala ng data, pagkaantala sa paggamit ng computer, hindi nakuhang mining rewards, o pagbabago sa halaga ng cryptocurrency.",
+              "text": "Hanggang sa pinakamalawak na saklaw na pinapahintulutan ng naaangkop na batas, hindi responsable ang developer para sa pagkawala o pinsalang dulot ng desisyon ng user na gumamit ng software sa pagmimina ng cryptocurrency, kabilang ang mga pagkawala na may kaugnayan sa pagpapatakbo ng hardware, init, konsumo ng kuryente, kawalang-katatagan ng system, pagkawala ng data, pagkaantala sa paggamit ng computer, hindi nakuhang gantimpala sa pagmimina, o pagbabago sa halaga ng cryptocurrency.",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Walang anumang bahagi ng acknowledgement na ito ang nag-aalis, naglilimita, o nagbabago sa anumang karapatan, garantiya, o remedyo na hindi maaaring legal na alisin, limitahan, o baguhin.",
+              "text": "Walang anumang bahagi ng pagkilalang ito ang nag-aalis, naglilimita, o nagbabago sa anumang karapatan, garantiya, o remedyo na hindi maaaring legal na alisin, limitahan, o baguhin.",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Hindi pinapalitan o binabago ng acknowledgement na ito ang GPL-3.0 licence o ang mga licence na naaangkop sa third-party components na kasama sa The Safex Mine, at hindi ito nagpapataw ng karagdagang restriction sa mga iyon.",
+              "text": "Hindi pinapalitan o binabago ng pagkilalang ito ang lisensiyang GPL-3.0 o ang mga lisensiyang naaangkop sa mga third-party component na kasama sa The Safex Mine, at hindi ito nagpapataw ng karagdagang paghihigpit sa mga iyon.",
               "strong": false
             }
           ]

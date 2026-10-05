@@ -17,7 +17,7 @@
           "strong": true
         },
         {
-          "text": ". Avant d’utiliser les fonctions de minage, veuillez lire et reconnaître les informations suivantes.",
+          "text": ". Avant d’utiliser les fonctions de minage, veuillez lire les informations suivantes et confirmer que vous en avez pris connaissance.",
           "strong": false
         }
       ]
@@ -146,7 +146,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "L’utilisation d’un logiciel de minage de cryptomonnaies peut avoir une incidence sur la couverture offerte par la garantie commerciale volontaire du fabricant, selon ses conditions et les circonstances d’une éventuelle panne. Cette reconnaissance ne porte atteinte à aucun droit ou recours légal auquel il ne peut être licitement dérogé.",
+              "text": "L’utilisation d’un logiciel de minage de cryptomonnaies peut avoir une incidence sur la couverture offerte par la garantie commerciale volontaire du fabricant, selon ses conditions et les circonstances d’une éventuelle panne. Cette déclaration ne porte atteinte à aucun droit ou recours légal auquel il ne peut être licitement dérogé.",
               "strong": false
             }
           ]
@@ -376,7 +376,7 @@
           "emphasis": true,
           "segments": [
             {
-              "text": "Aucune disposition de cette reconnaissance n’exclut, ne restreint ni ne modifie un droit, une garantie ou un recours qui ne peut légalement être exclu, restreint ou modifié.",
+              "text": "Aucune disposition de cette déclaration n’exclut, ne restreint ni ne modifie un droit, une garantie ou un recours qui ne peut légalement être exclu, restreint ou modifié.",
               "strong": false
             }
           ]
@@ -387,7 +387,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Cette reconnaissance ne remplace ni ne modifie la licence GPL-3.0 ou les licences applicables aux composants tiers inclus dans The Safex Mine, et ne leur impose aucune restriction supplémentaire.",
+              "text": "Cette déclaration ne remplace ni ne modifie la licence GPL-3.0 ou les licences applicables aux composants tiers inclus dans The Safex Mine, et ne leur impose aucune restriction supplémentaire.",
               "strong": false
             }
           ]

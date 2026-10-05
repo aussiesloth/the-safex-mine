@@ -18,7 +18,7 @@
   "error.helper.handshakeFailed": "Não foi possível concluir a autenticação inicial do auxiliar com privilégios elevados.",
   "error.helper.handshakeInvalid": "O token de autenticação inicial do auxiliar era inválido.",
   "error.helper.handshakeTimedOut": "O tempo de espera pela autenticação inicial do auxiliar foi excedido.",
-  "error.helper.invalidPath": "O caminho do auxiliar contém Unicode inválido.",
+  "error.helper.invalidPath": "O caminho do auxiliar contém caracteres Unicode inválidos.",
   "error.helper.launchFailed": "Não foi possível iniciar o auxiliar com privilégios elevados. O pedido UAC poderá ter sido cancelado.",
   "error.helper.notConnected": "O auxiliar com privilégios elevados não está ligado.",
   "error.helper.notFound": "Não foi encontrado o auxiliar do The Safex Mine.",

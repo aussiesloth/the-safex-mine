@@ -350,3 +350,37 @@ L7d passed `npm ci`, `npm run i18n:check`, `npm run build`, `cargo test --manife
 | Targeted mining | In one L7d locale: Start → UAC → live telemetry → language switch while mining → Stop; Safex address, daemon, mining mode, sound preference and mining state remain intact |
 
 The L7d physical pass confirmed the existing responsive layout handles the three new scripts without locale-specific styling. The documented first-run, persistence, complete Risk Acknowledgement and targeted live-mining checks passed. The exhaustive unchanged L6 mining/MSR/degraded/daemon-loss suite was not repeated because L7d did not alter mining implementation.
+
+
+### Translation-quality audit acceptance — existing localisations
+
+This audit is content-only. It does not alter mining logic, the helper/XMRig/MSR implementation, locale enablement, acknowledgement acceptance semantics or application/package versioning.
+
+**Automated validation completed 5 October 2026:** all required commands passed on the Windows development system.
+
+Run the normal validation gate:
+
+```powershell
+npm ci
+npm run i18n:check
+npm run build
+cargo test --manifest-path .\src-tauri\Cargo.toml
+cargo fmt --manifest-path .\src-tauri\Cargo.toml --check
+```
+
+**PASS (5 October 2026):** `npm ci` completed with 0 vulnerabilities; `npm run i18n:check` passed for 26 locales / 104 keys / 83 frontend references / 1 Risk Acknowledgement version; `npm run build` completed successfully (Vite emitted only the existing chunk-size warning); Rust tests passed 12/12; `cargo fmt --check` passed with no output. `npm run tauri dev` also launched successfully for physical review.
+
+Physical Windows review should be proportional to the changed source text rather than repeating every L6/L7 mining regression.
+
+**Manual acceptance completed 5 October 2026:** all existing human-language Mining Risk Acknowledgements were reviewed in the running Windows application with no formatting, clipping, wrapping or script-rendering issues observed. The targeted live-mining language-switch check also passed: mining remained active across the language change and stopped normally afterward.
+
+| Focus | Manual check |
+| --- | --- |
+| Changed UI strings | Inspect each changed language in the dashboard/settings/status surfaces and confirm revised wording is rendered completely with no clipping or unintended wrapping |
+| Risk Acknowledgement | **PASS (5 October 2026):** every existing human-language Risk Acknowledgement was reviewed; headings, paragraphs, five-item hardware list, highlighted statutory-rights paragraph, scrolling and footer controls rendered correctly with no formatting issues observed |
+| Script rendering | **PASS (5 October 2026):** the all-language Risk Acknowledgement review showed no clipping, shaping, line-height or word-boundary issues across the represented scripts |
+| Mining modes | Confirm revised prose uses the same translated Calm/Balanced/Full Bore labels shown by the UI and remains grammatically natural |
+| First run | Confirm the language selector and Risk notice presentation still work before acceptance and that acknowledgement version remains `1.0` |
+| Targeted mining | **PASS (5 October 2026):** Start → UAC → live telemetry → language switch while mining → Stop completed successfully; mining/settings state remained intact |
+
+The unchanged exhaustive mining/MSR/degraded/daemon-loss suites do not need to be repeated unless the final diff unexpectedly touches implementation code.
