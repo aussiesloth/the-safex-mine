@@ -69,14 +69,21 @@
       "nativeName": "Русский",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "uk",
       "nativeName": "Українська",
       "direction": "ltr",
       "fallback": "en-AU",
-      "enabled": false
+      "enabled": true
+    },
+    {
+      "id": "el",
+      "nativeName": "Ελληνικά",
+      "direction": "ltr",
+      "fallback": "en-AU",
+      "enabled": true
     },
     {
       "id": "tr",
