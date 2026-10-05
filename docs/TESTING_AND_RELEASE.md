@@ -253,9 +253,11 @@ The first public release is **v1.0.0**, published on **18 September 2026**. The 
 
 Keep current project/package versions at 1.0.0 during localisation development. Update them consistently to 1.1.0 only in the approved L9 release-hardening slice.
 
-## 9. Planned v1.1.0 localisation validation and release gate
+## 9. v1.1.0 localisation validation and release gate — current status
 
-The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. The current planning snapshot is canonical `en-AU` plus 23 LTR translations. Test and enable only those locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
+As of 5 October 2026, localisation implementation through L7d and the subsequent translation-quality audit are complete on `main`. The current development set is canonical `en-AU` plus **23 release-enabled translated LTR locales**; the complete developer-only Serbian Cyrillic locale was also included in the linguistic audit. L8 multilingual installer/public-document localisation and L9 release hardening remain. Application/package versions are still 1.0.0, and no v1.1.0 tag/release exists yet.
+
+The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. Test and enable only locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
 
 Before approving v1.1.0, verify:
 
