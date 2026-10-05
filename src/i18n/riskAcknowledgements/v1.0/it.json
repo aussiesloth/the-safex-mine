@@ -317,7 +317,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "I profili Tranquilla, Bilanciata e Massima potenza controllano la quantità di risorse CPU resa disponibile al miner. Non garantiscono un hashrate, una frequenza di ricompense o una redditività specifici.",
+              "text": "Le modalità Tranquilla, Bilanciata e Massima potenza controllano la quantità di risorse CPU resa disponibile al miner. Non garantiscono un hashrate, una frequenza di ricompense o una redditività specifici.",
               "strong": false
             }
           ]
