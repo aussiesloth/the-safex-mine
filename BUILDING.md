@@ -303,5 +303,5 @@ The NSIS release path has been exercised end-to-end on a clean Windows machine:
 
 See `docs/TESTING_AND_RELEASE.md` and `docs/WINDOWS_INSTALLATION.md` for the recorded behaviour.
 
-Before a public release, build the final installer from the intended release commit/tag and generate the SHA-256 checksum from **that exact final artefact**. Do not reuse the checksum from an earlier validation build.
+Before each public release, build the final installer from the intended release commit/tag and generate the SHA-256 checksum from **that exact final artefact**. Do not reuse the checksum from an earlier validation build. This was completed for v1.0.0 and must be repeated for the eventual v1.1.0 release candidate during release hardening.
 
