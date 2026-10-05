@@ -73,7 +73,7 @@
           "emphasis": false,
           "segments": [
             {
-              "text": "Le minage de cryptomonnaies peut solliciter durablement votre processeur (CPU) et d’autres composants de votre ordinateur. Cela peut augmenter :",
+              "text": "Le minage de cryptomonnaies peut solliciter durablement votre processeur (CPU) et d’autres composants de votre ordinateur. Cela peut augmenter :",
               "strong": false
             }
           ]
@@ -86,7 +86,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-1",
               "segments": [
                 {
-                  "text": "la température du processeur et la chaleur du système ;",
+                  "text": "la température du processeur et la chaleur du système ;",
                   "strong": false
                 }
               ]
@@ -95,7 +95,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-2",
               "segments": [
                 {
-                  "text": "la vitesse des ventilateurs et l’utilisation du système de refroidissement ;",
+                  "text": "la vitesse des ventilateurs et l’utilisation du système de refroidissement ;",
                   "strong": false
                 }
               ]
@@ -104,7 +104,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-3",
               "segments": [
                 {
-                  "text": "la consommation électrique ;",
+                  "text": "la consommation électrique ;",
                   "strong": false
                 }
               ]
@@ -113,7 +113,7 @@
               "id": "hardware-load-heat-and-power-consumption-list-1-item-4",
               "segments": [
                 {
-                  "text": "la charge des composants d’alimentation électrique de la carte mère ; et",
+                  "text": "la charge des composants d’alimentation électrique de la carte mère ; et",
                   "strong": false
                 }
               ]
