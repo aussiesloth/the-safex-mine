@@ -3,7 +3,7 @@
   "canonicalSourceLocale": "en-AU",
   "riskAcknowledgementVersion": "1.0",
   "reviewedOn": "2026-10-05",
-  "reviewMethod": "AI-assisted drafting from canonical en-AU, followed by a separate project semantic comparison of source clauses, technical tokens, risk qualifications and the GPL distribution distinction.",
+  "reviewMethod": "AI-assisted locale-by-locale translation-quality audit directly against canonical en-AU, covering every existing genuine translated UI/accessibility/status catalogue and Mining Risk Acknowledgement v1.0. The audit separately checked semantic fidelity, omitted or added meaning, natural contemporary usage, repeated terminology, mining-mode consistency, protected technical identifiers, legal/risk qualifications and the GPL distribution-versus-warranty distinction.",
   "certification": "The Safex Mine translations are AI-assisted community-project translations, and language/terminology corrections—including native-speaker feedback—remain welcome.",
   "locales": {
     "de": {
@@ -11,21 +11,21 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete"
+      "review": "translation-quality-audit-complete"
     },
     "es": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete"
+      "review": "translation-quality-audit-complete"
     },
     "sr-Cyrl": {
       "releaseEnabled": false,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete",
+      "review": "translation-quality-audit-complete",
       "derivedFrom": "sr-Latn with script transliteration and terminology review",
       "developerOnly": true,
       "deferredFromRelease": "Retained for pilot script/layout testing; Serbian Latin is the release-intended variant."
@@ -35,7 +35,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete",
+      "review": "translation-quality-audit-complete",
       "communityFeedback": "Targeted native-speaker clause 7.1 wording correction accepted; does not imply review or certification of the entire translation."
     },
     "zh-Hans": {
@@ -43,14 +43,14 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete"
+      "review": "translation-quality-audit-complete"
     },
     "ja": {
       "releaseEnabled": true,
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "semantic-back-translation-complete"
+      "review": "translation-quality-audit-complete"
     },
     "en-XA": {
       "releaseEnabled": false,
@@ -65,7 +65,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -74,7 +74,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -83,7 +83,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -92,7 +92,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -101,7 +101,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -110,7 +110,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -119,7 +119,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -128,7 +128,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -137,7 +137,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -146,7 +146,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -155,7 +155,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -164,7 +164,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -173,7 +173,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -182,7 +182,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -191,7 +191,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -200,7 +200,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -209,7 +209,7 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     },
@@ -218,11 +218,12 @@
       "ui": "complete",
       "accessibilityAndStatus": "complete",
       "riskAcknowledgement": "complete",
-      "review": "project-semantic-review-complete",
+      "review": "translation-quality-audit-complete",
       "provenance": "AI-assisted translation directly from en-AU; source clause-by-clause cross-check by project assistant",
       "reviewLimitations": "Language and terminology corrections, including native-speaker feedback, remain welcome."
     }
   },
   "lastReconciledOn": "2026-10-05",
-  "canonicalClarification": "Clause 7.1: 'provided under' to 'distributed under'; non-substantive clarification of GPL distribution terminology; acknowledgement remains version 1.0."
+  "canonicalClarification": "Clause 7.1: 'provided under' to 'distributed under'; non-substantive clarification of GPL distribution terminology; acknowledgement remains version 1.0.",
+  "auditLimitations": "This is a project translation-quality review, not native-speaker certification, professional translation certification or legal review. Native-speaker language and terminology corrections remain welcome."
 }
