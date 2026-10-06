@@ -28,11 +28,11 @@ Ne désactivez pas globalement l’antivirus. N’excluez pas le dossier Téléc
 
 L’installeur NSIS sélectionne normalement automatiquement le français selon la langue d’affichage de Windows. La langue de l’application peut encore être modifiée après le lancement.
 
-Au premier démarrage, **Mining Risk Acknowledgement — Version 1.0** s’affiche dans la langue d’application prise en charge choisie. Lisez-le avant de continuer. **Exit** ferme l’application sans enregistrer d’acceptation. L’anglais reste la référence canonique : [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Au premier démarrage, **Déclaration relative aux risques liés au minage — v1.0** s’affiche dans la langue d’application prise en charge choisie. Lisez-le avant de continuer. **Quitter** ferme l’application sans enregistrer d’acceptation. L’anglais reste la référence canonique : [Déclaration relative aux risques liés au minage v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. Assistant UAC et MSR
 
-L’interface graphique fonctionne avec les droits de l’utilisateur normal. Au premier **Start Mining** d’une session, Windows demande une approbation UAC pour :
+L’interface graphique fonctionne avec les droits de l’utilisateur normal. Au premier **Démarrer le minage** d’une session, Windows demande une approbation UAC pour :
 
     safex-mine-helper.exe
 
