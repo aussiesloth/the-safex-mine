@@ -8,7 +8,9 @@ function normaliseTag(tag) {
 }
 
 function getEnabledLocales(data) {
-  return Object.values(data.locales).filter((locale) => locale.enabled === true);
+  return Object.entries(data.locales)
+    .filter(([, locale]) => locale.enabled === true)
+    .map(([id, locale]) => ({ id, ...locale }));
 }
 
 function resolveLocale(tag, data) {
