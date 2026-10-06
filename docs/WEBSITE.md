@@ -77,6 +77,10 @@ Translated Windows installation-guide links point to the existing Markdown files
 
 Translations use the same project position as the v1.1.0 application: AI-assisted community-project localisation, with English (Australia) as the canonical reference. They are not described as professional, native-speaker or legal certification.
 
+A website-specific localisation quality pass was completed on 6 October 2026 across all 23 translated release locales. The review compared every website string against canonical `en-AU`, used the already-reviewed application catalogues as the preferred terminology reference, preserved product names and technical identifiers that users need to recognise, and specifically checked for unnecessary English prose embedded in translated copy. Native-speaker corrections remain welcome.
+
+`pages:check` also emits non-failing review warnings for two common regression patterns: long translated strings that are copied unchanged from canonical English, and suspicious ordinary-English prose appearing in non-Latin-script locales outside the protected technical-term set. These warnings require human review rather than automatically failing the build.
+
 ## Release metadata
 
 The current public release data is isolated in:
@@ -96,6 +100,8 @@ For a future public release, update that file as part of release/documentation w
 - published installer SHA-256.
 
 The site deliberately does not call the GitHub API at runtime to discover the current release.
+
+The HTML and fetched website data use explicit cache-version query strings. When changing `site.js`, `site.css`, `translations.json` or other runtime website data, bump the shared website asset version so returning browsers do not continue using a stale cached copy.
 
 `npm run pages:check` verifies that the website release version matches `package.json` and that release metadata is structurally consistent.
 
@@ -128,7 +134,8 @@ npm.cmd run build
 - required website assets;
 - release metadata;
 - website translation keys referenced by the HTML;
-- absence of external JavaScript/CSS runtime dependencies in the landing page.
+- absence of external JavaScript/CSS runtime dependencies in the landing page;
+- review warnings for suspicious English-language leakage or wholly untranslated long strings.
 
 ## Local preview
 
