@@ -4,7 +4,7 @@
 
 ## 1. Unduh hanya dari rilis resmi
 
-The Safex Mine adalah aplikasi Windows x64 **tanpa tanda tangan digital** yang berisi penambang CPU, helper dengan hak istimewa yang ditingkatkan, dan driver WinRing. Unduh penginstal hanya dari rilis GitHub resmi proyek.
+The Safex Mine adalah aplikasi Windows x64 **tanpa tanda tangan digital** yang berisi penambang CPU, proses pembantu dengan hak istimewa yang ditingkatkan, dan driver WinRing. Unduh penginstal hanya dari rilis GitHub resmi proyek.
 
 ## 2. Verifikasi SHA-256 **sebelum menjalankan**
 
@@ -28,18 +28,18 @@ Jangan menonaktifkan antivirus secara menyeluruh. Jangan mengecualikan Downloads
 
 Penginstal NSIS biasanya otomatis memilih Bahasa Indonesia berdasarkan bahasa tampilan Windows. Bahasa aplikasi tetap dapat diubah setelah aplikasi dijalankan.
 
-Saat pertama kali dijalankan, **Mining Risk Acknowledgement — Version 1.0** ditampilkan dalam bahasa aplikasi yang didukung dan dipilih. Bacalah sebelum melanjutkan. **Exit** menutup aplikasi tanpa menyimpan penerimaan. Bahasa Inggris tetap menjadi rujukan kanonis: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Saat pertama kali dijalankan, **Pernyataan Pemahaman Risiko Penambangan — v1.0** ditampilkan dalam bahasa aplikasi yang didukung dan dipilih. Bacalah sebelum melanjutkan. **Keluar** menutup aplikasi tanpa menyimpan penerimaan. Bahasa Inggris tetap menjadi rujukan kanonis: [Pernyataan Pemahaman Risiko Penambangan v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
-## 5. Helper UAC dan MSR
+## 5. Proses pembantu UAC dan MSR
 
-Aplikasi grafis berjalan sebagai pengguna biasa. Pada **Start Mining** pertama dalam satu sesi, Windows meminta persetujuan UAC untuk:
+Aplikasi grafis berjalan sebagai pengguna biasa. Pada **Mulai Menambang** pertama dalam satu sesi, Windows meminta persetujuan UAC untuk:
 
     safex-mine-helper.exe
 
-Hanya helper ini yang dijalankan dengan hak istimewa tinggi. Helper memulai dan mengawasi XMRig serta memungkinkan percobaan optimasi MSR. Jika keamanan Windows memblokir MSR, penambangan dapat terus berjalan dengan kinerja lebih rendah. Jangan menonaktifkan fitur keamanan hanya untuk meningkatkan hashrate.
+Hanya proses pembantu ini yang dijalankan dengan hak istimewa tinggi. Proses tersebut memulai dan mengawasi XMRig serta memungkinkan percobaan optimasi MSR. Jika keamanan Windows memblokir MSR, penambangan dapat terus berjalan dengan kinerja lebih rendah. Jangan menonaktifkan fitur keamanan hanya untuk meningkatkan hashrate.
 
 ## 6. Menghapus instalasi
 
-Uninstall menghapus aplikasi. Pengecualian Defender yang Anda tambahkan secara manual dapat tetap ada; hapus secara manual sesudahnya jika tidak lagi diperlukan.
+Menghapus instalasi akan menghapus aplikasi. Pengecualian Defender yang Anda tambahkan secara manual dapat tetap ada; hapus secara manual sesudahnya jika tidak lagi diperlukan.
 
 Bantuan lebih lanjut: [pemecahan masalah bahasa Inggris](../../../TROUBLESHOOTING.md).
