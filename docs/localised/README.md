@@ -2,6 +2,10 @@
 
 English remains the canonical project documentation. The pages below are AI-assisted community-project translations of the essential Windows installation, security and first-use guidance. They are not professional, native-speaker or legal certifications; language and terminology corrections are welcome.
 
+A locale-by-locale installation-guide quality pass was completed on 6 October 2026. The review compared each guide against the canonical English safety meaning, retained the intentionally condensed six-section format, used the released application catalogues as the terminology and UI-label reference, and specifically checked for unnecessary English prose in translated guidance. Product names, executable names, paths and technical identifiers that users need to recognise are intentionally retained.
+
+Run `npm run localised-docs:check` to verify guide coverage, required security identifiers/links, six-section structure and alignment with the released app's localised Risk Acknowledgement, Exit and Start Mining labels. The checker also emits non-failing review warnings for suspicious English prose in non-Latin-script guides.
+
 The Safex Mine remains a single Windows x64 NSIS installer. The installer normally follows the Windows UI language. Application-language coverage is broader than installer-language coverage: Filipino and Bengali use the English installer because NSIS 3.11 does not provide those installer languages, but both languages remain available in the application and in Mining Risk Acknowledgement v1.0 after launch.
 
 | Application language | Guide | NSIS installer |
