@@ -220,8 +220,8 @@ main {
 
 .hero-art img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .section {
