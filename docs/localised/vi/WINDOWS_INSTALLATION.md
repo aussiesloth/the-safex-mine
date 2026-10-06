@@ -28,11 +28,11 @@ Không tắt rộng rãi phần mềm chống virus. Không loại trừ Downloa
 
 Trình cài đặt NSIS thường tự động chọn Tiếng Việt theo ngôn ngữ hiển thị của Windows. Ngôn ngữ ứng dụng vẫn có thể đổi sau khi khởi động.
 
-Ở lần chạy đầu tiên, **Mining Risk Acknowledgement — Version 1.0** được hiển thị bằng ngôn ngữ ứng dụng được hỗ trợ mà bạn chọn. Hãy đọc trước khi tiếp tục. **Exit** đóng ứng dụng mà không lưu chấp thuận. Tiếng Anh vẫn là tham chiếu chuẩn: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Ở lần chạy đầu tiên, **Xác nhận rủi ro khi đào — v1.0** được hiển thị bằng ngôn ngữ ứng dụng được hỗ trợ mà bạn chọn. Hãy đọc trước khi tiếp tục. **Thoát** đóng ứng dụng mà không lưu chấp thuận. Tiếng Anh vẫn là tham chiếu chuẩn: [Xác nhận rủi ro khi đào v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. Trợ giúp UAC và MSR
 
-Ứng dụng đồ họa chạy với quyền người dùng thông thường. Ở lần **Start Mining** đầu tiên trong một phiên, Windows yêu cầu phê duyệt UAC cho:
+Ứng dụng đồ họa chạy với quyền người dùng thông thường. Ở lần **Bắt đầu đào** đầu tiên trong một phiên, Windows yêu cầu phê duyệt UAC cho:
 
     safex-mine-helper.exe
 
