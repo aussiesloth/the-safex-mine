@@ -4,7 +4,7 @@
 
 ## 1. 公式リリースからのみダウンロード
 
-The Safex Mine は、CPU マイナー、昇格権限で動作するヘルパー、WinRing ドライバーを含む**未署名**の Windows x64 アプリです。インストーラーはプロジェクトの公式 GitHub Release からのみダウンロードしてください。
+The Safex Mine は、CPU マイナー、昇格権限で動作するヘルパー、WinRing ドライバーを含む**未署名**の Windows x64 アプリです。インストーラーはプロジェクトの公式 GitHub リリース からのみダウンロードしてください。
 
 ## 2. **実行前に** SHA-256 を確認
 
@@ -12,7 +12,7 @@ PowerShell で次を実行します。
 
     Get-FileHash .\The-Safex-Mine_<version>_x64-setup.exe -Algorithm SHA256
 
-表示された値を、GitHub Release に掲載された SHA-256 と正確に比較してください。
+表示された値を、GitHub リリース に掲載された SHA-256 と正確に比較してください。
 
 **Microsoft Defender がダウンロード直後にインストーラーを隔離した場合:** まず**そのダウンロードしたインストーラーだけ**を復元/許可し、その後 SHA-256 を計算してください。公式値と一致するまでは実行しないでください。
 
