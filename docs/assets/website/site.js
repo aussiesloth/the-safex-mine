@@ -1,6 +1,7 @@
 const STORAGE_KEY = "safexMine.websiteLanguage";
-const TRANSLATIONS_URL = "./assets/website/translations.json";
-const RELEASE_URL = "./assets/website/release.json";
+const WEBSITE_ASSET_VERSION = "1.1.0-3";
+const TRANSLATIONS_URL = "./assets/website/translations.json?v=" + WEBSITE_ASSET_VERSION;
+const RELEASE_URL = "./assets/website/release.json?v=" + WEBSITE_ASSET_VERSION;
 const CANONICAL_LOCALE = "en-AU";
 
 function normaliseTag(tag) {
