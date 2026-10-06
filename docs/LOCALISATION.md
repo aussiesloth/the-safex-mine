@@ -4,7 +4,7 @@ The Safex Mine uses a small in-repository localisation layer under src/i18n.
 
 ## Current scope
 
-Localisation Slices L1-L5 established the framework, extracted the frontend UI, localised the backend/frontend message boundary, structured Mining Risk Acknowledgement v1.0 for translation, and added Windows preferred-language detection plus a persistent manual selector. L6 implemented and validated the pilot translations and layout-stress tooling. L7a, L7b, L7c and L7d completed the remaining approved LTR translation groups through PRs #12-#15. PR #16 then completed a locale-by-locale translation-quality audit against canonical `en-AU`. L8 added the multilingual NSIS installer configuration and essential translated public installation/first-use documentation, with automated, package-build and representative physical Windows acceptance completed on 6 October 2026. L9 release hardening is merged to `main`; package/application/helper versions are at 1.1.0 while Mining Risk Acknowledgement remains version 1.0. The localisation programme is release-ready, with only the final release build/checksum, explicit approval and publication remaining.
+Localisation Slices L1-L5 established the framework, extracted the frontend UI, localised the backend/frontend message boundary, structured Mining Risk Acknowledgement v1.0 for translation, and added Windows preferred-language detection plus a persistent manual selector. L6 implemented and validated the pilot translations and layout-stress tooling. L7a, L7b, L7c and L7d completed the remaining approved LTR translation groups through PRs #12-#15. PR #16 then completed a locale-by-locale translation-quality audit against canonical `en-AU`. L8 added the multilingual NSIS installer configuration and essential translated public installation/first-use documentation, with automated, package-build and representative physical Windows acceptance completed on 6 October 2026. L9 release hardening completed with package/application/helper versions at 1.1.0 while Mining Risk Acknowledgement remained version 1.0. v1.1.0 was then published on 6 October 2026.
 
 English (Australia), `en-AU`, remains the canonical source locale and fallback. Current `main` has **23 release-enabled translated LTR locales** in addition to English: `de`, `es`, `sr-Latn`, `zh-Hans`, `ja`, `fr`, `it`, `nl`, `pl`, `pt-BR`, `pt-PT`, `tr`, `hu`, `sl`, `ru`, `uk`, `el`, `id`, `vi`, `fil`, `ko`, `hi` and `bn`. Serbian Cyrillic (`sr-Cyrl`) remains complete but developer-only/deferred, and `en-XA` remains a developer-only pseudo-locale. Traditional Chinese (`zh-Hant`) and the registered RTL locales remain disabled. The published v1.0.0 installer predates this multilingual implementation.
 
@@ -13,7 +13,7 @@ English (Australia), `en-AU`, remains the canonical source locale and fallback. 
 
 The revised governing programme (5 October 2026) **does not impose a locked language total, a permanent maximum, or an obligation to deliver every locale named in an earlier plan**. Scope is an approved per-release planning snapshot. Adding further languages or script variants is possible in any future separately governed slice; no new numerical ceiling should be introduced by a registry, validation script, installer, test plan or documentation.
 
-The v1.1.0 release-ready set is **en-AU plus 23 release-enabled LTR translations**. Translation implementation, the project translation-quality audit, L8 installer/public-document implementation and L8 Windows packaged acceptance are complete for that set. L9 consistent versioning, automated/package validation, dependency-licence review and the single candidate installation/launch/uninstall check have also passed; only the final release build/checksum and separate publication gate remain. The set is not the published v1.0.0 feature set and is not a future limit:
+The published v1.1.0 set is **en-AU plus 23 release-enabled LTR translations**. Translation implementation, the project translation-quality audit, L8 installer/public-document implementation, L8 Windows packaged acceptance, L9 consistent versioning, automated/package validation, dependency-licence review and the final installation/launch/uninstall check all completed before publication. The set is not the published v1.0.0 feature set and is not a future limit:
 
 | Delivery group | Current release-enabled translated locales |
 | --- | --- |
@@ -199,7 +199,7 @@ The original clause IDs, paragraph/list ordering, emphases, version `1.0`, accep
 
 **Provenance and limitations:** Project-maintained AI-assisted draft translations were prepared directly from canonical `en-AU` with a separate project semantic/source comparison, including the non-excludable rights qualification, mining reward uncertainty, warranty limits, technical identifiers and GPL distribution/provision distinction. The Safex Mine translations are AI-assisted **community-project translations**, and language/terminology corrections—including native-speaker feedback—remain welcome, with particular attention to both Portuguese variants, Polish inflection, Turkish case handling and Hungarian/Slovenian diacritics. Review status is recorded per locale in `translation-status.json`.
 
-The nine locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #12 was merged. They are **not part of the published v1.0.0 installer**. Subsequent L7 groups, installer/document localisation, translation audit and L9 release hardening have since completed for the release-ready v1.1.0 set.
+The nine locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #12 was merged. They are **not part of the published v1.0.0 installer**. Subsequent L7 groups, installer/document localisation, translation audit and L9 release hardening completed for the published v1.1.0 set.
 
 
 ## L7b Cyrillic and Greek expansion (completed 5 October 2026)
@@ -212,7 +212,7 @@ The Safex Mine translations are AI-assisted **community-project translations**, 
 
 Windows matching is covered for representative Russian, Ukrainian and Greek locale tags. Physical Windows acceptance confirmed Cyrillic and Greek glyph rendering, line height, title/status wrapping, content-aware mining-mode orientation and the complete Risk Acknowledgement without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening have since completed for the release-ready v1.1.0 set.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #13 was merged. They are **not part of the published v1.0.0 installer**. L7c/L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening completed for the published v1.1.0 set.
 
 ## L7c Southeast Asian Latin-script expansion (completed 5 October 2026)
 
@@ -224,7 +224,7 @@ Indonesian uses current Indonesian software terminology; Filipino deliberately p
 
 Physical Windows acceptance confirmed all three main UI states and all three Risk Acknowledgements, including Vietnamese diacritic/font/line-height rendering, natural Filipino terminology, content-aware mining-mode orientation, first-run switching, persistence/acknowledgement continuity and a targeted live-mining language switch without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening have since completed for the release-ready v1.1.0 set.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance before PR #14 was merged. They are **not part of the published v1.0.0 installer**. L7d, the translation-quality audit, L8 installer/document localisation and L9 release hardening completed for the published v1.1.0 set.
 
 ## L7d Korean, Hindi and Bengali expansion (5 October 2026; PR #15)
 
@@ -236,7 +236,7 @@ Korean, Hindi and Bengali use natural contemporary software terminology while pr
 
 Physical Windows acceptance confirmed Hangul glyph fallback and line height plus Devanagari and Bengali conjunct formation, matra/vowel-sign placement, reordering, clipping, wrapping and text measurement in both the dashboard and the complete Risk Acknowledgement. First-run switching, persistence/acknowledgement continuity and one targeted live-mining language switch also passed without requiring locale-specific CSS.
 
-These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance for PR #15. They are **not part of the published v1.0.0 installer**. L8 installer/document localisation, the translation-quality audit and L9 release hardening have since completed for the release-ready v1.1.0 set.
+These locales passed physical Windows visual, first-run, persistence and targeted live-mining acceptance for PR #15. They are **not part of the published v1.0.0 installer**. L8 installer/document localisation, the translation-quality audit and L9 release hardening completed for the published v1.1.0 set.
 
 
 ## Translation quality audit — existing human-language localisations (5 October 2026)
