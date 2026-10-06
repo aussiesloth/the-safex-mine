@@ -45,13 +45,13 @@ The repository copy of the published English v1.0 notice is maintained in `docs/
 
 ## Current multilingual first-run implementation (published v1.1.0)
 
-The current `main` branch implements a language selector on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority is: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
+Published v1.1.0 implements a language selector on the **first-run Mining Risk Acknowledgement before the user accepts** and in the main interface thereafter. It displays native language names without flags. Language-resolution priority is: saved manual override; best enabled match from Windows preferred UI languages; appropriate language/script fallback; canonical `en-AU`. “Use Windows language” removes the manual override.
 
 The selected enabled language controls both the dialog chrome and its complete version-consistent acknowledgement text. English remains an available reference/fallback. Switching language must not implicitly record acceptance, reset the checkbox/acceptance version improperly, modify the mining address, daemon, CPU mode, sound preference or ongoing mining session, or force a different regional number/date convention.
 
 Published v1.1.0 has canonical English plus **23 release-enabled translated LTR locales**, all with complete UI/accessibility/status and acknowledgement content and completed translation-quality review. This is the v1.1.0 release set, not a permanent language limit. Developer-only `en-XA`, deferred Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) are not ordinary release choices. RTL is optional future work and was not a v1.1.0 prerequisite. The historical v1.0.0 installer remains unchanged and does not contain this multilingual implementation.
 
-The published v1.0.0 Risk Acknowledgement acceptance marker remains version `1.0`. Merely adding translations or correcting translation phrasing does not create a new acknowledgement version; assess any canonical English wording clarification separately under the substantive-change rule. Existing acceptance is preserved unless that rule actually requires a new version. The original published v1.0.0 release assets are not retroactively altered.
+Published v1.1.0 retains Mining Risk Acknowledgement version `1.0`. Merely adding translations or correcting translation phrasing does not create a new acknowledgement version; assess any canonical English wording clarification separately under the substantive-change rule. Existing acceptance is preserved unless that rule actually requires a new version. The historical v1.0.0 release assets are not retroactively altered.
 
 ## 2. Current first-run configuration model
 
