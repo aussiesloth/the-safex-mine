@@ -4,7 +4,7 @@
 
 **The Safex Mine** is a Windows graphical solo miner for Safex Cash (SFX). It wraps a Safex-compatible XMRig backend with configuration, privilege handling, telemetry, recovery and a themed state-driven user interface.
 
-Current public release: `1.0.0` (18 September 2026). Current `main` is release-ready for `1.1.0`, with application/package/helper metadata aligned at that version. v1.1.0 is not yet published.
+Current public release: `1.1.0` (6 October 2026). Application/package/helper metadata is aligned at `1.1.0`. The historical v1.0.0 release remains available but is no longer the current release.
 
 ## 2. Published baseline and current development scope
 
@@ -30,7 +30,7 @@ The main window contains:
 - product/Safex branding header;
 - connection/mining status;
 - persistent sound toggle;
-- language selector on current `main` (release-ready v1.1.0);
+- language selector in published v1.1.0;
 - main mine scene;
 - Safex Cash address;
 - daemon endpoint/status;
@@ -141,11 +141,11 @@ Full Bore means maximum configured CPU allocation, not guaranteed maximum effici
 
 ## 12. Localisation and first-run language behaviour
 
-The published v1.0.0 installer is the historical English-only baseline. Current `main` adds Windows preferred-UI-language matching, a persistent manual language override, live language switching, and language selection on the first-run Mining Risk Acknowledgement before acceptance.
+The published v1.0.0 installer is the historical English-only baseline. Published v1.1.0 adds Windows preferred-UI-language matching, a persistent manual language override, live language switching, and language selection on the first-run Mining Risk Acknowledgement before acceptance.
 
-Canonical `en-AU` is the source/fallback locale. The v1.1.0 release-ready set contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
+Canonical `en-AU` is the source/fallback locale. Published v1.1.0 contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
 
-L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. L8 packaged acceptance is complete. L9 is merged and supplies consistent v1.1.0 candidate versioning; its automated/package checks, final installation/launch/uninstall validation and dependency-licence review passed on 6 October 2026. Only the final release build/checksum and separate publication gate remain.
+L8 adds a single multilingual Windows x64 NSIS installer configuration with English plus 21 translated installer languages, documented English installer fallback for Filipino and Bengali, and essential translated installation/first-use guidance for every release-enabled translated app locale. L8 packaged acceptance and L9 release hardening completed successfully. v1.1.0 was built from commit `4140fec9fbee64dc362484988b502a22a3a56699` and published on 6 October 2026.
 
 ## 13. Current scope exclusions
 

@@ -6,7 +6,7 @@ This guide describes the installation path observed during clean-machine testing
 
 ## Language and translated guidance
 
-The already-published v1.0.0 installer is the historical English-only release. The release-ready v1.1.0 configuration keeps a **single Windows x64 NSIS installer** and adds English plus 21 translated installer languages. v1.1.0 should not be described as published until its GitHub release exists.
+The already-published v1.0.0 installer is the historical English-only release. The published v1.1.0 release keeps a **single Windows x64 NSIS installer** and adds English plus 21 translated installer languages. The official Windows x64 installer is `The-Safex-Mine_1.1.0_x64-setup.exe`, published with `SHA256SUMS.txt` at the v1.1.0 GitHub release.
 
 The installer normally follows the Windows display language automatically; L8 does not add a separate language-selection dialog. Filipino and Bengali remain fully supported application languages, but NSIS 3.11 does not provide corresponding installer language files, so those two Windows installer flows fall back to English. After the application starts, users can still select Filipino or Bengali before accepting Mining Risk Acknowledgement v1.0.
 

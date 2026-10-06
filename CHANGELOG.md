@@ -4,7 +4,11 @@ All notable public-facing changes to The Safex Mine will be recorded here.
 
 The first public release is version **1.0.0**.
 
-## [Unreleased] — v1.1.0 release-ready
+## [Unreleased]
+
+_No entries yet._
+
+## [1.1.0] - 2026-10-06
 
 ### Added
 
@@ -23,12 +27,13 @@ The first public release is version **1.0.0**.
 - A complete translation-quality audit was merged after L7d, comparing every existing human-language localisation directly with canonical `en-AU`. These remain AI-assisted community-project translations; native-speaker corrections are welcome.
 - The NSIS installer follows the Windows UI language automatically where supported; no extra installer language-picker dialog is enabled.
 
-### Current release status
+### Release publication
 
-- The published release remains **v1.0.0** until the v1.1.0 GitHub release is actually published.
-- L8 multilingual NSIS/public-documentation implementation and representative Windows packaged acceptance are complete.
-- L9 release hardening is merged to `main`; application, Tauri, Rust and helper package versions are consistently `1.1.0`, while Mining Risk Acknowledgement remains version `1.0`.
-- L9 automated checks, production NSIS packaging, final installation/launch/uninstall validation and dependency-licence review completed successfully on 6 October 2026. `main` is release-ready; only the final post-documentation build/checksum, explicit release approval and publication remain.
+- Version **1.1.0** was published on **6 October 2026** and is the current public release.
+- The release is tagged `v1.1.0` at commit `4140fec9fbee64dc362484988b502a22a3a56699`.
+- The public Windows x64 NSIS installer is `The-Safex-Mine_1.1.0_x64-setup.exe`, published with `SHA256SUMS.txt` at the [v1.1.0 release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.1.0).
+- Published installer SHA-256: `DB13AB3CF3D1A9B34AE291A5F3643C32C8421D4F9C6C7AEA47B0447EA453FF93`.
+- L8 multilingual packaged acceptance, L9 release hardening, final install/launch/uninstall validation and dependency-licence review were complete before publication. Mining Risk Acknowledgement remains version `1.0`.
 
 ## [1.0.0] - 2026-09-18
 

@@ -119,11 +119,11 @@ Published v1.0.0 characteristics:
 - checksum and source/version information;
 - known-issues section if required.
 
-## Current release-ready phase: v1.1.0
+## Published release: v1.1.0 (6 October 2026)
 
-The published v1.0.0 Windows miner remains the current public release until v1.1.0 is actually published. `main` now contains the completed localisation implementation through L7d, the translation-quality audit, L8 installer/public-document work and merged L9 release hardening. Application, Tauri, Rust and helper package versions are aligned at 1.1.0 and the repository is release-ready; publication remains a separate explicit gate.
+v1.1.0 is now the current public Windows release. It contains the completed localisation implementation through L7d, the translation-quality audit, L8 installer/public-document work and L9 release hardening. Application, Tauri, Rust and helper package versions are aligned at 1.1.0.
 
-The revised localisation programme (5 October 2026) establishes extensible language coverage without a permanent maximum. The v1.1.0 release-ready set is canonical `en-AU` plus **23 release-enabled translated LTR locales**. All 23 have complete UI/accessibility/status catalogues, complete Mining Risk Acknowledgement v1.0 content, recorded provenance/review state and completed proportional Windows acceptance. The complete developer-only Serbian Cyrillic locale was also included in the translation-quality audit.
+The revised localisation programme (5 October 2026) establishes extensible language coverage without a permanent maximum. The published v1.1.0 set is canonical `en-AU` plus **23 release-enabled translated LTR locales**. All 23 have complete UI/accessibility/status catalogues, complete Mining Risk Acknowledgement v1.0 content, recorded provenance/review state and completed proportional Windows acceptance. The complete developer-only Serbian Cyrillic locale was also included in the translation-quality audit.
 
 Completed development stages:
 
@@ -139,7 +139,7 @@ Next release stages:
 
 - **L8 — complete and merged:** one Windows x64 NSIS installer carries English plus 21 translated installer languages, with seven project-maintained Tauri-message files, English installer fallback for Filipino/Bengali, and essential translated installation/security/first-use guides for all 23 translated app locales. Automated, package-build and representative physical Windows acceptance completed on 6 October 2026;
 - **L9 — complete and merged:** all release version sources are aligned at 1.1.0; final automated checks, production NSIS packaging, one installation/launch/uninstall validation and dependency-licence review passed on 6 October 2026;
-- **Final release gate — next:** build once from the exact release-ready `main` commit, generate the public SHA-256/checksum file, review the final release materials, and publish v1.1.0 only after explicit approval.
+- **Final release gate — complete:** v1.1.0 was built from commit `4140fec9fbee64dc362484988b502a22a3a56699`, published with `The-Safex-Mine_1.1.0_x64-setup.exe` and `SHA256SUMS.txt`, and marked as the latest release. Published installer SHA-256: `DB13AB3CF3D1A9B34AE291A5F3643C32C8421D4F9C6C7AEA47B0447EA453FF93`.
 
 Serbian Cyrillic (`sr-Cyrl`) and Traditional Chinese (`zh-Hant`) remain deferred from ordinary release selection. RTL implementation is optional future investigation and is not a v1.1.0 or later mandatory gate under the current programme. New languages can be added through separately approved work without creating a universal maximum.
 
