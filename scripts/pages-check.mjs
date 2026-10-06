@@ -12,7 +12,7 @@ const registryPath = path.join(repositoryRoot, "src", "i18n", "locales.json");
 const packagePath = path.join(repositoryRoot, "package.json");
 const htmlPath = path.join(websiteRoot, "index.html");
 const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
-const HTML_KEY_PATTERN = /data-i18n(?:-alt)?="([^"]+)"/g;
+const HTML_KEY_PATTERN = /data-i18n(?:-alt|-aria-label)?="([^"]+)"/g;
 
 const errors = [];
 
