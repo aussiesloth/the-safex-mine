@@ -4,7 +4,7 @@
 
 It provides a graphical interface around a Safex-compatible XMRig backend so users can configure a Safex Cash mining address, choose a CPU profile, connect to the default public daemon or a custom/LAN node, and monitor mining without managing XMRig from the command line.
 
-> **Project status:** **v1.0.0 remains the current published release.** The Windows x64 release remains available from the [v1.0.0 GitHub Release](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0), with its published installer and SHA-256 checksum. `main` is now **release-ready for v1.1.0**: localisation through L7, the translation-quality audit, L8 multilingual installer/public-document work and L9 release hardening are complete for canonical `en-AU` plus **23 release-enabled translated LTR locales**. Application/Tauri/Rust/helper versions are aligned at `1.1.0`; automated validation, production packaging, final installation/launch/uninstall acceptance and dependency-licence review have passed. The remaining work is the final build/checksum from this release-ready `main` state, explicit release approval, and publication. None of this changes the already-published v1.0.0 assets. Native-speaker language and terminology corrections remain welcome.
+> **Project status:** **v1.1.0 was publicly released on 6 October 2026** and is the current release. It adds comprehensive localisation for canonical `en-AU` plus **23 release-enabled translated LTR locales**, multilingual NSIS installation support, translated installation/first-use guidance, responsive-layout hardening and completed release/licence validation. Mining Risk Acknowledgement remains version `1.0`. The historical v1.0.0 assets remain unchanged. Native-speaker language and terminology corrections remain welcome.
 
 ## What it does
 
@@ -74,9 +74,9 @@ The repository intentionally does **not** contain the compiled XMRig executable 
 
 ### Packaged releases
 
-**Published download:** [The Safex Mine v1.0.0 for Windows x64](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.0.0). Download `The-Safex-Mine_1.0.0_x64-setup.exe` and verify its hash using the accompanying `SHA256SUMS.txt` before executing it, following the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
+**Published download:** [The Safex Mine v1.1.0 for Windows x64](https://github.com/aussiesloth/the-safex-mine/releases/tag/v1.1.0). Download `The-Safex-Mine_1.1.0_x64-setup.exe` and verify its hash using the accompanying `SHA256SUMS.txt` before executing it, following the [Windows Installation Guide](docs/WINDOWS_INSTALLATION.md).
 
-The published v1.0.0 installer is the historical English-only baseline. The release-ready v1.1.0 configuration keeps the same **single-installer** model while adding multilingual NSIS support. Essential translated installation/first-use guidance is available from the [localised Windows installation guide index](docs/localised/README.md).
+The published v1.0.0 installer remains the historical English-only baseline. The published v1.1.0 release keeps the same **single-installer** model while adding multilingual NSIS support. Essential translated installation/first-use guidance is available from the [localised Windows installation guide index](docs/localised/README.md).
 
 The Windows release is **unsigned**. Users can inspect the public source and decide whether they are comfortable running the application. Because the package contains a CPU miner, elevated helper and WinRing driver, users should expect antivirus/endpoint-security products may block or quarantine part of the runtime and Windows SmartScreen may warn about the unsigned application. The project provides verification and narrowly scoped exclusion/restoration guidance, but never disables security software or adds antivirus exclusions automatically.
 
