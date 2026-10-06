@@ -4,7 +4,7 @@
 
 The Safex Mine should be released only after the installed application, mining backend, privilege model and recovery paths work together on clean Windows systems.
 
-This file retains historical v1.0.0 development/release validation and documents the completed v1.1.0 localisation/release-hardening gate plus the remaining publication gate. The public v1.0.0 Windows installer was published on 18 September 2026.
+This file retains historical v1.0.0 development/release validation and documents the completed v1.1.0 localisation, release-hardening and publication record. v1.1.0 was published on 6 October 2026.
 
 ## 2. Development validation completed
 
@@ -253,9 +253,9 @@ The first public release is **v1.0.0**, published on **18 September 2026**. The 
 
 L1-L8 intentionally retained project/package version 1.0.0 during localisation development. The approved L9 release-hardening slice advances the application, Tauri, Rust application, helper and corresponding lockfile versions consistently to 1.1.0. Mining Risk Acknowledgement remains independently versioned at 1.0.
 
-## 9. v1.1.0 localisation validation and release gate — release-ready status
+## 9. v1.1.0 localisation validation and release record — published
 
-Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 added the multilingual NSIS configuration and essential translated public installation/first-use documentation for the same canonical `en-AU` plus **23 release-enabled translated LTR locales**. L8 Windows packaged acceptance completed on 6 October 2026. L9 release hardening is merged to `main`; application/package/helper versions are aligned at 1.1.0 while Mining Risk Acknowledgement remains version 1.0. Automated/build/manual acceptance and dependency-licence review are complete. No v1.1.0 tag/release exists yet.
+Localisation implementation through L7d and the subsequent translation-quality audit are complete. L8 added the multilingual NSIS configuration and essential translated public installation/first-use documentation for canonical `en-AU` plus **23 release-enabled translated LTR locales**. L8 Windows packaged acceptance and L9 release hardening completed on 6 October 2026. Application/package/helper versions are aligned at 1.1.0 while Mining Risk Acknowledgement remains version 1.0. Automated/build/manual acceptance and dependency-licence review completed before publication.
 
 The revised governing programme (5 October 2026) imposes **no permanent language count or fixed release maximum**. Test and enable only locales that are **actually complete and approved for the particular release**, using the enabled locale registry and provenance records; a proposed locale is not a mandatory release gate or an excuse to enable partial content.
 
@@ -343,11 +343,11 @@ Automated/source/build results:
 
 The agreed L9 physical gate was deliberately limited because L8 had just completed the broader multilingual, mining, UAC, MSR/degraded-mode, Risk Acknowledgement and installer acceptance matrix and L9 changed none of those functional paths. The single v1.1.0 validation cycle passed: the installer completed normally, the installed application launched normally, and uninstall completed normally.
 
-The L9 branch validation installer above is evidence only and must not supply the public checksum. After this release-readiness documentation reconciliation is merged, build once from that exact `main` commit and use that resulting installer filename and SHA-256 for the publication gate.
+The L9 branch validation installer above remains historical evidence only. The final public v1.1.0 installer was built from commit `4140fec9fbee64dc362484988b502a22a3a56699` after the release-readiness documentation reconciliation. Published asset: `The-Safex-Mine_1.1.0_x64-setup.exe` (15,983,368 bytes). Published SHA-256: `DB13AB3CF3D1A9B34AE291A5F3643C32C8421D4F9C6C7AEA47B0447EA453FF93`. `SHA256SUMS.txt` was published alongside the installer.
 
 RTL delivery or testing is **not required** for v1.1.0 or a later release under this programme. Retain direction metadata for any separately approved future feasibility work; an unsupported RTL locale must not block an otherwise ready LTR release. The developer-only pseudo-locale `en-XA`, deferred `sr-Cyrl` and `zh-Hant`, and incomplete/review-only languages must not be exposed as release choices merely to meet a planned total.
 
-L9 is merged and the development-slice gate is closed. Do not create a v1.1.0 tag or GitHub release until the exact release-ready `main` commit has been built, its installer/checksum verified, and the release title, notes, tag target and publication checklist have received explicit approval. Existing v1.0.0 assets remain historical and must not be modified.
+v1.1.0 was tagged at `4140fec9fbee64dc362484988b502a22a3a56699` and published on 6 October 2026 as the latest release after final installer/checksum verification and explicit approval. Existing v1.0.0 assets remain historical and were not modified.
 
 
 ### L7a acceptance matrix — nine Latin-script locales
