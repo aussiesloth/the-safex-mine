@@ -84,7 +84,7 @@ Sources:
 
 - `mining.png` is a website copy of `src/assets/scenes/MINING.png`;
 - `safex-gradient-logo.svg` is a website copy of `src/assets/branding/safex-gradient-logo.svg`;
-- `favicon.png` is a website copy of `src/assets/branding/app-icon/safex_cash_mining_icon.png`;
+- `favicon.png` is a compact website copy of `src-tauri/icons/32x32.png`, generated from the application icon;
 - `the-safex-mine-v1.1.0.png` is the release-era full application screenshot captured for the public website.
 
 The website copies prevent GitHub Pages from depending on application files outside the `/docs` publishing root. They do not replace the application production sources.
