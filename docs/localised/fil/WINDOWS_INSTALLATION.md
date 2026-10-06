@@ -28,7 +28,7 @@ Huwag ganap na patayin ang antivirus. Huwag gawing exclusion ang Downloads folde
 
 **English ang installer interface para sa Filipino**, dahil walang Filipino/Tagalog installer language ang NSIS 3.11. Pagkatapos ilunsad ang app, maaari mong piliin ang Filipino bilang wika ng application.
 
-Sa unang pagtakbo, ipapakita ang **Pagkilala sa mga Panganib ng Pagmimina — Bersyon 1.0** sa napiling suportadong wika. Basahin ito bago magpatuloy. Isinasara ng **Lumabas** ang app nang hindi nagtatala ng pagtanggap. Ang Ingles ang pangunahing sanggunian: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Sa unang pagtakbo, ipapakita ang **Pagkilala sa mga Panganib ng Pagmimina — Bersyon 1.0** sa napiling suportadong wika. Basahin ito bago magpatuloy. Isinasara ng **Lumabas** ang app nang hindi nagtatala ng pagtanggap. Ang Ingles ang pangunahing sanggunian: [Pagkilala sa mga Panganib ng Pagmimina v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. UAC helper at MSR
 
