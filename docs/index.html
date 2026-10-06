@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en-AU" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b1114">
+  <meta name="description" content="Community Safex Cash mining application for Windows.">
+  <title>The Safex Mine</title>
+  <link rel="icon" type="image/png" href="./images/website/favicon.png">
+  <link rel="stylesheet" href="./assets/website/site.css">
+  <script type="module" src="./assets/website/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="The Safex Mine home" data-i18n-aria-label="a11y.home">
+      <span class="brand-title">The Safex Mine</span>
+    </a>
+
+    <nav class="top-nav" aria-label="Primary" data-i18n-aria-label="a11y.primaryNav">
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#install" data-i18n="nav.install">Install safely</a>
+      <a href="https://github.com/aussiesloth/the-safex-mine" data-i18n="nav.source">Source</a>
+    </nav>
+
+    <label class="language-picker">
+      <span data-i18n="language.label">Language</span>
+      <select id="language-select" aria-label="Language"></select>
+    </label>
+
+    <img class="header-safex" src="./images/website/safex-gradient-logo.svg" alt="Safex">
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Community Safex Cash mining application</p>
+        <h1 data-i18n="hero.title">Solo mine Safex Cash from Windows.</h1>
+        <p class="hero-body" data-i18n="hero.body">A focused Windows desktop miner with three CPU profiles, live mining status, Safex address validation and a narrowly scoped elevated helper for XMRig/MSR operation.</p>
+
+        <div class="hero-actions">
+          <a id="download-link" class="button button-primary" href="#" data-i18n="release.download">Download for Windows x64</a>
+          <a id="release-link" class="button button-secondary" href="#" data-i18n="release.view">View GitHub release</a>
+        </div>
+
+        <div class="release-summary" aria-live="polite">
+          <span><strong data-i18n="release.current">Current release</strong>: <span id="release-version">v1.1.0</span></span>
+          <span><strong data-i18n="release.checksum">SHA-256</strong>: <code id="release-sha">DB13AB3C…</code></span>
+          <a id="checksum-link" href="#" data-i18n="release.checksumFile">Checksum file</a>
+        </div>
+      </div>
+
+      <figure class="hero-art">
+        <img src="./images/website/mining.png" alt="" aria-hidden="true">
+      </figure>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="features.eyebrow">Purpose-built</p>
+        <h2 data-i18n="features.title">Solo mining without living in a command prompt.</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="card">
+          <h3 data-i18n="feature.solo.title">Safex Cash solo mining</h3>
+          <p data-i18n="feature.solo.body">Uses the Safex-compatible XMRig backend with rx/sfx, the public rpc.safex.org:17402 endpoint by default, and optional custom or LAN nodes.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="feature.modes.title">Three CPU profiles</h3>
+          <p data-i18n="feature.modes.body">Calm, Balanced and Full Bore make it easy to choose between lower load and maximum CPU allocation.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="feature.status.title">Live status</h3>
+          <p data-i18n="feature.status.body">See hashrate, worker threads, session time, accepted blocks, rejected results and connection state while you mine.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="feature.security.title">Split-privilege design</h3>
+          <p data-i18n="feature.security.body">The graphical app remains a standard-user process. Only a narrowly scoped helper is elevated to supervise XMRig and allow MSR optimisation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section screenshot-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="screenshot.eyebrow">The real application</p>
+        <h2 data-i18n="screenshot.title">A state-driven interface built around the miner.</h2>
+        <p data-i18n="screenshot.body">The interface keeps controls and statistics steady while authored mine scenes reflect READY, MINING, BLOCK FOUND, REJECTED and OFFLINE states.</p>
+      </div>
+      <figure class="app-shot">
+        <img src="./images/website/the-safex-mine-v1.1.0.png" loading="lazy" data-i18n-alt="screenshot.alt" alt="The Safex Mine v1.1.0 application window while mining">
+      </figure>
+    </section>
+
+    <section class="section modes-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="modes.eyebrow">Choose your load</p>
+        <h2 data-i18n="modes.title">Calm, Balanced or Full Bore.</h2>
+      </div>
+      <div class="mode-grid">
+        <article class="mode-card">
+          <span class="mode-value">40%</span>
+          <h3 data-i18n="modes.calm.title">Calm</h3>
+          <p data-i18n="modes.calm.body">Lower CPU allocation for less heat, noise and system load.</p>
+        </article>
+        <article class="mode-card">
+          <span class="mode-value">70%</span>
+          <h3 data-i18n="modes.balanced.title">Balanced</h3>
+          <p data-i18n="modes.balanced.body">Strong mining performance while leaving more headroom for the rest of the system.</p>
+        </article>
+        <article class="mode-card">
+          <span class="mode-value">100%</span>
+          <h3 data-i18n="modes.full.title">Full Bore</h3>
+          <p data-i18n="modes.full.body">The highest CPU allocation available to the miner. Actual hashrate still depends on hardware, cooling and system limits.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="install" class="section security-section">
+      <div class="security-copy">
+        <p class="eyebrow" data-i18n="security.eyebrow">Install with care</p>
+        <h2 data-i18n="security.title">Unsigned mining software deserves a deliberate install process.</h2>
+        <p data-i18n="security.body">The Safex Mine is unsigned and includes a CPU miner, elevated helper and WinRing driver. SmartScreen or antivirus software may warn about or quarantine the installer or runtime.</p>
+
+        <ol class="security-steps">
+          <li data-i18n="security.step1">Download only from the official The Safex Mine GitHub release.</li>
+          <li data-i18n="security.step2">Verify the installer SHA-256 before executing it whenever the file remains accessible.</li>
+          <li data-i18n="security.step3">If antivirus quarantines the installer before verification, restore or allow that specific installer first, verify its SHA-256 against the official checksum, and only then execute it.</li>
+          <li data-i18n="security.step4">Never use broad antivirus exclusions. If an exclusion is genuinely required, limit it to the dedicated The Safex Mine installation folder.</li>
+        </ol>
+
+        <div class="hero-actions">
+          <a id="install-guide-link" class="button button-primary" href="#" data-i18n="security.guide">Read the installation guide</a>
+          <a href="https://github.com/aussiesloth/the-safex-mine/blob/main/TROUBLESHOOTING.md" class="button button-secondary" data-i18n="security.troubleshooting">Troubleshooting</a>
+        </div>
+      </div>
+
+      <aside class="notice">
+        <h3 data-i18n="security.notice.title">Security behaviour</h3>
+        <p data-i18n="security.notice.body">The application does not disable antivirus protection and does not create antivirus exclusions automatically.</p>
+      </aside>
+    </section>
+
+    <section class="section localisation-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="localisation.eyebrow">Multilingual v1.1.0</p>
+        <h2 data-i18n="localisation.title">The website follows the released application languages.</h2>
+        <p data-i18n="localisation.body">English (Australia) is canonical, with 23 release-enabled translated locales. Your browser language is used when possible, and you can override it at any time.</p>
+        <p class="translation-note" data-i18n="localisation.notice">Translations are AI-assisted community-project localisation, not professional, native-speaker or legal certification. Terminology corrections are welcome.</p>
+      </div>
+    </section>
+
+    <section class="section open-section">
+      <div>
+        <p class="eyebrow" data-i18n="open.eyebrow">Open source</p>
+        <h2 data-i18n="open.title">Inspect the code before deciding whether to run it.</h2>
+        <p data-i18n="open.body">The public repository documents the application architecture, privilege model, mining backend integration, installation process, licences and release testing.</p>
+      </div>
+      <div class="open-actions">
+        <a class="button button-primary" href="https://github.com/aussiesloth/the-safex-mine" data-i18n="open.source">View source on GitHub</a>
+        <a class="button button-secondary" href="https://github.com/aussiesloth/the-safex-mine#repository-documentation" data-i18n="open.docs">Project documentation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.identity">The Safex Mine is a community Safex Cash mining application and is not an official Safex desktop distribution.</p>
+    <p data-i18n="footer.licence">Application code is GPL-3.0-only. Safex/Safex Cash branding is used with permission and remains subject to its separate branding terms.</p>
+  </footer>
+
+  <noscript>
+    <div class="noscript">JavaScript is required only for language switching and release metadata. The project and release remain available on GitHub.</div>
+  </noscript>
+</body>
+</html>

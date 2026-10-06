@@ -63,13 +63,41 @@ src-tauri/icons/
 
 The set includes the Windows `.ico` plus the standard PNG/Store/Square variants generated for Tauri packaging. The icon combines recognisable Safex Cash branding with a pickaxe/mining motif so it remains identifiable as The Safex Mine rather than the standalone Safex Cash logo.
 
-## 7. Historical animation assets/plans
+## 7. GitHub Pages website copies
+
+The static GitHub Pages site publishes from `docs/`, so it owns copies of the visual assets it needs under:
+
+```text
+docs/images/website/
+```
+
+Current website assets are:
+
+```text
+docs/images/website/mining.png
+docs/images/website/safex-gradient-logo.svg
+docs/images/website/favicon.png
+docs/images/website/the-safex-mine-v1.1.0.png
+```
+
+Sources:
+
+- `mining.png` is a website copy of `src/assets/scenes/MINING.png`;
+- `safex-gradient-logo.svg` is a website copy of `src/assets/branding/safex-gradient-logo.svg`;
+- `favicon.png` is a compact website copy of `src-tauri/icons/32x32.png`, generated from the application icon;
+- `the-safex-mine-v1.1.0.png` is the release-era full application screenshot captured for the public website.
+
+The website copies prevent GitHub Pages from depending on application files outside the `/docs` publishing root. They do not replace the application production sources.
+
+When an application asset is intentionally changed for a future release, update the website copy only if the public site should change with it.
+
+## 8. Historical animation assets/plans
 
 Earlier work explored articulated 2D/3D character animation. That material is historical/deferred and is not required for the current state-driven release.
 
 Where retained, it belongs under `docs/archive/` or outside the active runtime asset tree.
 
-## 8. Asset-change checklist
+## 9. Asset-change checklist
 
 When replacing a production scene:
 
