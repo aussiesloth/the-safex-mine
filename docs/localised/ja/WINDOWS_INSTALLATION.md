@@ -28,11 +28,11 @@ PowerShell で次を実行します。
 
 NSIS インストーラーは通常、Windows の表示言語に基づいて日本語を自動選択します。アプリの言語は起動後にも変更できます。
 
-初回起動時には、選択した対応アプリ言語で **Mining Risk Acknowledgement — Version 1.0** が表示されます。続行前に内容を確認してください。**Exit** を選ぶと同意を保存せず終了します。英語版が正式な参照です：[Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md)。
+初回起動時には、選択した対応アプリ言語で **マイニングリスク確認書 — v1.0** が表示されます。続行前に内容を確認してください。**終了** を選ぶと同意を保存せず終了します。英語版が正式な参照です：[マイニングリスク確認書 v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md)。
 
 ## 5. UAC ヘルパーと MSR
 
-GUI 自体は通常ユーザー権限で動作します。1 回のアプリセッションで最初に **Start Mining** を押すと、Windows は次のヘルパーについて UAC 承認を求めます。
+GUI 自体は通常ユーザー権限で動作します。1 回のアプリセッションで最初に **マイニング開始** を押すと、Windows は次のヘルパーについて UAC 承認を求めます。
 
     safex-mine-helper.exe
 
