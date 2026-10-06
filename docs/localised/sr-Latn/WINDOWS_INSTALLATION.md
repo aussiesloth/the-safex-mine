@@ -28,11 +28,11 @@ Nemojte opšte isključivati antivirus. Nemojte izuzimati Downloads, ceo korisni
 
 NSIS instalacioni program obično automatski bira srpski latinicom prema Windows jeziku. Jezik aplikacije može se promeniti nakon pokretanja.
 
-Pri prvom pokretanju prikazuje se **Mining Risk Acknowledgement — Version 1.0** na izabranom podržanom jeziku aplikacije. Pročitajte ga pre nastavka. **Exit** zatvara aplikaciju bez čuvanja saglasnosti. Engleski ostaje kanonska referenca: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Pri prvom pokretanju prikazuje se **Potvrda o rizicima rudarenja — v1.0** na izabranom podržanom jeziku aplikacije. Pročitajte ga pre nastavka. **Izađi** zatvara aplikaciju bez čuvanja saglasnosti. Engleski ostaje kanonska referenca: [Potvrda o rizicima rudarenja v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. UAC pomoćni program i MSR
 
-Grafička aplikacija radi kao običan korisnik. Pri prvom pritisku na **Start Mining** u sesiji Windows traži UAC odobrenje za:
+Grafička aplikacija radi kao običan korisnik. Pri prvom pritisku na **Pokreni rudarenje** u sesiji Windows traži UAC odobrenje za:
 
     safex-mine-helper.exe
 
