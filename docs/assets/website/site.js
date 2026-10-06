@@ -21,8 +21,16 @@ function resolveLocale(tag, data) {
 
   if (requested === "en" || requested.startsWith("en-")) return "en-AU";
 
+  if (requested === "zh-tw" || requested === "zh-hk" || requested === "zh-mo" || requested.startsWith("zh-hant")) {
+    return null;
+  }
+
   if (requested === "zh" || requested === "zh-cn" || requested === "zh-sg" || requested === "zh-my" || requested.startsWith("zh-hans")) {
     return data.locales["zh-Hans"]?.enabled ? "zh-Hans" : null;
+  }
+
+  if (requested === "sr-cyrl" || requested.startsWith("sr-cyrl-")) {
+    return null;
   }
 
   if (requested === "pt-br" && data.locales["pt-BR"]?.enabled) return "pt-BR";
@@ -100,6 +108,11 @@ function translatePage(localeId, data) {
   for (const element of document.querySelectorAll("[data-i18n-alt]")) {
     const key = element.dataset.i18nAlt;
     element.setAttribute("alt", strings[key] ?? canonical.strings[key] ?? "");
+  }
+
+  for (const element of document.querySelectorAll("[data-i18n-aria-label]")) {
+    const key = element.dataset.i18nAriaLabel;
+    element.setAttribute("aria-label", strings[key] ?? canonical.strings[key] ?? key);
   }
 
   const metaDescription = document.querySelector('meta[name="description"]');
