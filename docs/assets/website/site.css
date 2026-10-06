@@ -52,7 +52,7 @@ img { display: block; max-width: 100%; }
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto auto;
+  grid-template-columns: minmax(220px, 1fr) auto auto auto;
   gap: 1.25rem;
   align-items: center;
   max-width: var(--max);
@@ -78,7 +78,11 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
-.brand img { width: 92px; height: auto; }
+.header-safex {
+  width: 92px;
+  height: auto;
+  justify-self: end;
+}
 
 .top-nav {
   display: flex;
@@ -354,7 +358,7 @@ main {
 @media (max-width: 900px) {
   .site-header {
     position: static;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
   }
 
   .top-nav { display: none; }
@@ -385,11 +389,18 @@ main {
 
 @media (max-width: 620px) {
   .site-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: .75rem;
   }
 
-  .language-picker { justify-content: space-between; }
+  .header-safex {
+    width: 82px;
+  }
+
+  .language-picker {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+  }
   .language-picker select { width: min(100%, 230px); }
 
   main { padding-inline: 1rem; }
