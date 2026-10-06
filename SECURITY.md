@@ -50,10 +50,10 @@ Public releases should provide checksums and source references so users can veri
 
 ## Unsigned releases
 
-The current public Windows release, v1.0.0, is unsigned. The release-ready v1.1.0 build is also expected to remain unsigned unless a future signing arrangement changes that. Users should therefore expect Windows SmartScreen or other trust warnings.
+The current public Windows release, v1.1.0, is unsigned. Users should therefore expect Windows SmartScreen or other trust warnings unless a future signing arrangement changes that.
 
 Unsigned distribution is not an invitation to bypass security warnings blindly. Users should verify the release source and published checksum before running it.
 
 ## Supported versions
 
-The current public release is **v1.0.0** until v1.1.0 is actually published. `main` is release-ready for **v1.1.0**, with application/package/helper versions aligned at 1.1.0 and release hardening complete. Security fixes should be assessed against both the currently distributed release and current release-ready code as appropriate; a later support policy may define narrower supported-version windows.
+The current public release is **v1.1.0**, published on 6 October 2026. Application/package/helper versions are aligned at 1.1.0 and release hardening is complete. Security fixes should be assessed against the currently distributed release and current `main` as appropriate; a later support policy may define narrower supported-version windows.
