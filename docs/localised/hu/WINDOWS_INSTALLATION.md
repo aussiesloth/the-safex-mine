@@ -28,11 +28,11 @@ Ne kapcsolja ki általánosan a vírusvédelmet. Ne zárja ki a Downloads mappá
 
 Az NSIS telepítő rendszerint a Windows megjelenítési nyelve alapján automatikusan magyart választ. Az alkalmazás nyelve indítás után is módosítható.
 
-Első indításkor a választott támogatott alkalmazásnyelven megjelenik a **Mining Risk Acknowledgement — Version 1.0**. Folytatás előtt olvassa el. Az **Exit** elfogadás mentése nélkül bezárja az alkalmazást. Az angol a kanonikus referencia: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Első indításkor a választott támogatott alkalmazásnyelven megjelenik a **Bányászati kockázatokról szóló nyilatkozat — v1.0**. Folytatás előtt olvassa el. Az **Kilépés** elfogadás mentése nélkül bezárja az alkalmazást. Az angol a kanonikus referencia: [Bányászati kockázatokról szóló nyilatkozat v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. UAC-segéd és MSR
 
-A grafikus alkalmazás normál felhasználóként fut. Egy munkamenet első **Start Mining** műveleténél a Windows UAC-jóváhagyást kér ehhez:
+A grafikus alkalmazás normál felhasználóként fut. Egy munkamenet első **Bányászat indítása** műveleténél a Windows UAC-jóváhagyást kér ehhez:
 
     safex-mine-helper.exe
 
