@@ -159,14 +159,19 @@ for (const locale of enabledApplicationLocales) {
   }
 }
 
+const referencedHtmlKeys = new Set();
+
 for (const match of html.matchAll(HTML_KEY_PATTERN)) {
-  if (!canonicalKeys.includes(match[1])) {
-    fail("docs/index.html references unknown translation key " + match[1] + ".");
+  const key = match[1];
+  referencedHtmlKeys.add(key);
+
+  if (!canonicalKeys.includes(key)) {
+    fail("docs/index.html references unknown translation key " + key + ".");
   }
 }
 
 for (const key of canonicalKeys) {
-  if (!html.includes('data-i18n="' + key + '"') && !html.includes('data-i18n-alt="' + key + '"') && !key.startsWith("meta.")) {
+  if (!key.startsWith("meta.") && !referencedHtmlKeys.has(key)) {
     fail("Canonical website key is not referenced by docs/index.html: " + key + ".");
   }
 }
