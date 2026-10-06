@@ -64,7 +64,10 @@
         "open.source": "View source on GitHub",
         "open.docs": "Project documentation",
         "footer.identity": "The Safex Mine is a community Safex Cash mining application and is not an official Safex desktop distribution.",
-        "footer.licence": "Application code is GPL-3.0-only. Safex/Safex Cash branding is used with permission and remains subject to its separate branding terms."
+        "footer.licence": "Application code is GPL-3.0-only. Safex/Safex Cash branding is used with permission and remains subject to its separate branding terms.",
+        "a11y.skip": "Skip to content",
+        "a11y.home": "The Safex Mine home",
+        "a11y.primaryNav": "Primary navigation"
       }
     },
     "de": {
@@ -129,7 +132,10 @@
         "open.source": "Quellcode auf GitHub ansehen",
         "open.docs": "Projektdokumentation",
         "footer.identity": "The Safex Mine ist eine Community-Mining-Anwendung für Safex Cash und keine offizielle Safex-Desktop-Distribution.",
-        "footer.licence": "Der Anwendungscode steht ausschließlich unter GPL-3.0. Safex/Safex-Cash-Branding wird mit Genehmigung verwendet und unterliegt separaten Branding-Bedingungen."
+        "footer.licence": "Der Anwendungscode steht ausschließlich unter GPL-3.0. Safex/Safex-Cash-Branding wird mit Genehmigung verwendet und unterliegt separaten Branding-Bedingungen.",
+        "a11y.skip": "Zum Inhalt springen",
+        "a11y.home": "Startseite The Safex Mine",
+        "a11y.primaryNav": "Hauptnavigation"
       }
     },
     "es": {
@@ -194,7 +200,10 @@
         "open.source": "Ver código en GitHub",
         "open.docs": "Documentación del proyecto",
         "footer.identity": "The Safex Mine es una aplicación comunitaria de minería de Safex Cash y no una distribución oficial de escritorio de Safex.",
-        "footer.licence": "El código de la aplicación se distribuye únicamente bajo GPL-3.0. La marca Safex/Safex Cash se usa con permiso y sigue sujeta a términos de marca independientes."
+        "footer.licence": "El código de la aplicación se distribuye únicamente bajo GPL-3.0. La marca Safex/Safex Cash se usa con permiso y sigue sujeta a términos de marca independientes.",
+        "a11y.skip": "Saltar al contenido",
+        "a11y.home": "Inicio de The Safex Mine",
+        "a11y.primaryNav": "Navegación principal"
       }
     },
     "fr": {
@@ -259,7 +268,10 @@
         "open.source": "Voir le code sur GitHub",
         "open.docs": "Documentation du projet",
         "footer.identity": "The Safex Mine est une application communautaire de minage Safex Cash, et non une distribution de bureau Safex officielle.",
-        "footer.licence": "Le code de l’application est sous GPL-3.0 uniquement. La marque Safex/Safex Cash est utilisée avec autorisation et reste soumise à ses conditions de marque distinctes."
+        "footer.licence": "Le code de l’application est sous GPL-3.0 uniquement. La marque Safex/Safex Cash est utilisée avec autorisation et reste soumise à ses conditions de marque distinctes.",
+        "a11y.skip": "Aller au contenu",
+        "a11y.home": "Accueil The Safex Mine",
+        "a11y.primaryNav": "Navigation principale"
       }
     },
     "it": {
@@ -324,7 +336,10 @@
         "open.source": "Vedi sorgente su GitHub",
         "open.docs": "Documentazione del progetto",
         "footer.identity": "The Safex Mine è un’applicazione comunitaria di mining Safex Cash e non una distribuzione desktop ufficiale Safex.",
-        "footer.licence": "Il codice dell’applicazione è solo GPL-3.0. Il branding Safex/Safex Cash è usato con autorizzazione e resta soggetto a condizioni di branding separate."
+        "footer.licence": "Il codice dell’applicazione è solo GPL-3.0. Il branding Safex/Safex Cash è usato con autorizzazione e resta soggetto a condizioni di branding separate.",
+        "a11y.skip": "Vai al contenuto",
+        "a11y.home": "Pagina iniziale The Safex Mine",
+        "a11y.primaryNav": "Navigazione principale"
       }
     },
     "nl": {
@@ -389,7 +404,10 @@
         "open.source": "Bekijk broncode op GitHub",
         "open.docs": "Projectdocumentatie",
         "footer.identity": "The Safex Mine is een community-miningapp voor Safex Cash en geen officiële Safex-desktopdistributie.",
-        "footer.licence": "De applicatiecode valt uitsluitend onder GPL-3.0. Safex/Safex Cash-branding wordt met toestemming gebruikt en blijft onder aparte brandingvoorwaarden vallen."
+        "footer.licence": "De applicatiecode valt uitsluitend onder GPL-3.0. Safex/Safex Cash-branding wordt met toestemming gebruikt en blijft onder aparte brandingvoorwaarden vallen.",
+        "a11y.skip": "Naar inhoud",
+        "a11y.home": "Startpagina The Safex Mine",
+        "a11y.primaryNav": "Hoofdnavigatie"
       }
     },
     "pl": {
@@ -454,7 +472,10 @@
         "open.source": "Zobacz kod na GitHub",
         "open.docs": "Dokumentacja projektu",
         "footer.identity": "The Safex Mine to społecznościowa aplikacja do wydobywania Safex Cash, a nie oficjalna dystrybucja desktopowa Safex.",
-        "footer.licence": "Kod aplikacji jest wyłącznie na licencji GPL-3.0. Branding Safex/Safex Cash jest używany za zgodą i podlega odrębnym warunkom."
+        "footer.licence": "Kod aplikacji jest wyłącznie na licencji GPL-3.0. Branding Safex/Safex Cash jest używany za zgodą i podlega odrębnym warunkom.",
+        "a11y.skip": "Przejdź do treści",
+        "a11y.home": "Strona główna The Safex Mine",
+        "a11y.primaryNav": "Główna nawigacja"
       }
     },
     "pt-BR": {
@@ -519,7 +540,10 @@
         "open.source": "Ver código no GitHub",
         "open.docs": "Documentação do projeto",
         "footer.identity": "The Safex Mine é um aplicativo comunitário de mineração de Safex Cash e não uma distribuição oficial de desktop da Safex.",
-        "footer.licence": "O código do aplicativo é somente GPL-3.0. A marca Safex/Safex Cash é usada com permissão e permanece sujeita a termos de marca separados."
+        "footer.licence": "O código do aplicativo é somente GPL-3.0. A marca Safex/Safex Cash é usada com permissão e permanece sujeita a termos de marca separados.",
+        "a11y.skip": "Ir para o conteúdo",
+        "a11y.home": "Página inicial do The Safex Mine",
+        "a11y.primaryNav": "Navegação principal"
       }
     },
     "pt-PT": {
@@ -584,7 +608,10 @@
         "open.source": "Ver código no GitHub",
         "open.docs": "Documentação do projeto",
         "footer.identity": "The Safex Mine é uma aplicação comunitária de mineração de Safex Cash e não uma distribuição oficial de desktop da Safex.",
-        "footer.licence": "O código da aplicação é apenas GPL-3.0. A marca Safex/Safex Cash é usada com permissão e permanece sujeita a termos de marca separados."
+        "footer.licence": "O código da aplicação é apenas GPL-3.0. A marca Safex/Safex Cash é usada com permissão e permanece sujeita a termos de marca separados.",
+        "a11y.skip": "Ir para o conteúdo",
+        "a11y.home": "Página inicial do The Safex Mine",
+        "a11y.primaryNav": "Navegação principal"
       }
     },
     "ru": {
@@ -649,7 +676,10 @@
         "open.source": "Исходный код на GitHub",
         "open.docs": "Документация проекта",
         "footer.identity": "The Safex Mine — сообщественное приложение для майнинга Safex Cash, а не официальная настольная дистрибуция Safex.",
-        "footer.licence": "Код приложения распространяется только по GPL-3.0. Брендинг Safex/Safex Cash используется с разрешения и регулируется отдельными условиями."
+        "footer.licence": "Код приложения распространяется только по GPL-3.0. Брендинг Safex/Safex Cash используется с разрешения и регулируется отдельными условиями.",
+        "a11y.skip": "Перейти к содержимому",
+        "a11y.home": "Главная The Safex Mine",
+        "a11y.primaryNav": "Основная навигация"
       }
     },
     "uk": {
@@ -714,7 +744,10 @@
         "open.source": "Вихідний код на GitHub",
         "open.docs": "Документація проєкту",
         "footer.identity": "The Safex Mine — спільнотний застосунок для майнінгу Safex Cash, а не офіційний настільний дистрибутив Safex.",
-        "footer.licence": "Код застосунку ліцензований лише за GPL-3.0. Брендинг Safex/Safex Cash використовується з дозволу та підпорядковується окремим умовам."
+        "footer.licence": "Код застосунку ліцензований лише за GPL-3.0. Брендинг Safex/Safex Cash використовується з дозволу та підпорядковується окремим умовам.",
+        "a11y.skip": "Перейти до вмісту",
+        "a11y.home": "Головна The Safex Mine",
+        "a11y.primaryNav": "Основна навігація"
       }
     },
     "el": {
@@ -779,7 +812,10 @@
         "open.source": "Προβολή κώδικα στο GitHub",
         "open.docs": "Τεκμηρίωση έργου",
         "footer.identity": "Το The Safex Mine είναι κοινοτική εφαρμογή mining Safex Cash και όχι επίσημη desktop διανομή Safex.",
-        "footer.licence": "Ο κώδικας της εφαρμογής είναι μόνο GPL-3.0. Το branding Safex/Safex Cash χρησιμοποιείται με άδεια και υπόκειται σε ξεχωριστούς όρους branding."
+        "footer.licence": "Ο κώδικας της εφαρμογής είναι μόνο GPL-3.0. Το branding Safex/Safex Cash χρησιμοποιείται με άδεια και υπόκειται σε ξεχωριστούς όρους branding.",
+        "a11y.skip": "Μετάβαση στο περιεχόμενο",
+        "a11y.home": "Αρχική The Safex Mine",
+        "a11y.primaryNav": "Κύρια πλοήγηση"
       }
     },
     "tr": {
@@ -844,7 +880,10 @@
         "open.source": "Kaynağı GitHub’da görüntüle",
         "open.docs": "Proje belgeleri",
         "footer.identity": "The Safex Mine bir topluluk Safex Cash madencilik uygulamasıdır ve resmi bir Safex masaüstü dağıtımı değildir.",
-        "footer.licence": "Uygulama kodu yalnızca GPL-3.0 lisanslıdır. Safex/Safex Cash markaları izinle kullanılır ve ayrı marka koşullarına tabidir."
+        "footer.licence": "Uygulama kodu yalnızca GPL-3.0 lisanslıdır. Safex/Safex Cash markaları izinle kullanılır ve ayrı marka koşullarına tabidir.",
+        "a11y.skip": "İçeriğe geç",
+        "a11y.home": "The Safex Mine ana sayfası",
+        "a11y.primaryNav": "Ana gezinme"
       }
     },
     "hu": {
@@ -909,7 +948,10 @@
         "open.source": "Forráskód a GitHubon",
         "open.docs": "Projekt dokumentáció",
         "footer.identity": "A The Safex Mine közösségi Safex Cash bányász alkalmazás, nem hivatalos Safex asztali disztribúció.",
-        "footer.licence": "Az alkalmazáskód kizárólag GPL-3.0 licencű. A Safex/Safex Cash arculat engedéllyel használható, és külön arculati feltételek vonatkoznak rá."
+        "footer.licence": "Az alkalmazáskód kizárólag GPL-3.0 licencű. A Safex/Safex Cash arculat engedéllyel használható, és külön arculati feltételek vonatkoznak rá.",
+        "a11y.skip": "Ugrás a tartalomhoz",
+        "a11y.home": "The Safex Mine kezdőlap",
+        "a11y.primaryNav": "Fő navigáció"
       }
     },
     "sl": {
@@ -974,7 +1016,10 @@
         "open.source": "Izvorna koda na GitHubu",
         "open.docs": "Dokumentacija projekta",
         "footer.identity": "The Safex Mine je skupnostna aplikacija za rudarjenje Safex Cash in ni uradna namizna distribucija Safex.",
-        "footer.licence": "Koda aplikacije je samo pod GPL-3.0. Blagovna znamka Safex/Safex Cash se uporablja z dovoljenjem in zanjo veljajo ločeni pogoji."
+        "footer.licence": "Koda aplikacije je samo pod GPL-3.0. Blagovna znamka Safex/Safex Cash se uporablja z dovoljenjem in zanjo veljajo ločeni pogoji.",
+        "a11y.skip": "Preskoči na vsebino",
+        "a11y.home": "Domača stran The Safex Mine",
+        "a11y.primaryNav": "Glavna navigacija"
       }
     },
     "sr-Latn": {
@@ -1039,7 +1084,10 @@
         "open.source": "Pogledaj kod na GitHubu",
         "open.docs": "Dokumentacija projekta",
         "footer.identity": "The Safex Mine je zajednička aplikacija za rudarenje Safex Cash i nije zvanična Safex desktop distribucija.",
-        "footer.licence": "Kod aplikacije je isključivo GPL-3.0. Safex/Safex Cash brending se koristi uz dozvolu i podleže posebnim uslovima brendiranja."
+        "footer.licence": "Kod aplikacije je isključivo GPL-3.0. Safex/Safex Cash brending se koristi uz dozvolu i podleže posebnim uslovima brendiranja.",
+        "a11y.skip": "Pređi na sadržaj",
+        "a11y.home": "Početna strana The Safex Mine",
+        "a11y.primaryNav": "Glavna navigacija"
       }
     },
     "id": {
@@ -1104,7 +1152,10 @@
         "open.source": "Lihat sumber di GitHub",
         "open.docs": "Dokumentasi proyek",
         "footer.identity": "The Safex Mine adalah aplikasi mining komunitas Safex Cash dan bukan distribusi desktop resmi Safex.",
-        "footer.licence": "Kode aplikasi hanya berlisensi GPL-3.0. Branding Safex/Safex Cash digunakan dengan izin dan tetap tunduk pada ketentuan branding terpisah."
+        "footer.licence": "Kode aplikasi hanya berlisensi GPL-3.0. Branding Safex/Safex Cash digunakan dengan izin dan tetap tunduk pada ketentuan branding terpisah.",
+        "a11y.skip": "Lompat ke konten",
+        "a11y.home": "Beranda The Safex Mine",
+        "a11y.primaryNav": "Navigasi utama"
       }
     },
     "vi": {
@@ -1169,7 +1220,10 @@
         "open.source": "Xem mã trên GitHub",
         "open.docs": "Tài liệu dự án",
         "footer.identity": "The Safex Mine là ứng dụng đào Safex Cash của cộng đồng, không phải bản phân phối desktop chính thức của Safex.",
-        "footer.licence": "Mã ứng dụng chỉ theo GPL-3.0. Thương hiệu Safex/Safex Cash được sử dụng có phép và vẫn chịu các điều khoản thương hiệu riêng."
+        "footer.licence": "Mã ứng dụng chỉ theo GPL-3.0. Thương hiệu Safex/Safex Cash được sử dụng có phép và vẫn chịu các điều khoản thương hiệu riêng.",
+        "a11y.skip": "Chuyển đến nội dung",
+        "a11y.home": "Trang chủ The Safex Mine",
+        "a11y.primaryNav": "Điều hướng chính"
       }
     },
     "fil": {
@@ -1234,7 +1288,10 @@
         "open.source": "Tingnan ang source sa GitHub",
         "open.docs": "Project documentation",
         "footer.identity": "Ang The Safex Mine ay community Safex Cash mining application at hindi opisyal na Safex desktop distribution.",
-        "footer.licence": "GPL-3.0-only ang application code. Ginagamit nang may pahintulot ang Safex/Safex Cash branding at saklaw pa rin ng hiwalay nitong branding terms."
+        "footer.licence": "GPL-3.0-only ang application code. Ginagamit nang may pahintulot ang Safex/Safex Cash branding at saklaw pa rin ng hiwalay nitong branding terms.",
+        "a11y.skip": "Lumaktaw sa nilalaman",
+        "a11y.home": "Home ng The Safex Mine",
+        "a11y.primaryNav": "Pangunahing nabigasyon"
       }
     },
     "zh-Hans": {
@@ -1299,7 +1356,10 @@
         "open.source": "在 GitHub 查看源代码",
         "open.docs": "项目文档",
         "footer.identity": "The Safex Mine 是社区 Safex Cash 挖矿应用，并非 Safex 官方桌面发行版。",
-        "footer.licence": "应用代码仅采用 GPL-3.0。Safex/Safex Cash 品牌经许可使用，并继续受其独立品牌条款约束。"
+        "footer.licence": "应用代码仅采用 GPL-3.0。Safex/Safex Cash 品牌经许可使用，并继续受其独立品牌条款约束。",
+        "a11y.skip": "跳到主要内容",
+        "a11y.home": "The Safex Mine 首页",
+        "a11y.primaryNav": "主导航"
       }
     },
     "ja": {
@@ -1364,7 +1424,10 @@
         "open.source": "GitHub でソースを見る",
         "open.docs": "プロジェクト文書",
         "footer.identity": "The Safex Mine はコミュニティ Safex Cash マイニングアプリであり、Safex の公式デスクトップ配布物ではありません。",
-        "footer.licence": "アプリコードは GPL-3.0-only です。Safex/Safex Cash ブランドは許可を得て使用しており、別個のブランド条件が適用されます。"
+        "footer.licence": "アプリコードは GPL-3.0-only です。Safex/Safex Cash ブランドは許可を得て使用しており、別個のブランド条件が適用されます。",
+        "a11y.skip": "本文へ移動",
+        "a11y.home": "The Safex Mine ホーム",
+        "a11y.primaryNav": "メインナビゲーション"
       }
     },
     "ko": {
@@ -1429,7 +1492,10 @@
         "open.source": "GitHub에서 소스 보기",
         "open.docs": "프로젝트 문서",
         "footer.identity": "The Safex Mine은 커뮤니티 Safex Cash 마이닝 애플리케이션이며 공식 Safex 데스크톱 배포판이 아닙니다.",
-        "footer.licence": "애플리케이션 코드는 GPL-3.0-only입니다. Safex/Safex Cash 브랜딩은 허가를 받아 사용하며 별도의 브랜딩 조건이 적용됩니다."
+        "footer.licence": "애플리케이션 코드는 GPL-3.0-only입니다. Safex/Safex Cash 브랜딩은 허가를 받아 사용하며 별도의 브랜딩 조건이 적용됩니다.",
+        "a11y.skip": "본문으로 건너뛰기",
+        "a11y.home": "The Safex Mine 홈",
+        "a11y.primaryNav": "기본 탐색"
       }
     },
     "hi": {
@@ -1494,7 +1560,10 @@
         "open.source": "GitHub पर source देखें",
         "open.docs": "Project documentation",
         "footer.identity": "The Safex Mine एक community Safex Cash mining application है, official Safex desktop distribution नहीं।",
-        "footer.licence": "Application code केवल GPL-3.0 के अंतर्गत है। Safex/Safex Cash branding अनुमति से उपयोग होती है और अलग branding terms के अधीन है।"
+        "footer.licence": "Application code केवल GPL-3.0 के अंतर्गत है। Safex/Safex Cash branding अनुमति से उपयोग होती है और अलग branding terms के अधीन है।",
+        "a11y.skip": "मुख्य सामग्री पर जाएँ",
+        "a11y.home": "The Safex Mine होम",
+        "a11y.primaryNav": "मुख्य नेविगेशन"
       }
     },
     "bn": {
@@ -1559,7 +1628,10 @@
         "open.source": "GitHub-এ source দেখুন",
         "open.docs": "Project documentation",
         "footer.identity": "The Safex Mine একটি community Safex Cash mining application; এটি official Safex desktop distribution নয়।",
-        "footer.licence": "Application code শুধুমাত্র GPL-3.0। Safex/Safex Cash branding অনুমতি নিয়ে ব্যবহার করা হয় এবং আলাদা branding terms-এর অধীন থাকে।"
+        "footer.licence": "Application code শুধুমাত্র GPL-3.0। Safex/Safex Cash branding অনুমতি নিয়ে ব্যবহার করা হয় এবং আলাদা branding terms-এর অধীন থাকে।",
+        "a11y.skip": "মূল কনটেন্টে যান",
+        "a11y.home": "The Safex Mine হোম",
+        "a11y.primaryNav": "প্রধান নেভিগেশন"
       }
     }
   }
