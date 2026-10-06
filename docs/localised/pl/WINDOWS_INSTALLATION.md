@@ -28,15 +28,15 @@ Nie wyłączaj ogólnie programu antywirusowego. Nie dodawaj do wyjątków folde
 
 Instalator NSIS zwykle automatycznie wybiera język polski zgodnie z językiem wyświetlania Windows. Język aplikacji można później zmienić.
 
-Przy pierwszym uruchomieniu wyświetlany jest **Mining Risk Acknowledgement — Version 1.0** w wybranym obsługiwanym języku aplikacji. Przeczytaj go przed kontynuacją. **Exit** zamyka aplikację bez zapisania akceptacji. Angielski pozostaje kanonicznym punktem odniesienia: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Przy pierwszym uruchomieniu wyświetlany jest **Oświadczenie o ryzyku związanym z kopaniem — v1.0** w wybranym obsługiwanym języku aplikacji. Przeczytaj go przed kontynuacją. **Wyjdź** zamyka aplikację bez zapisania akceptacji. Angielski pozostaje kanonicznym punktem odniesienia: [Oświadczenie o ryzyku związanym z kopaniem v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. Pomocnik UAC i MSR
 
-Interfejs graficzny działa jako zwykły użytkownik. Przy pierwszym **Start Mining** w danej sesji Windows prosi o zgodę UAC dla:
+Interfejs graficzny działa jako zwykły użytkownik. Przy pierwszym **Rozpocznij kopanie** w danej sesji Windows prosi o zgodę UAC dla:
 
     safex-mine-helper.exe
 
-Tylko ten pomocnik uzyskuje podwyższone uprawnienia. Uruchamia i nadzoruje XMRig oraz umożliwia próbę optymalizacji MSR. Jeśli zabezpieczenia Windows blokują MSR, mining może nadal działać z niższą wydajnością. Nie wyłączaj funkcji bezpieczeństwa tylko po to, by zwiększyć hashrate.
+Tylko ten pomocnik uzyskuje podwyższone uprawnienia. Uruchamia i nadzoruje XMRig oraz umożliwia próbę optymalizacji MSR. Jeśli zabezpieczenia Windows blokują MSR, kopanie może nadal działać z niższą wydajnością. Nie wyłączaj funkcji bezpieczeństwa tylko po to, by zwiększyć hashrate.
 
 ## 6. Odinstalowanie
 

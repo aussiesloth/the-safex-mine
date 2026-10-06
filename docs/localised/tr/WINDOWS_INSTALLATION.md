@@ -28,11 +28,11 @@ Antivirüsü genel olarak devre dışı bırakmayın. Downloads klasörünü, ku
 
 NSIS yükleyicisi normalde Windows görüntüleme diline göre Türkçeyi otomatik seçer. Uygulama dili başlatıldıktan sonra ayrıca değiştirilebilir.
 
-İlk çalıştırmada seçtiğiniz desteklenen uygulama dilinde **Mining Risk Acknowledgement — Version 1.0** gösterilir. Devam etmeden önce okuyun. **Exit**, kabulü kaydetmeden uygulamayı kapatır. İngilizce kanonik referanstır: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+İlk çalıştırmada seçtiğiniz desteklenen uygulama dilinde **Madencilik Riskleri Bildirimi — v1.0** gösterilir. Devam etmeden önce okuyun. **Çıkış**, kabulü kaydetmeden uygulamayı kapatır. İngilizce kanonik referanstır: [Madencilik Riskleri Bildirimi v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. UAC yardımcısı ve MSR
 
-Grafik uygulama normal kullanıcı olarak çalışır. Bir oturumdaki ilk **Start Mining** işleminde Windows şu dosya için UAC onayı ister:
+Grafik uygulama normal kullanıcı olarak çalışır. Bir oturumdaki ilk **Madenciliği Başlat** işleminde Windows şu dosya için UAC onayı ister:
 
     safex-mine-helper.exe
 

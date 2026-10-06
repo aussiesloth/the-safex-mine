@@ -248,7 +248,6 @@ const requiredDocMarkers = [
   "Microsoft Defender",
   "SmartScreen",
   "%LOCALAPPDATA%\\The Safex Mine",
-  "Mining Risk Acknowledgement",
   "safex-mine-helper.exe",
   "XMRig",
   "MSR",
@@ -273,6 +272,21 @@ for (const localeId of translatedLocales) {
     }
   }
 
+  const catalogue = await readJson(`src/i18n/catalogues/${localeId}.json`);
+  const localisedRiskTitle = catalogue?.["riskAcknowledgement.title"];
+  if (
+    typeof localisedRiskTitle !== "string" ||
+    localisedRiskTitle.trim() === ""
+  ) {
+    addError(
+      `src/i18n/catalogues/${localeId}.json: riskAcknowledgement.title must be available for translated-guide conformance.`,
+    );
+  } else if (!content.includes(localisedRiskTitle)) {
+    addError(
+      `${relativePath}: guide must use the released app's localised Risk Acknowledgement title: ${localisedRiskTitle}`,
+    );
+  }
+
   const opening = content.slice(0, 1400);
   if (!/^>\s+\*\*/m.test(opening)) {
     addError(`${relativePath}: translation/community status blockquote should be stated near the top of the guide.`);
@@ -286,10 +300,22 @@ for (const localeId of translatedLocales) {
   }
 }
 
+const fallbackLanguageMarkers = {
+  fil: /English/i,
+  bn: /ইংরেজি/,
+};
+
 for (const localeId of expectedFallbacks) {
   const fallbackGuide = await readText(`docs/localised/${localeId}/WINDOWS_INSTALLATION.md`);
-  if (!fallbackGuide.includes("NSIS 3.11") || !/English/i.test(fallbackGuide)) {
-    addError(`docs/localised/${localeId}/WINDOWS_INSTALLATION.md must clearly explain the English NSIS 3.11 installer fallback.`);
+  const languageMarker = fallbackLanguageMarkers[localeId];
+  if (
+    !fallbackGuide.includes("NSIS 3.11") ||
+    !languageMarker ||
+    !languageMarker.test(fallbackGuide)
+  ) {
+    addError(
+      `docs/localised/${localeId}/WINDOWS_INSTALLATION.md must clearly explain the English NSIS 3.11 installer fallback in that guide's language.`,
+    );
   }
 }
 

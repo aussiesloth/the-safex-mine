@@ -28,11 +28,11 @@ Não desactive o antivírus de forma geral. Não exclua a pasta Downloads, todo 
 
 O instalador NSIS normalmente selecciona automaticamente Português de Portugal de acordo com o idioma do Windows. O idioma da aplicação pode ser alterado após o arranque.
 
-Na primeira execução, **Mining Risk Acknowledgement — Version 1.0** é apresentado no idioma de aplicação suportado escolhido. Leia-o antes de continuar. **Exit** fecha a aplicação sem registar aceitação. O inglês continua a ser a referência canónica: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Na primeira execução, **Declaração de Conhecimento dos Riscos da Mineração — v1.0** é apresentado no idioma de aplicação suportado escolhido. Leia-o antes de continuar. **Sair** fecha a aplicação sem registar aceitação. O inglês continua a ser a referência canónica: [Declaração de Conhecimento dos Riscos da Mineração v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. Auxiliar UAC e MSR
 
-A interface gráfica é executada como utilizador normal. No primeiro **Start Mining** de uma sessão, o Windows pede aprovação UAC para:
+A interface gráfica é executada como utilizador normal. No primeiro **Iniciar mineração** de uma sessão, o Windows pede aprovação UAC para:
 
     safex-mine-helper.exe
 

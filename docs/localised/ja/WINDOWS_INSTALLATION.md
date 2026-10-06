@@ -4,7 +4,7 @@
 
 ## 1. 公式リリースからのみダウンロード
 
-The Safex Mine は、CPU マイナー、昇格権限で動作するヘルパー、WinRing ドライバーを含む**未署名**の Windows x64 アプリです。インストーラーはプロジェクトの公式 GitHub Release からのみダウンロードしてください。
+The Safex Mine は、CPU マイナー、昇格権限で動作するヘルパー、WinRing ドライバーを含む**未署名**の Windows x64 アプリです。インストーラーはプロジェクトの公式 GitHub リリース からのみダウンロードしてください。
 
 ## 2. **実行前に** SHA-256 を確認
 
@@ -12,7 +12,7 @@ PowerShell で次を実行します。
 
     Get-FileHash .\The-Safex-Mine_<version>_x64-setup.exe -Algorithm SHA256
 
-表示された値を、GitHub Release に掲載された SHA-256 と正確に比較してください。
+表示された値を、GitHub リリース に掲載された SHA-256 と正確に比較してください。
 
 **Microsoft Defender がダウンロード直後にインストーラーを隔離した場合:** まず**そのダウンロードしたインストーラーだけ**を復元/許可し、その後 SHA-256 を計算してください。公式値と一致するまでは実行しないでください。
 
@@ -28,11 +28,11 @@ PowerShell で次を実行します。
 
 NSIS インストーラーは通常、Windows の表示言語に基づいて日本語を自動選択します。アプリの言語は起動後にも変更できます。
 
-初回起動時には、選択した対応アプリ言語で **Mining Risk Acknowledgement — Version 1.0** が表示されます。続行前に内容を確認してください。**Exit** を選ぶと同意を保存せず終了します。英語版が正式な参照です：[Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md)。
+初回起動時には、選択した対応アプリ言語で **マイニングリスク確認書 — v1.0** が表示されます。続行前に内容を確認してください。**終了** を選ぶと同意を保存せず終了します。英語版が正式な参照です：[マイニングリスク確認書 v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md)。
 
 ## 5. UAC ヘルパーと MSR
 
-GUI 自体は通常ユーザー権限で動作します。1 回のアプリセッションで最初に **Start Mining** を押すと、Windows は次のヘルパーについて UAC 承認を求めます。
+GUI 自体は通常ユーザー権限で動作します。1 回のアプリセッションで最初に **マイニング開始** を押すと、Windows は次のヘルパーについて UAC 承認を求めます。
 
     safex-mine-helper.exe
 
