@@ -108,7 +108,7 @@ Safex mining addresses and public node endpoints are not passwords, but release 
 
 ## 12. Unsigned release model
 
-The published v1.0.0 Windows release is unsigned. The release-ready v1.1.0 build is also expected to remain unsigned unless a future signing arrangement changes.
+The published v1.1.0 Windows release is unsigned, as was v1.0.0. Users should expect SmartScreen or antivirus trust warnings unless a future signing arrangement changes.
 
 Users may therefore encounter SmartScreen/trust warnings. Public releases compensate with transparency:
 
@@ -136,4 +136,4 @@ Documentation may explain how a user who has independently verified the release 
 
 The v1.0.0 release completed the release-security work that had previously been listed as pending. Clean-machine testing covered the unsigned NSIS installer, installed runtime layout, helper-only UAC behaviour, Microsoft Defender quarantine/recovery, a narrow install-folder exclusion, full-scan behaviour and uninstall. The published release includes a SHA-256 checksum and the required project/third-party licence material. Earlier development-only probe commands are not registered in the production invoke handler.
 
-For future releases, these are release-specific checks rather than one-time assumptions. For v1.1.0, L8/L9 completed the required installer/runtime/security validation without changing the split-privilege model. The remaining publication step is to build/checksum the exact release-ready `main` commit and use the approved release materials.
+For future releases, these are release-specific checks rather than one-time assumptions. For v1.1.0, L8/L9 completed the required installer/runtime/security validation without changing the split-privilege model. The final installer was built/checksummed from commit `4140fec9fbee64dc362484988b502a22a3a56699` and published on 6 October 2026.
