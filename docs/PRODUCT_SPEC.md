@@ -141,7 +141,7 @@ Full Bore means maximum configured CPU allocation, not guaranteed maximum effici
 
 ## 12. Localisation and first-run language behaviour
 
-The published v1.0.0 installer is the historical English-only baseline. Current `main` adds Windows preferred-UI-language matching, a persistent manual language override, live language switching, and language selection on the first-run Mining Risk Acknowledgement before acceptance.
+The published v1.0.0 installer is the historical English-only baseline. Published v1.1.0 adds Windows preferred-UI-language matching, a persistent manual language override, live language switching, and language selection on the first-run Mining Risk Acknowledgement before acceptance.
 
 Canonical `en-AU` is the source/fallback locale. Published v1.1.0 contains **23 release-enabled translated LTR locales** in addition to English, each with complete UI/accessibility/status content and Mining Risk Acknowledgement v1.0. The complete developer-only Serbian Cyrillic locale and `en-XA` pseudo-locale are retained for development/testing but are not ordinary release choices. Translation-quality review is complete for the current human-language set; native-speaker corrections remain welcome.
 
