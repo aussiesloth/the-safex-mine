@@ -28,11 +28,11 @@ Schakel antivirusbescherming niet in brede zin uit. Sluit Downloads, uw volledig
 
 Het NSIS-installatieprogramma kiest normaal automatisch Nederlands op basis van de Windows-weergavetaal. De app-taal kan na het starten nog worden gewijzigd.
 
-Bij de eerste start verschijnt **Mining Risk Acknowledgement — Version 1.0** in de gekozen ondersteunde app-taal. Lees dit voordat u doorgaat. **Exit** sluit de app zonder acceptatie op te slaan. Engels blijft de canonieke referentie: [Mining Risk Acknowledgement v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
+Bij de eerste start verschijnt **Verklaring over miningrisico's — v1.0** in de gekozen ondersteunde app-taal. Lees dit voordat u doorgaat. **Afsluiten** sluit de app zonder acceptatie op te slaan. Engels blijft de canonieke referentie: [Verklaring over miningrisico's v1.0](../../MINING_RISK_ACKNOWLEDGEMENT.md).
 
 ## 5. UAC-helper en MSR
 
-De grafische toepassing draait als gewone gebruiker. Bij de eerste **Start Mining** in een sessie vraagt Windows UAC-goedkeuring voor:
+De grafische toepassing draait als gewone gebruiker. Bij de eerste **Mining starten** in een sessie vraagt Windows UAC-goedkeuring voor:
 
     safex-mine-helper.exe
 
