@@ -15,9 +15,25 @@ const PLACEHOLDER_PATTERN = /\{([A-Za-z][A-Za-z0-9_]*)\}/g;
 const HTML_KEY_PATTERN = /data-i18n(?:-alt|-aria-label)?="([^"]+)"/g;
 
 const errors = [];
+const warnings = [];
 
 function fail(message) {
   errors.push(message);
+}
+
+function warn(message) {
+  warnings.push(message);
+}
+
+const NON_LATIN_REVIEW_LOCALES = new Set(["bn", "hi", "el", "ru", "uk", "zh-Hans", "ja", "ko"]);
+const SUSPICIOUS_ENGLISH_PROSE_PATTERN = /\b(?:application|desktop|profile|live|status|address|validation|elevated|helper|backend|public|endpoint|custom|node|load|allocation|worker|thread|session|time|accepted|result|connection|state|graphical|standard|user|process|interface|controls|statistics|system|performance|hardware|cooling|unsigned|software|antivirus|installer|runtime|component|official|verification|checksum|restore|allow|exclusion|folder|installation|guide|security|behaviour|browser|language|canonical|translated|locale|translation|professional|native|speaker|legal|certification|terminology|correction|community|branding|terms|licence|source|code)\b/i;
+
+function stripProtectedWebsiteTerms(value) {
+  return String(value)
+    .replace(/https?:\/\/\S+/gi, " ")
+    .replace(/rpc\.safex\.org:\d+/gi, " ")
+    .replace(/\{[A-Za-z][A-Za-z0-9_]*\}/g, " ")
+    .replace(/\b(?:The Safex Mine|Safex Cash|Safex|Windows|XMRig|MSR|CPU|LAN|GitHub|SHA-256|WinRing|UAC|RPC|HTTP|HTTPS|x64|GPL-3\.0(?:-only)?|Unicode|PowerShell|SmartScreen|Defender|NSIS|AI|rx\/sfx|English \(Australia\)|v\d+(?:\.\d+)*)\b/gi, " ");
 }
 
 async function readJson(filePath) {
@@ -140,6 +156,21 @@ for (const locale of enabledApplicationLocales) {
     if (!sameStrings(expected, actual)) {
       fail(locale.id + ":" + key + " placeholder mismatch.");
     }
+
+    if (
+      locale.id !== registry.canonicalLocale &&
+      String(canonical.strings[key]).trim().length >= 25 &&
+      String(strings[key]).trim() === String(canonical.strings[key]).trim()
+    ) {
+      warn(locale.id + ":" + key + " is identical to the canonical English sentence; review whether it is intentionally untranslated.");
+    }
+
+    if (NON_LATIN_REVIEW_LOCALES.has(locale.id)) {
+      const reviewText = stripProtectedWebsiteTerms(strings[key]);
+      if (SUSPICIOUS_ENGLISH_PROSE_PATTERN.test(reviewText)) {
+        warn(locale.id + ":" + key + " contains English prose outside the protected technical-term set; review localisation quality.");
+      }
+    }
   }
 
   for (const key of keys) {
@@ -223,6 +254,11 @@ if (release?.installerName && !String(release.installerUrl ?? "").endsWith("/" +
 
 if (/https?:\/\/[^"']+\.(?:js|css)(?:["'?])/i.test(html)) {
   fail("docs/index.html must not load external JavaScript or CSS dependencies.");
+}
+
+if (warnings.length > 0) {
+  console.warn("GitHub Pages localisation review warnings:");
+  for (const warning of warnings) console.warn("- " + warning);
 }
 
 if (errors.length > 0) {
